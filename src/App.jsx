@@ -21,6 +21,8 @@ import Policy from './pages/policy/Policy';
 import PaymentMethods from './pages/payment/PaymentMethods';
 import NotFound from './pages/notFound/NotFound';
 
+import ScrollToTop from './components/ScrollToTop';
+
 function App() {
   const { currentLang } = useLangStore();
 
@@ -32,6 +34,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900 font-sans">
+      <ScrollToTop />
       <Routes>
         {/* گروه اول روت‌ها: تمام صفحات داخل لایوت اصلی (همراه هدر و فوتر) */}
         <Route element={<MainLayout />}>

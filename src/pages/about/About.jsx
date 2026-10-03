@@ -493,15 +493,46 @@ export default function About() {
 
               <div>
                 <label className="block text-xs font-bold text-[#14213D] mb-1">
-                  {isRtl ? 'پکیج یا خدمت مدنظر' : 'Package / Service Name'}
+                  {isRtl ? 'پکیج یا خدمت مدنظر' : 'Package / Service Name'} <span className="text-[#FCA311]">*</span>
                 </label>
-                <input
-                  type="text"
-                  name="packageOrService"
-                  value={formData.packageOrService}
-                  onChange={handleChange}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-[#FCA311] text-xs sm:text-sm text-slate-800 bg-slate-50/50 font-medium"
-                />
+                <div className="relative">
+                  <select
+                    name="packageOrService"
+                    value={formData.packageOrService}
+                    onChange={handleChange}
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-[#FCA311] text-xs sm:text-sm text-slate-800 bg-slate-50/50 font-medium cursor-pointer appearance-none"
+                  >
+                    <option value="Bespoke Afghanistan Journey">
+                      {isRtl ? 'سفر اختصاصی و سفارشی افغانستان (Bespoke Journey)' : 'Bespoke Afghanistan Journey'}
+                    </option>
+                    <option value="Cultural & Heritage Tour">
+                      {isRtl ? 'تور فرهنگی و میراث تاریخی (کابل، بامیان، هرات، بلخ)' : 'Cultural & Heritage Tour (Kabul, Bamyan, Herat, Balkh)'}
+                    </option>
+                    <option value="Photography & Media Expedition">
+                      {isRtl ? 'سفر تخصصی عکاسی و مستندسازی' : 'Photography & Media Expedition'}
+                    </option>
+                    <option value="Adventure & Pamir Trekking">
+                      {isRtl ? 'ماجراجویی و کوهنوردی پامیر و نورستان' : 'Adventure & Pamir / Nuristan Trekking'}
+                    </option>
+                    <option value="Academic & Research Delegations">
+                      {isRtl ? 'هیئت‌های دانشگاهی، پژوهشی و علمی' : 'Academic & Research Delegations'}
+                    </option>
+                    <option value="Diplomatic & Business Logistics">
+                      {isRtl ? 'پشتیبانی لجستیکی دیپلماتیک و تجاری' : 'Diplomatic & Business Logistics'}
+                    </option>
+                    <option value="Secure Transport & Private Guide">
+                      {isRtl ? 'ترانسپورت ایمن و راهنمای محلی اختصاصی' : 'Secure Transport & Private Guide'}
+                    </option>
+                    <option value="Custom Tailored Itinerary">
+                      {isRtl ? 'برنامه کاملاً سفارشی‌سازی‌شده / سایر خدمات' : 'Custom Tailored Itinerary / Other'}
+                    </option>
+                  </select>
+                  <div className={`pointer-events-none absolute inset-y-0 ${isRtl ? 'left-3' : 'right-3'} flex items-center text-slate-400`}>
+                    <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                      <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+                    </svg>
+                  </div>
+                </div>
               </div>
 
               <div>

@@ -134,11 +134,49 @@
       "title": " Begin Your Journey",
       "description" : "Receive your final travel arrangements and get ready for Afghanistan."
     }
-
+    }
+  },
+  "contactPage": {
+    "eyebrow": "GET IN TOUCH",
+    "titlePrefix": "Contact ",
+    "titleHighlight": "Amovi Travel",
+    "subtitle": "We're here to help plan your next journey.",
+    "letsTalkTitle": "Let's Talk",
+    "letsTalkSubtitle": "Reach out to us through any of the following channels. We're always happy to help.",
+    "whatsappTitle": "WhatsApp",
+    "whatsappNumber": "+93 700 000 000",
+    "whatsappAction": "Chat with us on WhatsApp",
+    "emailTitle": "Email",
+    "emailAddress": "info@amovitravel.com",
+    "emailAction": "Send us an email",
+    "officeTitle": "Kabul Office",
+    "officeLocation": "Kabul, Afghanistan",
+    "officeAction": "Visit our office",
+    "formTitle": "Send Us a Message",
+    "formSubtitle": "Fill out the form below and we'll get back to you as soon as possible.",
+    "fullName": "Full Name",
+    "fullNamePlaceholder": "Enter your full name",
+    "email": "Email Address",
+    "emailPlaceholder": "Enter your email address",
+    "phone": "Phone / WhatsApp",
+    "phonePlaceholder": "+93 700 000 000",
+    "subject": "Subject",
+    "selectSubject": "Select a subject",
+    "subjectOptions": {
+      "general": "General Inquiry",
+      "tour": "Tour Packages & Booking",
+      "visa": "Visa Support Services",
+      "custom": "Custom Journey Request",
+      "other": "Other Inquiries"
+    },
+    "message": "Message",
+    "messagePlaceholder": "Tell us how we can help you...",
+    "sendMessage": "Send Message",
+    "sending": "Sending...",
+    "sentSuccess": "Your message has been sent successfully! We will get back to you shortly.",
+    "visitOurOffice": "VISIT OUR OFFICE",
+    "officeCity": "Kabul, Afghanistan",
+    "officeAddress": "Street 2, Wazir Akbar Khan, Kabul, Afghanistan",
+    "getDirections": "Get Directions"
   }
-
-
-  }
-
-
 }

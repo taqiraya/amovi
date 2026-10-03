@@ -217,5 +217,187 @@
     "ctaButton": "Contact Us",
     "formTitle": "Request This Package / Service",
     "formSubmit": "Submit Request"
+  },
+  "servicesPage": {
+    "heroEyebrow": "SERVICES",
+    "heroTitlePrefix": "Travel Beyond ",
+    "heroTitleHighlight": "Expectations",
+    "heroSubtitle": "From planning to arrival, experience Afghanistan with trusted local expertise.",
+    "sectionEyebrow": "OUR SERVICES",
+    "sectionTitle": "Designed Around Your Journey",
+    "sectionSubtitle": "From visa assistance to secure transportation, Amovi Travel handles the details so you can focus on the experience.",
+    "requestService": "Request This Service",
+    "services": [
+      {
+        "id": "visa",
+        "tag": "VISA ASSISTANCE",
+        "title": "Visa Assistance",
+        "description": "We help simplify your visa process with expert guidance and full support.",
+        "bullets": [
+          "Application guidance",
+          "Document preparation",
+          "Process support"
+        ],
+        "image": "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1000&q=80"
+      },
+      {
+        "id": "accommodations",
+        "tag": "ACCOMMODATIONS",
+        "title": "Accommodations",
+        "description": "Comfortable stays selected around your itinerary for a better travel experience.",
+        "bullets": [
+          "Carefully selected hotels",
+          "Location-focused options",
+          "Comfortable arrangements"
+        ],
+        "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1000&q=80"
+      },
+      {
+        "id": "transportation",
+        "tag": "TRANSPORTATION",
+        "title": "Transportation",
+        "description": "Safe and reliable transportation throughout your journey.",
+        "bullets": [
+          "Airport transfers",
+          "Private transportation",
+          "Route coordination"
+        ],
+        "image": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=1000&q=80"
+      },
+      {
+        "id": "guides",
+        "tag": "PROFESSIONAL GUIDES",
+        "title": "Professional Guides",
+        "description": "Discover Afghanistan through knowledgeable and friendly local guides.",
+        "bullets": [
+          "Local expertise",
+          "Cultural insight",
+          "Personalized experiences"
+        ],
+        "image": "/tours/images/heratPictures.webp"
+      },
+      {
+        "id": "security",
+        "tag": "TRAVEL SECURITY & SUPPORT",
+        "title": "Travel Security & Support",
+        "description": "Your safety and comfort are our top priority from start to finish.",
+        "bullets": [
+          "Traveler assistance",
+          "Local support",
+          "Journey coordination"
+        ],
+        "image": "/tours/images/bamyanPictures.webp"
+      }
+    ],
+    "ctaEyebrow": "READY TO PLAN?",
+    "ctaTitle": "Request Your Experience",
+    "ctaSubtitle": "Tell us what you need and our team can help plan the next step.",
+    "ctaButton": "Contact Us",
+    "formTitle": "Request This Package / Service",
+    "formSubtitle": "Submit your inquiry and we will arrange everything for you.",
+    "fullName": "Full Name",
+    "fullNamePlaceholder": "Enter your full name",
+    "email": "Email Address",
+    "emailPlaceholder": "Enter your email address",
+    "phone": "Phone / WhatsApp",
+    "phonePlaceholder": "+93 700 000 000",
+    "preferredDate": "Preferred Travel Date",
+    "travelers": "Number of Travelers",
+    "packageOrService": "Package / Service Name",
+    "requirements": "Additional Requirements",
+    "requirementsPlaceholder": "Tell us anything else we should know about your trip...",
+    "agreeTerms": "I agree to the terms and privacy policy of Amovi Travel.",
+    "submit": "Submit Request",
+    "submitting": "Submitting...",
+    "success": "Your request has been submitted successfully! We will contact you soon."
+  },
+  "blogPage": {
+    "heroEyebrow": "TRAVEL STORIES",
+    "heroTitlePrefix": "Stories From ",
+    "heroTitleHighlight": "Afghanistan",
+    "heroSubtitle": "Discover destinations, culture, history, travel advice and experiences from Afghanistan.",
+    "sectionEyebrow": "JOURNAL",
+    "sectionTitle": "Stories Worth Discovering",
+    "sectionSubtitle": "Explore Afghanistan through stories about its landscapes, heritage, people and experiences.",
+    "readMore": "Read More",
+    "readArticle": "Read Full Story",
+    "close": "Close",
+    "publishedOn": "Published on",
+    "category": "Category",
+    "share": "Share",
+    "articles": [
+      {
+        "id": "bamyan-landscapes",
+        "date": "12 SEP 2026",
+        "category": "DESTINATIONS",
+        "title": "Discovering Bamyan's Hidden Landscapes",
+        "excerpt": "Explore the landscapes, history and cultural heritage that make Bamyan one of Afghanistan's remarkable destinations.",
+        "image": "/tours/images/bamyanPictures.webp"
+      },
+      {
+        "id": "herat-timeless",
+        "date": "08 SEP 2026",
+        "category": "CULTURE",
+        "title": "Exploring Herat's Timeless Beauty",
+        "excerpt": "From ancient architecture to vibrant culture, Herat offers a unique glimpse into Afghanistan's rich past.",
+        "image": "/tours/images/heratPictures.webp"
+      },
+      {
+        "id": "travel-tips",
+        "date": "03 SEP 2026",
+        "category": "TRAVEL TIPS",
+        "title": "Travel Tips for Visiting Afghanistan",
+        "excerpt": "Essential tips to help you plan a safe, comfortable and rewarding journey across Afghanistan.",
+        "image": "/images/provinces/kabul/bagh-e-babur.webp"
+      },
+      {
+        "id": "balkh-history",
+        "date": "28 AUG 2026",
+        "category": "HERITAGE",
+        "title": "The History of Balkh: The Ancient Jewel",
+        "excerpt": "Discover the historical significance of Balkh, one of the oldest cities in the world.",
+        "image": "/tours/images/mazarPictures.webp"
+      },
+      {
+        "id": "nuristan-hiking",
+        "date": "20 AUG 2026",
+        "category": "ADVENTURE",
+        "title": "Hiking in Nuristan: Nature at Its Purest",
+        "excerpt": "Explore pristine valleys, crystal rivers and breathtaking mountain trails in Nuristan.",
+        "image": "/tours/images/noristanPictures.webp"
+      },
+      {
+        "id": "kandahar-hospitality",
+        "date": "15 AUG 2026",
+        "category": "EXPERIENCES",
+        "title": "Kandahar: Where History Meets Hospitality",
+        "excerpt": "Experience the cultural heart of Afghanistan with its rich history and warm people.",
+        "image": "/tours/images/kandaharPictures.webp"
+      },
+      {
+        "id": "samangan-beauty",
+        "date": "10 AUG 2026",
+        "category": "CULTURE",
+        "title": "The Beauty of Samangan's Historical Sites",
+        "excerpt": "Uncover the hidden gems of Samangan, from ancient sites to stunning landscapes.",
+        "image": "/images/provinces/bamyan/Buddha-1.webp"
+      },
+      {
+        "id": "ghor-mountains",
+        "date": "02 AUG 2026",
+        "category": "DESTINATIONS",
+        "title": "Ghor's Majestic Mountains",
+        "excerpt": "A journey through dramatic peaks, remote villages and untouched nature.",
+        "image": "/tours/images/ghorPictures.webp"
+      },
+      {
+        "id": "visit-afghanistan-now",
+        "date": "25 JUL 2026",
+        "category": "TRAVEL TIPS",
+        "title": "Why You Should Visit Afghanistan Now",
+        "excerpt": "Experience authentic culture, warm hospitality and breathtaking landscapes before the world discovers it.",
+        "image": "/images/provinces/kabul/kabul-hero.webp"
+      }
+    ]
   }
 }

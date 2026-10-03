@@ -4,7 +4,7 @@
     "about": "درباره ما",
     "services": "خدمات",
     "destinations": "مقاصد",
-    "tours": "تورها",
+    "tours": "سفرها",
     "blog": "وبلاگ",
     "gallery": "گالری",
     "contact": "تماس با ما",
@@ -28,27 +28,27 @@
   },
   "tourPage": {
     "heroSection": {
-      "label": "پکیج‌های تور",
+      "label": "پکیج‌های سفر",
       "title": "پکیج‌های",
-      "titleHighlight": "تور",
+      "titleHighlight": "سفر",
       "subtitle": "سفرهایی با دقت طراحی‌شده برای کشف افغانستان",
-      "button": "مشاهده پکیج"
+      "button": "مشاهده پکیج‌ها"
     },
     "discoverSection": {
       "title": "افغانستان را به شیوه خود کشف کنید",
       "description": "افغانستان را از طریق سفرهای دقیقاً برنامه‌ریزی‌شده، همراه با مقصد، اقامت، حمل‌ونقل، راهنما و پشتیبانی سفر کشف کنید"
     },
     "exploreSection": {
-      "label": "پکیج‌های ما را کشف کنید",
-      "title": "پکیج‌های ما را ببینید",
+      "label": "پکیج‌های سفر ما را کشف کنید",
+      "title": "پکیج‌های سفر ما را ببینید",
       "description": "سفرهایی را کشف کنید که بر اساس فرهنگ، تاریخ و مکان‌های دیدنی افغانستان طراحی شده‌اند.",
-      "button": "مشاهده پکیج"
+      "button": "مشاهده پکیج‌ها"
     },
     "exploreCTA": {
       "bedroom": "اقامت",
       "transport": "حمل‌ونقل",
       "people": "مسافران",
-      "meetNow": "مشاهده تور",
+      "meetNow": "رزرو سفر",
       "days": "روز",
       "nights": "شب"
     },
@@ -81,8 +81,8 @@
       }
     },
     "moreCTA": {
-      "eyebrow": "فراتر از یک تور",
-      "title": "فراتر از یک تور",
+      "eyebrow": "فراتر از یک سفر ساده",
+      "title": "خدماتی فراتر از یک سفر ساده",
       "accommodation": {
         "title": "اقامت",
         "description": "اقامتگاه‌های منتخب برای سفر شما."
@@ -157,7 +157,7 @@
     "selectSubject": "یک موضوع انتخاب کنید",
     "subjectOptions": {
       "general": "پرسش عمومی",
-      "tour": "رزرو و پکیج‌های تور",
+      "tour": "رزرو و پکیج‌های سفر",
       "visa": "خدمات ویزا",
       "custom": "سفرهای سفارشی و اختصاصی",
       "other": "سایر موارد"
@@ -230,7 +230,7 @@
       "gemsNumber": "۵۰+",
       "gemsLabel": "جاذبه‌های بکر کشف‌شده",
       "toursNumber": "۱۰۰٪",
-      "toursLabel": "تورهای کاملاً ایمن",
+      "toursLabel": "سفرهای کاملاً ایمن",
       "provincesNumber": "۱۲+",
       "provincesLabel": "ولایات تحت پوشش",
       "ratingNumber": "۵.۰",
@@ -316,7 +316,7 @@
           "پاسخگویی شفاف به پرسش‌های کنسولی مسافران",
           "پشتیبانی مستمر تا رسیدن به مقصد"
         ],
-        "image": "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1200&q=80"
+        "image": "/images/provinces/kabul/kabul-history.webp"
       },
       {
         "id": "accommodations",
@@ -391,7 +391,7 @@
           "تنوع اقامتی از محیط‌های سنتی تا هتل‌های مدرن و VIP",
           "پشتیبانی لحظه‌ای در طول اقامت"
         ],
-        "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80"
+        "image": "/images/provinces/kabul/kabul-culture.webp"
       },
       {
         "id": "transportation",
@@ -466,7 +466,7 @@
           "رانندگان بااخلاق، حرفه‌ای و آشنا به تمامی مسیرها",
           "پایش مستمر وضعیت راه‌ها و امنیت جاده‌ای"
         ],
-        "image": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=1200&q=80"
+        "image": "/tours/images/kabulPictures.webp"
       },
       {
         "id": "guides",
@@ -691,7 +691,7 @@
           "پشتیبانی تدارکاتی در صورت بروز بیماری یا فوریت",
           "خط تماس اختصاصی برای هماهنگی‌های اضطراری"
         ],
-        "image": "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=1200&q=80"
+        "image": "/tours/images/ghorPictures.webp"
       },
       {
         "id": "vip",
@@ -1351,7 +1351,7 @@
     "traditionalMarkets": "بازارهای سنتی و گذرگاه‌های کهن",
     "modernDistricts": "محله‌ها و نقاط مدرن",
     "exploreDetails": "مشاهده جزئیات",
-    "viewAvailableTours": "مشاهده تورهای موجود",
+    "viewAvailableTours": "مشاهده سفرهای موجود",
     "ctaReady": "آماده آغاز سفر هستید؟",
     "ctaTitleSuffix": "در انتظار شماست",
     "ctaDesc": "تاریخ، فرهنگ غنی و شگفتی‌های طبیعی این ولایت تماشایی را با آمووی تجربه کنید.",

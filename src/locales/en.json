@@ -45,10 +45,10 @@
       "button": "Explore Package"
     },
     "exploreCTA": {
-      "bedroom": "Bedroom",
+      "bedroom": "Stay",
       "transport": "Transport",
-      "people": "People",
-      "meetNow": "Meet Now",
+      "people": "Travelers",
+      "meetNow": "Book Journey",
       "days": "Days",
       "nights": "Nights"
     },
@@ -316,7 +316,7 @@
           "Transparent step-by-step application guidance",
           "Personalized support tailored to your journey"
         ],
-        "image": "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1200&q=80"
+        "image": "/images/provinces/kabul/kabul-history.webp"
       },
       {
         "id": "accommodations",
@@ -391,7 +391,7 @@
           "Prime locations for ease and security",
           "Flexible options from local boutiques to luxury"
         ],
-        "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80"
+        "image": "/images/provinces/kabul/kabul-culture.webp"
       },
       {
         "id": "transportation",
@@ -466,7 +466,7 @@
           "Intercity transport with experienced drivers",
           "Real-time route planning and road coordination"
         ],
-        "image": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=1200&q=80"
+        "image": "/tours/images/kabulPictures.webp"
       },
       {
         "id": "guides",
@@ -691,7 +691,7 @@
           "Emergency logistics and evacuation coordination",
           "24/7 dedicated contact for health inquiries"
         ],
-        "image": "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=1200&q=80"
+        "image": "/tours/images/ghorPictures.webp"
       },
       {
         "id": "vip",

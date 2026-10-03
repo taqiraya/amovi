@@ -15,7 +15,18 @@ const ExploreCTA = ({ image, title, price, durationDay, durationNight }) => {
           {durationDay} {cta.days} / {durationNight} {cta.nights}
         </p>
       </div>
-      <img className="h-[150px] w-full rounded-t-lg" src={image} alt="" />
+      <img 
+        className="h-[150px] w-full object-cover rounded-t-lg bg-slate-100 select-none" 
+        src={image || "/tours/images/kabulPictures.webp"} 
+        alt={title || "Tour package"} 
+        loading="lazy"
+        onError={(e) => {
+          if (!e.target.dataset.tried) {
+            e.target.dataset.tried = 'true';
+            e.target.src = '/tours/images/kabulPictures.webp';
+          }
+        }}
+      />
       <h3 className="text-xl font-semibold ps-2 min-[350px]:ps-5 p-1 ">
         {title}
       </h3>

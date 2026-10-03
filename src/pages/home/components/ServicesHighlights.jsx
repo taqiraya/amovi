@@ -28,10 +28,10 @@ export default function ServicesHighlights({ currentLang }) {
     {
       id: "packages-service",
       iconKey: "Tour",
-      title_en: "Tour Packages",
-      title_fa: "پکیج‌های مسافرتی",
-      desc_en: "Curated tours for unforgettable experiences.",
-      desc_fa: "تورهای برنامه‌ریزی شده و اختصاصی برگزیده برای خلق تجربه‌های فراموش‌نشدنی.",
+      title_en: "Travel Packages",
+      title_fa: "پکیج‌های سفر",
+      desc_en: "Curated journeys for unforgettable experiences.",
+      desc_fa: "سفرهای برنامه‌ریزی‌شده و اختصاصی برای خلق تجربه‌های فراموش‌نشدنی.",
       path: "/tours"
     },
     {

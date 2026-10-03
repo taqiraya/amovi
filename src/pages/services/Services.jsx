@@ -241,8 +241,14 @@ export default function Services() {
                   <img
                     src={service.image}
                     alt={service.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 select-none"
                     loading="lazy"
+                    onError={(e) => {
+                      if (!e.target.dataset.tried) {
+                        e.target.dataset.tried = 'true';
+                        e.target.src = '/images/provinces/kabul/kabul-culture.webp';
+                      }
+                    }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#14213D]/70 via-transparent to-transparent pointer-events-none" />
                   

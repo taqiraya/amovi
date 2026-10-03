@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useLangStore } from '../../store/useLangStore';
 import { getDestinations, getTours, getTestimonials } from '../../services/api';
+import localDb from '../../../db.json';
 
 import Hero from './components/Hero';
 import AboutExperience from './components/AboutExperience';
@@ -12,10 +13,10 @@ import SEO from '../../components/SEO';
 export default function Home() {
   const { currentLang, translations } = useLangStore();
   const isRtl = currentLang === 'fa';
-  const [destinations, setDestinations] = useState([]);
-  const [tours, setTours] = useState([]);
-  const [testimonials, setTestimonials] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [destinations, setDestinations] = useState(localDb.provinces || []);
+  const [tours, setTours] = useState(localDb.tours || []);
+  const [testimonials, setTestimonials] = useState(localDb.testimonials || []);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     Promise.all([getDestinations(), getTours(), getTestimonials()])

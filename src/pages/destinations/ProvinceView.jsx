@@ -447,8 +447,14 @@ export default function ProvinceView() {
                         <img
                           src={place.image}
                           alt={placeData.name}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 select-none"
                           loading="lazy"
+                          onError={(e) => {
+                            if (!e.target.dataset.tried) {
+                              e.target.dataset.tried = 'true';
+                              e.target.src = province.images?.hero_cover || '/images/provinces/kabul/kabul-hero.webp';
+                            }
+                          }}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
                         

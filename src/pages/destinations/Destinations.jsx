@@ -75,7 +75,14 @@ export default function Destinations() {
               <img
                 src={prov.image}
                 alt={isRtl ? prov.nameFa : prov.nameEn}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 select-none"
+                loading="lazy"
+                onError={(e) => {
+                  if (!e.target.dataset.tried) {
+                    e.target.dataset.tried = 'true';
+                    e.target.src = '/images/provinces/kabul/kabul-hero.webp';
+                  }
+                }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
               <h2 className="absolute bottom-3 right-4 left-4 text-white text-xl font-bold">

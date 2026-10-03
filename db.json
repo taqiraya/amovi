@@ -904,7 +904,7 @@
         },
         {
           "id": "bam-g4",
-          "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80",
+          "image": "/images/provinces/bamyan/bamyan-hero.webp",
           "en": {
             "title": "Koh-e Baba Mountain Ranges & Valleys",
             "location": "Highlands, Bamyan"
@@ -916,7 +916,7 @@
         },
         {
           "id": "bam-g5",
-          "image": "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1200&q=80",
+          "image": "/images/provinces/bamyan/Buddha-1.webp",
           "en": {
             "title": "Rural Highland Traditions & Clay Hamlets",
             "location": "Bamyan Villages"
@@ -928,7 +928,7 @@
         },
         {
           "id": "bam-g6",
-          "image": "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=80",
+          "image": "/tours/images/bamyanPictures.webp",
           "en": {
             "title": "Crystal Waterfall Travertine Barriers",
             "location": "Band-e Amir, Bamyan"

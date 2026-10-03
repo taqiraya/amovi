@@ -2,10 +2,11 @@ import { useState, useEffect } from "react";
 import ExploreCTA from "./ExploreCTA";
 import { getTours } from "../../../../services/api";
 import { useLangStore } from "../../../../store/useLangStore";
+import localDb from "../../../../../db.json";
 
 const ExploreHandle = () => {
   const { currentLang } = useLangStore();
-  const [tours, setTours] = useState([]);
+  const [tours, setTours] = useState(localDb.tours || []);
 
   useEffect(() => {
     let isMounted = true;

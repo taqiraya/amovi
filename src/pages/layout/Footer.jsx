@@ -14,7 +14,7 @@ function Footer() {
   const quickLinks = [
     { name: translations.services || (isRtl ? "خدمات لوکس" : "Services"), path: "/services" },
     { name: translations.destinations || (isRtl ? "مقاصد رویایی" : "Destinations"), path: "/destinations" },
-    { name: translations.tours || (isRtl ? "تورهای ویژه" : "Tours"), path: "/tours" },
+    { name: translations.tours || (isRtl ? "سفرهای ویژه" : "Tours"), path: "/tours" },
     { name: translations.blog || (isRtl ? "مجله سفر" : "Blog"), path: "/blog" },
     { name: translations.nav?.gallery || (isRtl ? "گالری تصاویر" : "Gallery"), path: "/gallery" },
   ];

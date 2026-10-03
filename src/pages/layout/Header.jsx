@@ -33,8 +33,8 @@ function Header() {
     { name: translations.nav?.home || (isRtl ? "صفحه اصلی" : "Home"), path: "/" },
     { name: translations.nav?.about || (isRtl ? "درباره ما" : "About Us"), path: "/about" },
     { name: translations.nav?.services || (isRtl ? "خدمات" : "Services"), path: "/services" },
-    { name: translations.nav?.tours || (isRtl ? "تورها" : "Tours"), path: "/tours" },
-    { name: translations.nav?.blog || (isRtl ? "بلاگ" : "Blog"), path: "/blog" },
+    { name: translations.nav?.tours || (isRtl ? "سفرها" : "Tours"), path: "/tours" },
+    { name: translations.nav?.blog || (isRtl ? "وبلاگ" : "Blog"), path: "/blog" },
     { name: translations.nav?.gallery || (isRtl ? "گالری" : "Gallery"), path: "/gallery" },
   ];
 
@@ -44,16 +44,16 @@ function Header() {
 
   return (
     <header className="sticky top-4 z-50 w-[96%] max-w-[1600px] mx-auto border border-slate-200 bg-white text-[#14213D] rounded-2xl shadow-xl transition-all duration-300">
-      <div className={`flex h-16 sm:h-20 w-full items-center justify-between px-4 sm:px-8 ${isRtl ? 'flex-row-reverse' : ''}`}>
+      <div className="flex h-16 sm:h-20 w-full items-center justify-between px-4 sm:px-8">
         
         {/* ========================================== BRAND & LOGO ========================================== */}
-        <Link to="/" onClick={() => setMobileMenuOpen(false)} className={`flex items-center gap-1.5 sm:gap-2.5 shrink-0 ${isRtl ? 'flex-row-reverse text-right' : ''}`}>
+        <Link to="/" onClick={() => setMobileMenuOpen(false)} className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
           <img 
             src={amoviLogo} 
             alt="Amovi Travel Logo" 
             className="h-8 sm:h-12 w-auto object-contain rounded-xl border border-white/20 shadow-sm"
           />
-          <div>
+          <div dir="ltr" className="text-left">
             <span 
               className="block text-[12px] sm:text-[18px] font-extrabold leading-tight tracking-wide text-[#14213D]"
               style={{ fontFamily: 'Inter, sans-serif' }}
@@ -70,7 +70,7 @@ function Header() {
         </Link>
 
         {/* ========================================== DESKTOP NAVIGATION ========================================== */}
-        <nav className={`hidden items-center gap-6 lg:flex xl:gap-8 ${isRtl ? 'flex-row-reverse' : ''}`}>
+        <nav className="hidden items-center gap-6 lg:flex xl:gap-8">
           {navigation.slice(0, 3).map((item) => (
             <NavLink
               key={item.name}
@@ -95,7 +95,7 @@ function Header() {
             <button 
               type="button"
               onClick={() => setDesktopDestOpen(!desktopDestOpen)}
-              className={`flex items-center gap-1 text-[14px] font-semibold text-[#14213D] hover:text-[#FCA311] transition-colors duration-200 cursor-pointer ${isRtl ? 'font-[Sahel] flex-row-reverse' : 'font-[Inter]'}`}
+              className={`flex items-center gap-1 text-[14px] font-semibold text-[#14213D] hover:text-[#FCA311] transition-colors duration-200 cursor-pointer ${isRtl ? 'font-[Sahel]' : 'font-[Inter]'}`}
             >
               <span>{translations.nav?.destinations || (isRtl ? "مقاصد" : "Destinations")}</span>
               <ChevronDown size={14} className={`transition-transform duration-200 mt-0.5 ${desktopDestOpen ? 'rotate-180 text-[#FCA311]' : ''}`} />
@@ -127,7 +127,7 @@ function Header() {
                   <Link
                     to="/gallery"
                     onClick={() => setDesktopDestOpen(false)}
-                    className={`flex items-center justify-between p-2 rounded-xl text-xs font-bold text-[#FCA311] hover:bg-amber-50/70 transition-colors ${isRtl ? 'flex-row-reverse text-right font-[Sahel]' : 'text-left font-[Inter]'}`}
+                    className={`flex items-center justify-between p-2 rounded-xl text-xs font-bold text-[#FCA311] hover:bg-amber-50/70 transition-colors ${isRtl ? 'font-[Sahel]' : 'font-[Inter]'}`}
                   >
                     <span>{isRtl ? 'مشاهده گالری تصاویر ولایات' : 'View Provinces Photo Gallery'}</span>
                     <Camera size={14} className="shrink-0" />
@@ -153,7 +153,7 @@ function Header() {
           ))}
         </nav>
         {/* ========================================== GLOBAL ACTIONS ========================================== */}
-        <div className={`flex items-center gap-1.5 sm:gap-4 shrink-0 ${isRtl ? 'flex-row-reverse' : ''}`}>
+        <div className="flex items-center gap-1.5 sm:gap-4 shrink-0">
           
           {/* سوئیچ زبان دسکتاپ/موبایل متصل به استور زوشتند */}
           <button

@@ -5,22 +5,22 @@ const DiscoverSection = () => {
   const discover = translations.tourPage.discoverSection;
   return (
     <section
-      className=" px-8 py-5  grid grid-cols-1
-       sm:px-16 sm:py-10 min-[1200px]:grid-cols-2 min-[1200px]:gap-8  "
+      className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center"
     >
-      <div className="min-[1200px]:order-2">
-        <h2 className="my-2 text-2xl font-semibold text-[var(--color-amovi-navy)] sm:text-3xl md:text-4xl lg:text-5xl">
+      <div className="lg:order-2 space-y-3">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#14213D] leading-tight">
           {discover.title}
         </h2>
-        <p className="text-sm text-[var(--color-amovi-black)] leading-relaxed sm:text-base md:text-lg lg:text-xl">
+        <p className="text-xs sm:text-sm md:text-base text-slate-600 leading-relaxed font-normal">
           {discover.description}
         </p>
       </div>
-      <div className="my-2 min-[1200px]:order-1">
+      <div className="lg:order-1 max-w-xl mx-auto lg:max-w-none w-full">
         <img
-          className="rounded-lg h-[200px] w-full"
+          className="rounded-2xl sm:rounded-3xl aspect-[16/10] w-full object-cover shadow-xl border-2 sm:border-4 border-white bg-slate-100"
           src={imageTwo}
           alt={discover.title}
+          loading="lazy"
         />
       </div>
     </section>

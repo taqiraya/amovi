@@ -1,14 +1,18 @@
 const MoreCTA = ({ title, icon, description }) => {
   return (
-    <section className="shadow rounded-lg  py-2 px-4 flex gap-3 items-center">
-      <div className="shrink-0 bg-[var(--color-amovi-gold)]  flex h-8 w-8 items-center justify-center rounded-full">
+    <div className="rounded-2xl p-4 sm:p-5 bg-white border border-slate-200/80 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col sm:flex-row gap-3 sm:gap-4 items-start">
+      <div className="shrink-0 bg-[var(--color-amovi-gold)] text-[var(--color-amovi-navy)] flex h-10 w-10 items-center justify-center rounded-xl shadow-xs">
         {icon}
       </div>
-      <div>
-        <p className="font-bold py-1 text-lg">{title}</p>
-        <p className="text-sm leading-relaxed sm:text-base">{description}</p>
+      <div className="flex-1 min-w-0">
+        <h3 className="font-bold text-sm sm:text-base text-[var(--color-amovi-navy)] mb-1">
+          {title}
+        </h3>
+        <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+          {description}
+        </p>
       </div>
-    </section>
+    </div>
   );
 };
 

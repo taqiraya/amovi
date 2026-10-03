@@ -14,7 +14,7 @@ export default function Tours() {
 
   return (
     <div
-      className={`m-auto max-w-[1440px] ${
+      className={`w-full overflow-x-hidden ${
         isRtl
           ? "font-['Sahel',system-ui,sans-serif]"
           : "font-['Inter',system-ui,sans-serif]"

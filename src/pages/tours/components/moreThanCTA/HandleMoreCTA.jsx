@@ -40,14 +40,16 @@ const HandleMoreCTA = () => {
   ];
 
   return (
-    <section className="m-auto max-w-[1600px]">
-      <div className="px-10 mb-5">
-        <p className="text-[var(--color-amovi-gold)]">{moreCTA.eyebrow}</p>
-        <h2 className="mb-2  text-2xl font-semibold text-[var(--color-amovi-navy)] sm:text-3xl md:text-4xl lg:text-5xl">
+    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
+      <div className="mb-8 sm:mb-12">
+        <p className="text-[var(--color-amovi-gold)] text-xs sm:text-sm font-bold tracking-wider uppercase mb-2">
+          {moreCTA.eyebrow}
+        </p>
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[var(--color-amovi-navy)] leading-tight">
           {moreCTA.title}
         </h2>
       </div>
-      <div className="mx-10 mb-10 grid min-[598px]:grid-cols-2 gap-4 min-[890px]:grid-cols-3 min-[1170px]:grid-cols-4 xl:grid-cols-5 text-[var(--color-amovi-navy)]">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 sm:gap-5 text-[var(--color-amovi-navy)]">
         {data.map((item) => (
           <MoreCTA
             key={item.id}

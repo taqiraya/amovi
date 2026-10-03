@@ -36,15 +36,18 @@ const HandleWorkCTA = () => {
     },
   ];
   return (
-    <section className="m-auto max-w-[1600px]">
-      <p className="text-center text-[var(--color-amovi-gold)]">
-        {workCTA.eyebrow}
-      </p>
+    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 mb-8 sm:mb-16">
+      <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12">
+        <p className="text-[var(--color-amovi-gold)] text-xs sm:text-sm font-bold tracking-wider uppercase mb-2">
+          {workCTA.eyebrow}
+        </p>
 
-      <h2 className="mb-2 text-center text-2xl font-semibold text-[var(--color-amovi-navy)] sm:text-3xl md:text-4xl lg:text-5xl">
-        {workCTA.title}
-      </h2>
-      <div className="m-10 grid min-[560px]:max-[892px]:grid-cols-2 gap-4  min-[892px]:max-[1230px]:grid-cols-3 min-[1230px]:grid-cols-4 text-[var(--color-amovi-navy)]">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[var(--color-amovi-navy)] leading-tight">
+          {workCTA.title}
+        </h2>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 text-[var(--color-amovi-navy)]">
         {data.map((item) => (
           <WorkCTA
             key={item.id}

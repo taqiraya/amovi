@@ -1,14 +1,16 @@
 const TravelCTA = ({ icon, title, description }) => {
   return (
-    <section className="shadow rounded-lg flex flex-col items-center py-2 px-4">
-      <div className="bg-[var(--color-amovi-gold)]  flex h-10 w-10 items-center justify-center rounded-full">
+    <div className="rounded-2xl p-6 bg-white border border-slate-200/80 shadow-sm hover:shadow-md hover:border-slate-300 transition-all duration-300 flex flex-col items-center text-center">
+      <div className="shrink-0 bg-[var(--color-amovi-gold)] text-[var(--color-amovi-navy)] flex h-12 w-12 items-center justify-center rounded-2xl shadow-sm mb-4">
         {icon}
       </div>
-      <p className="font-bold py-2 text-base  min-[350px]:text-lg">{title}</p>
-      <p className="text-center text-sm leading-relaxed sm:text-base">
+      <h3 className="font-bold text-base sm:text-lg text-[var(--color-amovi-navy)] mb-2">
+        {title}
+      </h3>
+      <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
         {description}
       </p>
-    </section>
+    </div>
   );
 };
 

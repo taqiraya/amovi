@@ -260,14 +260,14 @@ export default function Gallery() {
       />
 
       {/* ۱. هیرو سکشن اصلی گالری */}
-      <section className="relative w-full pt-36 pb-20 sm:pt-40 sm:pb-28 overflow-hidden bg-[#14213D] text-white">
+      <section className="relative w-full pt-32 pb-16 sm:pt-40 sm:pb-28 overflow-hidden bg-[#14213D] text-white">
         <div 
           className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-45 scale-105"
           style={{ backgroundImage: `url(${heroBg})` }}
         />
         <div className="absolute inset-0 z-10 bg-gradient-to-b from-[#14213D]/95 via-[#14213D]/80 to-[#14213D] pointer-events-none" />
 
-        <div className={`relative z-20 max-w-6xl mx-auto px-6 ${isRtl ? 'text-right' : 'text-left'}`}>
+        <div className={`relative z-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 ${isRtl ? 'text-right' : 'text-left'}`}>
           <div className="inline-flex items-center gap-2 mb-2">
             <Camera size={16} className="text-[#FCA311]" />
             <span className="text-[#FCA311] text-xs font-bold uppercase tracking-[0.2em] font-[Inter]">
@@ -279,7 +279,7 @@ export default function Gallery() {
             {isRtl ? 'افغانستان از قاب تصویر' : 'Afghanistan Through the Lens'}
           </h1>
 
-          <p className="mt-4 text-slate-300 text-sm sm:text-base max-w-2xl font-light leading-relaxed">
+          <p className="mt-4 text-slate-300 text-xs sm:text-sm md:text-base max-w-2xl font-light leading-relaxed">
             {isRtl 
               ? 'مجموعه‌ای برگزیده از شگفتی‌های طبیعی بامیان، یادمان‌های تاریخی هرات و بلخ، زندگی روزمره کابل و زیبایی‌های کمتر دیده‌شده افغانستان.'
               : 'A curated photographic journey through the natural wonders of Bamyan, historical landmarks of Herat and Balkh, vibrant Kabul life, and untouched landscapes.'}
@@ -288,8 +288,8 @@ export default function Gallery() {
       </section>
 
       {/* ۲. تب‌های فیلتر دسته‌بندی گالری */}
-      <section className="max-w-6xl mx-auto px-6 pt-10 pb-8">
-        <div className="flex flex-wrap items-center justify-center gap-2.5">
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-10 pb-6 sm:pb-8">
+        <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2.5">
           {categories.map((cat) => {
             const isActive = activeCategory === cat.id;
             return (
@@ -297,7 +297,7 @@ export default function Gallery() {
                 key={cat.id}
                 type="button"
                 onClick={() => setActiveCategory(cat.id)}
-                className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${
+                className={`px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${
                   isActive
                     ? 'bg-[#14213D] text-[#FCA311] shadow-lg shadow-[#14213D]/20 scale-105 border border-[#14213D]'
                     : 'bg-white text-slate-600 hover:text-[#14213D] hover:bg-slate-100 border border-slate-200'
@@ -311,15 +311,15 @@ export default function Gallery() {
       </section>
 
       {/* ۳. گرید ریسپانسیو تصاویر */}
-      <section className="max-w-6xl mx-auto px-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" dir={isRtl ? 'rtl' : 'ltr'}>
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6" dir={isRtl ? 'rtl' : 'ltr'}>
           {filteredPhotos.map((item, idx) => {
             const text = item[currentLang] || item.en;
             return (
               <div
                 key={item.id}
                 onClick={() => setLightboxIndex(idx)}
-                className="group relative rounded-3xl overflow-hidden aspect-[4/3] bg-slate-100 shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-1.5 cursor-pointer border border-slate-200/80"
+                className="group relative rounded-2xl sm:rounded-3xl overflow-hidden aspect-[4/3] bg-slate-100 shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-1.5 cursor-pointer border border-slate-200/80"
               >
                 <img
                   src={item.image}
@@ -338,8 +338,8 @@ export default function Gallery() {
                 <div className="absolute inset-0 bg-gradient-to-t from-[#14213D]/90 via-[#14213D]/20 to-transparent opacity-80 group-hover:opacity-95 transition-opacity duration-300" />
 
                 {/* نشان لوکیشن در بالا */}
-                <div className={`absolute top-4 ${isRtl ? 'right-4' : 'left-4'} z-10`}>
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#14213D]/80 backdrop-blur-md text-[#FCA311] text-[11px] font-bold shadow-md">
+                <div className={`absolute top-3.5 ${isRtl ? 'right-3.5' : 'left-3.5'} z-10`}>
+                  <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-[#14213D]/80 backdrop-blur-md text-[#FCA311] text-[11px] font-bold shadow-md">
                     <MapPin size={12} />
                     <span>{text.location}</span>
                   </span>
@@ -347,14 +347,14 @@ export default function Gallery() {
 
                 {/* آیکون زوم در مرکز */}
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 pointer-events-none">
-                  <div className="w-12 h-12 rounded-full bg-[#FCA311] text-[#14213D] flex items-center justify-center shadow-xl transform scale-75 group-hover:scale-100 transition-transform duration-300">
-                    <Eye size={20} strokeWidth={2.5} />
+                  <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#FCA311] text-[#14213D] flex items-center justify-center shadow-xl transform scale-75 group-hover:scale-100 transition-transform duration-300">
+                    <Eye size={18} strokeWidth={2.5} />
                   </div>
                 </div>
 
                 {/* عنوان و توضیحات پایین کارت */}
-                <div className={`absolute bottom-0 inset-x-0 p-5 z-10 ${isRtl ? 'text-right' : 'text-left'}`}>
-                  <h3 className="text-white text-base sm:text-lg font-black leading-tight drop-shadow-sm group-hover:text-[#FCA311] transition-colors">
+                <div className={`absolute bottom-0 inset-x-0 p-4 sm:p-5 z-10 ${isRtl ? 'text-right' : 'text-left'}`}>
+                  <h3 className="text-white text-sm sm:text-base md:text-lg font-black leading-tight drop-shadow-sm group-hover:text-[#FCA311] transition-colors">
                     {text.title}
                   </h3>
                   <p className="text-slate-300 text-xs mt-1 line-clamp-2 font-light leading-relaxed">
@@ -370,46 +370,46 @@ export default function Gallery() {
       {/* ۴. مودال لایت‌باکس تمام‌صفحه (Fullscreen Lightbox) */}
       {lightboxIndex !== null && filteredPhotos[lightboxIndex] && (
         <div 
-          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-4 select-none animate-fadeIn"
+          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-3 sm:p-4 select-none animate-fadeIn"
           onClick={() => setLightboxIndex(null)}
         >
           {/* دکمه بستن */}
           <button
             type="button"
             onClick={() => setLightboxIndex(null)}
-            className="absolute top-6 right-6 z-50 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors cursor-pointer"
+            className="absolute top-4 right-4 sm:top-6 sm:right-6 z-50 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors cursor-pointer"
           >
-            <X size={24} />
+            <X size={20} />
           </button>
 
           {/* دکمه قبلی */}
           <button
             type="button"
             onClick={handlePrev}
-            className="absolute left-4 sm:left-8 z-50 w-12 h-12 rounded-full bg-white/10 hover:bg-[#FCA311] hover:text-[#14213D] text-white flex items-center justify-center transition-all cursor-pointer shadow-lg"
+            className="absolute left-2 sm:left-8 z-50 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 hover:bg-[#FCA311] hover:text-[#14213D] text-white flex items-center justify-center transition-all cursor-pointer shadow-lg"
           >
-            <ChevronLeft size={28} />
+            <ChevronLeft size={24} />
           </button>
 
           {/* محتوای تصویر و کپشن */}
           <div 
-            className="relative max-w-5xl max-h-[90vh] flex flex-col items-center"
+            className="relative max-w-5xl max-h-[90vh] flex flex-col items-center px-4"
             onClick={(e) => e.stopPropagation()}
           >
             <img
               src={filteredPhotos[lightboxIndex].image}
               alt={filteredPhotos[lightboxIndex][currentLang]?.title || 'Gallery'}
-              className="max-w-full max-h-[75vh] object-contain rounded-2xl shadow-2xl border border-white/15"
+              className="max-w-full max-h-[68vh] sm:max-h-[75vh] object-contain rounded-xl sm:rounded-2xl shadow-2xl border border-white/15"
             />
             
-            <div className={`mt-4 text-center max-w-2xl px-4 ${isRtl ? 'font-[Sahel]' : 'font-[Inter]'}`}>
+            <div className={`mt-3 sm:mt-4 text-center max-w-2xl px-4 ${isRtl ? 'font-[Sahel]' : 'font-[Inter]'}`}>
               <div className="inline-flex items-center gap-1.5 text-[#FCA311] text-xs font-bold mb-1">
                 <MapPin size={13} />
                 <span>{filteredPhotos[lightboxIndex][currentLang]?.location || filteredPhotos[lightboxIndex].en.location}</span>
                 <span className="text-white/40">•</span>
                 <span className="text-slate-400">{lightboxIndex + 1} / {filteredPhotos.length}</span>
               </div>
-              <h2 className="text-white text-lg sm:text-2xl font-black">
+              <h2 className="text-white text-base sm:text-xl md:text-2xl font-black">
                 {filteredPhotos[lightboxIndex][currentLang]?.title || filteredPhotos[lightboxIndex].en.title}
               </h2>
               <p className="text-slate-300 text-xs sm:text-sm mt-1 leading-relaxed font-light">
@@ -422,9 +422,9 @@ export default function Gallery() {
           <button
             type="button"
             onClick={handleNext}
-            className="absolute right-4 sm:right-8 z-50 w-12 h-12 rounded-full bg-white/10 hover:bg-[#FCA311] hover:text-[#14213D] text-white flex items-center justify-center transition-all cursor-pointer shadow-lg"
+            className="absolute right-2 sm:right-8 z-50 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 hover:bg-[#FCA311] hover:text-[#14213D] text-white flex items-center justify-center transition-all cursor-pointer shadow-lg"
           >
-            <ChevronRight size={28} />
+            <ChevronRight size={24} />
           </button>
         </div>
       )}

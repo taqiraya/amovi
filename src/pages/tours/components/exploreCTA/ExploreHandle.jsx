@@ -21,8 +21,8 @@ const ExploreHandle = () => {
   }, []);
 
   return (
-    <section id="tours-package-grid" className="m-auto max-w-[1600px] scroll-mt-24">
-      <div className=" m-10 grid justify-items-center grid-cols-1 gap-4 min-[650px]:grid-cols-2 min-[900px]:grid-cols-3 min-[1162px]:grid-cols-4 text-[var(--color-amovi-navy)]">
+    <section id="tours-package-grid" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 scroll-mt-24">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 text-[var(--color-amovi-navy)]">
         {tours.map((tour) => {
           const tourData = tour[currentLang] || tour.en || {};
           return (

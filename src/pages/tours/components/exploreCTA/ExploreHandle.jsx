@@ -21,7 +21,7 @@ const ExploreHandle = () => {
   }, []);
 
   return (
-    <section className="m-auto max-w-[1600px] ">
+    <section id="tours-package-grid" className="m-auto max-w-[1600px] scroll-mt-24">
       <div className=" m-10 grid justify-items-center grid-cols-1 gap-4 min-[650px]:grid-cols-2 min-[900px]:grid-cols-3 min-[1162px]:grid-cols-4 text-[var(--color-amovi-navy)]">
         {tours.map((tour) => {
           const tourData = tour[currentLang] || tour.en || {};

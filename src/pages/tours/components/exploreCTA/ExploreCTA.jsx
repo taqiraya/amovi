@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Bed, Car, User, ArrowRight, ArrowLeft } from "lucide-react";
 import { useLangStore } from "../../../../store/useLangStore";
 
@@ -50,20 +51,23 @@ const ExploreCTA = ({ image, title, price, durationDay, durationNight }) => {
         <h3 className="text-xl font-semibold text-[var(--color-amovi-gold)] ">
           {price}
         </h3>
-        <button className="flex cursor-pointer gap-3 rounded-full bg-[var(--color-amovi-gold)] px-3 py-1 text-sm font-bold text-[var(--color-amovi-navy)] sm:py-1 group hover:bg-[#e08f0a] duration-300">
-          {cta.meetNow}
+        <Link 
+          to={`/contact?subject=${encodeURIComponent(title ? `Tour Booking: ${title}` : 'Tour Inquiry')}`}
+          className="flex cursor-pointer gap-2 items-center rounded-full bg-[var(--color-amovi-gold)] px-3 py-1.5 text-xs sm:text-sm font-bold text-[var(--color-amovi-navy)] group hover:bg-[#e08f0a] transition-all duration-300 shadow-sm"
+        >
+          <span>{cta.meetNow}</span>
           {isRTL ? (
             <ArrowLeft
-              className="mt-1 self-center group-hover:translate-x-1  duration-300"
-              size={16}
+              className="group-hover:-translate-x-1 transition-transform duration-300"
+              size={14}
             />
           ) : (
             <ArrowRight
-              className="mt-1 self-center group-hover:translate-x-1 duration-300"
-              size={16}
+              className="group-hover:translate-x-1 transition-transform duration-300"
+              size={14}
             />
           )}
-        </button>
+        </Link>
       </div>
     </section>
   );

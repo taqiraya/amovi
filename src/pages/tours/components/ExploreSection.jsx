@@ -22,12 +22,21 @@ const ExploreSection = () => {
         <p className="text-center text-sm mb-2 leading-relaxed sm:text-base md:text-lg md:mb-3 lg:text-xl">
           {explore.description}
         </p>
-        <button className="mx-auto flex cursor-pointer gap-3 rounded-full bg-[var(--color-amovi-gold)] px-3 py-1 text-sm font-bold text-[var(--color-amovi-navy)] sm:py-2 xl:py-3 xl:px-6 xl:text-base">
-          {explore.button}
+        <button 
+          type="button"
+          onClick={() => {
+            const el = document.getElementById("tours-package-grid");
+            if (el) {
+              el.scrollIntoView({ behavior: 'smooth' });
+            }
+          }}
+          className="mx-auto flex cursor-pointer gap-3 rounded-full bg-[var(--color-amovi-gold)] px-4 py-2 text-sm font-bold text-[var(--color-amovi-navy)] sm:py-2.5 xl:py-3 xl:px-6 xl:text-base hover:bg-amber-500 transition-all duration-300 shadow-md active:scale-95"
+        >
+          <span>{explore.button}</span>
           {isRTL ? (
-            <ArrowLeft className="mt-1 self-center" size={16} />
+            <ArrowLeft className="mt-0.5 self-center" size={16} />
           ) : (
-            <ArrowRight className="mt-1 self-center" size={16} />
+            <ArrowRight className="mt-0.5 self-center" size={16} />
           )}
         </button>
       </div>

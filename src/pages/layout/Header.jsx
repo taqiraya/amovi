@@ -6,18 +6,18 @@ import { useLangStore } from "../../store/useLangStore";
 // لود فایل لوگوی رسمی
 import amoviLogo from "../../assets/images/logo.png";
 
-// لیست ثابت ۱۰ ولایت افغانستان برای منوی دراپ‌داون
+// لیست ۱۰ ولایت مستند و فعال افغانستان برای منوی دراپ‌داون
 const provincesList = [
   { slug: "kabul", en: "Kabul", fa: "کابل" },
-  { slug: "herat", en: "Herat", fa: "هرات" },
-  { slug: "balkh", en: "Balkh", fa: "بلخ" },
   { slug: "bamyan", en: "Bamyan", fa: "بامیان" },
+  { slug: "herat", en: "Herat", fa: "هرات" },
+  { slug: "balkh", en: "Balkh", fa: "بلخ و مزار" },
   { slug: "kandahar", en: "Kandahar", fa: "کندهار" },
-  { slug: "nangarhar", en: "Nangarhar", fa: "ننگرهار" },
-  { slug: "badakhshan", en: "Badakhshan", fa: "بدخشان" },
-  { slug: "panjshir", en: "Panjshir", fa: "پنجشیر" },
   { slug: "ghazni", en: "Ghazni", fa: "غزنی" },
   { slug: "samangan", en: "Samangan", fa: "سمنگان" },
+  { slug: "ghor", en: "Ghor", fa: "غور" },
+  { slug: "helmand", en: "Helmand", fa: "هلمند" },
+  { slug: "nuristan", en: "Nuristan", fa: "نورستان" },
 ];
 
 function Header() {

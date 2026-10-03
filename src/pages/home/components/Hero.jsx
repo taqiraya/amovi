@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 // ایمپورت کردن تصاویر پروژه
 import heroBg from '../../../assets/images/hero-bg.webp';
 import heroMain from '../../../assets/images/hero-main.webp';
@@ -67,17 +68,15 @@ export default function Hero({ currentLang }) {
 
           {/* دکمه مشاهده تورها */}
           <div className="flex pt-1">
-            <button 
-              onClick={() => {
-                document.getElementById('featured-tours')?.scrollIntoView({ behavior: 'smooth' });
-              }}
+            <Link 
+              to="/tours"
               className="flex items-center gap-3 bg-[#FCA311] hover:bg-[#e08f0a] text-[#14213D] font-extrabold px-5 py-2.5 sm:px-6 sm:py-3 rounded-full transition-all duration-300 shadow-md shadow-[#FCA311]/10 group text-xs tracking-wider uppercase cursor-pointer font-[Inter]"
             >
               <span>{isRtl ? 'مشاهده تورها' : 'Explore Tours'}</span>
               <svg className={`w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1 ${isRtl ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
               </svg>
-            </button>
+            </Link>
           </div>
         </div>
 

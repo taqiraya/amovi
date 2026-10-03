@@ -58,12 +58,30 @@
   </url>
 
   <url>
+    <loc>https://amovi.travel/gallery</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/gallery?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/gallery?lang=fa" />
+  </url>
+
+  <url>
     <loc>https://amovi.travel/contact</loc>
     <lastmod>2026-10-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/contact?lang=en" />
     <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/contact?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/payment-methods</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/payment-methods?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/payment-methods?lang=fa" />
   </url>
 
   <url>
@@ -80,6 +98,8 @@
     <lastmod>2026-10-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/privacy-policy?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/privacy-policy?lang=fa" />
   </url>
 
   <url>
@@ -87,6 +107,8 @@
     <lastmod>2026-10-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/terms-and-conditions?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/terms-and-conditions?lang=fa" />
   </url>
 
   <url>
@@ -94,14 +116,18 @@
     <lastmod>2026-10-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/booking-terms?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/booking-terms?lang=fa" />
   </url>
 
-  <!-- Provinces -->
+  <!-- Provinces (All 10 Authentic Provinces) -->
   <url>
     <loc>https://amovi.travel/destinations/kabul</loc>
     <lastmod>2026-10-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/kabul?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/kabul?lang=fa" />
   </url>
 
   <url>
@@ -109,42 +135,243 @@
     <lastmod>2026-10-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/bamyan?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/bamyan?lang=fa" />
   </url>
 
   <url>
     <loc>https://amovi.travel/destinations/herat</loc>
     <lastmod>2026-10-03</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/herat?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/herat?lang=fa" />
   </url>
 
   <url>
     <loc>https://amovi.travel/destinations/balkh</loc>
     <lastmod>2026-10-03</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/balkh?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/balkh?lang=fa" />
   </url>
 
-  <!-- Attractions & Sub-Destinations -->
   <url>
-    <loc>https://amovi.travel/destinations/kabul/bagh-e-babur</loc>
+    <loc>https://amovi.travel/destinations/kandahar</loc>
     <lastmod>2026-10-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/kandahar?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/kandahar?lang=fa" />
   </url>
 
+  <url>
+    <loc>https://amovi.travel/destinations/ghazni</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/ghazni?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/ghazni?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/samangan</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/samangan?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/samangan?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/ghor</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/ghor?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/ghor?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/helmand</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/helmand?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/helmand?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/nuristan</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/nuristan?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/nuristan?lang=fa" />
+  </url>
+
+  <!-- Sub-Destinations & Sights -->
   <url>
     <loc>https://amovi.travel/destinations/kabul/bibi-mahro-hill</loc>
     <lastmod>2026-10-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/kabul/bibi-mahro-hill?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/kabul/bibi-mahro-hill?lang=fa" />
   </url>
 
   <url>
-    <loc>https://amovi.travel/destinations/kabul/national-museum</loc>
+    <loc>https://amovi.travel/destinations/kabul/cannon-hill</loc>
     <lastmod>2026-10-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/kabul/cannon-hill?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/kabul/cannon-hill?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/kabul/maranjan-hill</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/kabul/maranjan-hill?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/kabul/maranjan-hill?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/kabul/bagh-e-bala</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/kabul/bagh-e-bala?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/kabul/bagh-e-bala?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/kabul/bagh-e-babur</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/kabul/bagh-e-babur?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/kabul/bagh-e-babur?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/kabul/chihil-sutun-garden</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/kabul/chihil-sutun-garden?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/kabul/chihil-sutun-garden?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/kabul/kabul-zoo</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/kabul/kabul-zoo?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/kabul/kabul-zoo?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/kabul/timur-shah-garden</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/kabul/timur-shah-garden?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/kabul/timur-shah-garden?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/kabul/buddhist-stupa-of-shewaki</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/kabul/buddhist-stupa-of-shewaki?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/kabul/buddhist-stupa-of-shewaki?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/kabul/kolola-pushta-fort</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/kabul/kolola-pushta-fort?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/kabul/kolola-pushta-fort?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/kabul/minaret-of-knowledge-and-ignorance</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/kabul/minaret-of-knowledge-and-ignorance?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/kabul/minaret-of-knowledge-and-ignorance?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/kabul/murad-khani-historic-quarter</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/kabul/murad-khani-historic-quarter?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/kabul/murad-khani-historic-quarter?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/kabul/taq-e-zafar</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/kabul/taq-e-zafar?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/kabul/taq-e-zafar?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/kabul/national-archives-of-afghanistan</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/kabul/national-archives-of-afghanistan?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/kabul/national-archives-of-afghanistan?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/kabul/national-gallery-of-afghanistan</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/kabul/national-gallery-of-afghanistan?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/kabul/national-gallery-of-afghanistan?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/kabul/national-museum-of-afghanistan</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/kabul/national-museum-of-afghanistan?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/kabul/national-museum-of-afghanistan?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/kabul/bagh-e-bala-palace</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/kabul/bagh-e-bala-palace?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/kabul/bagh-e-bala-palace?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/kabul/chihil-sutun-palace</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/kabul/chihil-sutun-palace?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/kabul/chihil-sutun-palace?lang=fa" />
   </url>
 
   <url>
@@ -152,6 +379,134 @@
     <lastmod>2026-10-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/kabul/darul-aman-palace?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/kabul/darul-aman-palace?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/kabul/paghman-palace</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/kabul/paghman-palace?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/kabul/paghman-palace?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/kabul/taj-beg-palace</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/kabul/taj-beg-palace?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/kabul/taj-beg-palace?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/kabul/kabul-antique-street</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/kabul/kabul-antique-street?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/kabul/kabul-antique-street?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/kabul/kah-froshi-birds-market</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/kabul/kah-froshi-birds-market?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/kabul/kah-froshi-birds-market?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/kabul/bukhara-restaurant</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/kabul/bukhara-restaurant?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/kabul/bukhara-restaurant?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/kabul/modern-shopping</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/kabul/modern-shopping?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/kabul/modern-shopping?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/kabul/namak-restaurant</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/kabul/namak-restaurant?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/kabul/namak-restaurant?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/kabul/prime-steakhouse</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/kabul/prime-steakhouse?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/kabul/prime-steakhouse?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/kabul/turkish-restaurant</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/kabul/turkish-restaurant?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/kabul/turkish-restaurant?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/kabul/ziyafat-restaurant</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/kabul/ziyafat-restaurant?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/kabul/ziyafat-restaurant?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/bamyan/adventure</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/bamyan/adventure?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/bamyan/adventure?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/bamyan/cultural</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/bamyan/cultural?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/bamyan/cultural?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/bamyan/historical-archaeological-sites-buddhas-of-bamiyan</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/bamyan/historical-archaeological-sites-buddhas-of-bamiyan?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/bamyan/historical-archaeological-sites-buddhas-of-bamiyan?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/bamyan/historical-archaeological-sites-shahr-e-gholghola</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/bamyan/historical-archaeological-sites-shahr-e-gholghola?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/bamyan/historical-archaeological-sites-shahr-e-gholghola?lang=fa" />
   </url>
 
   <url>
@@ -159,119 +514,279 @@
     <lastmod>2026-10-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/bamyan/band-e-amir?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/bamyan/band-e-amir?lang=fa" />
   </url>
 
   <url>
-    <loc>https://amovi.travel/destinations/bamyan/buddha-niches</loc>
+    <loc>https://amovi.travel/destinations/herat/herat-citadel</loc>
     <lastmod>2026-10-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/herat/herat-citadel?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/herat/herat-citadel?lang=fa" />
   </url>
 
   <url>
-    <loc>https://amovi.travel/destinations/bamyan/shahr-e-gholghola</loc>
+    <loc>https://amovi.travel/destinations/herat/herat-national-museum</loc>
     <lastmod>2026-10-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-  </url>
-
-  <!-- Blog Articles -->
-  <url>
-    <loc>https://amovi.travel/blog/beyond-headlines</loc>
-    <lastmod>2026-10-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/herat/herat-national-museum?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/herat/herat-national-museum?lang=fa" />
   </url>
 
   <url>
-    <loc>https://amovi.travel/blog/hidden-natural-beauty</loc>
+    <loc>https://amovi.travel/destinations/herat/musalla-of-herat</loc>
     <lastmod>2026-10-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/herat/musalla-of-herat?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/herat/musalla-of-herat?lang=fa" />
   </url>
 
   <url>
-    <loc>https://amovi.travel/blog/through-the-seasons</loc>
+    <loc>https://amovi.travel/destinations/herat/gawhar-shad-mausoleum</loc>
     <lastmod>2026-10-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/herat/gawhar-shad-mausoleum?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/herat/gawhar-shad-mausoleum?lang=fa" />
   </url>
 
   <url>
-    <loc>https://amovi.travel/blog/ancient-cities-landscapes</loc>
+    <loc>https://amovi.travel/destinations/herat/gazargah-shrine-of-khwaja-abdullah-ansari</loc>
     <lastmod>2026-10-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/herat/gazargah-shrine-of-khwaja-abdullah-ansari?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/herat/gazargah-shrine-of-khwaja-abdullah-ansari?lang=fa" />
   </url>
 
   <url>
-    <loc>https://amovi.travel/blog/nuristan-mountains</loc>
+    <loc>https://amovi.travel/destinations/herat/great-mosque-of-herat</loc>
     <lastmod>2026-10-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/herat/great-mosque-of-herat?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/herat/great-mosque-of-herat?lang=fa" />
   </url>
 
   <url>
-    <loc>https://amovi.travel/blog/soul-culture-identity</loc>
+    <loc>https://amovi.travel/destinations/herat/tomb-of-jami</loc>
     <lastmod>2026-10-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/herat/tomb-of-jami?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/herat/tomb-of-jami?lang=fa" />
   </url>
 
   <url>
-    <loc>https://amovi.travel/blog/people-behind-land</loc>
+    <loc>https://amovi.travel/destinations/balkh/buzkashi-experinces</loc>
     <lastmod>2026-10-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/balkh/buzkashi-experinces?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/balkh/buzkashi-experinces?lang=fa" />
   </url>
 
   <url>
-    <loc>https://amovi.travel/blog/afghan-hospitality</loc>
+    <loc>https://amovi.travel/destinations/balkh/landmark-heritage-blue-mosque</loc>
     <lastmod>2026-10-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/balkh/landmark-heritage-blue-mosque?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/balkh/landmark-heritage-blue-mosque?lang=fa" />
   </url>
 
   <url>
-    <loc>https://amovi.travel/blog/traditions-alive</loc>
+    <loc>https://amovi.travel/destinations/balkh/local-experience-tradational-bazars</loc>
     <lastmod>2026-10-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/balkh/local-experience-tradational-bazars?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/balkh/local-experience-tradational-bazars?lang=fa" />
   </url>
 
   <url>
-    <loc>https://amovi.travel/blog/taste-of-afghanistan</loc>
+    <loc>https://amovi.travel/destinations/balkh/museums-culture-rawza-e-mubarak</loc>
     <lastmod>2026-10-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/balkh/museums-culture-rawza-e-mubarak?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/balkh/museums-culture-rawza-e-mubarak?lang=fa" />
   </url>
 
   <url>
-    <loc>https://amovi.travel/blog/jewelry-stones-crafts</loc>
+    <loc>https://amovi.travel/destinations/balkh/seasonal-experinces-nawruz-in-mazar-i-sharif</loc>
     <lastmod>2026-10-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/balkh/seasonal-experinces-nawruz-in-mazar-i-sharif?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/balkh/seasonal-experinces-nawruz-in-mazar-i-sharif?lang=fa" />
   </url>
 
   <url>
-    <loc>https://amovi.travel/blog/afghan-carpets</loc>
+    <loc>https://amovi.travel/destinations/balkh/ancient-city-of-balkh</loc>
     <lastmod>2026-10-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/balkh/ancient-city-of-balkh?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/balkh/ancient-city-of-balkh?lang=fa" />
   </url>
 
   <url>
-    <loc>https://amovi.travel/blog/afghan-saffron</loc>
+    <loc>https://amovi.travel/destinations/balkh/balkh-ancient-walls</loc>
     <lastmod>2026-10-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/balkh/balkh-ancient-walls?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/balkh/balkh-ancient-walls?lang=fa" />
   </url>
 
   <url>
-    <loc>https://amovi.travel/blog/fruits-dry-fruits</loc>
+    <loc>https://amovi.travel/destinations/balkh/khwaja</loc>
     <lastmod>2026-10-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/balkh/khwaja?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/balkh/khwaja?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/balkh/noh-gunbad</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/balkh/noh-gunbad?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/balkh/noh-gunbad?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/balkh/rabia-balkhi</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/balkh/rabia-balkhi?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/balkh/rabia-balkhi?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/balkh/tape-rustam</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/balkh/tape-rustam?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/balkh/tape-rustam?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/kandahar/chehel-zina</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/kandahar/chehel-zina?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/kandahar/chehel-zina?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/kandahar/kherqa-sharif</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/kandahar/kherqa-sharif?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/kandahar/kherqa-sharif?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/kandahar/old-kandahar</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/kandahar/old-kandahar?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/kandahar/old-kandahar?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/kandahar/place</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/kandahar/place?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/kandahar/place?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/ghazni/historical-archeological-landmarks-citadel-of-ghazni</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/ghazni/historical-archeological-landmarks-citadel-of-ghazni?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/ghazni/historical-archeological-landmarks-citadel-of-ghazni?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/ghazni/historical-archeological-landmarks-ghazni-minarets</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/ghazni/historical-archeological-landmarks-ghazni-minarets?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/ghazni/historical-archeological-landmarks-ghazni-minarets?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/ghazni/mausoleum-of-sultan-mahmud-of-ghazni</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/ghazni/mausoleum-of-sultan-mahmud-of-ghazni?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/ghazni/mausoleum-of-sultan-mahmud-of-ghazni?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/samangan/takht-e-rustam</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/samangan/takht-e-rustam?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/samangan/takht-e-rustam?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/ghor/minaret-of-jam</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/ghor/minaret-of-jam?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/ghor/minaret-of-jam?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/helmand/qala-bost</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/helmand/qala-bost?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/helmand/qala-bost?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/nuristan/nuristan</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations/nuristan/nuristan?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations/nuristan/nuristan?lang=fa" />
+  </url>
+
+  <!-- Blog Posts -->
+  <url>
+    <loc>https://amovi.travel/blog/post-001</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/blog/post-001?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/blog/post-001?lang=fa" />
   </url>
 
 </urlset>

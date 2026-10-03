@@ -4,91 +4,214 @@ import { useLangStore } from '../../store/useLangStore';
 import SEO from '../../components/SEO';
 import heroBg from '../../assets/images/hero-bg.webp';
 
-// لیست تصاویر منتخب گالری سراسری افغانستان
+// لیست جامع تصاویر منتخب و واقعی گالری سراسری افغانستان با تصاویر بهینه‌شده WebP
 const galleryDatabase = [
+  // ==================== کابل (Kabul) ====================
   {
     id: 1,
-    category: 'bamyan',
-    image: '/images/provinces/bamyan/bamyan-hero.webp',
-    en: { title: 'Bamyan Valley & Cliffs', location: 'Bamyan', desc: 'Ancient cliffs, cave dwellings and high-altitude agricultural valleys.' },
-    fa: { title: 'دره باستانی بامیان', location: 'بامیان', desc: 'صخره‌های تاریخی، مغاره‌های کهن و دشت‌های سرسبز بامیان.' }
+    category: 'kabul',
+    image: '/images/destinations/kabul/1ca023080c9829f1a83baabc4178a909.webp',
+    en: { title: 'Bagh-e Babur (Babur Gardens)', location: 'Kabul', desc: '16th-century terraced Mughal royal garden with historic marble pavilion and lush cypress trees.' },
+    fa: { title: 'باغ تاریخی بابر', location: 'کابل', desc: 'باغ‌های پلکانی سده شانزدهم میلادی گورکانی همراه با کوشک مرمرین و چنارهای کهنسال.' }
   },
   {
     id: 2,
-    category: 'bamyan',
-    image: '/tours/images/bamyanPictures.webp',
-    en: { title: 'Band-e-Amir National Park', location: 'Bamyan', desc: 'Turquoise natural lakes nestled in the Hindu Kush mountains.' },
-    fa: { title: 'پارک ملی بند امیر', location: 'بامیان', desc: 'دریاچه‌های فیروزه‌ای طبیعی در دل رشته‌کوه هندوکش.' }
+    category: 'kabul',
+    image: '/images/destinations/kabul/3e610b13953ec79379b8fce1462a8a65.webp',
+    en: { title: 'Darul Aman Palace', location: 'Kabul', desc: 'Neoclassical 1920s royal palace commissioned by King Amanullah Khan, an iconic architectural landmark.' },
+    fa: { title: 'قصر دارالامان', location: 'کابل', desc: 'کاخ نئوکلاسیک دوران شاه امان‌الله خان و از برجسته‌ترین نمادهای معماری پایتخت.' }
   },
   {
     id: 3,
-    category: 'bamyan',
-    image: '/images/provinces/bamyan/Buddha-1.webp',
-    en: { title: 'Giant Buddha Niches', location: 'Bamyan', desc: 'Historic 6th-century monumental Buddha niches carved into the red rock.' },
-    fa: { title: 'تندیس‌های صلصال و شهمامه', location: 'بامیان', desc: 'تندیس‌های سترگ بودا تراشیده‌شده در صخره‌های سرخ سده ششم میلادی.' }
+    category: 'kabul',
+    image: '/images/destinations/kabul/3edd5432cab059e10b7670ac14f33bb7.webp',
+    en: { title: 'Paghman Royal Gardens & Palaces', location: 'Kabul', desc: 'Summer royal retreat nestled at the foothills of the Paghman mountains with European-style fountains.' },
+    fa: { title: 'باغ‌ها و کوشک‌های پغمان', location: 'کابل', desc: 'اقامتگاه ییلاقی شاهی در دامنه کوهپایه‌های پغمان با فواره‌ها و چشم‌انداز دل‌انگیز.' }
   },
   {
     id: 4,
     category: 'kabul',
-    image: '/images/provinces/kabul/kabul-hero.webp',
-    en: { title: 'Kabul Cityscape & Mountains', location: 'Kabul', desc: 'The historic capital nestled in a high mountain valley.' },
-    fa: { title: 'چشم‌انداز شهر کابل', location: 'کابل', desc: 'پایتخت تاریخی افغانستان احاطه‌شده در میان کوه‌های سر به فلک کشیده.' }
+    image: '/images/destinations/kabul/30e93d072f56af0481f2cd6de33a93ca.webp',
+    en: { title: 'Taq-e Zafar (Arch of Victory)', location: 'Kabul', desc: 'Iconic triumphal arch commemorating Afghanistan independence, set amidst mountain gardens.' },
+    fa: { title: 'طاق ظفر پغمان', location: 'کابل', desc: 'بنای یادبود و طاق نصرت تاریخی به نشانه استقلال کشور در دل باغستان‌های پغمان.' }
   },
   {
     id: 5,
     category: 'kabul',
-    image: '/images/provinces/kabul/bagh-e-babur.webp',
-    en: { title: 'Bagh-e Babur (Babur Gardens)', location: 'Kabul', desc: '16th-century terraced Mughal gardens with marble pavilion.' },
-    fa: { title: 'باغ تاریخی بابر', location: 'کابل', desc: 'باغ‌های پلکانی دوره گورکانی با کوشک مرمرین و چنارهای کهنسال.' }
+    image: '/images/destinations/kabul/3abc82b853537940bc93e6c61f1654bf.webp',
+    en: { title: 'Chihil Sutun Palace', location: 'Kabul', desc: '19th-century royal palace surrounded by extensive restored botanical gardens and walnut groves.' },
+    fa: { title: 'قصر و باغ چهل‌ستون', location: 'کابل', desc: 'کاخ باشکوه سده نوزدهم میلادی احاطه‌شده در میان باغستان‌های سرسبز و چنارستان‌های دلگشا.' }
   },
   {
     id: 6,
     category: 'kabul',
-    image: '/images/provinces/kabul/kabul-culture.webp',
-    en: { title: 'Old Kabul Artisan Traditions', location: 'Kabul', desc: 'Coppersmiths, spice bazaars, and traditional hospitality.' },
-    fa: { title: 'بازار سنتی و صنایع دستی کابل', location: 'کابل', desc: 'راسته مسگران، بازارهای ادویه و مهمان‌نوازی اصیل کابل قدیم.' }
+    image: '/images/destinations/kabul/37f17e6e7470188bad7ef4717d7ae762.webp',
+    en: { title: 'National Museum of Afghanistan', location: 'Kabul', desc: 'Preserving over five millennia of Silk Road artifacts, Greco-Buddhist treasures and Kushan relics.' },
+    fa: { title: 'موزه ملی افغانستان', location: 'کابل', desc: 'گنجینه آثار باستانی جاده ابریشم، تندیس‌های بودایی یونانی و تمدن ۵۰۰۰ ساله باختر.' }
   },
   {
     id: 7,
     category: 'kabul',
-    image: '/images/provinces/kabul/bibi-mahro.webp',
-    en: { title: 'Bibi Mahro Hill Panorama', location: 'Kabul', desc: 'Sweeping panoramic vantage point over modern and historic Kabul.' },
-    fa: { title: 'تپه بی‌بی مهرو', location: 'کابل', desc: 'چشم‌انداز فراخ و پانورامیک بر فراز بخش‌های نوین و کهن کابل.' }
+    image: '/images/destinations/kabul/0c8c8378a034947760afa71f41778429.webp',
+    en: { title: 'Bibi Mahro Hill Panorama', location: 'Kabul', desc: 'Sweeping panoramic vantage point over modern and historic neighborhoods of the Kabul valley.' },
+    fa: { title: 'تپه بی‌بی مهرو', location: 'کابل', desc: 'چشم‌انداز پانورامای فراخ بر فراز پایتخت، تپه‌ها و معماری نوین و کهن کابل.' }
   },
   {
     id: 8,
-    category: 'herat',
-    image: '/tours/images/heratPictures.webp',
-    en: { title: 'Citadel of Herat (Qala Ikhtiyaruddin)', location: 'Herat', desc: 'Alexander the Great era fortress, mosaic tiles and historical museum.' },
-    fa: { title: 'ارگ باستانی اختیارالدین هرات', location: 'هرات', desc: 'دژ استوار دوره اسکندر، کاشی‌کاری‌های ایلخانی و موزه تاریخی.' }
+    category: 'kabul',
+    image: '/images/destinations/kabul/2997745e50df412b8e5d721744ac66fc-1.webp',
+    en: { title: 'Buddhist Stupa of Shewaki', location: 'Kabul', desc: 'Ancient 3rd-century Kushan-era Buddhist stupa monument restored in the southeastern hills.' },
+    fa: { title: 'استوپای باستانی شیوکی', location: 'کابل', desc: 'یادگار دوران کوشانی‌ها از سده سوم میلادی در تپه‌های جنوب‌شرقی کابل.' }
   },
   {
     id: 9,
-    category: 'balkh',
-    image: '/tours/images/mazarPictures.webp',
-    en: { title: 'Blue Mosque of Mazar-i-Sharif', location: 'Balkh', desc: 'Turquoise and lapis glazed tiles of the historic shrine complex.' },
-    fa: { title: 'مسجد کبود مزار شریف (روضه سخی)', location: 'بلخ', desc: 'شاهکار کاشی‌کاری‌های فیروزه‌ای و لاجوردی در کهن‌شهر بلخ.' }
+    category: 'kabul',
+    image: '/images/destinations/kabul/2f29d4f2a2e712e893270523f17bf5d9.webp',
+    en: { title: 'Murad Khani Historic Quarter', location: 'Kabul', desc: 'Timber-framed heritage district with restored cedar-wood courtyards and artisan craft studios.' },
+    fa: { title: 'گذر تاریخی مرادخانی', location: 'کابل', desc: 'محله بازسازی‌شده کابل قدیم با معماری ارسی، چوب‌تراشی‌های هنری و کارگاه‌های صنایع دستی.' }
   },
+
+  // ==================== بامیان (Bamyan) ====================
   {
     id: 10,
-    category: 'nature',
-    image: '/tours/images/noristanPictures.webp',
-    en: { title: 'Nuristan Alpine Valleys', location: 'Nuristan', desc: 'Dense cedar forests, terraced timber houses and mountain rivers.' },
-    fa: { title: 'دره‌های سرسبز نورستان', location: 'نورستان', desc: 'جنگل‌های انبوه سدر، خانه‌های چوبی پلکانی و رودهای خروشان.' }
+    category: 'bamyan',
+    image: '/images/destinations/bamyan/43216cd43374487aa9b318aed4a8cec3.webp',
+    en: { title: 'Band-e-Amir National Park', location: 'Bamyan', desc: 'Six natural turquoise travertine lakes set dramatically amidst the rugged Hindu Kush canyons.' },
+    fa: { title: 'پارک ملی بند امیر', location: 'بامیان', desc: 'دریاچه‌های طبیعی فیروزه‌ای و صخره‌های بلورین تراورتن در دل کوهستان‌های پرصلابت.' }
   },
   {
     id: 11,
-    category: 'nature',
-    image: '/tours/images/ghorPictures.webp',
-    en: { title: 'Ghor Landscapes & Valleys', location: 'Ghor', desc: 'Canyon rivers, rugged central highlands, and turquoise skies.' },
-    fa: { title: 'طبیعت کوهستانی غور', location: 'غور', desc: 'دره‌های ژرف، تنگه‌های طبیعی و آسمان فیروزه‌ای ارتفاعات مرکزی.' }
+    category: 'bamyan',
+    image: '/images/destinations/bamyan/171e9a06774b94ed2e5740aa1e743ae2.webp',
+    en: { title: 'Giant Buddha Niches & Cliff Caves', location: 'Bamyan', desc: 'Monumental 6th-century cliff niches and monastic cave networks carved into sandstone cliffs.' },
+    fa: { title: 'تندیس‌ها و غارهای بودای بامیان', location: 'بامیان', desc: 'طاق‌های صخره‌ای سترگ سده ششم میلادی و مجموعه مغاره‌های کهن راهبان در صخره‌های سرخ.' }
   },
   {
     id: 12,
+    category: 'bamyan',
+    image: '/images/destinations/bamyan/1eead6bc-cc50-42af-a15c-986112fda6c0.webp',
+    en: { title: 'Shahr-e Gholghola (City of Screams)', location: 'Bamyan', desc: '5th-century fortified citadel citadel overlooking the Bamyan valley, conquered during the Mongol era.' },
+    fa: { title: 'شهر غلغله بامیان', location: 'بامیان', desc: 'دژ استوار تاریخی سده پنجم میلادی مشرف بر دره باستانی بامیان و شاهدی بر گذر دوران‌ها.' }
+  },
+  {
+    id: 13,
+    category: 'bamyan',
+    image: '/images/destinations/bamyan/127c717c46db98c65f3cd9600051faaf.webp',
+    en: { title: 'Shahr-e Zohak (The Red Fortress)', location: 'Bamyan', desc: 'Strategic citadel perched on towering crimson mudstone cliffs guard the entrance to the Bamyan basin.' },
+    fa: { title: 'شهر ضحاک (دژ سرخ)', location: 'بامیان', desc: 'باروی سرخ‌رنگ صخره‌ای مستحکم در مدخل دره بامیان و دژ دیدبانی باستانی جاده ابریشم.' }
+  },
+  {
+    id: 14,
+    category: 'bamyan',
+    image: '/images/destinations/bamyan/0984a798701785cf1e58bc320ed83b7a.webp',
+    en: { title: 'Bamyan Valley Panoramic Landscape', location: 'Bamyan', desc: 'Golden wheat terraces, willow trees, and mountain backdrop of the central highlands.' },
+    fa: { title: 'دشت و دره‌های سرسبز بامیان', location: 'بامیان', desc: 'مزارع پلکانی، درختان بید و دورنمای برفی قله‌های سرفراز کوه بابا.' }
+  },
+
+  // ==================== هرات (Herat) ====================
+  {
+    id: 15,
+    category: 'herat',
+    image: '/images/destinations/herat/12_58_291.webp',
+    en: { title: 'Citadel of Herat (Qala Ikhtiyaruddin)', location: 'Herat', desc: 'Alexander the Great era fortress towering over the city, featuring Timurid towers and museum halls.' },
+    fa: { title: 'ارگ باستانی اختیارالدین هرات', location: 'هرات', desc: 'قلعه تاریخی و استوار هرات با پیشینه‌ای بیش از ۲۰۰۰ سال، برج‌های تیموری و موزه میراث.' }
+  },
+  {
+    id: 16,
+    category: 'herat',
+    image: '/images/destinations/herat/4c3n5fe27845be2bxjs_800c450.webp',
+    en: { title: 'Great Mosque of Herat (Masjid Jami)', location: 'Herat', desc: 'Masterpiece of Persian turquoise and cobalt mosaic tiles with a grand 800-year courtyard.' },
+    fa: { title: 'مسجد جامع بزرگ هرات', location: 'هرات', desc: 'شاهکار هنر کاشی‌کاری معرق لاجوردی و فیروزه‌ای غوری و تیموری با حیاطی به قدمت ۸ سده.' }
+  },
+  {
+    id: 17,
+    category: 'herat',
+    image: '/images/destinations/herat/240752b59ed183d8bb6995f0e94bcd01.webp',
+    en: { title: 'Musalla Complex & Minarets', location: 'Herat', desc: 'Slender 15th-century Timurid minarets adorned with intricate geometric and floral glazed bricks.' },
+    fa: { title: 'مناره‌های تاریخی مصلی هرات', location: 'هرات', desc: 'مناره‌های برافراشته سده پانزدهم میلادی تیموری آراسته به نقوش هندسی و لعاب‌های نیلگون.' }
+  },
+  {
+    id: 18,
+    category: 'herat',
+    image: '/images/destinations/herat/435b386fc33a5548dc01eb9976aa3a87.webp',
+    en: { title: 'Mausoleum of Gawhar Shad Begum', location: 'Herat', desc: 'Timurid architectural crown jewel featuring ribbed turquoise turquoise dome and muqarnas.' },
+    fa: { title: 'آرامگاه گوهرشاد بیگم', location: 'هرات', desc: 'نگین معماری رنسانس تیموری با گنبد ترک‌دار فیروزه‌ای و مقرنس‌های ظریف و چشم‌نواز.' }
+  },
+  {
+    id: 19,
+    category: 'herat',
+    image: '/images/destinations/herat/4c3n09dc3285002bxjx_800c450.webp',
+    en: { title: 'Gazargah Shrine of Khwaja Abdullah Ansari', location: 'Herat', desc: 'Historic 15th-century Sufi pilgrimage complex with intricate stonework and tranquil pine gardens.' },
+    fa: { title: 'زیارتگاه گازرگاه خواجه عبدالله انصاری', location: 'هرات', desc: 'آرامگاه عارف نامدار در فضایی آرام‌بخش با سنگ‌تراشی‌های نفیس هفت‌قلم و کاشی‌های کهن.' }
+  },
+  {
+    id: 20,
+    category: 'herat',
+    image: '/images/destinations/herat/4c3nafe7d552982bxjn_800c450.webp',
+    en: { title: 'Mausoleum of Nur al-Din Jami', location: 'Herat', desc: 'Resting place of the celebrated 15th-century Persian poet surrounded by shaded gardens.' },
+    fa: { title: 'آرامگاه مولانا عبدالرحمن جامی', location: 'هرات', desc: 'مزار شاعر و ادیب بزرگ مشرق‌زمین احاطه‌شده در سایه‌سار درختان و باغ‌های هرات.' }
+  },
+
+  // ==================== بلخ و مزار شریف (Balkh & Mazar) ====================
+  {
+    id: 21,
+    category: 'balkh',
+    image: '/tours/images/mazarPictures.webp',
+    en: { title: 'Blue Mosque (Rawza-e Sharif)', location: 'Mazar-i-Sharif', desc: 'Vibrant cobalt and turquoise tiled sacred complex glowing under northern Afghan skies.' },
+    fa: { title: 'مسجد کبود (روضه شریف مزار)', location: 'مزار شریف', desc: 'مجموعه زیارتی منحصربه‌فرد با کاشی‌کاری‌های لاجوردی و فیروزه‌ای در قلب شمال افغانستان.' }
+  },
+  {
+    id: 22,
+    category: 'balkh',
+    image: '/images/provinces/kabul/kabul-history.webp',
+    en: { title: 'Ancient City Walls of Balkh (Bactra)', location: 'Balkh', desc: 'Massive earthen fortifications of the "Mother of Cities" along the ancient Silk Route.' },
+    fa: { title: 'دیوارهای کهن شهر باستانی بلخ', location: 'بلخ', desc: 'باروهای خشتی سترگ ام‌البلاد (باختر باستان) در پیوندگاه تجارت کهن جاده ابریشم.' }
+  },
+
+  // ==================== طبیعت و مناظر (Nature & Landscapes) ====================
+  {
+    id: 23,
+    category: 'nature',
+    image: '/tours/images/noristanPictures.webp',
+    en: { title: 'Nuristan Alpine Valleys & Cedar Forests', location: 'Nuristan', desc: 'Lush alpine evergreen woodlands, terraced wooden villages and clear crystal rivers.' },
+    fa: { title: 'دره‌های سرسبز و جنگل‌های سدر نورستان', location: 'نورستان', desc: 'طبیعت بکر و جنگل‌های انبوه، روستاهای چوبی پلکانی و رودهای خروشان کوهستانی.' }
+  },
+  {
+    id: 24,
+    category: 'nature',
+    image: '/tours/images/ghorPictures.webp',
+    en: { title: 'Minaret of Jam & River Canyons', location: 'Ghor', desc: 'UNESCO World Heritage 65-meter minaret soaring from a dramatic canyon in Ghor province.' },
+    fa: { title: 'منار باستانی جام و دره‌های غور', location: 'غور', desc: 'منار ۶۵ متری ثبت یونسکو از دوره غوریان برافراشته در میان صخره‌های تنگه هریرود.' }
+  },
+  {
+    id: 25,
+    category: 'nature',
+    image: '/images/destinations/bamyan/4df3b4c6e1f2016ab693f906a5d1aed5.webp',
+    en: { title: 'Band-e Haibat Crystal Waters', location: 'Bamyan', desc: 'Deep sapphire-blue water framed by pure mineral travertine shores at Band-e-Amir.' },
+    fa: { title: 'آب‌های نیلگون بند هیبت', location: 'بامیان', desc: 'رنگ شگفت‌انگیز آب‌های عمیق بند هیبت در پهنه پارک ملی بند امیر.' }
+  },
+
+  // ==================== فرهنگ و سنت‌ها (Culture & Heritage) ====================
+  {
+    id: 26,
     category: 'culture',
     image: '/tours/images/kandaharPictures.webp',
-    en: { title: 'Kandahar Architecture & Gardens', location: 'Kandahar', desc: 'Historic domes, pomegranates orchards and southern Afghan heritage.' },
-    fa: { title: 'معماری و باغات قندهار', location: 'قندهار', desc: 'گنبدها و ابنیه تاریخی، باغات انار و شکوه جنوب افغانستان.' }
+    en: { title: 'Kandahar Architecture & Heritage', location: 'Kandahar', desc: 'Ahmad Shah Durrani mausoleum, historic bazaars and famed pomegranate orchards.' },
+    fa: { title: 'معماری و میراث تاریخی قندهار', location: 'قندهار', desc: 'گنبد آرامگاه احمد شاه بابا، بازارهای چهارسو و شکوه تاریخی جنوب افغانستان.' }
+  },
+  {
+    id: 27,
+    category: 'culture',
+    image: '/images/destinations/kabul/4b1c96e9a0f11fec4e20a870caa2cea9.webp',
+    en: { title: 'Ka Faroshi Historic Bird Market', location: 'Kabul', desc: 'Centuries-old lively alleyways filled with singing canaries, partridges, and heritage birdcages.' },
+    fa: { title: 'بازار سنتی کوچه کاه فروشی', location: 'کابل', desc: 'گذرگاهی چند صد ساله از نغمه کبک‌ها و قناری‌ها در بافت سنتی و نوستالژیک کابل.' }
+  },
+  {
+    id: 28,
+    category: 'culture',
+    image: '/images/destinations/herat/763de7666e6b4b239ec31a8833cfd756.webp',
+    en: { title: 'Traditional Tile & Craft Guilds of Herat', location: 'Herat', desc: 'Living tradition of handmade glaze tiles, glassblowing, and miniature painting schools.' },
+    fa: { title: 'هنر کاشی‌سازی سنتی و صنایع دستی هرات', location: 'هرات', desc: 'میراث زنده کارگاه‌های کاشی معرق، شیشه‌گری سنتی و مکتب نگارگری کهن هرات.' }
   }
 ];
 

@@ -46,7 +46,7 @@ export default function ProvinceView() {
     };
   }, [slug]);
 
-  const categories = useMemo(() => [
+  const allCategoryDefinitions = useMemo(() => [
     { id: 'all', label: t.all || (isRtl ? 'همه' : 'All') },
     { id: 'gallery', label: t.gallery || (isRtl ? 'گالری تصاویر' : 'Photo Gallery'), isGallery: true },
     { id: 'museum-and-galleries', label: t.museumAndGalleries || (isRtl ? 'موزه‌ها و گالری‌ها' : 'Museum and Galleries') },
@@ -57,6 +57,14 @@ export default function ProvinceView() {
     { id: 'traditional-markets', label: t.traditionalMarkets || (isRtl ? 'بازارهای سنتی و گذرگاه‌های کهن' : 'Traditional Markets & Old Cities') },
     { id: 'modern-districts', label: t.modernDistricts || (isRtl ? 'محله‌ها و نقاط مدرن' : 'Modern Districts') },
   ], [isRtl, t]);
+
+  const categories = useMemo(() => {
+    if (!province?.sub_destinations) return allCategoryDefinitions;
+    const presentCategories = new Set(province.sub_destinations.map((place) => place.filter_category));
+    return allCategoryDefinitions.filter(
+      (cat) => cat.id === 'all' || cat.id === 'gallery' || presentCategories.has(cat.id)
+    );
+  }, [province, allCategoryDefinitions]);
 
   const filteredPlaces = useMemo(() => {
     if (!province?.sub_destinations) return [];

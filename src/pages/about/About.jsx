@@ -106,14 +106,14 @@ export default function About() {
       {/* ========================================================
           ۱. هیرو سکشن اصلی صفحه درباره ما (Brand Profile: Amovi Explore Afghanistan)
       ======================================================== */}
-      <section className="relative w-full pt-36 pb-20 sm:pt-40 sm:pb-28 overflow-hidden bg-[#14213D] text-white">
+      <section className="relative w-full pt-32 pb-16 sm:pt-40 sm:pb-28 overflow-hidden bg-[#14213D] text-white">
         <div 
           className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-50 scale-105"
           style={{ backgroundImage: `url(${heroBg})` }}
         />
         <div className="absolute inset-0 z-10 bg-gradient-to-b from-[#14213D]/95 via-[#14213D]/80 to-[#14213D] pointer-events-none" />
 
-        <div className={`relative z-20 max-w-6xl mx-auto px-6 ${isRtl ? 'text-right' : 'text-left'}`}>
+        <div className={`relative z-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 ${isRtl ? 'text-right' : 'text-left'}`}>
           <span className="inline-block text-[#FCA311] text-xs font-bold uppercase tracking-[0.2em] mb-2 font-[Inter]">
             {t.heroEyebrow || (isRtl ? 'پروفایل برند' : 'BRAND PROFILE')}
           </span>
@@ -138,7 +138,7 @@ export default function About() {
       {/* ========================================================
           ۲. بخش داستان برند و رسالت آمووی (About Amovi Explore Afghanistan)
       ======================================================== */}
-      <section className="max-w-6xl mx-auto px-6 py-16 sm:py-24">
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20 lg:py-24">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center" dir={isRtl ? 'rtl' : 'ltr'}>
           
           {/* ستون متن معرفی و رسالت برند */}
@@ -174,11 +174,11 @@ export default function About() {
           </div>
 
           {/* ستون تصاویر کلاژ هم‌پوشان */}
-          <div className="lg:col-span-6 relative pb-10 sm:pb-12">
-            <div className="relative w-full max-w-lg mx-auto">
+          <div className="lg:col-span-6 relative pb-8 sm:pb-12">
+            <div className="relative w-full max-w-sm sm:max-w-md lg:max-w-lg mx-auto">
               
               {/* عکس بزرگ پس‌زمینه */}
-              <div className="w-[85%] rounded-3xl overflow-hidden shadow-xl border-4 border-white bg-slate-200 aspect-[4/3]">
+              <div className="w-[85%] rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl border-2 sm:border-4 border-white bg-slate-200 aspect-[4/3]">
                 <img
                   src={aboutImg1}
                   alt="Afghanistan Landscapes"
@@ -187,7 +187,7 @@ export default function About() {
               </div>
 
               {/* عکس جلو هم‌پوشان با سایه عمیق */}
-              <div className={`w-[60%] rounded-2xl overflow-hidden shadow-2xl border-4 border-white bg-slate-300 aspect-[4/3] absolute -bottom-6 ${isRtl ? 'left-0' : 'right-0'} hover:scale-105 transition-transform duration-500`}>
+              <div className={`w-[60%] rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl border-2 sm:border-4 border-white bg-slate-300 aspect-[4/3] absolute -bottom-4 sm:-bottom-6 ${isRtl ? 'left-0' : 'right-0'} hover:scale-105 transition-transform duration-500`}>
                 <img
                   src={aboutImg2}
                   alt="Cultural Heritage"
@@ -204,48 +204,52 @@ export default function About() {
       {/* ========================================================
           ۳. بخش چشم‌انداز و ماموریت (Vision & Mission)
       ======================================================== */}
-      <section className="w-full py-16 bg-[#14213D] text-white relative overflow-hidden">
+      <section className="w-full py-14 sm:py-20 bg-[#14213D] text-white relative overflow-hidden">
         <div 
           className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-20 pointer-events-none"
           style={{ backgroundImage: `url(${heroBg})` }}
         />
-        <div className="relative z-10 max-w-6xl mx-auto px-6" dir={isRtl ? 'rtl' : 'ltr'}>
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8" dir={isRtl ? 'rtl' : 'ltr'}>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-14 items-start">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 lg:gap-10 items-stretch">
             
             {/* چشم‌انداز (Vision) */}
-            <div className={`space-y-3.5 bg-white/5 p-8 rounded-3xl border border-white/10 backdrop-blur-sm ${isRtl ? 'text-right' : 'text-left'}`}>
-              <span className="text-[#FCA311] text-xs font-bold uppercase tracking-widest block font-[Inter]">
-                {t.visionEyebrow || (isRtl ? 'چشم‌انداز و اهداف کلان' : 'OUR VISION & OBJECTIVES')}
-              </span>
-              <h3 className="text-xl sm:text-2xl font-black text-white">
-                {t.visionTitle || (isRtl ? 'تبدیل شدن به معتمدترین و معتبرترین برند گردشگری افغانستان' : "To Become Afghanistan's Most Trusted Tourism Brand")}
-              </h3>
-              <p className="text-slate-300 text-sm leading-relaxed font-light">
-                {t.visionText || (isRtl 
-                  ? 'ما آینده‌ای را ترسیم می‌کنیم که در آن، افغانستان بر روی نقشه گردشگری جهانی به عنوان مقصدی الهام‌بخش شناخته شود؛ جایی که هر سفر، تجربه‌ای پرمعنا و داستانی نو خلق کند.' 
-                  : 'We envision a future where Afghanistan is recognized on the global tourism map as an inspiring destination.')}
-              </p>
-              <p className="text-slate-300 text-sm leading-relaxed font-light pt-1">
-                {t.objectiveText || (isRtl 
-                  ? 'هدف ما ارائه تجربه‌ای اصیل و متمایز از افغانستان بر پایه اعتماد، امنیت کامل، رفاه و استانداردهای عالی بین‌المللی است.' 
-                  : 'Our objective is to provide an authentic and distinctive experience of Afghanistan, built on trust, safety, and comfort.')}
-              </p>
+            <div className={`space-y-3.5 bg-white/5 p-6 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl border border-white/10 backdrop-blur-sm flex flex-col justify-between ${isRtl ? 'text-right' : 'text-left'}`}>
+              <div className="space-y-3.5">
+                <span className="text-[#FCA311] text-xs font-bold uppercase tracking-widest block font-[Inter]">
+                  {t.visionEyebrow || (isRtl ? 'چشم‌انداز و اهداف کلان' : 'OUR VISION & OBJECTIVES')}
+                </span>
+                <h3 className="text-xl sm:text-2xl font-black text-white">
+                  {t.visionTitle || (isRtl ? 'تبدیل شدن به معتمدترین و معتبرترین برند گردشگری افغانستان' : "To Become Afghanistan's Most Trusted Tourism Brand")}
+                </h3>
+                <p className="text-slate-300 text-xs sm:text-sm leading-relaxed font-light">
+                  {t.visionText || (isRtl 
+                    ? 'ما آینده‌ای را ترسیم می‌کنیم که در آن، افغانستان بر روی نقشه گردشگری جهانی به عنوان مقصدی الهام‌بخش شناخته شود؛ جایی که هر سفر، تجربه‌ای پرمعنا و داستانی نو خلق کند.' 
+                    : 'We envision a future where Afghanistan is recognized on the global tourism map as an inspiring destination.')}
+                </p>
+                <p className="text-slate-300 text-xs sm:text-sm leading-relaxed font-light pt-1">
+                  {t.objectiveText || (isRtl 
+                    ? 'هدف ما ارائه تجربه‌ای اصیل و متمایز از افغانستان بر پایه اعتماد، امنیت کامل، رفاه و استانداردهای عالی بین‌المللی است.' 
+                    : 'Our objective is to provide an authentic and distinctive experience of Afghanistan, built on trust, safety, and comfort.')}
+                </p>
+              </div>
             </div>
 
             {/* ماموریت (Mission) */}
-            <div className={`space-y-3.5 bg-white/5 p-8 rounded-3xl border border-white/10 backdrop-blur-sm ${isRtl ? 'text-right' : 'text-left'}`}>
-              <span className="text-[#FCA311] text-xs font-bold uppercase tracking-widest block font-[Inter]">
-                {t.missionEyebrow || (isRtl ? 'ماموریت ما' : 'OUR MISSION')}
-              </span>
-              <h3 className="text-xl sm:text-2xl font-black text-white">
-                {t.missionTitle || (isRtl ? 'سفرهایی امن، الهام‌بخش، آموزنده و سرشار از لذت' : 'Safe, Educational, Inspiring, and Enjoyable Journeys')}
-              </h3>
-              <p className="text-slate-300 text-sm leading-relaxed font-light">
-                {t.missionText || (isRtl 
-                  ? 'مأموریت ما ارائه سفرهایی امن، آموزنده، الهام‌بخش و لذت‌بخش است که آگاهی بومی، همراهی راهنمایان باسابقه و پشتیبانی چندزبانه حرفه‌ای را در هم می‌آمیزد.' 
-                  : 'Our mission is to provide safe, educational, inspiring, and enjoyable travel experiences combining local knowledge, experienced regional guides, and professional support.')}
-              </p>
+            <div className={`space-y-3.5 bg-white/5 p-6 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl border border-white/10 backdrop-blur-sm flex flex-col justify-between ${isRtl ? 'text-right' : 'text-left'}`}>
+              <div className="space-y-3.5">
+                <span className="text-[#FCA311] text-xs font-bold uppercase tracking-widest block font-[Inter]">
+                  {t.missionEyebrow || (isRtl ? 'ماموریت ما' : 'OUR MISSION')}
+                </span>
+                <h3 className="text-xl sm:text-2xl font-black text-white">
+                  {t.missionTitle || (isRtl ? 'سفرهایی امن، الهام‌بخش، آموزنده و سرشار از لذت' : 'Safe, Educational, Inspiring, and Enjoyable Journeys')}
+                </h3>
+                <p className="text-slate-300 text-xs sm:text-sm leading-relaxed font-light">
+                  {t.missionText || (isRtl 
+                    ? 'مأموریت ما ارائه سفرهایی امن، آموزنده، الهام‌بخش و لذت‌بخش است که آگاهی بومی، همراهی راهنمایان باسابقه و پشتیبانی چندزبانه حرفه‌ای را در هم می‌آمیزد.' 
+                    : 'Our mission is to provide safe, educational, inspiring, and enjoyable travel experiences combining local knowledge, experienced regional guides, and professional support.')}
+                </p>
+              </div>
             </div>
 
           </div>
@@ -256,24 +260,24 @@ export default function About() {
       {/* ========================================================
           ۴. بخش ۶ ارزش بنیادین برند آمووی (Our 6 Core Values)
       ======================================================== */}
-      <section className="w-full py-16 sm:py-24 bg-white border-b border-slate-200/60">
-        <div className="max-w-6xl mx-auto px-6">
+      <section className="w-full py-14 sm:py-20 lg:py-24 bg-white border-b border-slate-200/60">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="text-center max-w-2xl mx-auto mb-14 space-y-2">
+          <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14 space-y-2">
             <span className="text-[#FCA311] text-xs font-bold uppercase tracking-widest block font-[Inter]">
               {t.valuesEyebrow || (isRtl ? 'ارزش‌های بنیادین ما' : 'OUR CORE VALUES')}
             </span>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#14213D]">
               {t.valuesTitle || (isRtl ? 'شش اصل راهنما در تمام سفرهای آمووی' : 'Six Principles That Guide Every Journey')}
             </h2>
-            <p className="text-slate-500 text-sm leading-relaxed">
+            <p className="text-slate-500 text-xs sm:text-sm leading-relaxed">
               {t.valuesSubtitle || (isRtl 
                 ? 'این ارزش‌ها مبنای تعهد ما نسبت به مسافران، جوامع محلی و حفاظت از میراث ماندگار افغانستان است.' 
                 : 'These values define our commitments to our guests, local communities, and the heritage of Afghanistan.')}
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8" dir={isRtl ? 'rtl' : 'ltr'}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8" dir={isRtl ? 'rtl' : 'ltr'}>
             {(t.valuesList || [
               { id: 'trust', title: 'Trust & Safety', desc: 'Creating a safe, reliable, and comfortable environment for every traveler.' },
               { id: 'respect', title: 'Respect for Culture & Heritage', desc: 'Approaching Afghanistan’s history and traditions with genuine respect.' },
@@ -284,12 +288,12 @@ export default function About() {
             ]).map((val, idx) => (
               <div 
                 key={val.id || idx}
-                className={`bg-[#F8FAFC] p-7 rounded-3xl border border-slate-200/80 shadow-sm hover:shadow-xl hover:border-[#FCA311]/40 transition-all duration-300 hover:-translate-y-1 space-y-4 ${isRtl ? 'text-right' : 'text-left'}`}
+                className={`bg-[#F8FAFC] p-5 sm:p-6 lg:p-7 rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-sm hover:shadow-xl hover:border-[#FCA311]/40 transition-all duration-300 hover:-translate-y-1 space-y-3.5 sm:space-y-4 ${isRtl ? 'text-right' : 'text-left'}`}
               >
-                <div className="w-13 h-13 rounded-full bg-[#14213D] text-[#FCA311] border border-[#FCA311]/40 flex items-center justify-center shadow-md shadow-[#14213D]/20 shrink-0">
+                <div className="w-12 h-12 rounded-full bg-[#14213D] text-[#FCA311] border border-[#FCA311]/40 flex items-center justify-center shadow-md shadow-[#14213D]/20 shrink-0">
                   {getValueIcon(idx)}
                 </div>
-                <h3 className="text-lg sm:text-xl font-bold text-[#14213D]">
+                <h3 className="text-base sm:text-lg lg:text-xl font-bold text-[#14213D]">
                   {val.title}
                 </h3>
                 <p className="text-slate-500 text-xs sm:text-sm leading-relaxed font-normal">
@@ -305,12 +309,12 @@ export default function About() {
       {/* ========================================================
           ۵. بخش دستاوردها و آمارها (Numbers That Tell Our Story)
       ======================================================== */}
-      <section className="w-full py-16 bg-[#14213D] text-white relative overflow-hidden">
+      <section className="w-full py-14 sm:py-20 bg-[#14213D] text-white relative overflow-hidden">
         <div 
           className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-20 pointer-events-none"
           style={{ backgroundImage: `url(${heroBg})` }}
         />
-        <div className="relative z-10 max-w-6xl mx-auto px-6">
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center space-y-2 mb-10">
             <span className="text-[#FCA311] text-xs font-bold uppercase tracking-widest font-[Inter]">
@@ -325,7 +329,7 @@ export default function About() {
             
             {/* ۱. جاذبه‌های بکر */}
             <div className="space-y-1">
-              <span className="text-3xl sm:text-5xl font-black text-[#FCA311] font-[Inter] tracking-tight block">
+              <span className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#FCA311] font-[Inter] tracking-tight block">
                 {t.stats?.gemsNumber || '50+'}
               </span>
               <p className="text-xs sm:text-sm text-slate-300 font-medium font-sans">
@@ -335,7 +339,7 @@ export default function About() {
 
             {/* ۲. تورهای امن */}
             <div className="space-y-1">
-              <span className="text-3xl sm:text-5xl font-black text-[#FCA311] font-[Inter] tracking-tight block">
+              <span className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#FCA311] font-[Inter] tracking-tight block">
                 {t.stats?.toursNumber || '100%'}
               </span>
               <p className="text-xs sm:text-sm text-slate-300 font-medium font-sans">
@@ -345,7 +349,7 @@ export default function About() {
 
             {/* ۳. ولایات پوشش داده شده */}
             <div className="space-y-1">
-              <span className="text-3xl sm:text-5xl font-black text-[#FCA311] font-[Inter] tracking-tight block">
+              <span className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#FCA311] font-[Inter] tracking-tight block">
                 {t.stats?.provincesNumber || '12+'}
               </span>
               <p className="text-xs sm:text-sm text-slate-300 font-medium font-sans">
@@ -355,9 +359,9 @@ export default function About() {
 
             {/* ۴. امتیاز VIP */}
             <div className="space-y-1">
-              <span className="text-3xl sm:text-5xl font-black text-[#FCA311] font-[Inter] tracking-tight flex items-center justify-start gap-1.5">
+              <span className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#FCA311] font-[Inter] tracking-tight flex items-center justify-center gap-1.5">
                 <span>{t.stats?.ratingNumber || (isRtl ? '۵.۰' : '5.0')}</span>
-                <Star size={28} className="fill-[#FCA311] text-[#FCA311] inline shrink-0" />
+                <Star className="w-5 h-5 sm:w-6 sm:h-6 fill-[#FCA311] text-[#FCA311] inline shrink-0" />
               </span>
               <p className="text-xs sm:text-sm text-slate-300 font-medium font-sans">
                 {t.stats?.ratingLabel || (isRtl ? 'امتیاز مسافران VIP' : 'VIP Rating')}
@@ -372,11 +376,11 @@ export default function About() {
       {/* ========================================================
           ۶. بخش آماده برنامه‌ریزی سفر و فرم درخواست (Ready to Plan?)
       ======================================================== */}
-      <section className="max-w-6xl mx-auto px-6 py-16 sm:py-20">
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch" dir={isRtl ? 'rtl' : 'ltr'}>
           
           {/* ستون چپ: بنر تصویری دعوت به تماس */}
-          <div className="lg:col-span-5 relative rounded-3xl overflow-hidden shadow-xl min-h-[380px] flex flex-col justify-between p-8 sm:p-10 text-white bg-[#14213D]">
+          <div className="lg:col-span-5 relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl min-h-[320px] sm:min-h-[360px] lg:min-h-[380px] flex flex-col justify-between p-6 sm:p-8 md:p-10 text-white bg-[#14213D]">
             <div 
               className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-40 scale-105"
               style={{ backgroundImage: `url(${heroBg})` }}
@@ -400,7 +404,7 @@ export default function About() {
             <div className={`relative z-20 pt-6 ${isRtl ? 'text-right' : 'text-left'}`}>
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-2 bg-[#FCA311] hover:bg-amber-500 text-[#14213D] font-bold py-3 px-6 rounded-full shadow-lg transition-all duration-200 text-xs sm:text-sm group uppercase font-[Inter] tracking-wider"
+                className="inline-flex items-center justify-center gap-2 bg-[#FCA311] hover:bg-amber-500 text-[#14213D] font-bold py-3 px-6 rounded-full shadow-lg transition-all duration-200 text-xs sm:text-sm group uppercase font-[Inter] tracking-wider w-full sm:w-auto"
               >
                 <span>{t.ctaButton || (isRtl ? 'تماس با ما' : 'Contact Us')}</span>
                 {isRtl ? (
@@ -413,7 +417,7 @@ export default function About() {
           </div>
 
           {/* ستون راست: فرم ثبت درخواست */}
-          <div className="lg:col-span-7 bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-xl space-y-4">
+          <div className="lg:col-span-7 bg-white p-5 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl border border-slate-200 shadow-xl space-y-4">
             <div>
               <h3 className="text-lg sm:text-xl font-bold text-[#14213D]">
                 {t.formTitle || (isRtl ? 'ثبت درخواست این پکیج / خدمت' : 'Request This Package / Service')}
@@ -500,7 +504,7 @@ export default function About() {
                     name="packageOrService"
                     value={formData.packageOrService}
                     onChange={handleChange}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-[#FCA311] text-xs sm:text-sm text-slate-800 bg-slate-50/50 font-medium cursor-pointer appearance-none"
+                    className="w-full px-3.5 py-2.5 ps-3.5 pe-9 rtl:ps-9 rtl:pe-3.5 rounded-xl border border-slate-200 focus:outline-none focus:border-[#FCA311] text-xs sm:text-sm text-slate-800 bg-slate-50/50 font-medium cursor-pointer appearance-none"
                   >
                     <option value="Bespoke Afghanistan Journey">
                       {isRtl ? 'سفر اختصاصی و سفارشی افغانستان (Bespoke Journey)' : 'Bespoke Afghanistan Journey'}

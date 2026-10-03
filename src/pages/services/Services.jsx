@@ -128,14 +128,14 @@ export default function Services() {
       {/* ========================================================
           ۱. هیرو سکشن اصلی صفحه خدمات (Services Hero)
       ======================================================== */}
-      <section className="relative w-full pt-36 pb-20 sm:pt-40 sm:pb-28 overflow-hidden bg-[#14213D] text-white">
+      <section className="relative w-full pt-32 pb-16 sm:pt-40 sm:pb-28 overflow-hidden bg-[#14213D] text-white">
         <div 
           className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-45 scale-105"
           style={{ backgroundImage: `url(${heroBg})` }}
         />
         <div className="absolute inset-0 z-10 bg-gradient-to-b from-[#14213D]/95 via-[#14213D]/80 to-[#14213D] pointer-events-none" />
 
-        <div className={`relative z-20 max-w-6xl mx-auto px-6 ${isRtl ? 'text-right' : 'text-left'}`}>
+        <div className={`relative z-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 ${isRtl ? 'text-right' : 'text-left'}`}>
           <span className="inline-block text-[#FCA311] text-xs font-bold uppercase tracking-[0.2em] mb-2 font-[Inter]">
             {t.heroEyebrow || (isRtl ? 'خدمات آمووی' : 'SERVICES')}
           </span>
@@ -156,7 +156,7 @@ export default function Services() {
           </p>
 
           {/* دکمه‌های اقدام هیرو */}
-          <div className="mt-8 flex flex-wrap items-center gap-4">
+          <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
             <button
               type="button"
               onClick={() => {
@@ -164,7 +164,7 @@ export default function Services() {
                   formRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 }
               }}
-              className="inline-flex items-center gap-2 bg-[#FCA311] hover:bg-amber-500 text-[#14213D] font-bold py-3.5 px-7 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 text-xs sm:text-sm uppercase tracking-wider cursor-pointer"
+              className="inline-flex items-center justify-center gap-2 bg-[#FCA311] hover:bg-amber-500 text-[#14213D] font-bold py-3.5 px-7 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 text-xs sm:text-sm uppercase tracking-wider cursor-pointer w-full sm:w-auto"
             >
               <span>{t.planJourney || (isRtl ? 'برنامه‌ریزی سفر' : 'Plan Your Journey')}</span>
               {isRtl ? (
@@ -177,14 +177,14 @@ export default function Services() {
             <button
               type="button"
               onClick={handleScrollToServices}
-              className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-semibold py-3.5 px-7 rounded-full border border-white/25 backdrop-blur-sm transition-all duration-200 text-xs sm:text-sm cursor-pointer"
+              className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white font-semibold py-3.5 px-7 rounded-full border border-white/25 backdrop-blur-sm transition-all duration-200 text-xs sm:text-sm cursor-pointer w-full sm:w-auto"
             >
               <span>{t.exploreServices || (isRtl ? 'مشاهده خدمات ما' : 'Explore Our Services')}</span>
             </button>
           </div>
 
           {/* ناوبری سریع ۷ خدمت (Quick Jump Pills) */}
-          <div className="mt-10 pt-6 border-t border-white/10 flex flex-wrap gap-2 text-xs">
+          <div className="mt-8 sm:mt-10 pt-6 border-t border-white/10 flex flex-wrap gap-1.5 sm:gap-2 text-xs">
             {servicesList.map((service, idx) => (
               <button
                 key={service.id || idx}
@@ -195,7 +195,7 @@ export default function Services() {
                     el.scrollIntoView({ behavior: 'smooth', block: 'center' });
                   }
                 }}
-                className="px-3.5 py-1.5 rounded-full bg-white/5 hover:bg-[#FCA311] hover:text-[#14213D] text-slate-300 border border-white/10 transition-colors duration-200 cursor-pointer text-xs font-medium"
+                className="px-3 sm:px-3.5 py-1.5 rounded-full bg-white/5 hover:bg-[#FCA311] hover:text-[#14213D] text-slate-300 border border-white/10 transition-colors duration-200 cursor-pointer text-[11px] sm:text-xs font-medium"
               >
                 {service.number || `0${idx + 1}`} {service.title}
               </button>
@@ -207,14 +207,14 @@ export default function Services() {
       {/* ========================================================
           ۲. عنوان بخش ۷ خدمت اصلی (Our 7 Services Header)
       ======================================================== */}
-      <section ref={servicesSectionRef} className="max-w-6xl mx-auto px-6 pt-16 sm:pt-20 pb-8 text-center">
+      <section ref={servicesSectionRef} className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 sm:pt-20 pb-6 sm:pb-8 text-center">
         <span className="text-[#FCA311] text-xs font-bold uppercase tracking-widest block font-[Inter] mb-2">
           {t.sectionEyebrow || (isRtl ? 'خدمات ما — ۷ خدمت تخصصی' : 'OUR SERVICES — 7 SERVICES')}
         </span>
         <h2 className="text-2xl sm:text-4xl font-black text-[#14213D] tracking-tight">
           {t.sectionTitle || (isRtl ? 'پشتیبانی در تمام مراحل سفر شما' : 'Support for Every Step of Your Journey')}
         </h2>
-        <p className="text-slate-500 text-sm sm:text-base max-w-2xl mx-auto mt-3 leading-relaxed">
+        <p className="text-slate-500 text-xs sm:text-sm md:text-base max-w-2xl mx-auto mt-3 leading-relaxed">
           {t.sectionSubtitle || (isRtl 
             ? 'در آمووی، خدمات کاربردی و مطمئن سفر را ارائه می‌دهیم تا سفری آسان‌تر، راحت‌تر و با هماهنگی کامل در سراسر افغانستان تجربه کنید.' 
             : 'At Amovi, we provide practical and reliable travel services designed to make your journey across Afghanistan smoother, more comfortable, and well supported.')}
@@ -224,7 +224,7 @@ export default function Services() {
       {/* ========================================================
           ۳. ردیف‌های ۷‌گانه زیگزاگی خدمات با جزییات کامل
       ======================================================== */}
-      <section className="max-w-6xl mx-auto px-6 py-8 sm:py-12 space-y-16 sm:space-y-24">
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-14 sm:space-y-20 lg:space-y-24">
         {servicesList.map((service, index) => {
           const isReversed = index % 2 === 1;
 
@@ -236,8 +236,8 @@ export default function Services() {
               dir={isRtl ? 'rtl' : 'ltr'}
             >
               {/* تصویر شاخص با جلوه شیک */}
-              <div className="w-full lg:w-1/2">
-                <div className="relative rounded-3xl overflow-hidden shadow-xl border-4 border-white bg-slate-200 aspect-[16/10] group">
+              <div className="w-full lg:w-1/2 max-w-xl lg:max-w-none mx-auto">
+                <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl border-2 sm:border-4 border-white bg-slate-200 aspect-[16/10] group">
                   <img
                     src={service.image}
                     alt={service.title}
@@ -253,13 +253,13 @@ export default function Services() {
                   <div className="absolute inset-0 bg-gradient-to-t from-[#14213D]/70 via-transparent to-transparent pointer-events-none" />
                   
                   {/* بج شماره خدمت روی عکس */}
-                  <div className={`absolute top-4 ${isRtl ? 'right-4' : 'left-4'} bg-[#14213D]/80 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/20 text-[#FCA311] font-bold text-xs font-[Inter] tracking-wider`}>
+                  <div className={`absolute top-3.5 sm:top-4 ${isRtl ? 'right-3.5 sm:right-4' : 'left-3.5 sm:left-4'} bg-[#14213D]/80 backdrop-blur-md px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full border border-white/20 text-[#FCA311] font-bold text-xs font-[Inter] tracking-wider`}>
                     {service.tag || service.number}
                   </div>
 
                   {/* تگ لاین کوتاه روی گوشه تصویر */}
                   {service.heroTagline && (
-                    <div className="absolute bottom-4 inset-x-4 text-white text-xs sm:text-sm font-medium drop-shadow-md">
+                    <div className="absolute bottom-3.5 sm:bottom-4 inset-x-3.5 sm:inset-x-4 text-white text-xs sm:text-sm font-medium drop-shadow-md">
                       {service.heroTagline}
                     </div>
                   )}
@@ -277,32 +277,32 @@ export default function Services() {
                   </span>
                 </div>
 
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-[#14213D] tracking-tight">
+                <h3 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-[#14213D] tracking-tight">
                   {service.title}
                 </h3>
 
-                <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+                <p className="text-slate-600 text-xs sm:text-sm md:text-base leading-relaxed">
                   {service.description}
                 </p>
 
                 {/* چک‌لیست ۴ ویژگی کلیدی */}
-                <ul className="space-y-2.5 pt-2">
+                <ul className="space-y-2.5 pt-1 sm:pt-2">
                   {service.bullets?.map((bullet, bIdx) => (
-                    <li key={bIdx} className="flex items-center gap-3 text-slate-700 text-sm font-medium">
-                      <div className="w-5 h-5 rounded-full bg-amber-500/15 text-[#FCA311] flex items-center justify-center shrink-0">
-                        <CheckCircle2 size={16} className="text-[#FCA311]" />
+                    <li key={bIdx} className="flex items-start gap-2.5 sm:gap-3 text-slate-700 text-xs sm:text-sm font-medium">
+                      <div className="w-5 h-5 rounded-full bg-amber-500/15 text-[#FCA311] flex items-center justify-center shrink-0 mt-0.5">
+                        <CheckCircle2 size={15} className="text-[#FCA311]" />
                       </div>
-                      <span>{bullet}</span>
+                      <span className="leading-snug">{bullet}</span>
                     </li>
                   ))}
                 </ul>
 
                 {/* دکمه‌های عملگر خدمت */}
-                <div className="pt-4 flex flex-wrap items-center gap-3">
+                <div className="pt-3 sm:pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3">
                   <button
                     type="button"
                     onClick={() => handleSelectService(service.title)}
-                    className="inline-flex items-center gap-2 bg-[#FCA311] hover:bg-amber-500 text-[#14213D] font-bold py-3 px-6 rounded-full shadow-md hover:shadow-lg transition-all duration-200 text-xs sm:text-sm group uppercase font-[Inter] tracking-wider cursor-pointer"
+                    className="inline-flex items-center justify-center gap-2 bg-[#FCA311] hover:bg-amber-500 text-[#14213D] font-bold py-3 px-6 rounded-full shadow-md hover:shadow-lg transition-all duration-200 text-xs sm:text-sm group uppercase font-[Inter] tracking-wider cursor-pointer w-full sm:w-auto"
                   >
                     <span>{t.requestService || (isRtl ? 'درخواست این خدمت' : 'Request This Service')}</span>
                     {isRtl ? (
@@ -315,7 +315,7 @@ export default function Services() {
                   <button
                     type="button"
                     onClick={() => setActiveModalService(service)}
-                    className="inline-flex items-center gap-1.5 bg-slate-100 hover:bg-slate-200 text-[#14213D] font-semibold py-3 px-5 rounded-full border border-slate-200 transition-colors duration-200 text-xs sm:text-sm cursor-pointer"
+                    className="inline-flex items-center justify-center gap-1.5 bg-slate-100 hover:bg-slate-200 text-[#14213D] font-semibold py-3 px-5 rounded-full border border-slate-200 transition-colors duration-200 text-xs sm:text-sm cursor-pointer w-full sm:w-auto"
                   >
                     <Info size={15} className="text-[#14213D]/70" />
                     <span>{t.learnMore || (isRtl ? 'جزییات بیشتر' : 'Learn More')}</span>
@@ -331,45 +331,45 @@ export default function Services() {
           ۴. نحوه ارائه خدمات (How Our Services Work - 6 Steps)
       ======================================================== */}
       {howWork.steps && (
-        <section className="w-full bg-[#14213D] text-white py-16 sm:py-24 my-12 relative overflow-hidden">
+        <section className="w-full bg-[#14213D] text-white py-14 sm:py-20 my-8 sm:my-12 relative overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(#FCA311_1px,transparent_1px)] [background-size:24px_24px] opacity-5 pointer-events-none" />
           
-          <div className="max-w-6xl mx-auto px-6 relative z-10" dir={isRtl ? 'rtl' : 'ltr'}>
-            <div className="text-center max-w-3xl mx-auto mb-14">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10" dir={isRtl ? 'rtl' : 'ltr'}>
+            <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
               <span className="text-[#FCA311] text-xs font-bold uppercase tracking-widest block font-[Inter] mb-2">
                 {howWork.eyebrow || (isRtl ? 'نحوه ارائه خدمات ما' : 'HOW OUR SERVICES WORK')}
               </span>
               <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight">
                 {howWork.title || (isRtl ? 'فرآیندی ساده از ثبت درخواست تا تأیید نهایی' : 'A Simple Process from Request to Confirmation')}
               </h2>
-              <p className="text-slate-300 text-sm sm:text-base mt-3 leading-relaxed font-light">
+              <p className="text-slate-300 text-xs sm:text-sm md:text-base mt-3 leading-relaxed font-light">
                 {howWork.subtitle || (isRtl 
                   ? 'چه به یک خدمت انفرادی نیاز داشته باشید و چه بخواهید کل سفر خود را مدیریت کنید، فرآیند ما شفاف و سرراست است.' 
                   : 'Whether you need a single service or support for a complete journey, our process is clear and straightforward.')}
               </p>
             </div>
 
-            {/* گام‌های ۶‌گانه افقی در دسکتاپ و کارتی در موبایل */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4 sm:gap-6 relative">
+            {/* گام‌های ۶‌گانه: ۱ در موبایل کوچک، ۲ در موبایل بزرگ، ۳ در تبلت (iPad)، ۶ در دسکتاپ */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-5 lg:gap-4 relative">
               {howWork.steps.map((st, sIdx) => (
                 <div 
                   key={sIdx}
-                  className="bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-[#FCA311]/50 transition-all duration-300 flex flex-col justify-between group"
+                  className="bg-white/5 border border-white/10 rounded-2xl p-4 sm:p-5 hover:border-[#FCA311]/50 transition-all duration-300 flex flex-col justify-between group"
                 >
                   <div>
-                    <div className="w-10 h-10 rounded-xl bg-[#FCA311]/15 text-[#FCA311] flex items-center justify-center font-black text-sm font-[Inter] mb-4 group-hover:bg-[#FCA311] group-hover:text-[#14213D] transition-colors duration-300">
+                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#FCA311]/15 text-[#FCA311] flex items-center justify-center font-black text-xs sm:text-sm font-[Inter] mb-3 sm:mb-4 group-hover:bg-[#FCA311] group-hover:text-[#14213D] transition-colors duration-300">
                       {st.step}
                     </div>
-                    <h4 className="text-base font-bold text-white mb-2">
+                    <h4 className="text-sm sm:text-base font-bold text-white mb-1.5 sm:mb-2">
                       {st.title}
                     </h4>
-                    <p className="text-slate-300 text-xs sm:text-sm leading-relaxed font-light">
+                    <p className="text-slate-300 text-xs leading-relaxed font-light">
                       {st.desc}
                     </p>
                   </div>
 
                   {sIdx < howWork.steps.length - 1 && (
-                    <div className="hidden lg:block pt-4 text-[#FCA311]/40 text-xs font-mono">
+                    <div className="hidden lg:block pt-3 text-[#FCA311]/40 text-xs font-mono">
                       {isRtl ? '←' : '→'}
                     </div>
                   )}
@@ -384,31 +384,31 @@ export default function Services() {
           ۵. چرا آمووی؟ (Why Choose Amovi - 4 Columns)
       ======================================================== */}
       {whyChoose.features && (
-        <section className="max-w-6xl mx-auto px-6 py-12 sm:py-16" dir={isRtl ? 'rtl' : 'ltr'}>
-          <div className="text-center max-w-3xl mx-auto mb-12">
+        <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16" dir={isRtl ? 'rtl' : 'ltr'}>
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
             <span className="text-[#FCA311] text-xs font-bold uppercase tracking-widest block font-[Inter] mb-2">
               {whyChoose.eyebrow || (isRtl ? 'چرا آمووی را انتخاب کنید؟' : 'WHY CHOOSE AMOVI?')}
             </span>
             <h2 className="text-2xl sm:text-4xl font-black text-[#14213D] tracking-tight">
               {whyChoose.title || (isRtl ? 'با اطمینان سفر کنید؛ همراه شما در تک‌تک مراحل' : 'Travel with Confidence. Supported Every Step of the Way.')}
             </h2>
-            <p className="text-slate-600 text-sm sm:text-base mt-3 leading-relaxed">
+            <p className="text-slate-600 text-xs sm:text-sm md:text-base mt-3 leading-relaxed">
               {whyChoose.subtitle || (isRtl 
                 ? 'آمووی دانش بومی، هماهنگی‌های حرفه‌ای و پشتیبانی اختصاصی را گردهم آورده تا تجربه شما از سفر در افغانستان آرام، امن و دلپذیر باشد.' 
                 : 'Amovi combines local knowledge, professional coordination, and personalized support to help make your journey across Afghanistan smoother and more comfortable.')}
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
             {whyChoose.features.map((feat, fIdx) => (
               <div 
                 key={feat.id || fIdx}
-                className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col items-start space-y-4"
+                className="bg-white p-5 sm:p-6 rounded-2xl border border-slate-200/80 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col items-start space-y-3.5 sm:space-y-4"
               >
-                <div className="p-3 bg-amber-500/10 rounded-2xl">
+                <div className="p-2.5 sm:p-3 bg-amber-500/10 rounded-2xl">
                   {whyChooseIcons[fIdx % whyChooseIcons.length]}
                 </div>
-                <h3 className="text-lg font-bold text-[#14213D]">
+                <h3 className="text-base sm:text-lg font-bold text-[#14213D]">
                   {feat.title}
                 </h3>
                 <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
@@ -423,25 +423,25 @@ export default function Services() {
       {/* ========================================================
           ۶. بنر خدمات سفارشی‌تر (Need Something More Personalized CTA)
       ======================================================== */}
-      <section className="w-full bg-gradient-to-r from-[#14213D] via-[#1b2b4d] to-[#14213D] text-white py-14 sm:py-20 my-8 shadow-xl">
-        <div className="max-w-4xl mx-auto px-6 text-center space-y-6" dir={isRtl ? 'rtl' : 'ltr'}>
+      <section className="w-full bg-gradient-to-r from-[#14213D] via-[#1b2b4d] to-[#14213D] text-white py-12 sm:py-20 my-6 sm:my-8 shadow-xl">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-5 sm:space-y-6" dir={isRtl ? 'rtl' : 'ltr'}>
           <span className="text-[#FCA311] text-xs font-bold uppercase tracking-widest block font-[Inter]">
             {personalizedCta.eyebrow || (isRtl ? 'خدمات سفارشی' : 'CUSTOM SOLUTIONS')}
           </span>
           <h2 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
             {personalizedCta.title || (isRtl ? 'به برنامه‌ای شخصی‌سازی‌شده‌تر نیاز دارید؟' : 'Need Something More Personalized?')}
           </h2>
-          <p className="text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto font-light">
+          <p className="text-slate-300 text-xs sm:text-sm md:text-base leading-relaxed max-w-2xl mx-auto font-light">
             {personalizedCta.desc || (isRtl 
               ? 'هر مسافری سلیقه متفاوتی دارد. اگر به ترکیبی از خدمات نیاز دارید یا درخواست ویژه‌ای دارید، تیم ما متناسب با خواست شما راهکاری سفارشی تدارک خواهد دید.' 
               : 'Every traveler is different. If you need a combination of services, have special requirements, or cannot find exactly what you are looking for, our team can help arrange a solution based on your journey.')}
           </p>
 
-          <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 pt-3 sm:pt-4">
             <button
               type="button"
               onClick={() => handleSelectService('Customized & VIP Travel')}
-              className="inline-flex items-center gap-2 bg-[#FCA311] hover:bg-amber-500 text-[#14213D] font-bold py-3.5 px-8 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 text-xs sm:text-sm uppercase tracking-wider cursor-pointer"
+              className="inline-flex items-center justify-center gap-2 bg-[#FCA311] hover:bg-amber-500 text-[#14213D] font-bold py-3.5 px-8 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 text-xs sm:text-sm uppercase tracking-wider cursor-pointer w-full sm:w-auto"
             >
               <span>{personalizedCta.requestBtn || (isRtl ? 'ثبت درخواست خدمت' : 'Request a Service')}</span>
               {isRtl ? <ArrowLeft size={16} strokeWidth={2.5} /> : <ArrowRight size={16} strokeWidth={2.5} />}
@@ -449,7 +449,7 @@ export default function Services() {
 
             <Link
               to="/contact"
-              className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-semibold py-3.5 px-8 rounded-full border border-white/25 backdrop-blur-sm transition-all duration-200 text-xs sm:text-sm"
+              className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white font-semibold py-3.5 px-8 rounded-full border border-white/25 backdrop-blur-sm transition-all duration-200 text-xs sm:text-sm w-full sm:w-auto"
             >
               <span>{personalizedCta.contactBtn || (isRtl ? 'تماس با آمووی' : 'Contact Amovi')}</span>
             </Link>
@@ -460,11 +460,11 @@ export default function Services() {
       {/* ========================================================
           ۷. بخش آماده برنامه‌ریزی و فرم ثبت درخواست (Inquiry Form)
       ======================================================== */}
-      <section ref={formRef} className="max-w-6xl mx-auto px-6 py-16 sm:py-24">
+      <section ref={formRef} className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch" dir={isRtl ? 'rtl' : 'ltr'}>
           
           {/* ستون چپ: بنر دعوت به تماس و مشاوره مستقیم */}
-          <div className="lg:col-span-5 relative rounded-3xl overflow-hidden shadow-xl min-h-[420px] flex flex-col justify-between p-8 sm:p-10 text-white bg-[#14213D]">
+          <div className="lg:col-span-5 relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl min-h-[340px] sm:min-h-[380px] lg:min-h-[420px] flex flex-col justify-between p-6 sm:p-8 md:p-10 text-white bg-[#14213D]">
             <div 
               className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-40 scale-105"
               style={{ backgroundImage: `url(${heroBg})` }}
@@ -484,7 +484,7 @@ export default function Services() {
                   : 'Let Amovi help you take the first step toward a smoother journey to Afghanistan.')}
               </p>
 
-              <div className="pt-4 space-y-2 text-xs text-slate-300">
+              <div className="pt-3 sm:pt-4 space-y-2 text-xs text-slate-300">
                 <div className="flex items-center gap-2">
                   <CheckCircle2 size={15} className="text-[#FCA311]" />
                   <span>{isRtl ? 'مشاوره کاملاً رایگان و اختصاصی' : 'Free personalized travel consultation'}</span>
@@ -500,10 +500,10 @@ export default function Services() {
               </div>
             </div>
 
-            <div className={`relative z-20 pt-8 ${isRtl ? 'text-right' : 'text-left'}`}>
+            <div className={`relative z-20 pt-6 sm:pt-8 ${isRtl ? 'text-right' : 'text-left'}`}>
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-2 bg-[#FCA311] hover:bg-amber-500 text-[#14213D] font-bold py-3.5 px-6 rounded-full shadow-lg transition-all duration-200 text-xs sm:text-sm group uppercase font-[Inter] tracking-wider"
+                className="inline-flex items-center justify-center gap-2 bg-[#FCA311] hover:bg-amber-500 text-[#14213D] font-bold py-3 px-6 rounded-full shadow-lg transition-all duration-200 text-xs sm:text-sm group uppercase font-[Inter] tracking-wider w-full sm:w-auto"
               >
                 <span>{t.ctaButton || (isRtl ? 'تماس با آمووی' : 'Contact Amovi')}</span>
                 {isRtl ? (
@@ -516,7 +516,7 @@ export default function Services() {
           </div>
 
           {/* ستون راست: فرم جامع ثبت تقاضای خدمات */}
-          <div className="lg:col-span-7 bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-xl space-y-4">
+          <div className="lg:col-span-7 bg-white p-5 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl border border-slate-200 shadow-xl space-y-4">
             <div>
               <h3 className="text-lg sm:text-xl font-bold text-[#14213D]">
                 {t.formTitle || (isRtl ? 'فرم ثبت درخواست و استعلام خدمت' : 'Inquiry & Service Request Form')}
@@ -650,24 +650,31 @@ export default function Services() {
                   <label className="block text-xs font-bold text-[#14213D] mb-1">
                     {t.packageOrService || (isRtl ? 'خدمت مورد تقاضا' : 'Requested Service')} <span className="text-[#FCA311]">*</span>
                   </label>
-                  <select
-                    name="packageOrService"
-                    value={formData.packageOrService}
-                    onChange={handleChange}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-[#FCA311] text-xs sm:text-sm text-slate-800 bg-slate-50/50 font-medium"
-                  >
-                    {servicesList.map((srv, sIdx) => (
-                      <option key={sIdx} value={srv.title}>
-                        {srv.title}
+                  <div className="relative">
+                    <select
+                      name="packageOrService"
+                      value={formData.packageOrService}
+                      onChange={handleChange}
+                      className="w-full px-3.5 py-2.5 ps-3.5 pe-9 rtl:ps-9 rtl:pe-3.5 rounded-xl border border-slate-200 focus:outline-none focus:border-[#FCA311] text-xs sm:text-sm text-slate-800 bg-slate-50/50 font-medium cursor-pointer appearance-none"
+                    >
+                      {servicesList.map((srv, sIdx) => (
+                        <option key={sIdx} value={srv.title}>
+                          {srv.title}
+                        </option>
+                      ))}
+                      <option value="Customized & VIP Travel">
+                        {isRtl ? 'سفرهای سفارشی و تشریفاتی (VIP)' : 'Customized & VIP Travel'}
                       </option>
-                    ))}
-                    <option value="Customized & VIP Travel">
-                      {isRtl ? 'سفرهای سفارشی و تشریفاتی (VIP)' : 'Customized & VIP Travel'}
-                    </option>
-                    <option value="All Services / Comprehensive Package">
-                      {isRtl ? 'بسته جامع سفر (تمامی خدمات)' : 'All Services / Comprehensive Package'}
-                    </option>
-                  </select>
+                      <option value="All Services / Comprehensive Package">
+                        {isRtl ? 'بسته جامع سفر (تمامی خدمات)' : 'All Services / Comprehensive Package'}
+                      </option>
+                    </select>
+                    <div className={`pointer-events-none absolute inset-y-0 ${isRtl ? 'left-3' : 'right-3'} flex items-center text-slate-400`}>
+                      <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                        <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+                      </svg>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -726,11 +733,11 @@ export default function Services() {
       ======================================================== */}
       {activeModalService && (
         <div 
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#14213D]/70 backdrop-blur-sm animate-fadeIn"
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-[#14213D]/70 backdrop-blur-sm animate-fadeIn"
           onClick={() => setActiveModalService(null)}
         >
           <div 
-            className="bg-white rounded-3xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-slate-200 relative text-[#14213D] p-6 sm:p-8 space-y-6"
+            className="bg-white rounded-2xl sm:rounded-3xl shadow-2xl max-w-2xl w-full max-h-[92vh] overflow-y-auto border border-slate-200 relative text-[#14213D] p-5 sm:p-7 md:p-8 space-y-5 sm:space-y-6"
             dir={isRtl ? 'rtl' : 'ltr'}
             onClick={(e) => e.stopPropagation()}
           >
@@ -738,7 +745,7 @@ export default function Services() {
             <button
               type="button"
               onClick={() => setActiveModalService(null)}
-              className={`absolute top-5 ${isRtl ? 'left-5' : 'right-5'} p-2 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 transition-colors cursor-pointer`}
+              className={`absolute top-4 sm:top-5 ${isRtl ? 'left-4 sm:left-5' : 'right-4 sm:right-5'} p-2 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 transition-colors cursor-pointer`}
               aria-label="Close"
             >
               <X size={20} />
@@ -751,7 +758,7 @@ export default function Services() {
                   {activeModalService.tag || activeModalService.number}
                 </span>
               </div>
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-[#14213D]">
+              <h3 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-[#14213D]">
                 {activeModalService.title}
               </h3>
               {activeModalService.heroTagline && (
@@ -759,7 +766,7 @@ export default function Services() {
                   {activeModalService.heroTagline}
                 </p>
               )}
-              <p className="text-slate-600 text-xs sm:text-sm mt-3 leading-relaxed">
+              <p className="text-slate-600 text-xs sm:text-sm mt-2.5 sm:mt-3 leading-relaxed">
                 {activeModalService.intro || activeModalService.description}
               </p>
             </div>
@@ -837,7 +844,7 @@ export default function Services() {
 
             {/* بخش ۴: نکات و اطلاعات مهم (Important Information) */}
             {activeModalService.disclaimer && (
-              <div className="p-4 rounded-2xl bg-amber-50/80 border border-amber-200 text-amber-950 flex items-start gap-3">
+              <div className="p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-amber-50/80 border border-amber-200 text-amber-950 flex items-start gap-3">
                 <HelpCircle size={20} className="text-amber-600 shrink-0 mt-0.5" />
                 <div>
                   <div className="font-bold text-xs sm:text-sm mb-1">
@@ -851,11 +858,11 @@ export default function Services() {
             )}
 
             {/* دکمه درخواست مستقیم در مودال */}
-            <div className="pt-2 flex items-center justify-end gap-3 border-t border-slate-100">
+            <div className="pt-3 sm:pt-4 flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-end gap-2.5 sm:gap-3 border-t border-slate-100">
               <button
                 type="button"
                 onClick={() => setActiveModalService(null)}
-                className="px-5 py-2.5 rounded-full border border-slate-200 text-xs sm:text-sm font-semibold hover:bg-slate-100 transition-colors cursor-pointer"
+                className="px-5 py-2.5 rounded-full border border-slate-200 text-xs sm:text-sm font-semibold hover:bg-slate-100 transition-colors cursor-pointer w-full sm:w-auto"
               >
                 {t.close || (isRtl ? 'بستن' : 'Close')}
               </button>
@@ -863,7 +870,7 @@ export default function Services() {
               <button
                 type="button"
                 onClick={() => handleSelectService(activeModalService.title)}
-                className="inline-flex items-center gap-2 bg-[#FCA311] hover:bg-amber-500 text-[#14213D] font-bold py-2.5 px-6 rounded-full shadow-md text-xs sm:text-sm uppercase tracking-wider cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 bg-[#FCA311] hover:bg-amber-500 text-[#14213D] font-bold py-2.5 px-6 rounded-full shadow-md text-xs sm:text-sm uppercase tracking-wider cursor-pointer w-full sm:w-auto"
               >
                 <span>{t.requestService || (isRtl ? 'درخواست این خدمت' : 'Request This Service')}</span>
                 {isRtl ? <ArrowLeft size={15} /> : <ArrowRight size={15} />}

@@ -19,9 +19,9 @@ export default function Home() {
   useEffect(() => {
     Promise.all([getDestinations(), getTours(), getTestimonials()])
       .then(([destRes, toursRes, testRes]) => {
-        setDestinations(destRes.data || []);
-        setTours(toursRes.data || []);
-        setTestimonials(testRes.data || []);
+        setDestinations(destRes?.data || destRes || []);
+        setTours(toursRes?.data || toursRes || []);
+        setTestimonials(testRes?.data || testRes || []);
         setLoading(false);
       })
       .catch((error) => {
@@ -31,7 +31,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="w-full max-w-[1440px] mx-auto bg-[#14213D] text-white overflow-x-hidden font-['Sahel'] shadow-2xl">
+    <main className={`w-full max-w-[1440px] mx-auto bg-[#14213D] text-white overflow-x-hidden ${currentLang === 'fa' ? 'font-[Sahel]' : 'font-[Inter]'} shadow-2xl`}>
       {/* هیرو سکشن اصلی */}
       <Hero currentLang={currentLang} />
       

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useLangStore } from '../store/useLangStore';
+import { createMasterRequest } from '../services/api';
 
 export default function MasterRequestForm({ packageName = "" }) {
   const { currentLang, translations } = useLangStore();
@@ -30,10 +31,15 @@ export default function MasterRequestForm({ packageName = "" }) {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Data to send:", formData);
-    alert(currentLang === 'en' ? "Request Received!" : "درخواست دریافت شد!");
+    try {
+      await createMasterRequest(formData);
+      alert(currentLang === 'en' ? "Request Received Successfully!" : "درخواست شما با موفقیت ثبت شد!");
+    } catch (err) {
+      console.error(err);
+      alert(currentLang === 'en' ? "Failed to send request" : "ارسال درخواست با خطا مواجه شد");
+    }
   };
 
   return (

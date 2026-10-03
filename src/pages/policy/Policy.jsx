@@ -1,19 +1,163 @@
+import { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { Shield, FileText, CalendarCheck, CheckCircle2 } from 'lucide-react';
 import { useLangStore } from '../../store/useLangStore';
+import heroBg from '../../assets/images/hero-bg.webp';
 
-export default function Policy() {
-  const { currentLang } = useLangStore();
+export default function Policy({ defaultTab = 'privacy' }) {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const { currentLang, translations } = useLangStore();
   const isRtl = currentLang === 'fa';
+  
+  const legalData = translations?.legalPage || {};
+  
+  // خواندن تب از کوئری پارامز یا استیت محلی بدون نیاز به useEffect
+  const queryTab = searchParams.get('tab');
+  const [localTab, setLocalTab] = useState(defaultTab);
+  const activeTab = queryTab || localTab;
+
+  const handleTabChange = (tabKey) => {
+    setLocalTab(tabKey);
+    setSearchParams({ tab: tabKey });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const currentDoc = legalData[activeTab] || legalData.privacy || {};
 
   return (
-    <div className={`pt-32 pb-20 px-6 max-w-5xl mx-auto ${isRtl ? 'text-right font-[Sahel]' : 'text-left font-[Inter]'}`}>
-      <h1 className="text-3xl sm:text-4xl font-extrabold text-[#14213D] mb-4">
-        {isRtl ? 'قوانین و حریم خصوصی' : 'Privacy Policy & Terms'}
-      </h1>
-      <p className="text-slate-600 leading-relaxed text-base sm:text-lg">
-        {isRtl
-          ? 'آمووی ترول متعهد به حفظ اطلاعات خصوصی و امنیت داده‌های تمامی مسافران و کاربران گرامی می‌باشد.'
-          : 'Amovi Travel is committed to protecting the privacy and personal data of our travelers.'}
-      </p>
+    <div className={`w-full bg-[#F8FAFC] min-h-screen text-[#14213D] ${isRtl ? 'font-[Sahel]' : 'font-[Inter]'}`}>
+      
+      {/* ========================================================
+          ۱. هیرو سکشن مرکز قوانین و حریم خصوصی
+      ======================================================== */}
+      <section className="relative w-full pt-36 pb-16 sm:pt-40 sm:pb-20 overflow-hidden bg-[#14213D] text-white">
+        <div 
+          className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-45 scale-105"
+          style={{ backgroundImage: `url(${heroBg})` }}
+        />
+        <div className="absolute inset-0 z-10 bg-gradient-to-b from-[#14213D]/95 via-[#14213D]/80 to-[#14213D] pointer-events-none" />
+
+        <div className={`relative z-20 max-w-5xl mx-auto px-6 ${isRtl ? 'text-right' : 'text-left'}`}>
+          <span className="inline-block text-[#FCA311] text-xs font-bold uppercase tracking-[0.2em] mb-2 font-[Inter]">
+            {isRtl ? 'مرکز اسناد حقوقی آمووی' : 'AMOVI LEGAL & COMPLIANCE'}
+          </span>
+
+          <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
+            {legalData.title || (isRtl ? 'مرکز قوانین و شرایط حقوقی' : 'Legal & Terms Center')}
+          </h1>
+
+          <p className="mt-3 text-slate-300 text-sm sm:text-base max-w-2xl font-light leading-relaxed">
+            {legalData.subtitle || (isRtl 
+              ? 'مجموعه توافق‌نامه‌ها، قوانین حقوقی، شرایط رزرو و سیاست‌های حریم خصوصی آمووی اکسپلور افغانستان.' 
+              : 'Important legal agreements, policies, and guidelines for traveling with Amovi Explore Afghanistan.')}
+          </p>
+
+          {/* تب‌های انتخاب سند حقوقی */}
+          <div className="mt-8 flex flex-wrap gap-2.5 sm:gap-3" dir={isRtl ? 'rtl' : 'ltr'}>
+            <button
+              type="button"
+              onClick={() => handleTabChange('privacy')}
+              className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${
+                activeTab === 'privacy'
+                  ? 'bg-[#FCA311] text-[#14213D] shadow-lg shadow-[#FCA311]/30 scale-105 font-extrabold'
+                  : 'bg-white/10 text-slate-200 hover:bg-white/20 border border-white/20'
+              }`}
+            >
+              <Shield size={16} />
+              <span>{legalData.tabs?.privacy || (isRtl ? 'حریم خصوصی' : 'Privacy Policy')}</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => handleTabChange('terms')}
+              className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${
+                activeTab === 'terms'
+                  ? 'bg-[#FCA311] text-[#14213D] shadow-lg shadow-[#FCA311]/30 scale-105 font-extrabold'
+                  : 'bg-white/10 text-slate-200 hover:bg-white/20 border border-white/20'
+              }`}
+            >
+              <FileText size={16} />
+              <span>{legalData.tabs?.terms || (isRtl ? 'شرایط و ضوابط عمومی' : 'Terms & Conditions')}</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => handleTabChange('booking')}
+              className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${
+                activeTab === 'booking'
+                  ? 'bg-[#FCA311] text-[#14213D] shadow-lg shadow-[#FCA311]/30 scale-105 font-extrabold'
+                  : 'bg-white/10 text-slate-200 hover:bg-white/20 border border-white/20'
+              }`}
+            >
+              <CalendarCheck size={16} />
+              <span>{legalData.tabs?.booking || (isRtl ? 'مقررات و شرایط رزرو' : 'Booking Terms & Conditions')}</span>
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+      {/* ========================================================
+          ۲. بدنه متن سند قانونی انتخاب‌شده
+      ======================================================== */}
+      <main className="max-w-5xl mx-auto px-6 py-12 sm:py-16">
+        <div className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/90 shadow-xl space-y-8" dir={isRtl ? 'rtl' : 'ltr'}>
+          
+          {/* هدر سند */}
+          <div className="border-b border-slate-100 pb-6 space-y-2">
+            <span className="text-[#FCA311] text-xs font-bold uppercase tracking-wider font-[Inter] block">
+              {currentDoc.lastUpdated || 'Last Updated: September 2026'}
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-black text-[#14213D]">
+              {currentDoc.title}
+            </h2>
+            <p className="text-slate-600 text-sm sm:text-base leading-relaxed pt-1 font-normal">
+              {currentDoc.intro}
+            </p>
+          </div>
+
+          {/* لیست بندهای ۹‌گانه سند حقوقی */}
+          <div className="space-y-6">
+            {currentDoc.sections?.map((section) => (
+              <div 
+                key={section.num}
+                className="bg-[#F8FAFC] p-6 rounded-2xl border border-slate-200/70 hover:border-[#FCA311]/40 transition-colors space-y-2.5"
+              >
+                <div className="flex items-center gap-3">
+                  <span className="w-8 h-8 rounded-xl bg-[#14213D] text-[#FCA311] flex items-center justify-center text-xs font-black font-[Inter] shrink-0">
+                    {section.num}
+                  </span>
+                  <h3 className="text-base sm:text-lg font-bold text-[#14213D]">
+                    {section.title}
+                  </h3>
+                </div>
+
+                <p className="text-slate-600 text-sm sm:text-base leading-relaxed ps-11">
+                  {section.content}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          {/* فوتر سند با تاکید بر تعهد و تماس */}
+          <div className="pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+            <div className="flex items-center gap-2">
+              <CheckCircle2 size={16} className="text-[#FCA311] shrink-0" />
+              <span>
+                {isRtl 
+                  ? 'تمامی سفرهای آمووی تحت پوشش پروتکل‌های امنیتی و تعهدات رسمی اجرا می‌شوند.' 
+                  : 'All Amovi journeys are operated under verified safety protocols and official commitments.'}
+              </span>
+            </div>
+
+            <span className="font-[Inter] text-slate-400">
+              Amovi Explore Afghanistan © 2026
+            </span>
+          </div>
+
+        </div>
+      </main>
+
     </div>
   );
 }

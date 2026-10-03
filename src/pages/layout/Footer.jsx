@@ -18,10 +18,11 @@ function Footer() {
     { name: translations.blog || (isRtl ? "مجله سفر" : "Blog"), path: "/blog" },
   ];
 
-  // بخش قوانین
+  // بخش قوانین و حقوقی
   const legalLinks = [
-    { name: isRtl ? "شرایط و مقررات" : "Terms & Conditions", path: "/policy" },
-    { name: isRtl ? "حریم خصوصی" : "Privacy Policy", path: "/policy" },
+    { name: isRtl ? "سیاست حریم خصوصی" : "Privacy Policy", path: "/privacy-policy" },
+    { name: isRtl ? "شرایط و ضوابط عمومی" : "Terms & Conditions", path: "/terms-and-conditions" },
+    { name: isRtl ? "مقررات و شرایط رزرو" : "Booking Terms", path: "/booking-terms" },
   ];
 
   return (

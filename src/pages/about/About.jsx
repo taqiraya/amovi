@@ -1,6 +1,16 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Compass, Star, ShieldCheck, ArrowRight, ArrowLeft, CheckCircle2 } from 'lucide-react';
+import { 
+  ShieldCheck, 
+  Compass, 
+  Star, 
+  Sparkles, 
+  HeartHandshake, 
+  Lightbulb, 
+  ArrowRight, 
+  ArrowLeft, 
+  CheckCircle2 
+} from 'lucide-react';
 import { useLangStore } from '../../store/useLangStore';
 import { createMasterRequest } from '../../services/api';
 
@@ -62,11 +72,31 @@ export default function About() {
     }
   };
 
+  // نگاشت آیکون‌ها برای ۶ ارزش اصلی برند
+  const getValueIcon = (index) => {
+    switch (index) {
+      case 0:
+        return <ShieldCheck size={24} className="text-white" />;
+      case 1:
+        return <Compass size={24} className="text-white" />;
+      case 2:
+        return <Sparkles size={24} className="text-white" />;
+      case 3:
+        return <Star size={24} className="fill-white text-white" />;
+      case 4:
+        return <HeartHandshake size={24} className="text-white" />;
+      case 5:
+        return <Lightbulb size={24} className="text-white" />;
+      default:
+        return <Compass size={24} className="text-white" />;
+    }
+  };
+
   return (
     <div className={`w-full bg-[#F8FAFC] min-h-screen text-[#14213D] ${isRtl ? 'font-[Sahel]' : 'font-[Inter]'}`}>
       
       {/* ========================================================
-          ۱. هیرو سکشن اصلی صفحه درباره ما (Our Story & Legacy)
+          ۱. هیرو سکشن اصلی صفحه درباره ما (Brand Profile: Amovi Explore Afghanistan)
       ======================================================== */}
       <section className="relative w-full pt-36 pb-20 sm:pt-40 sm:pb-28 overflow-hidden bg-[#14213D] text-white">
         <div 
@@ -77,54 +107,60 @@ export default function About() {
 
         <div className={`relative z-20 max-w-6xl mx-auto px-6 ${isRtl ? 'text-right' : 'text-left'}`}>
           <span className="inline-block text-[#FCA311] text-xs font-bold uppercase tracking-[0.2em] mb-2 font-[Inter]">
-            {t.heroEyebrow || (isRtl ? 'ما که هستیم' : 'WHO WE ARE')}
+            {t.heroEyebrow || (isRtl ? 'پروفایل برند' : 'BRAND PROFILE')}
           </span>
 
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight">
             <span className="relative inline-block pb-1 after:absolute after:bottom-0 after:left-0 after:w-full after:h-1 after:bg-[#FCA311] after:rounded-full">
-              {t.heroTitlePrefix || (isRtl ? 'داستان و میراث ' : 'Our Story ')}
+              {t.heroTitlePrefix || (isRtl ? 'آمووی؛ کاوش در ' : 'Amovi Explore ')}
             </span>{' '}
             <span className="text-[#FCA311]">
-              {t.heroTitleHighlight || (isRtl ? 'ماندگار ما' : '& Legacy')}
+              {t.heroTitleHighlight || (isRtl ? 'افغانستان' : 'Afghanistan')}
             </span>
           </h1>
 
-          <p className="mt-4 text-slate-300 text-sm sm:text-base md:text-lg max-w-xl font-light leading-relaxed">
+          <p className="mt-4 text-slate-300 text-sm sm:text-base md:text-lg max-w-2xl font-light leading-relaxed">
             {t.heroSubtitle || (isRtl 
-              ? 'چشم‌انداز، ارزش‌ها و تیمی که در پشت پرده آمووی ترول فعالیت دارند را بشناسید.' 
-              : 'Discover the vision, values and people behind Amovi Travel.')}
+              ? 'جایی که هر سفر به تجربه‌ای امن، الهام‌بخش و فراموش‌نشدنی تبدیل می‌شود.' 
+              : 'Where every journey becomes a safe, inspiring, and unforgettable experience.')}
           </p>
         </div>
       </section>
 
       {/* ========================================================
-          ۲. بخش مأموریت ما (Redefining Luxury Travel in Afghanistan)
+          ۲. بخش داستان برند و رسالت آمووی (About Amovi Explore Afghanistan)
       ======================================================== */}
       <section className="max-w-6xl mx-auto px-6 py-16 sm:py-24">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center" dir={isRtl ? 'rtl' : 'ltr'}>
           
-          {/* ستون متن مأموریت */}
+          {/* ستون متن معرفی و رسالت برند */}
           <div className={`lg:col-span-6 space-y-5 ${isRtl ? 'text-right' : 'text-left'}`}>
             <span className="text-[#FCA311] text-xs font-bold uppercase tracking-widest block font-[Inter]">
-              {t.missionEyebrow || (isRtl ? 'ماموریت ما' : 'OUR MISSION')}
+              {t.brandStoryEyebrow || (isRtl ? 'درباره آمووی ترول' : 'ABOUT AMOVI EXPLORE AFGHANISTAN')}
             </span>
 
             <h2 className="text-2xl sm:text-4xl font-black text-[#14213D] leading-tight tracking-tight">
-              {t.missionTitle || (isRtl ? 'بازتعریف سفرهای لوکس در افغانستان' : 'Redefining Luxury Travel in Afghanistan')}
+              {t.brandStoryTitle || (isRtl ? 'معرفی شگفتی‌های افغانستان از دریچه‌ای تازه و روشن' : 'Introducing Afghanistan From a Fresh and Positive Perspective')}
             </h2>
 
             <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-normal">
-              {t.missionText || (isRtl 
-                ? 'در آمووی ترول، ما متعهد به ارائه مهمان‌نوازی در کلاس جهانی با روحی اصیل و بومی هستیم. مأموریت ما خلق سفرهایی پرمعنا است که مسافران را به فرهنگ غنی، مناظر شگفت‌انگیز و میراث ماندگار افغانستان پیوند دهد — در حالی که همواره از مردم و جوامع محلی این سرزمین حمایت می‌کنیم.' 
-                : "At Amovi Travel, we are committed to delivering world-class hospitality with a local heart. Our mission is to create meaningful journeys that connect travelers with Afghanistan's rich culture, breathtaking landscapes and enduring heritage — while supporting the people and communities that make this country so extraordinary.")}
+              {t.brandStoryText1 || (isRtl 
+                ? 'آمووی اکسپلور افغانستان، برندی گردشگری است که با هدف معرفی میراث استثنایی تاریخی، فرهنگی و طبیعی افغانستان به جهانیان از دیدگاهی نو، پویا و مثبت پایه‌گذاری شده است.' 
+                : 'Amovi Explore Afghanistan is a tourism brand dedicated to introducing Afghanistan’s remarkable historical, cultural, and natural heritage to the world from a fresh and positive perspective.')}
+            </p>
+
+            <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-normal">
+              {t.brandStoryText2 || (isRtl 
+                ? 'آمووی از پیوند عشق عمیق به سرزمین، فرهنگ و میراث افغانستان با دیدگاهی نوین و بین‌المللی متولد شد. رسالت ما ساختن پلی از جنس اعتماد میان گنجینه‌های پنهان این سرزمین و مسافران مشتاق سراسر جهان است.' 
+                : 'Amovi was founded from a deep appreciation for Afghanistan’s land, culture, and heritage, combined with a modern international vision for tourism. Our role is to build a bridge of trust between these hidden treasures and travelers.')}
             </p>
 
             {/* کوت‌باکس با بوردر طلایی عینا مطابق طرح تمپلت */}
-            <div className={`border-l-4 rtl:border-r-4 rtl:border-l-0 border-[#FCA311] ps-4 pe-2 py-2 bg-amber-50/40 rounded-r-xl rtl:rounded-l-xl rtl:rounded-r-none mt-6`}>
+            <div className={`border-l-4 rtl:border-r-4 rtl:border-l-0 border-[#FCA311] ps-4 pe-2 py-3 bg-amber-50/50 rounded-r-xl rtl:rounded-l-xl rtl:rounded-r-none mt-6`}>
               <p className="italic font-bold text-[#14213D] text-sm sm:text-base leading-relaxed">
-                {t.missionQuote || (isRtl 
-                  ? '«لوکس بودن هرگز نباید به قیمت از دست رفتن اصالت باشد.»' 
-                  : '“Luxury should never come at the expense of authenticity.”')}
+                {t.brandStoryQuote || (isRtl 
+                  ? '«با آمووی، هر سفر فراتر از یک مقصد است؛ روایتی تازه است برای بازگو کردن.»' 
+                  : '“With Amovi, every journey is more than a destination—it is a new story to tell.”')}
               </p>
             </div>
           </div>
@@ -158,69 +194,49 @@ export default function About() {
       </section>
 
       {/* ========================================================
-          ۳. بخش ارزش‌های ما (What Defines Amovi)
+          ۳. بخش چشم‌انداز و ماموریت (Vision & Mission)
       ======================================================== */}
-      <section className="w-full py-16 sm:py-20 bg-white border-y border-slate-200/60">
-        <div className="max-w-6xl mx-auto px-6">
+      <section className="w-full py-16 bg-[#14213D] text-white relative overflow-hidden">
+        <div 
+          className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-20 pointer-events-none"
+          style={{ backgroundImage: `url(${heroBg})` }}
+        />
+        <div className="relative z-10 max-w-6xl mx-auto px-6" dir={isRtl ? 'rtl' : 'ltr'}>
           
-          <div className="text-center max-w-xl mx-auto mb-14 space-y-2">
-            <span className="text-[#FCA311] text-xs font-bold uppercase tracking-widest block font-[Inter]">
-              {t.valuesEyebrow || (isRtl ? 'ارزش‌های ما' : 'OUR VALUES')}
-            </span>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#14213D]">
-              {t.valuesTitle || (isRtl ? 'آنچه آمووی را تعریف می‌کند' : 'What Defines Amovi')}
-            </h2>
-            <p className="text-slate-500 text-sm leading-relaxed">
-              {t.valuesSubtitle || (isRtl 
-                ? 'سه اصل بنیادین که راهنمای هر سفری است که ما خلق می‌کنیم.' 
-                : 'Three principles guide every journey we create.')}
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8" dir={isRtl ? 'rtl' : 'ltr'}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-14 items-start">
             
-            {/* کارت ۱: اصالت */}
-            <div className={`bg-[#F8FAFC] p-8 rounded-3xl border border-slate-200/80 shadow-sm hover:shadow-xl hover:border-[#FCA311]/40 transition-all duration-300 hover:-translate-y-1 space-y-4 ${isRtl ? 'text-right' : 'text-left'}`}>
-              <div className="w-13 h-13 rounded-full bg-[#FCA311] text-white flex items-center justify-center shadow-md shadow-[#FCA311]/20 shrink-0">
-                <Compass size={24} />
-              </div>
-              <h3 className="text-xl font-bold text-[#14213D]">
-                {t.values?.authenticityTitle || (isRtl ? 'اصالت' : 'Authenticity')}
+            {/* چشم‌انداز (Vision) */}
+            <div className={`space-y-3.5 bg-white/5 p-8 rounded-3xl border border-white/10 backdrop-blur-sm ${isRtl ? 'text-right' : 'text-left'}`}>
+              <span className="text-[#FCA311] text-xs font-bold uppercase tracking-widest block font-[Inter]">
+                {t.visionEyebrow || (isRtl ? 'چشم‌انداز و اهداف کلان' : 'OUR VISION & OBJECTIVES')}
+              </span>
+              <h3 className="text-xl sm:text-2xl font-black text-white">
+                {t.visionTitle || (isRtl ? 'تبدیل شدن به معتمدترین و معتبرترین برند گردشگری افغانستان' : "To Become Afghanistan's Most Trusted Tourism Brand")}
               </h3>
-              <p className="text-slate-500 text-sm leading-relaxed font-normal">
-                {t.values?.authenticityDesc || (isRtl 
-                  ? 'ما مسافران را با فرهنگ اصیل افغان، مناظر بکر و تجربه‌های واقعی بومی پیوند می‌دهیم.' 
-                  : 'We connect travelers with genuine Afghan culture, landscapes and local experiences.')}
+              <p className="text-slate-300 text-sm leading-relaxed font-light">
+                {t.visionText || (isRtl 
+                  ? 'ما آینده‌ای را ترسیم می‌کنیم که در آن، افغانستان بر روی نقشه گردشگری جهانی به عنوان مقصدی الهام‌بخش شناخته شود؛ جایی که هر سفر، تجربه‌ای پرمعنا و داستانی نو خلق کند.' 
+                  : 'We envision a future where Afghanistan is recognized on the global tourism map as an inspiring destination.')}
+              </p>
+              <p className="text-slate-300 text-sm leading-relaxed font-light pt-1">
+                {t.objectiveText || (isRtl 
+                  ? 'هدف ما ارائه تجربه‌ای اصیل و متمایز از افغانستان بر پایه اعتماد، امنیت کامل، رفاه و استانداردهای عالی بین‌المللی است.' 
+                  : 'Our objective is to provide an authentic and distinctive experience of Afghanistan, built on trust, safety, and comfort.')}
               </p>
             </div>
 
-            {/* کارت ۲: برتری و استاندارد */}
-            <div className={`bg-[#F8FAFC] p-8 rounded-3xl border border-slate-200/80 shadow-sm hover:shadow-xl hover:border-[#FCA311]/40 transition-all duration-300 hover:-translate-y-1 space-y-4 ${isRtl ? 'text-right' : 'text-left'}`}>
-              <div className="w-13 h-13 rounded-full bg-[#FCA311] text-white flex items-center justify-center shadow-md shadow-[#FCA311]/20 shrink-0">
-                <Star size={24} className="fill-white" />
-              </div>
-              <h3 className="text-xl font-bold text-[#14213D]">
-                {t.values?.excellenceTitle || (isRtl ? 'برتری و کیفیت' : 'Excellence')}
+            {/* ماموریت (Mission) */}
+            <div className={`space-y-3.5 bg-white/5 p-8 rounded-3xl border border-white/10 backdrop-blur-sm ${isRtl ? 'text-right' : 'text-left'}`}>
+              <span className="text-[#FCA311] text-xs font-bold uppercase tracking-widest block font-[Inter]">
+                {t.missionEyebrow || (isRtl ? 'ماموریت ما' : 'OUR MISSION')}
+              </span>
+              <h3 className="text-xl sm:text-2xl font-black text-white">
+                {t.missionTitle || (isRtl ? 'سفرهایی امن، الهام‌بخش، آموزنده و سرشار از لذت' : 'Safe, Educational, Inspiring, and Enjoyable Journeys')}
               </h3>
-              <p className="text-slate-500 text-sm leading-relaxed font-normal">
-                {t.values?.excellenceDesc || (isRtl 
-                  ? 'ما بالاترین استانداردها را در ارائه خدمات، امنیت و سفرهای اختصاصی حفظ می‌کنیم.' 
-                  : 'We maintain the highest standards in service, safety and personalized travel experiences.')}
-              </p>
-            </div>
-
-            {/* کارت ۳: همراهی امن */}
-            <div className={`bg-[#F8FAFC] p-8 rounded-3xl border border-slate-200/80 shadow-sm hover:shadow-xl hover:border-[#FCA311]/40 transition-all duration-300 hover:-translate-y-1 space-y-4 ${isRtl ? 'text-right' : 'text-left'}`}>
-              <div className="w-13 h-13 rounded-full bg-[#FCA311] text-white flex items-center justify-center shadow-md shadow-[#FCA311]/20 shrink-0">
-                <ShieldCheck size={24} />
-              </div>
-              <h3 className="text-xl font-bold text-[#14213D]">
-                {t.values?.safetyTitle || (isRtl ? 'همراهی امن' : 'Safe Accompaniment')}
-              </h3>
-              <p className="text-slate-500 text-sm leading-relaxed font-normal">
-                {t.values?.safetyDesc || (isRtl 
-                  ? 'امنیت و آسایش شما اولویت اصلی ماست؛ از لحظه ورود تا زمان بازگشت به خانه.' 
-                  : 'Your safety and comfort are our priority, from the moment you arrive until you return.')}
+              <p className="text-slate-300 text-sm leading-relaxed font-light">
+                {t.missionText || (isRtl 
+                  ? 'مأموریت ما ارائه سفرهایی امن، آموزنده، الهام‌بخش و لذت‌بخش است که آگاهی بومی، همراهی راهنمایان باسابقه و پشتیبانی چندزبانه حرفه‌ای را در هم می‌آمیزد.' 
+                  : 'Our mission is to provide safe, educational, inspiring, and enjoyable travel experiences combining local knowledge, experienced regional guides, and professional support.')}
               </p>
             </div>
 
@@ -230,7 +246,56 @@ export default function About() {
       </section>
 
       {/* ========================================================
-          ۴. بخش دستاوردها و آمارها (Numbers That Tell Our Story)
+          ۴. بخش ۶ ارزش بنیادین برند آمووی (Our 6 Core Values)
+      ======================================================== */}
+      <section className="w-full py-16 sm:py-24 bg-white border-b border-slate-200/60">
+        <div className="max-w-6xl mx-auto px-6">
+          
+          <div className="text-center max-w-2xl mx-auto mb-14 space-y-2">
+            <span className="text-[#FCA311] text-xs font-bold uppercase tracking-widest block font-[Inter]">
+              {t.valuesEyebrow || (isRtl ? 'ارزش‌های بنیادین ما' : 'OUR CORE VALUES')}
+            </span>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#14213D]">
+              {t.valuesTitle || (isRtl ? 'شش اصل راهنما در تمام سفرهای آمووی' : 'Six Principles That Guide Every Journey')}
+            </h2>
+            <p className="text-slate-500 text-sm leading-relaxed">
+              {t.valuesSubtitle || (isRtl 
+                ? 'این ارزش‌ها مبنای تعهد ما نسبت به مسافران، جوامع محلی و حفاظت از میراث ماندگار افغانستان است.' 
+                : 'These values define our commitments to our guests, local communities, and the heritage of Afghanistan.')}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8" dir={isRtl ? 'rtl' : 'ltr'}>
+            {(t.valuesList || [
+              { id: 'trust', title: 'Trust & Safety', desc: 'Creating a safe, reliable, and comfortable environment for every traveler.' },
+              { id: 'respect', title: 'Respect for Culture & Heritage', desc: 'Approaching Afghanistan’s history and traditions with genuine respect.' },
+              { id: 'authenticity', title: 'Authentic & Unique Experiences', desc: 'Creating journeys that reveal the authentic character of Afghanistan.' },
+              { id: 'quality', title: 'Quality & International Standards', desc: 'Providing high-quality services based on modern international standards.' },
+              { id: 'sustainability', title: 'Sustainability & Social Responsibility', desc: 'Supporting local communities and respecting the natural environment.' },
+              { id: 'innovation', title: 'Innovation & Continuous Progress', desc: 'Embracing new ideas to improve traveler experience.' }
+            ]).map((val, idx) => (
+              <div 
+                key={val.id || idx}
+                className={`bg-[#F8FAFC] p-7 rounded-3xl border border-slate-200/80 shadow-sm hover:shadow-xl hover:border-[#FCA311]/40 transition-all duration-300 hover:-translate-y-1 space-y-4 ${isRtl ? 'text-right' : 'text-left'}`}
+              >
+                <div className="w-13 h-13 rounded-full bg-[#14213D] text-[#FCA311] border border-[#FCA311]/40 flex items-center justify-center shadow-md shadow-[#14213D]/20 shrink-0">
+                  {getValueIcon(idx)}
+                </div>
+                <h3 className="text-lg sm:text-xl font-bold text-[#14213D]">
+                  {val.title}
+                </h3>
+                <p className="text-slate-500 text-xs sm:text-sm leading-relaxed font-normal">
+                  {val.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* ========================================================
+          ۵. بخش دستاوردها و آمارها (Numbers That Tell Our Story)
       ======================================================== */}
       <section className="w-full py-16 bg-[#14213D] text-white relative overflow-hidden">
         <div 
@@ -296,7 +361,7 @@ export default function About() {
       </section>
 
       {/* ========================================================
-          ۵. بخش آماده برنامه‌ریزی سفر و فرم درخواست (Ready to Plan?)
+          ۶. بخش آماده برنامه‌ریزی سفر و فرم درخواست (Ready to Plan?)
       ======================================================== */}
       <section className="max-w-6xl mx-auto px-6 py-16 sm:py-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch" dir={isRtl ? 'rtl' : 'ltr'}>
@@ -399,19 +464,17 @@ export default function About() {
                     value={formData.phoneWhatsApp}
                     onChange={handleChange}
                     placeholder="+93 700 000 000"
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-[#FCA311] text-xs sm:text-sm text-slate-800 bg-slate-50/50 text-left"
-                    dir="ltr"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-[#FCA311] text-xs sm:text-sm text-slate-800 bg-slate-50/50"
                   />
                 </div>
 
                 <div>
                   <label className="block text-xs font-bold text-[#14213D] mb-1">
-                    {isRtl ? 'تاریخ موردنظر سفر' : 'Preferred Travel Date'} <span className="text-[#FCA311]">*</span>
+                    {isRtl ? 'تاریخ سفر مدنظر' : 'Preferred Travel Date'}
                   </label>
                   <input
                     type="date"
                     name="preferredDate"
-                    required
                     value={formData.preferredDate}
                     onChange={handleChange}
                     className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-[#FCA311] text-xs sm:text-sm text-slate-800 bg-slate-50/50"
@@ -421,65 +484,54 @@ export default function About() {
 
               <div>
                 <label className="block text-xs font-bold text-[#14213D] mb-1">
-                  {isRtl ? 'نام پکیج یا خدمت' : 'Package / Service Name'} <span className="text-[#FCA311]">*</span>
+                  {isRtl ? 'پکیج یا خدمت مدنظر' : 'Package / Service Name'}
                 </label>
                 <input
                   type="text"
                   name="packageOrService"
                   value={formData.packageOrService}
                   onChange={handleChange}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-[#FCA311] text-xs sm:text-sm text-slate-800 bg-slate-50/50"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-[#FCA311] text-xs sm:text-sm text-slate-800 bg-slate-50/50 font-medium"
                 />
               </div>
 
               <div>
                 <label className="block text-xs font-bold text-[#14213D] mb-1">
-                  {isRtl ? 'نیازمندی‌های اضافی' : 'Additional Requirements'}
+                  {isRtl ? 'توضیحات و نیازمندی‌های تکمیلی' : 'Additional Requirements'}
                 </label>
-                <input
-                  type="text"
+                <textarea
+                  rows="3"
                   name="additionalRequirements"
                   value={formData.additionalRequirements}
                   onChange={handleChange}
-                  placeholder={isRtl ? 'نیازمندی‌های خاص خود را بنویسید...' : 'Tell us about your specific needs...'}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-[#FCA311] text-xs sm:text-sm text-slate-800 bg-slate-50/50"
+                  placeholder={isRtl ? 'هر نکته یا درخواست خاصی دارید بنویسید...' : 'Tell us anything else we should know about your trip...'}
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-[#FCA311] text-xs sm:text-sm text-slate-800 bg-slate-50/50 resize-none"
                 />
               </div>
 
-              <div className="flex items-center gap-2 pt-1 text-xs text-slate-600">
+              <div className="flex items-center gap-2">
                 <input
                   type="checkbox"
-                  name="agreeTerms"
                   id="agreeTerms"
-                  required
+                  name="agreeTerms"
                   checked={formData.agreeTerms}
                   onChange={handleChange}
-                  className="accent-[#FCA311] rounded cursor-pointer"
+                  className="rounded text-[#FCA311] focus:ring-[#FCA311] w-4 h-4 accent-[#FCA311]"
                 />
-                <label htmlFor="agreeTerms" className="cursor-pointer">
-                  {isRtl 
-                    ? 'من قوانین و حریم خصوصی را می‌پذیرم.' 
-                    : 'I agree to the Privacy Policy and Terms & Conditions.'}
+                <label htmlFor="agreeTerms" className="text-xs text-slate-500 cursor-pointer">
+                  {isRtl ? 'قوانین و شرایط آمووی را می‌پذیرم.' : 'I agree to the terms and privacy policy of Amovi Travel.'}
                 </label>
               </div>
 
-              <div className="pt-2">
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full bg-[#FCA311] hover:bg-amber-500 text-[#14213D] font-extrabold py-3 px-6 rounded-xl shadow-md transition-all duration-200 flex items-center justify-center gap-2 group cursor-pointer disabled:opacity-60 text-xs sm:text-sm"
-                >
-                  <span>
-                    {isSubmitting ? (isRtl ? 'در حال ثبت...' : 'Submitting...') : (t.formSubmit || (isRtl ? 'ثبت درخواست سفر' : 'Submit Request'))}
-                  </span>
-                  {isRtl ? (
-                    <ArrowLeft size={16} className="transition-transform group-hover:-translate-x-1" strokeWidth={2.5} />
-                  ) : (
-                    <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" strokeWidth={2.5} />
-                  )}
-                </button>
-              </div>
-
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full bg-[#FCA311] hover:bg-amber-500 text-[#14213D] font-bold py-3.5 px-6 rounded-xl shadow-lg transition-all duration-200 text-xs sm:text-sm tracking-wide disabled:opacity-50 cursor-pointer"
+              >
+                {isSubmitting
+                  ? (isRtl ? 'در حال ثبت...' : 'Submitting...')
+                  : (t.formSubmit || (isRtl ? 'ثبت درخواست سفر' : 'Submit Request'))}
+              </button>
             </form>
           </div>
 

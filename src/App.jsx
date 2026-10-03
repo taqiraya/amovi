@@ -44,6 +44,9 @@ function App() {
           <Route path="/blog/:id" element={<BlogDetail />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/policy" element={<Policy />} />
+          <Route path="/privacy-policy" element={<Policy defaultTab="privacy" />} />
+          <Route path="/terms-and-conditions" element={<Policy defaultTab="terms" />} />
+          <Route path="/booking-terms" element={<Policy defaultTab="booking" />} />
           <Route path="/payment-methods" element={<PaymentMethods />} />
           <Route path="*" element={<NotFound />} />
         </Route>

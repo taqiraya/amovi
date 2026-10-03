@@ -172,25 +172,57 @@
     "getDirections": "Get Directions"
   },
   "aboutPage": {
-    "heroEyebrow": "WHO WE ARE",
-    "heroTitlePrefix": "Our Story ",
-    "heroTitleHighlight": "& Legacy",
-    "heroSubtitle": "Discover the vision, values and people behind Amovi Travel.",
+    "heroEyebrow": "BRAND PROFILE",
+    "heroTitlePrefix": "Amovi Explore ",
+    "heroTitleHighlight": "Afghanistan",
+    "heroSubtitle": "Where every journey becomes a safe, inspiring, and unforgettable experience.",
+    "brandStoryEyebrow": "ABOUT AMOVI EXPLORE AFGHANISTAN",
+    "brandStoryTitle": "Introducing Afghanistan From a Fresh and Positive Perspective",
+    "brandStoryText1": "Amovi Explore Afghanistan is a tourism brand dedicated to introducing Afghanistan’s remarkable historical, cultural, and natural heritage to the world from a fresh and positive perspective. We are committed to creating travel experiences that are safe, authentic, exciting, and unforgettable—journeys that go beyond visiting places to discovering the history, heritage, landscapes, and people that make Afghanistan unique.",
+    "brandStoryText2": "Amovi Explore Afghanistan was founded from a deep appreciation for Afghanistan’s land, culture, and heritage, combined with a modern and international vision for tourism. We believe Afghanistan is more than the challenges and headlines often associated with it. It is a land of untold stories, ancient civilizations, remarkable culture, breathtaking landscapes, and people known for their warmth and hospitality. Our role is to build a bridge of trust between these hidden treasures and travelers who are eager to experience them.",
+    "brandStoryQuote": "“With Amovi, every journey is more than a destination—it is a new story to tell.”",
+    "visionEyebrow": "OUR VISION & OBJECTIVES",
+    "visionTitle": "To Become Afghanistan's Most Trusted, Reliable, and Respected Tourism Brand",
+    "visionText": "We envision a future where Afghanistan is recognized on the global tourism map as an inspiring destination, where every journey creates a meaningful experience, a lasting memory, and a new story to tell.",
+    "objectiveText": "Our objective is to provide an authentic and distinctive experience of Afghanistan, built on trust, safety, comfort, and high international standards. We aim to support the sustainable development of Afghanistan, create employment opportunities, and encourage responsible investment.",
     "missionEyebrow": "OUR MISSION",
-    "missionTitle": "Redefining Luxury Travel in Afghanistan",
-    "missionText": "At Amovi Travel, we are committed to delivering world-class hospitality with a local heart. Our mission is to create meaningful journeys that connect travelers with Afghanistan's rich culture, breathtaking landscapes and enduring heritage — while supporting the people and communities that make this country so extraordinary.",
-    "missionQuote": "“Luxury should never come at the expense of authenticity.”",
-    "valuesEyebrow": "OUR VALUES",
-    "valuesTitle": "What Defines Amovi",
-    "valuesSubtitle": "Three principles guide every journey we create.",
-    "values": {
-      "authenticityTitle": "Authenticity",
-      "authenticityDesc": "We connect travelers with genuine Afghan culture, landscapes and local experiences.",
-      "excellenceTitle": "Excellence",
-      "excellenceDesc": "We maintain the highest standards in service, safety and personalized travel experiences.",
-      "safetyTitle": "Safe Accompaniment",
-      "safetyDesc": "Your safety and comfort are our priority, from the moment you arrive until you return."
-    },
+    "missionTitle": "Safe, Educational, Inspiring, and Enjoyable Journeys",
+    "missionText": "Our mission is to provide safe, educational, inspiring, and enjoyable travel experiences that combine local knowledge, experienced regional guides, and professional multilingual support. We strive to deliver refined services that meet international standards while presenting a more authentic, positive, and welcoming image of Afghanistan to the world.",
+    "valuesEyebrow": "OUR CORE VALUES",
+    "valuesTitle": "Six Principles That Guide Every Journey",
+    "valuesSubtitle": "These values define our commitments to our guests, local communities, and the heritage of Afghanistan.",
+    "valuesList": [
+      {
+        "id": "trust",
+        "title": "Trust & Safety",
+        "desc": "Creating a safe, reliable, and comfortable environment for every traveler."
+      },
+      {
+        "id": "respect",
+        "title": "Respect for Culture & Heritage",
+        "desc": "Approaching Afghanistan’s history, traditions, and cultural heritage with genuine respect and sensitivity."
+      },
+      {
+        "id": "authenticity",
+        "title": "Authentic & Unique Experiences",
+        "desc": "Creating journeys that reveal the authentic character and distinctive beauty of Afghanistan."
+      },
+      {
+        "id": "quality",
+        "title": "Quality & International Standards",
+        "desc": "Providing high-quality services based on modern international standards and a commitment to continuous improvement."
+      },
+      {
+        "id": "sustainability",
+        "title": "Sustainability & Social Responsibility",
+        "desc": "Supporting local communities and respecting the natural and cultural environment of the destinations we visit."
+      },
+      {
+        "id": "innovation",
+        "title": "Innovation & Continuous Progress",
+        "desc": "Embracing new ideas and better approaches to improve the traveler experience and contribute to the development of tourism in Afghanistan."
+      }
+    ],
     "statsEyebrow": "OUR ACHIEVEMENTS",
     "statsTitle": "Numbers That Tell Our Story",
     "stats": {
@@ -596,5 +628,170 @@
     "subscribedSuccess": "Thank you for subscribing to our journal!",
     "backToBlog": "Back to Stories",
     "copied": "Link copied to clipboard!"
+  },
+  "legalPage": {
+    "title": "Legal & Terms Center",
+    "subtitle": "Important legal agreements, policies, and guidelines for traveling with Amovi Explore Afghanistan.",
+    "tabs": {
+      "privacy": "Privacy Policy",
+      "terms": "Terms & Conditions",
+      "booking": "Booking Terms & Conditions"
+    },
+    "privacy": {
+      "title": "Privacy Policy",
+      "lastUpdated": "Last Updated: September 2026",
+      "intro": "Amovi Explore Afghanistan respects your privacy and is committed to protecting the personal information you provide when using our website and services.",
+      "sections": [
+        {
+          "num": "01",
+          "title": "Information We Collect",
+          "content": "Depending on how you use our website, we may collect information such as: Full Name, Email Address, Phone / WhatsApp Number, Travel Dates, Number of Travelers, Package or Service Requested, Additional Requirements, and other information voluntarily provided through our forms or communications."
+        },
+        {
+          "num": "02",
+          "title": "How We Use Your Information",
+          "content": "We may use your information to: Respond to travel requests, prepare quotations and travel arrangements, provide requested services, communicate with you about your request or booking, improve our website and services, and meet applicable administrative or legal requirements."
+        },
+        {
+          "num": "03",
+          "title": "Information Sharing",
+          "content": "Amovi will not sell your personal information. Where necessary to provide requested travel services, relevant information may be shared with appropriate service providers, such as accommodation providers, transportation providers, guides, or other partners involved in your arrangements. Only information reasonably required for the relevant service should be shared."
+        },
+        {
+          "num": "04",
+          "title": "Data Security",
+          "content": "Amovi takes reasonable measures to protect personal information against unauthorized access, loss, misuse, or disclosure. However, no online transmission or storage system can be guaranteed to be completely secure."
+        },
+        {
+          "num": "05",
+          "title": "Cookies",
+          "content": "The Amovi website may use cookies and similar technologies to support website functionality, security, performance, and user experience. Further information may be provided through the website's cookie settings or notice where applicable."
+        },
+        {
+          "num": "06",
+          "title": "Third-Party Services",
+          "content": "The website may use third-party services such as payment providers, analytics tools, communication services, or other technology providers. These services may process information according to their own privacy policies and applicable requirements."
+        },
+        {
+          "num": "07",
+          "title": "Your Information",
+          "content": "You may contact Amovi regarding the personal information we hold about you or to request appropriate correction or other action where applicable under relevant law."
+        },
+        {
+          "num": "08",
+          "title": "Policy Updates",
+          "content": "Amovi may update this Privacy Policy from time to time to reflect changes in its services, website, technology, or applicable requirements. The latest version will be published on this page."
+        },
+        {
+          "num": "09",
+          "title": "Contact",
+          "content": "For privacy-related questions or requests, please contact Amovi through the official contact information provided on the website."
+        }
+      ]
+    },
+    "terms": {
+      "title": "Terms & Conditions",
+      "lastUpdated": "Last Updated: September 2026",
+      "intro": "These Terms & Conditions govern the use of the Amovi Explore Afghanistan website and the travel services provided by Amovi.",
+      "sections": [
+        {
+          "num": "01",
+          "title": "About These Terms",
+          "content": "By using this website or requesting Amovi's services, you acknowledge that you have read and understood these Terms & Conditions."
+        },
+        {
+          "num": "02",
+          "title": "Services",
+          "content": "Amovi provides travel-related services including tour packages, customized journeys, accommodation, transportation, professional guides, visa assistance, security and travel support, and related services. Service availability may depend on travel dates, local conditions, operational circumstances, and third-party availability."
+        },
+        {
+          "num": "03",
+          "title": "Travel Requests",
+          "content": "Submitting a request through the website does not constitute a confirmed booking. A booking becomes confirmed only after the travel arrangements, final price, payment requirements, and other applicable conditions have been agreed and confirmed by Amovi."
+        },
+        {
+          "num": "04",
+          "title": "Information Provided by Customers",
+          "content": "Customers are responsible for providing accurate and complete information required for their travel arrangements. Amovi is not responsible for problems resulting from incorrect or incomplete information provided by the customer."
+        },
+        {
+          "num": "05",
+          "title": "Third-Party Services",
+          "content": "Certain travel arrangements may involve third-party providers, including hotels, transportation providers, guides, and other service providers. Such services are subject to their respective terms, availability, and operational conditions."
+        },
+        {
+          "num": "06",
+          "title": "Travel Documents",
+          "content": "Customers are responsible for ensuring that they hold valid passports, visas, permits, and other required travel documents unless otherwise agreed as part of Amovi's services."
+        },
+        {
+          "num": "07",
+          "title": "Website Information",
+          "content": "Amovi aims to keep website information accurate and up to date. However, destinations, services, availability, routes, prices, and other information may change due to operational or local circumstances."
+        },
+        {
+          "num": "08",
+          "title": "Changes to These Terms",
+          "content": "Amovi may update these Terms & Conditions when necessary. The latest version published on the website will apply to future requests and bookings, subject to applicable agreements."
+        },
+        {
+          "num": "09",
+          "title": "Contact",
+          "content": "For questions regarding these Terms & Conditions, please contact Amovi through the official contact information provided on the website."
+        }
+      ]
+    },
+    "booking": {
+      "title": "Booking Terms & Conditions",
+      "lastUpdated": "Last Updated: September 2026",
+      "intro": "These Booking Terms & Conditions apply to confirmed travel arrangements and bookings made with Amovi Explore Afghanistan.",
+      "sections": [
+        {
+          "num": "01",
+          "title": "Prices",
+          "content": "All prices shown on the website are subject to confirmation. Where a package is listed as Price Upon Request, the final price will be provided after reviewing the customer's travel dates, group size, accommodation, transportation, and selected services. A quotation is valid for the period stated by Amovi."
+        },
+        {
+          "num": "02",
+          "title": "Payments",
+          "content": "Payment instructions will be provided after the travel arrangements and final quotation have been confirmed. A booking is not confirmed until the required payment has been received and Amovi has issued a booking confirmation. Available payment methods will be communicated by Amovi according to the customer's booking."
+        },
+        {
+          "num": "03",
+          "title": "Cancellation by the Customer",
+          "content": "Cancellation requests must be submitted to Amovi in writing. Any applicable cancellation charges, refunds, or non-refundable amounts will depend on the booking conditions, service providers involved, and the timing of the cancellation. The applicable cancellation terms will be communicated to the customer before or at the time of booking confirmation."
+        },
+        {
+          "num": "04",
+          "title": "Cancellation by Amovi",
+          "content": "Amovi may cancel or suspend a booking when circumstances outside its reasonable control make the planned journey impractical, unsafe, unavailable, or impossible to operate. Where appropriate, Amovi will communicate the available options to the customer regarding rescheduling, alternative arrangements, or applicable refunds."
+        },
+        {
+          "num": "05",
+          "title": "Alteration of Itineraries",
+          "content": "Amovi may modify an itinerary when necessary due to weather conditions, road or transportation conditions, site accessibility, local conditions, security or operational considerations, third-party availability, or other circumstances beyond reasonable control. Amovi will make reasonable efforts to maintain the overall character and key experiences of the journey whenever possible."
+        },
+        {
+          "num": "06",
+          "title": "Accommodation & Transportation",
+          "content": "Accommodation, transportation, guides, and other services are subject to availability and may be replaced by suitable alternatives when necessary. Any significant change will be communicated to the customer whenever reasonably possible."
+        },
+        {
+          "num": "07",
+          "title": "Customer Responsibilities",
+          "content": "Customers are responsible for: Providing accurate personal and travel information, holding valid travel documents, following applicable local rules and regulations, and following reasonable instructions provided by Amovi and its service providers."
+        },
+        {
+          "num": "08",
+          "title": "Force Majeure",
+          "content": "Amovi shall not be held responsible for delays, cancellations, alterations, losses, or additional costs resulting from circumstances beyond its reasonable control, including severe weather, natural events, road closures, government restrictions, security situations, transportation disruption, or other extraordinary circumstances."
+        },
+        {
+          "num": "09",
+          "title": "Final Booking Terms",
+          "content": "The specific terms applicable to a booking may be included in the customer's quotation, booking confirmation, or other written agreement. Where specific booking terms differ from these general terms, the confirmed booking terms will apply to that booking."
+        }
+      ]
+    }
   }
 }

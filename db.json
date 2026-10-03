@@ -19,9 +19,9 @@
       "id": "kabul",
       "slug": "kabul",
       "images": {
-         "hero_cover": "/Amovi/images/provinces/kabul-hero.webp",
-         "history_img": "/Amovi/images/provinces/kabul-history.webp",
-         "culture_img": "/Amovi/images/provinces/kabul-culture.webp"
+         "hero_cover": "/images/provinces/kabul/kabul-hero.webp",
+         "history_img": "/images/provinces/kabul/kabul-history.webp",
+         "culture_img": "/images/provinces/kabul/kabul-culture.webp"
       },
       "en": {
         "name": "Kabul",
@@ -47,7 +47,7 @@
         {
           "id": "bibi-mahro-hill",
           "filter_category": "gardens-and-parks",
-          "image": "/images/kabul/bibi-mahro.webp",
+          "image": "/images/provinces/kabul/bibi-mahro.webp",
           "en": {
             "name": "Bibi Mahro Hill",
             "teaser": "Bibi Mahro Hill, also known as Wazir Akbar Khan Hill, is one of Kabul’s prominent elevated landmarks and a popular recreational destination featuring the national flag monument."
@@ -60,7 +60,7 @@
         {
           "id": "bagh-e-babur",
           "filter_category": "gardens-and-parks",
-          "image": "/images/kabul/bagh-e-babur.webp",
+          "image": "/images/provinces/kabul/bagh-e-babur.webp",
           "en": {
             "name": "Bagh-e Babur",
             "teaser": "A historic garden where Mughal heritage, Afghan culture, architecture, and the natural beauty of Kabul come together."
@@ -68,6 +68,63 @@
           "fa": {
             "name": "باغ بابر",
             "teaser": "باغی تاریخی که در آن میراث مغول، فرهنگ افغانی، معماری و زیبایی‌های طبیعی کابل با هم پیوند می‌خورند."
+          }
+        }
+      ]
+    },
+    {
+      "id": "bamyan",
+      "slug": "bamyan",
+      "images": {
+         "hero_cover": "/images/provinces/bamyan/bamyan-hero.webp",
+         "history_img": "/images/provinces/bamyan/Buddha-1.webp",
+         "culture_img": "/images/provinces/bamyan/Buddha-1.webp"
+      },
+      "en": {
+        "name": "Bamyan",
+        "tagline": "The Valley of Giant Buddhas & Crystal Lakes",
+        "intro": "Bamyan is a breathtaking cultural landscape situated in the central highlands of Afghanistan. Renowned for its ancient Buddha niches, Band-e-Amir national park lakes, and serene valleys.",
+        "marketing_pitch": "Experience the legendary serenity of Bamyan with Amovi Travel.",
+        "history_title": "History - The Crossroads of Buddhism and the Silk Road",
+        "history_text": "Bamyan flourished as a major center for monastic Buddhism from the 2nd century up to the 9th century along the Silk Road.",
+        "culture_title": "Culture - Traditional Hospitality in the Highlands",
+        "culture_text": "Known for vibrant handicraft traditions, Hazara folklore, and peaceful highland life."
+      },
+      "fa": {
+        "name": "بامیان",
+        "tagline": "دره شگفت‌انگیز بوداها و دریاچه‌های فیروزه‌ای",
+        "intro": "بامیان، مهد تمدن کهن و نگین درخشان ارتفاعات مرکزی افغانستان، با تندیس‌های تاریخی بودا و دریاچه‌های لاجوردی پارک ملی بند امیر در جهان شهره است.",
+        "marketing_pitch": "آرامش بی‌نظیر و شکوه تاریخ بامیان را با آمووی ترول تجربه کنید.",
+        "history_title": "تاریخ - چهارراه بودیسم و جاده ابریشم",
+        "history_text": "بامیان برای قرن‌ها یکی از بزرگ‌ترین مراکز بودایی و تجاری جهان باستان در مسیر جاده ابریشم بوده است.",
+        "culture_title": "فرهنگ - مهمان‌نوازی اصیل هزارستان",
+        "culture_text": "فرهنگ بامیان بازتابی از موسیقی اصیل، صنایع دستی سوزن‌دوزی و زیست مسالمت‌آمیز مردمان کوهستان است."
+      },
+      "sub_destinations": [
+        {
+          "id": "band-e-amir",
+          "filter_category": "natural-wonders",
+          "image": "/images/provinces/bamyan/bamyan-hero.webp",
+          "en": {
+            "name": "Band-e Amir National Park",
+            "teaser": "Afghanistan's first national park featuring six stunning deep-blue mineral lakes."
+          },
+          "fa": {
+            "name": "پارک ملی بند امیر",
+            "teaser": "نخستین پارک ملی افغانستان با شش دریاچه طبیعی با آب زلال و فیروزه‌ای."
+          }
+        },
+        {
+          "id": "buddha-niches",
+          "filter_category": "cultural-heritage",
+          "image": "/images/provinces/bamyan/Buddha-1.webp",
+          "en": {
+            "name": "Buddha Niches & Caves",
+            "teaser": "Monuments carving into cliffs where ancient monks meditated."
+          },
+          "fa": {
+            "name": "صلصال و شهمامه",
+            "teaser": "رواق‌ها و غارهای تاریخی تراشیده‌شده در دل صخره‌های کهن بامیان."
           }
         }
       ]
@@ -103,7 +160,7 @@
 
 "price": 0,
 "currency": "USD",
-"image": "tours/images/kabulPictures.webp",
+"image": "/tours/images/kabulPictures.webp",
 "isActive": true,
 "createdAt": "2026-09-28T08:00:00Z"
 },
@@ -130,7 +187,7 @@
 
 "price": 0,
 "currency": "USD",
-"image": "tours/images/bamyanPictures.webp",
+"image": "/tours/images/bamyanPictures.webp",
 "isActive": true,
 "createdAt": "2026-09-28T08:00:00Z"
 },
@@ -156,7 +213,7 @@
       ],
       "price": 0,
       "currency": "USD",
-      "image": "tours/images/heratPictures.webp",
+      "image": "/tours/images/heratPictures.webp",
       "isActive": true,
       "createdAt": "2026-09-28T08:00:00Z"
     },
@@ -183,7 +240,7 @@
       ],
       "price": 0,
       "currency": "USD",
-      "image": "tours/images/mazarPictures.webp",
+      "image": "/tours/images/mazarPictures.webp",
       "isActive": true,
       "createdAt": "2026-09-28T08:00:00Z"
     },
@@ -209,7 +266,7 @@
       ],
       "price": 0,
       "currency": "USD",
-      "image": "tours/images/kandaharPictures.webp",
+      "image": "/tours/images/kandaharPictures.webp",
       "isActive": true,
       "createdAt": "2026-09-28T08:00:00Z"
     },
@@ -235,7 +292,7 @@
       ],
       "price": 0,
       "currency": "USD",
-      "image": "tours/images/noristanPictures.webp",
+      "image": "/tours/images/noristanPictures.webp",
       "isActive": true,
       "createdAt": "2026-09-28T08:00:00Z"
     },
@@ -263,7 +320,7 @@
       ],
       "price": 0,
       "currency": "USD",
-      "image": "tours/images/kabulPictures.webp",
+      "image": "/tours/images/kabulPictures.webp",
       "isActive": true,
       "createdAt": "2026-09-28T08:00:00Z"
     },
@@ -290,7 +347,7 @@
       ],
       "price": 0,
       "currency": "USD",
-      "image": "tours/images/kandaharPictures.webp",
+      "image": "/tours/images/kandaharPictures.webp",
       "isActive": true,
       "createdAt": "2026-09-28T08:00:00Z"
     },
@@ -317,7 +374,7 @@
       ],
       "price": 0,
       "currency": "USD",
-      "image": "tours/images/ghorPictures.webp",
+      "image": "/tours/images/ghorPictures.webp",
       "isActive": true,
       "createdAt": "2026-09-28T08:00:00Z"
     },
@@ -345,7 +402,7 @@
       ],
       "price": 0,
       "currency": "USD",
-      "image": "tours/images/mazarPictures.webp",
+      "image": "/tours/images/mazarPictures.webp",
       "isActive": true,
       "createdAt": "2026-09-28T08:00:00Z"
     }

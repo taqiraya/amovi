@@ -10,7 +10,7 @@ export default function Testimonials({ currentLang }) {
     {
       id: 1,
       name: "Sarah M.",
-      avatar: "https://unsplash.com",
+      avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80",
       location_en: "United Kingdom",
       location_fa: "بریتانیا",
       text_en: "\"Amovi made our journey through Afghanistan feel effortless. Every detail was thoughtfully planned.\"",
@@ -19,7 +19,7 @@ export default function Testimonials({ currentLang }) {
     {
       id: 2,
       name: "James T.",
-      avatar: "https://unsplash.com",
+      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80",
       location_en: "Canada",
       location_fa: "کانادا",
       text_en: "\"An incredible experience! The landscapes, people and culture were beyond my expectations.\"",
@@ -28,7 +28,7 @@ export default function Testimonials({ currentLang }) {
     {
       id: 3,
       name: "Fatima A.",
-      avatar: "https://unsplash.com",
+      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
       location_en: "UAE",
       location_fa: "امارات متحده عربی",
       text_en: "\"Professional, reliable and truly passionate about what they do. Highly recommended!\"",

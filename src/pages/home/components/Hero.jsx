@@ -1,4 +1,3 @@
-import React from 'react';
 // ایمپورت کردن نوبار از پوشه لایه‌اوت
 import Header from '../../layout/Header';
 

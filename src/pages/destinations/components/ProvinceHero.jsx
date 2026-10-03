@@ -1,5 +1,3 @@
-import { MapPin } from 'lucide-react';
-
 export default function ProvinceHero({ province, localData, isRtl }) {
   return (
     /* 👑 هیرو با قد عمیق، هماهنگ با لایه زدایندکس و مارجین منفی جهت اتصال به سقف */

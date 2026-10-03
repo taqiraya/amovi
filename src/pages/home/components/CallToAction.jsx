@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react'; // ایمپورت لوسید آیکون تیرک
 import heroBg from '../../../assets/images/hero-bg.webp'; // تصویر باکیفیت کوه‌ها

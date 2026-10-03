@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { Landmark, Compass, Car, Hotel, MapPin, Sliders } from 'lucide-react';
 

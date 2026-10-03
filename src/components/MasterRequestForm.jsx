@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useLangStore } from '../store/useLangStore';
 
 export default function MasterRequestForm({ packageName = "" }) {
@@ -16,9 +16,11 @@ export default function MasterRequestForm({ packageName = "" }) {
     privacyConsent: false
   });
 
-  useEffect(() => {
+  const [prevPackageName, setPrevPackageName] = useState(packageName);
+  if (packageName !== prevPackageName) {
+    setPrevPackageName(packageName);
     setFormData(prev => ({ ...prev, packageOrService: packageName }));
-  }, [packageName]);
+  }
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;

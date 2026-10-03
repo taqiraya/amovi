@@ -113,7 +113,7 @@ export default function PaymentMethods() {
   ];
 
   return (
-    <div className={`w-full bg-[#F8FAFC] min-h-screen text-[#14213D] pb-24 ${isRtl ? 'font-[Sahel]' : 'font-[Inter]'}`}>
+    <div className={`w-full overflow-x-hidden bg-[#F8FAFC] min-h-screen text-[#14213D] pb-16 sm:pb-24 ${isRtl ? 'font-[Sahel]' : 'font-[Inter]'}`}>
       <SEO 
         title={isRtl ? 'روش‌های پرداخت امن و بین‌المللی | آمووی ترول' : 'Secure Payment Methods | Amovi Travel'}
         description={isRtl 
@@ -123,14 +123,14 @@ export default function PaymentMethods() {
       />
 
       {/* ۱. هیرو سکشن صفحه پرداخت */}
-      <section className="relative w-full pt-36 pb-20 sm:pt-40 sm:pb-28 overflow-hidden bg-[#14213D] text-white">
+      <section className="relative w-full pt-32 pb-14 sm:pt-40 sm:pb-20 md:pb-24 overflow-hidden bg-[#14213D] text-white">
         <div 
           className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-45 scale-105"
           style={{ backgroundImage: `url(${heroBg})` }}
         />
         <div className="absolute inset-0 z-10 bg-gradient-to-b from-[#14213D]/95 via-[#14213D]/80 to-[#14213D] pointer-events-none" />
 
-        <div className={`relative z-20 max-w-6xl mx-auto px-6 ${isRtl ? 'text-right' : 'text-left'}`}>
+        <div className={`relative z-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 ${isRtl ? 'text-right' : 'text-left'}`}>
           <div className="inline-flex items-center gap-2 mb-2">
             <ShieldCheck size={16} className="text-[#FCA311]" />
             <span className="text-[#FCA311] text-xs font-bold uppercase tracking-[0.2em] font-[Inter]">
@@ -138,11 +138,11 @@ export default function PaymentMethods() {
             </span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight">
+          <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight">
             {isRtl ? 'روش‌های پرداخت و تسویه حساب' : 'Payment Methods & Options'}
           </h1>
 
-          <p className="mt-4 text-slate-300 text-sm sm:text-base md:text-lg max-w-2xl font-light leading-relaxed">
+          <p className="mt-3 sm:mt-4 text-slate-300 text-xs sm:text-sm md:text-base max-w-2xl font-light leading-relaxed">
             {isRtl 
               ? 'روشی امن، شفاف و متناسب با شرایط مسافران بین‌المللی جهت رزرو مطمئن سفرها و خدمات در افغانستان.' 
               : 'Flexible, transparent and secure payment solutions tailored for international travelers visiting Afghanistan.'}
@@ -151,33 +151,33 @@ export default function PaymentMethods() {
       </section>
 
       {/* ۲. محتوای گزینه‌های پرداخت */}
-      <section className="max-w-6xl mx-auto px-6 pt-16 sm:pt-20">
-        <div className="text-center max-w-2xl mx-auto mb-12">
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 md:pt-20">
+        <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
           <span className="text-[#FCA311] text-xs font-bold uppercase tracking-widest block font-[Inter] mb-2">
             {isRtl ? 'کانال‌های مجاز پرداخت' : 'ACCEPTED PAYMENT CHANNELS'}
           </span>
-          <h2 className="text-2xl sm:text-4xl font-black text-[#14213D] tracking-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-[#14213D] tracking-tight">
             {isRtl ? 'شیوه‌های پرداخت مورد تایید آمووی' : 'Approved Payment Methods'}
           </h2>
-          <p className="text-slate-500 text-sm sm:text-base mt-2">
+          <p className="text-slate-500 text-xs sm:text-sm md:text-base mt-2">
             {isRtl 
               ? 'تمامی تراکنش‌ها با فاکتور رسمی، تاییدیه مکتوب و استانداردهای کامل امنیتی انجام می‌پذیرند.' 
               : 'All transactions are backed by official commercial invoicing and clear refund protection.'}
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8" dir={isRtl ? 'rtl' : 'ltr'}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8" dir={isRtl ? 'rtl' : 'ltr'}>
           {paymentOptions.map((opt) => (
             <div 
               key={opt.id}
-              className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1"
+              className="bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-6 md:p-7 border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1"
             >
               <div>
-                <div className="flex items-center justify-between mb-5">
-                  <div className="w-14 h-14 rounded-2xl bg-amber-500/10 flex items-center justify-center text-[#FCA311] group-hover:scale-110 transition-transform">
+                <div className="flex items-center justify-between mb-4 sm:mb-5">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-amber-500/10 flex items-center justify-center text-[#FCA311] group-hover:scale-110 transition-transform">
                     {opt.icon}
                   </div>
-                  <span className="px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-[11px] font-bold">
+                  <span className="px-2.5 sm:px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-[10px] sm:text-[11px] font-bold">
                     {isRtl ? opt.badge_fa : opt.badge_en}
                   </span>
                 </div>
@@ -186,11 +186,11 @@ export default function PaymentMethods() {
                   {isRtl ? opt.title_fa : opt.title_en}
                 </h3>
 
-                <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-5 font-normal">
+                <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4 sm:mb-5 font-normal">
                   {isRtl ? opt.desc_fa : opt.desc_en}
                 </p>
 
-                <div className="space-y-2 pt-4 border-t border-slate-100">
+                <div className="space-y-2 pt-3 sm:pt-4 border-t border-slate-100">
                   {(isRtl ? opt.features_fa : opt.features_en).map((feat, i) => (
                     <div key={i} className="flex items-center gap-2 text-xs text-slate-700 font-medium">
                       <CheckCircle2 size={14} className="text-emerald-500 shrink-0" />
@@ -205,17 +205,17 @@ export default function PaymentMethods() {
       </section>
 
       {/* ۳. فرآیند سه مرحله‌ای پرداخت */}
-      <section className="max-w-6xl mx-auto px-6 pt-20">
-        <div className="bg-[#14213D] rounded-3xl p-8 sm:p-12 text-white relative overflow-hidden shadow-2xl" dir={isRtl ? 'rtl' : 'ltr'}>
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 md:pt-20">
+        <div className="bg-[#14213D] rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 text-white relative overflow-hidden shadow-2xl" dir={isRtl ? 'rtl' : 'ltr'}>
           <div className="relative z-10 max-w-3xl">
             <span className="text-[#FCA311] text-xs font-bold uppercase tracking-widest block font-[Inter] mb-2">
               {isRtl ? 'مراحل تسویه حساب' : 'SIMPLE 3-STEP PROCESS'}
             </span>
-            <h2 className="text-2xl sm:text-3xl font-black mb-6">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-black mb-4 sm:mb-6">
               {isRtl ? 'رزرو سفر در سه گام شفاف' : 'Booking Your Journey in 3 Clear Steps'}
             </h2>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-2">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 pt-2">
               <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
                 <div className="w-8 h-8 rounded-full bg-[#FCA311] text-[#14213D] font-black flex items-center justify-center text-sm mb-3">
                   1
@@ -251,14 +251,14 @@ export default function PaymentMethods() {
       </section>
 
       {/* ۴. سوالات متداول (FAQ) */}
-      <section className="max-w-4xl mx-auto px-6 pt-20">
-        <div className="text-center mb-10">
-          <h2 className="text-2xl sm:text-3xl font-black text-[#14213D]">
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 md:pt-20">
+        <div className="text-center mb-6 sm:mb-10">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-black text-[#14213D]">
             {isRtl ? 'پرسش‌های متداول پرداخت' : 'Payment Frequently Asked Questions'}
           </h2>
         </div>
 
-        <div className="space-y-4" dir={isRtl ? 'rtl' : 'ltr'}>
+        <div className="space-y-3 sm:space-y-4" dir={isRtl ? 'rtl' : 'ltr'}>
           {faqs.map((faq, index) => {
             const isOpen = activeFaq === index;
             return (
@@ -269,13 +269,13 @@ export default function PaymentMethods() {
                 <button
                   type="button"
                   onClick={() => setActiveFaq(isOpen ? null : index)}
-                  className="w-full p-5 text-start flex items-center justify-between gap-4 font-bold text-sm sm:text-base text-[#14213D] hover:text-[#FCA311] transition-colors cursor-pointer"
+                  className="w-full p-4 sm:p-5 text-start flex items-center justify-between gap-4 font-bold text-xs sm:text-sm md:text-base text-[#14213D] hover:text-[#FCA311] transition-colors cursor-pointer"
                 >
                   <span>{isRtl ? faq.q_fa : faq.q_en}</span>
                   <HelpCircle size={18} className={`shrink-0 transition-transform ${isOpen ? 'text-[#FCA311]' : 'text-slate-400'}`} />
                 </button>
                 {isOpen && (
-                  <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100">
+                  <div className="px-4 sm:px-5 pb-4 sm:pb-5 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100">
                     {isRtl ? faq.a_fa : faq.a_en}
                   </div>
                 )}
@@ -284,13 +284,13 @@ export default function PaymentMethods() {
           })}
         </div>
 
-        <div className="mt-12 text-center">
-          <p className="text-slate-500 text-xs sm:text-sm mb-4">
+        <div className="mt-8 sm:mt-12 text-center">
+          <p className="text-slate-500 text-xs sm:text-sm mb-3 sm:mb-4">
             {isRtl ? 'نیاز به راهنمایی بیشتر یا هماهنگی حساب بانکی خاص دارید؟' : 'Need customized invoicing details or specific corporate arrangements?'}
           </p>
           <Link
             to="/contact"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#FCA311] text-[#14213D] font-bold text-xs sm:text-sm shadow-md hover:bg-amber-500 transition-colors"
+            className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-[#FCA311] text-[#14213D] font-bold text-xs sm:text-sm shadow-md hover:bg-amber-500 transition-colors"
           >
             <span>{isRtl ? 'ارتباط با واحد مالی و پشتیبانی' : 'Contact Support & Accounts'}</span>
             {isRtl ? <ArrowLeft size={14} /> : <ArrowRight size={14} />}

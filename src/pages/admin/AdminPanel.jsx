@@ -70,35 +70,35 @@ export default function AdminPanel() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0F172A] text-slate-100 font-sans flex flex-col">
+    <div className="min-h-screen bg-[#0F172A] text-slate-100 font-sans flex flex-col w-full overflow-x-hidden">
       {/* Top Admin Navbar */}
-      <header className="bg-[#1E293B] border-b border-slate-700/80 px-6 py-4 flex flex-wrap items-center justify-between gap-4 sticky top-0 z-40">
+      <header className="bg-[#1E293B] border-b border-slate-700/80 px-4 sm:px-6 py-3.5 sm:py-4 flex flex-wrap items-center justify-between gap-4 sticky top-0 z-40">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-[#FCA311] flex items-center justify-center text-[#14213D] font-black text-xl shadow-md">
+          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#FCA311] flex items-center justify-center text-[#14213D] font-black text-lg sm:text-xl shadow-md shrink-0">
             A
           </div>
           <div>
-            <h1 className="text-lg font-bold text-white tracking-wide flex items-center gap-2">
+            <h1 className="text-base sm:text-lg font-bold text-white tracking-wide flex items-center gap-2">
               Amovi Travel Control Hub
               <span className="text-[10px] uppercase px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-bold border border-emerald-500/30">
                 Live Admin
               </span>
             </h1>
-            <p className="text-xs text-slate-400">Master Operations & Communications Management</p>
+            <p className="text-[11px] sm:text-xs text-slate-400">Master Operations & Communications Management</p>
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5 sm:gap-3">
           <button
             onClick={exportData}
-            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-300 border border-slate-700 transition cursor-pointer"
+            className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-300 border border-slate-700 transition cursor-pointer"
           >
             <Download size={14} />
             <span>Export JSON</span>
           </button>
           <Link
             to="/"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#FCA311] hover:bg-amber-500 text-xs font-bold text-[#14213D] transition shadow-md"
+            className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl bg-[#FCA311] hover:bg-amber-500 text-xs font-bold text-[#14213D] transition shadow-md"
           >
             <Home size={14} />
             <span>Return to Website</span>
@@ -107,7 +107,7 @@ export default function AdminPanel() {
       </header>
 
       {/* Main Admin Content */}
-      <main className="flex-1 max-w-7xl w-full mx-auto p-6 space-y-6">
+      <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 space-y-5 sm:space-y-6">
         {/* KPI Summary Cards */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           <div className="bg-[#1E293B] border border-slate-700/60 rounded-2xl p-5 shadow-sm">

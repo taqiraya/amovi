@@ -3,6 +3,7 @@ import { useLangStore } from '../store/useLangStore';
 
 export default function MasterRequestForm({ packageName = "" }) {
   const { currentLang, translations } = useLangStore();
+  const formT = translations?.form || {};
 
   const [formData, setFormData] = useState({
     fullName: '',
@@ -42,40 +43,40 @@ export default function MasterRequestForm({ packageName = "" }) {
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">{translations.fullName} *</label>
+            <label className="block text-sm font-medium text-slate-700 mb-1">{formT.fullName || "Full Name"} *</label>
             <input type="text" name="fullName" required value={formData.fullName} onChange={handleChange} className="w-full p-3 border border-[var(--color-amovi-gray-light)] rounded-xl focus:outline-none focus:border-[var(--color-amovi-gold)]" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">{translations.email} *</label>
+            <label className="block text-sm font-medium text-slate-700 mb-1">{formT.email || "Email Address"} *</label>
             <input type="email" name="email" required value={formData.email} onChange={handleChange} className="w-full p-3 border border-[var(--color-amovi-gray-light)] rounded-xl focus:outline-none focus:border-[var(--color-amovi-gold)]" />
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">{translations.phone} *</label>
+            <label className="block text-sm font-medium text-slate-700 mb-1">{formT.phone || "Phone / WhatsApp"} *</label>
             <input type="text" name="phoneWhatsApp" required placeholder="+93..." value={formData.phoneWhatsApp} onChange={handleChange} className="w-full p-3 border border-[var(--color-amovi-gray-light)] rounded-xl focus:outline-none focus:border-[var(--color-amovi-gold)] text-left" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">{translations.travelDate} *</label>
+            <label className="block text-sm font-medium text-slate-700 mb-1">{formT.travelDate || "Preferred Travel Date"} *</label>
             <input type="date" name="preferredDate" required value={formData.preferredDate} onChange={handleChange} className="w-full p-3 border border-[var(--color-amovi-gray-light)] rounded-xl focus:outline-none focus:border-[var(--color-amovi-gold)]" />
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">{translations.travelers} *</label>
+            <label className="block text-sm font-medium text-slate-700 mb-1">{formT.travelers || "Number of Travelers"} *</label>
             <input type="number" name="travelersCount" min="1" required value={formData.travelersCount} onChange={handleChange} className="w-full p-3 border border-[var(--color-amovi-gray-light)] rounded-xl focus:outline-none focus:border-[var(--color-amovi-gold)]" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">{translations.packageField} *</label>
+            <label className="block text-sm font-medium text-slate-700 mb-1">{formT.packageField || "Package / Service Name"} *</label>
             <input type="text" name="packageOrService" readOnly value={formData.packageOrService} className="w-full p-3 bg-slate-50 border border-[var(--color-amovi-gray-light)] rounded-xl text-slate-400 font-semibold cursor-not-allowed" />
           </div>
         </div>
 
         <div>
           <button type="submit" className="w-full bg-[var(--color-amovi-gold)] hover:bg-amber-500 text-[var(--color-amovi-navy)] font-bold py-3 px-6 rounded-xl shadow-md transition duration-300 mt-4 cursor-pointer">
-            {translations.submitBtn}
+            {formT.submitBtn || "Submit Request"}
           </button>
         </div>
       </form>

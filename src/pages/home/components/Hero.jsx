@@ -1,6 +1,3 @@
-// ایمپورت کردن نوبار از پوشه لایه‌اوت
-import Header from '../../layout/Header';
-
 // ایمپورت کردن تصاویر پروژه
 import heroBg from '../../../assets/images/hero-bg.webp';
 import heroMain from '../../../assets/images/hero-main.webp';
@@ -12,13 +9,6 @@ export default function Hero({ currentLang }) {
 
   return (
     <section className="relative w-full h-[95vh] min-h-[720px] sm:min-h-[800px] md:min-h-[750px] max-h-[950px] flex flex-col justify-center overflow-hidden bg-[#14213D]" dir="ltr">
-      
-      {/* ۱. نوبار شناور با فاصله از سقف مرورگر */}
-      <div className="fixed top-4 left-0 w-full z-50 px-4 sm:px-6 md:px-8 pointer-events-none">
-        <div className="max-w-[1220px] mx-auto w-full pointer-events-auto">
-          <Header />
-        </div>
-      </div>
 
       {/* تصویر پس‌زمینه سراسری - در حالت دری عکس فلیپ می‌شود */}
       <div 

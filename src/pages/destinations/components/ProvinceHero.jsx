@@ -1,7 +1,7 @@
 export default function ProvinceHero({ province, localData, isRtl }) {
   return (
-    /* 👑 هیرو با قد عمیق، هماهنگ با لایه زدایندکس و مارجین منفی جهت اتصال به سقف */
-    <section className="w-[100%] max-w-[1600px] mx-auto relative h-[95vh] md:h-[88vh] overflow-hidden shadow-2xl group z-0 -mt-24 sm:-mt-28 bg-black">
+    /* 👑 هیرو با قد عمیق، هماهنگ با لایوت و هدر سراسری */
+    <section className="w-[100%] max-w-[1600px] mx-auto relative h-[95vh] md:h-[88vh] overflow-hidden shadow-2xl group z-0 bg-black">
       
       {/* ۱. عکس پس‌زمینه پانورامیک (تضمین لود کامل) */}
       <div className="absolute inset-0 z-0">

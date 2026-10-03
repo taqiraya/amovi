@@ -1,4 +1,3 @@
-import Header from "../layout/Header.jsx";
 import DiscoverSection from "./components/DiscoverSection.jsx";
 import ExploreHandle from "./components/exploreCTA/ExploreHandle.jsx";
 import ExploreSection from "./components/ExploreSection.jsx";
@@ -19,12 +18,6 @@ export default function Tours() {
           : "font-['Inter',system-ui,sans-serif]"
       }`}
     >
-      <div className="fixed top-4 left-0 z-50 w-full px-4 pointer-events-none sm:px-6 md:px-8">
-        <div className="mx-auto w-full max-w-[1220px] pointer-events-auto">
-          <Header />
-        </div>
-      </div>
-
       <TourHero />
       <DiscoverSection />
       <ExploreSection />

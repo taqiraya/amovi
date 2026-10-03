@@ -1,6 +1,5 @@
 import { useParams, Link } from 'react-router-dom';
 import { useLangStore } from '../../store/useLangStore';
-import Header from "../layout/Header.jsx";
 
 // ۱. ایمپورت کامپوننت مستقل هیرو سکشن ولایت
 import ProvinceHero from './components/ProvinceHero';
@@ -35,10 +34,7 @@ export default function ProvinceView() {
 
   return (
     <div className="w-full bg-[#F8FAFC] pb-12">
-      {/* 🟢 ۱. صدا زدن هدر به صورت استاندارد و بازکردن زنجیر کانتینر ۱۲۲۰ پیکسلی */}
-      <Header />
-      
-      {/* 👑 ۲. صدا زدن کامپوننت هیرو سکشن (دقیقاً تراز با لبه‌های هدر بالای خود) */}
+      {/* 👑 صدا زدن کامپوننت هیرو سکشن ولایت */}
       <ProvinceHero 
         province={province} 
         localData={localData} 

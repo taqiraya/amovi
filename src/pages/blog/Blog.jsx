@@ -1,90 +1,39 @@
-import { useState } from 'react';
-import { ArrowRight, ArrowLeft, Calendar, Tag, Clock, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useState, useMemo } from 'react';
+import { ArrowRight, ArrowLeft, Calendar, Tag, Clock, X, ChevronLeft, ChevronRight, Compass } from 'lucide-react';
 import { useLangStore } from '../../store/useLangStore';
 import heroBg from '../../assets/images/hero-bg.webp';
+
+const ITEMS_PER_PAGE = 6;
 
 export default function Blog() {
   const { currentLang, translations } = useLangStore();
   const isRtl = currentLang === 'fa';
   const t = translations?.blogPage || {};
 
+  const [activePillar, setActivePillar] = useState('all');
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedArticle, setSelectedArticle] = useState(null);
 
-  const articlesList = t.articles || [
-    {
-      id: 'bamyan-landscapes',
-      date: '12 SEP 2026',
-      category: 'DESTINATIONS',
-      title: "Discovering Bamyan's Hidden Landscapes",
-      excerpt: "Explore the landscapes, history and cultural heritage that make Bamyan one of Afghanistan's remarkable destinations.",
-      image: '/tours/images/bamyanPictures.webp'
-    },
-    {
-      id: 'herat-timeless',
-      date: '08 SEP 2026',
-      category: 'CULTURE',
-      title: "Exploring Herat's Timeless Beauty",
-      excerpt: "From ancient architecture to vibrant culture, Herat offers a unique glimpse into Afghanistan's rich past.",
-      image: '/tours/images/heratPictures.webp'
-    },
-    {
-      id: 'travel-tips',
-      date: '03 SEP 2026',
-      category: 'TRAVEL TIPS',
-      title: 'Travel Tips for Visiting Afghanistan',
-      excerpt: 'Essential tips to help you plan a safe, comfortable and rewarding journey across Afghanistan.',
-      image: '/images/provinces/kabul/bagh-e-babur.webp'
-    },
-    {
-      id: 'balkh-history',
-      date: '28 AUG 2026',
-      category: 'HERITAGE',
-      title: 'The History of Balkh: The Ancient Jewel',
-      excerpt: 'Discover the historical significance of Balkh, one of the oldest cities in the world.',
-      image: '/tours/images/mazarPictures.webp'
-    },
-    {
-      id: 'nuristan-hiking',
-      date: '20 AUG 2026',
-      category: 'ADVENTURE',
-      title: 'Hiking in Nuristan: Nature at Its Purest',
-      excerpt: 'Explore pristine valleys, crystal rivers and breathtaking mountain trails in Nuristan.',
-      image: '/tours/images/noristanPictures.webp'
-    },
-    {
-      id: 'kandahar-hospitality',
-      date: '15 AUG 2026',
-      category: 'EXPERIENCES',
-      title: 'Kandahar: Where History Meets Hospitality',
-      excerpt: 'Experience the cultural heart of Afghanistan with its rich history and warm people.',
-      image: '/tours/images/kandaharPictures.webp'
-    },
-    {
-      id: 'samangan-beauty',
-      date: '10 AUG 2026',
-      category: 'CULTURE',
-      title: "The Beauty of Samangan's Historical Sites",
-      excerpt: 'Uncover the hidden gems of Samangan, from ancient sites to stunning landscapes.',
-      image: '/images/provinces/bamyan/Buddha-1.webp'
-    },
-    {
-      id: 'ghor-mountains',
-      date: '02 AUG 2026',
-      category: 'DESTINATIONS',
-      title: "Ghor's Majestic Mountains",
-      excerpt: 'A journey through dramatic peaks, remote villages and untouched nature.',
-      image: '/tours/images/ghorPictures.webp'
-    },
-    {
-      id: 'visit-afghanistan-now',
-      date: '25 JUL 2026',
-      category: 'TRAVEL TIPS',
-      title: 'Why You Should Visit Afghanistan Now',
-      excerpt: 'Experience authentic culture, warm hospitality and breathtaking landscapes before the world discovers it.',
-      image: '/images/provinces/kabul/kabul-hero.webp'
-    }
-  ];
+  // فیلتر مقالات بر اساس پیلار انتخابی
+  const filteredArticles = useMemo(() => {
+    const raw = t.articles || [];
+    if (activePillar === 'all') return raw;
+    return raw.filter((item) => item.pillar === activePillar);
+  }, [t.articles, activePillar]);
+
+  // محاسبه تعداد کل صفحات
+  const totalPages = Math.max(1, Math.ceil(filteredArticles.length / ITEMS_PER_PAGE));
+
+  // مقالات صفحه جاری
+  const paginatedArticles = useMemo(() => {
+    const start = (currentPage - 1) * ITEMS_PER_PAGE;
+    return filteredArticles.slice(start, start + ITEMS_PER_PAGE);
+  }, [filteredArticles, currentPage]);
+
+  const handleSelectPillar = (pillarKey) => {
+    setActivePillar(pillarKey);
+    setCurrentPage(1);
+  };
 
   const handleOpenArticle = (article) => {
     setSelectedArticle(article);
@@ -93,6 +42,13 @@ export default function Blog() {
   const handleCloseArticle = () => {
     setSelectedArticle(null);
   };
+
+  const pillarsData = t.pillars || {};
+
+  // دریافت سوال تماتیک پیلار فعال
+  const activeQuestion = activePillar !== 'all' && pillarsData[activePillar]?.question 
+    ? pillarsData[activePillar].question 
+    : null;
 
   return (
     <div className={`w-full bg-[#F8FAFC] min-h-screen text-[#14213D] ${isRtl ? 'font-[Sahel]' : 'font-[Inter]'}`}>
@@ -130,9 +86,9 @@ export default function Blog() {
       </section>
 
       {/* ========================================================
-          ۲. عنوان بخش مقالات مجله (Stories Worth Discovering)
+          ۲. عنوان بخش مقالات مجله و پیلارها (Stories Worth Discovering)
       ======================================================== */}
-      <section className="max-w-6xl mx-auto px-6 pt-16 sm:pt-20 pb-10 text-center">
+      <section className="max-w-6xl mx-auto px-6 pt-16 sm:pt-20 pb-8 text-center">
         <span className="text-[#FCA311] text-xs font-bold uppercase tracking-widest block font-[Inter] mb-2">
           {t.sectionEyebrow || (isRtl ? 'مجله گردشگری' : 'JOURNAL')}
         </span>
@@ -144,35 +100,83 @@ export default function Blog() {
             ? 'سفر به اعماق افغانستان از دریچه روایت‌هایی درباره مناظر، میراث، مردم و تجربیات.' 
             : 'Explore Afghanistan through stories about its landscapes, heritage, people and experiences.')}
         </p>
+
+        {/* تب‌های دسته‌بندی پیلارها (Discover, Understand, Experience) */}
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-2.5 sm:gap-3" dir={isRtl ? 'rtl' : 'ltr'}>
+          <button
+            type="button"
+            onClick={() => handleSelectPillar('all')}
+            className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${
+              activePillar === 'all'
+                ? 'bg-[#14213D] text-[#FCA311] shadow-lg shadow-[#14213D]/20 scale-105'
+                : 'bg-white text-slate-600 hover:text-[#14213D] border border-slate-200/80 hover:border-slate-300'
+            }`}
+          >
+            {pillarsData.all || (isRtl ? 'همه داستان‌ها' : 'All Stories')}
+          </button>
+
+          {['discover', 'understand', 'experience'].map((pKey) => {
+            const pillar = pillarsData[pKey];
+            if (!pillar) return null;
+            const isActive = activePillar === pKey;
+
+            return (
+              <button
+                key={pKey}
+                type="button"
+                onClick={() => handleSelectPillar(pKey)}
+                className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${
+                  isActive
+                    ? 'bg-[#14213D] text-[#FCA311] shadow-lg shadow-[#14213D]/20 scale-105'
+                    : 'bg-white text-slate-600 hover:text-[#14213D] border border-slate-200/80 hover:border-slate-300'
+                }`}
+              >
+                {pillar.label}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* ساب‌تایتل تماتیک پیلار انتخاب‌شده */}
+        {activeQuestion && (
+          <div className="mt-5 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-[#FCA311]/30 text-[#14213D] text-xs sm:text-sm font-medium animate-fadeIn">
+            <Compass size={15} className="text-[#FCA311] shrink-0" />
+            <span className="italic">{activeQuestion}</span>
+          </div>
+        )}
       </section>
 
       {/* ========================================================
-          ۳. گرید ۹ کارته مقالات وبلاگ (۳ ستونه)
+          ۳. گرید کارتی مقالات وبلاگ (۳ ستونه پاسخگو)
       ======================================================== */}
       <section className="max-w-6xl mx-auto px-6 pb-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" dir={isRtl ? 'rtl' : 'ltr'}>
-          {articlesList.map((article) => (
+          {paginatedArticles.map((article) => (
             <article
               key={article.id}
               onClick={() => handleOpenArticle(article)}
               className="bg-white rounded-3xl overflow-hidden border border-slate-200/90 shadow-sm hover:shadow-2xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col cursor-pointer group"
             >
-              {/* تصویر و بج تاریخ روی تصویر */}
+              {/* تصویر مقاله با بج تاریخ و افکت زوم */}
               <div className="relative aspect-[16/10] overflow-hidden bg-slate-200">
                 <img
                   src={article.image}
                   alt={article.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   loading="lazy"
+                  onError={(e) => {
+                    // در صورت خطای لود عکس‌های اکسترنال، از عکس محلی پروژه استفاده می‌شود
+                    e.target.src = '/tours/images/bamyanPictures.webp';
+                  }}
                 />
                 
-                {/* تاریخ انتشار مطابق طرح تمپلت */}
+                {/* نشان تاریخ انتشار عینا مطابق دیزاین */}
                 <div className={`absolute top-4 ${isRtl ? 'right-4' : 'left-4'} bg-[#14213D]/90 backdrop-blur-sm text-white px-3 py-1 rounded-full text-[11px] font-bold tracking-wider uppercase font-[Inter] shadow-md`}>
                   {article.date}
                 </div>
               </div>
 
-              {/* بدنه کارت مقاله */}
+              {/* بدنه کارت */}
               <div className={`p-6 flex-1 flex flex-col justify-between space-y-4 ${isRtl ? 'text-right' : 'text-left'}`}>
                 <div className="space-y-2.5">
                   <span className="text-[#FCA311] text-[11px] font-bold uppercase tracking-wider block font-[Inter]">
@@ -188,8 +192,8 @@ export default function Blog() {
                   </p>
                 </div>
 
-                {/* دکمه / لینک مطالعه بیشتر */}
-                <div className="pt-2 border-t border-slate-100 flex items-center justify-between">
+                {/* فوتر کارت با دکمه مطالعه و زمان مطالعه */}
+                <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
                   <span className="inline-flex items-center gap-1.5 text-xs font-bold text-[#14213D] group-hover:text-[#FCA311] transition-colors uppercase font-[Inter] tracking-wider">
                     <span>{t.readMore || (isRtl ? 'مطالعه بیشتر' : 'Read More')}</span>
                     {isRtl ? (
@@ -200,8 +204,8 @@ export default function Blog() {
                   </span>
                   
                   <span className="text-slate-400 text-xs flex items-center gap-1">
-                    <Clock size={13} />
-                    <span>4 min</span>
+                    <Clock size={13} className="text-[#FCA311]" />
+                    <span>{article.readTime || '4 min'}</span>
                   </span>
                 </div>
               </div>
@@ -210,56 +214,62 @@ export default function Blog() {
         </div>
 
         {/* ========================================================
-            ۴. کنترل‌های شماره صفحات (Pagination)
+            ۴. کنترل‌های شماره صفحات داینامیک (Pagination)
         ======================================================== */}
-        <div className="mt-14 flex items-center justify-center gap-2" dir="ltr">
-          <button
-            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-            disabled={currentPage === 1}
-            className="w-10 h-10 rounded-full border border-slate-300 flex items-center justify-center text-slate-600 hover:border-[#14213D] hover:text-[#14213D] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
-            aria-label="Previous Page"
-          >
-            <ChevronLeft size={18} />
-          </button>
-
-          {[1, 2, 3].map((page) => (
+        {totalPages > 1 && (
+          <div className="mt-14 flex items-center justify-center gap-2" dir="ltr">
             <button
-              key={page}
-              onClick={() => setCurrentPage(page)}
-              className={`w-10 h-10 rounded-full font-bold text-sm transition-all duration-200 ${
-                currentPage === page
-                  ? 'bg-[#FCA311] text-[#14213D] shadow-md shadow-[#FCA311]/30 font-extrabold'
-                  : 'border border-slate-300 text-slate-600 hover:border-[#14213D] hover:text-[#14213D]'
-              }`}
+              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1}
+              className="w-10 h-10 rounded-full border border-slate-300 flex items-center justify-center text-slate-600 hover:border-[#14213D] hover:text-[#14213D] disabled:opacity-40 disabled:cursor-not-allowed transition-colors cursor-pointer"
+              aria-label="Previous Page"
             >
-              {page}
+              <ChevronLeft size={18} />
             </button>
-          ))}
 
-          <button
-            onClick={() => setCurrentPage((prev) => Math.min(prev + 1, 3))}
-            disabled={currentPage === 3}
-            className="w-10 h-10 rounded-full border border-slate-300 flex items-center justify-center text-slate-600 hover:border-[#14213D] hover:text-[#14213D] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
-            aria-label="Next Page"
-          >
-            <ChevronRight size={18} />
-          </button>
-        </div>
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+              <button
+                key={page}
+                onClick={() => setCurrentPage(page)}
+                className={`w-10 h-10 rounded-full font-bold text-sm transition-all duration-200 cursor-pointer ${
+                  currentPage === page
+                    ? 'bg-[#FCA311] text-[#14213D] shadow-md shadow-[#FCA311]/30 font-extrabold scale-105'
+                    : 'border border-slate-300 text-slate-600 hover:border-[#14213D] hover:text-[#14213D]'
+                }`}
+              >
+                {page}
+              </button>
+            ))}
+
+            <button
+              onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+              disabled={currentPage === totalPages}
+              className="w-10 h-10 rounded-full border border-slate-300 flex items-center justify-center text-slate-600 hover:border-[#14213D] hover:text-[#14213D] disabled:opacity-40 disabled:cursor-not-allowed transition-colors cursor-pointer"
+              aria-label="Next Page"
+            >
+              <ChevronRight size={18} />
+            </button>
+          </div>
+        )}
       </section>
 
       {/* ========================================================
-          ۵. مودال نمایش جزئیات کامل مقاله انتخاب‌شده
+          ۵. مودال نمایش کامل متن مقاله اصلی (Full Story Modal)
       ======================================================== */}
       {selectedArticle && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fadeIn">
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fadeIn"
+          onClick={handleCloseArticle}
+        >
           <div 
             className="bg-white w-full max-w-2xl rounded-3xl overflow-hidden shadow-2xl max-h-[90vh] flex flex-col relative"
             dir={isRtl ? 'rtl' : 'ltr'}
+            onClick={(e) => e.stopPropagation()}
           >
             {/* دکمه بستن */}
             <button
               onClick={handleCloseArticle}
-              className={`absolute top-4 ${isRtl ? 'left-4' : 'right-4'} z-10 w-9 h-9 rounded-full bg-[#14213D]/80 text-white hover:bg-[#14213D] flex items-center justify-center transition-colors shadow-md`}
+              className={`absolute top-4 ${isRtl ? 'left-4' : 'right-4'} z-10 w-9 h-9 rounded-full bg-[#14213D]/80 text-white hover:bg-[#14213D] flex items-center justify-center transition-colors shadow-md cursor-pointer`}
               aria-label="Close Modal"
             >
               <X size={18} />
@@ -271,21 +281,28 @@ export default function Blog() {
                 src={selectedArticle.image}
                 alt={selectedArticle.title}
                 className="w-full h-full object-cover"
+                onError={(e) => {
+                  e.target.src = '/tours/images/bamyanPictures.webp';
+                }}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none" />
               <div className={`absolute bottom-4 ${isRtl ? 'right-6' : 'left-6'} text-white`}>
-                <span className="bg-[#FCA311] text-[#14213D] px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider font-[Inter]">
+                <span className="bg-[#FCA311] text-[#14213D] px-3.5 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider font-[Inter]">
                   {selectedArticle.category}
                 </span>
               </div>
             </div>
 
-            {/* متن مقاله با اسکرول بار زیبا */}
+            {/* بدنه و متن کامل پاراگراف‌های مقاله */}
             <div className="p-6 sm:p-8 overflow-y-auto space-y-4">
               <div className="flex items-center gap-4 text-xs text-slate-400 font-medium">
                 <span className="flex items-center gap-1.5">
                   <Calendar size={14} className="text-[#FCA311]" />
                   <span>{selectedArticle.date}</span>
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <Clock size={14} className="text-[#FCA311]" />
+                  <span>{selectedArticle.readTime || '4 min'}</span>
                 </span>
                 <span className="flex items-center gap-1.5">
                   <Tag size={14} className="text-[#FCA311]" />
@@ -297,31 +314,31 @@ export default function Blog() {
                 {selectedArticle.title}
               </h2>
 
-              <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+              <p className="text-[#14213D] font-semibold text-sm sm:text-base leading-relaxed bg-amber-50/50 p-3.5 rounded-2xl border-l-4 rtl:border-r-4 rtl:border-l-0 border-[#FCA311]">
                 {selectedArticle.excerpt}
               </p>
 
-              <div className="space-y-3 pt-3 border-t border-slate-100 text-slate-600 text-sm leading-relaxed">
-                <p>
-                  {isRtl
-                    ? 'افغانستان با قدمتی چندهزار ساله و موقعیت استراتژیک در قلب جاده ابریشم، گنجینه‌ای از شگفتی‌های تاریخی، تنوع فرهنگی کم‌نظیر و طبیعتی خیره‌کننده است. از قله‌های سربه‌فلک‌کشیده پامیر و هندوکش تا دشت‌های باستانی بلخ و بناهای فیروزه‌ای هرات، هر گوشه از این سرزمین داستانی ناگفته در سینه دارد.'
-                    : 'Afghanistan, with thousands of years of rich history and its strategic position at the crossroads of the ancient Silk Road, is a treasure trove of historical wonders, cultural diversity and breathtaking natural landscapes. From the towering peaks of Pamir and Hindu Kush to the ancient plains of Balkh and the turquoise minarets of Herat, every corner holds an untold story.'}
-                </p>
-                <p>
-                  {isRtl
-                    ? 'تیم آمووی ترول با شناخت عمیق از مناطق محلی و همراهی راهنمایان بومی متخصص، به شما امکان می‌دهد تا این روایت‌های زنده را از نزدیک لمس کرده و با آسودگی خاطر به کشف ناشناخته‌ها بپردازید.'
-                    : 'The Amovi Travel team, equipped with deep local knowledge and seasoned professional guides, enables you to experience these living narratives firsthand while traveling with complete peace of mind and comfort.'}
-                </p>
+              {/* پاراگراف‌های تفصیلی مقاله */}
+              <div className="space-y-3.5 pt-2 text-slate-700 text-sm sm:text-base leading-relaxed font-normal">
+                {selectedArticle.content && Array.isArray(selectedArticle.content) ? (
+                  selectedArticle.content.map((paragraph, pIdx) => (
+                    <p key={pIdx} className="leading-relaxed">
+                      {paragraph}
+                    </p>
+                  ))
+                ) : (
+                  <p>{selectedArticle.excerpt}</p>
+                )}
               </div>
 
-              <div className="pt-4 flex items-center justify-between border-t border-slate-100">
+              <div className="pt-5 flex items-center justify-between border-t border-slate-100">
                 <span className="text-xs text-slate-400">
-                  {isRtl ? 'اشتراک‌گذاری در شبکه‌های اجتماعی' : 'Share this story on social media'}
+                  {isRtl ? 'آمووی ترول | روایت‌های ماندگار افغانستان' : 'Amovi Travel | Authentic Afghanistan Stories'}
                 </span>
                 <button
                   type="button"
                   onClick={handleCloseArticle}
-                  className="bg-[#14213D] hover:bg-slate-800 text-white font-bold py-2 px-5 rounded-xl text-xs transition-colors cursor-pointer"
+                  className="bg-[#14213D] hover:bg-slate-800 text-white font-bold py-2 px-6 rounded-xl text-xs transition-colors cursor-pointer"
                 >
                   {t.close || (isRtl ? 'بستن' : 'Close')}
                 </button>

@@ -25,115 +25,107 @@
     "loading": "Loading...",
     "successMessage": "Your inquiry has been submitted successfully!"
   },
-
-  "tourPage":{
-      "heroSection": {
+  "tourPage": {
+    "heroSection": {
       "label": "TOUR PACKAGES",
       "title": "Tour",
       "titleHighlight": "Packages",
       "subtitle": "Thoughtfully designed journeys to discover Afghanistan",
       "button": "Explore Package"
     },
-
     "discoverSection": {
-    "title": "Discover Afghanistan Your Way",
-    "description": "Explore Afghanistan through carefully planned journeys combining destinations, accommodation, transportation, guides, and travel support"
-  },
-
-  "exploreSection": {
-    "label": "EXPLORE OUR PACKAGES",
-    "title": "Explore Our Packages",
-    "description": "Discover journeys designed around Afghanistan's culture, history, and interesting places.",
-    "button": "Explore Package"
-  },
-  
-  "exploreCTA": {
-  "bedroom": "Bedroom",
-  "transport": "Transport",
-  "people": "People",
-  "meetNow": "Meet Now",
-  "days": "Days",
-  "nights": "Nights"
-  },
-
-  "travelCTA": {
-    "eyebrow": "Travel Themes",
-    "title": " Choose Your Travel Experience",
-    "plane":{
-      "title": "Destination Experiences",
-      "description": "Discover individual destinations through carefully designed journeys."
+      "title": "Discover Afghanistan Your Way",
+      "description": "Explore Afghanistan through carefully planned journeys combining destinations, accommodation, transportation, guides, and travel support"
     },
-    "map":{
-      "title": "Multi-Destination Journeys",
-      "description": "Connect multiple destinations in one seamless journey across Afghanistan."
+    "exploreSection": {
+      "label": "EXPLORE OUR PACKAGES",
+      "title": "Explore Our Packages",
+      "description": "Discover journeys designed around Afghanistan's culture, history, and interesting places.",
+      "button": "Explore Package"
     },
-    "landmark":{
-      "title": "Cultural & Heritage",
-      "description": "Explore Afghanistan's history, culture, traditions, and heritage."
+    "exploreCTA": {
+      "bedroom": "Bedroom",
+      "transport": "Transport",
+      "people": "People",
+      "meetNow": "Meet Now",
+      "days": "Days",
+      "nights": "Nights"
     },
-    "mountain":{
-      "title": "Nature & Adventure",
-      "description": "Experience mountains, valleys, lakes, landscapes, and outdoor activities."
+    "travelCTA": {
+      "eyebrow": "Travel Themes",
+      "title": " Choose Your Travel Experience",
+      "plane": {
+        "title": "Destination Experiences",
+        "description": "Discover individual destinations through carefully designed journeys."
+      },
+      "map": {
+        "title": "Multi-Destination Journeys",
+        "description": "Connect multiple destinations in one seamless journey across Afghanistan."
+      },
+      "landmark": {
+        "title": "Cultural & Heritage",
+        "description": "Explore Afghanistan's history, culture, traditions, and heritage."
+      },
+      "mountain": {
+        "title": "Nature & Adventure",
+        "description": "Experience mountains, valleys, lakes, landscapes, and outdoor activities."
+      },
+      "crown": {
+        "title": "Premium & VIP",
+        "description": "Travel with enhanced comfort, personalized arrangements, and dedicated support."
+      },
+      "setting": {
+        "title": "Customized Journeys",
+        "description": "Create a journey tailored to your interests, schedule, and travel preferences."
+      }
     },
-    "crown": {
-      "title": "Premium & VIP",
-      "description": "Travel with enhanced comfort, personalized arrangements, and dedicated support."
+    "moreCTA": {
+      "eyebrow": "More Than a Tour",
+      "title": "More Than a Tour",
+      "accommodation": {
+        "title": "Accommodation",
+        "description": "Selected stays for your journey."
+      },
+      "transportation": {
+        "title": "Transportation",
+        "description": "Coordinated travel between destinations."
+      },
+      "professional": {
+        "title": "Professional Guides",
+        "description": "Local guidance and cultural insight."
+      },
+      "travel": {
+        "title": "Travel Support",
+        "description": "Practical assistance throughout your journey."
+      },
+      "visa": {
+        "title": "Visa Assistance",
+        "description": "Guidance with your visa preparation."
+      }
     },
-    "setting":{
-      "title": "Customized Journeys",
-      "description": "Create a journey tailored to your interests, schedule, and travel preferences."
-    }
-    
-  },
-  
-  "moreCTA": {
-    "eyebrow": "More Than a Tour",
-    "title": "More Than a Tour",
-    "accommodation":{
-      "title": "Accommodation",
-      "description": "Selected stays for your journey."
-    },
-    "transportation":{
-      "title": "Transportation",
-      "description": "Coordinated travel between destinations."
-    },
-    "professional":{
-      "title": "Professional Guides",
-      "description": "Local guidance and cultural insight."
-    },
-    "travel":{
-      "title": "Travel Support",
-      "description": "Practical assistance throughout your journey."
-    },
-    "visa": {
-      "title": "Visa Assistance",
-      "description": "Guidance with your visa preparation."
-    }
-    
-  },
-  "workCTA":{
-    "title": "How It Works",
-    "eyebrow": "How Booking Works",
-    "package":{
-      "number": "01",
-      "title": "Choose Your Package",
-      "description": "Select the journey that interests you."
-    },
-    "request":{
-      "number": "02",
-      "title":"Send Your Request",
-      "description": "Share your dates, group details, and requirements."
-    },
-    "confirmJourney":{
-      "number": "03",
-      "title": "Confirm Your Journey",
-      "description": "Review the arrangements and complete the required payment."
-    },
-    "beginJourney":{
-      "number": "04",
-      "title": " Begin Your Journey",
-      "description" : "Receive your final travel arrangements and get ready for Afghanistan."
-    }
+    "workCTA": {
+      "title": "How It Works",
+      "eyebrow": "How Booking Works",
+      "package": {
+        "number": "01",
+        "title": "Choose Your Package",
+        "description": "Select the journey that interests you."
+      },
+      "request": {
+        "number": "02",
+        "title": "Send Your Request",
+        "description": "Share your dates, group details, and requirements."
+      },
+      "confirmJourney": {
+        "number": "03",
+        "title": "Confirm Your Journey",
+        "description": "Review the arrangements and complete the required payment."
+      },
+      "beginJourney": {
+        "number": "04",
+        "title": " Begin Your Journey",
+        "description": "Receive your final travel arrangements and get ready for Afghanistan."
+      }
     }
   },
   "contactPage": {
@@ -327,77 +319,259 @@
     "share": "Share",
     "articles": [
       {
-        "id": "bamyan-landscapes",
-        "date": "12 SEP 2026",
-        "category": "DESTINATIONS",
-        "title": "Discovering Bamyan's Hidden Landscapes",
-        "excerpt": "Explore the landscapes, history and cultural heritage that make Bamyan one of Afghanistan's remarkable destinations.",
+        "id": "beyond-headlines",
+        "pillar": "discover",
+        "category": "DISCOVER",
+        "date": "24 SEP 2026",
+        "readTime": "4 min",
+        "title": "Afghanistan Beyond the Headlines",
+        "excerpt": "Beyond the headlines lies another Afghanistan: a land of breathtaking mountains, ancient cities, timeless traditions, and warm hospitality.",
+        "content": [
+          "For years, Afghanistan has often been seen through headlines—stories of conflict, uncertainty, and a country difficult to understand from afar. But beyond those headlines lies another Afghanistan: a land of breathtaking mountains, ancient cities, timeless traditions, and people whose warmth can turn a simple encounter into a lasting memory.",
+          "Here, history is not confined to museums. It lives in centuries-old streets, mountain valleys, ancient ruins, bustling bazaars, and stories passed from one generation to the next. From the blue waters of Band-e Amir to the historic streets of Herat, from the quiet forests of Nuristan to the cultural treasures of Kabul, every landscape carries a story waiting to be discovered.",
+          "To travel through Afghanistan is to look beyond the familiar picture and experience the country through its people, heritage, landscapes, and everyday life.",
+          "Look beyond the headlines. Discover the Afghanistan that waits to be experienced."
+        ],
+        "image": "/images/provinces/kabul/kabul-hero.webp"
+      },
+      {
+        "id": "hidden-natural-beauty",
+        "pillar": "discover",
+        "category": "DISCOVER",
+        "date": "18 SEP 2026",
+        "readTime": "5 min",
+        "title": "The Hidden Natural Beauty of Afghanistan",
+        "excerpt": "Beyond historic cities lies a quieter world shaped by mountains, turquoise lakes, rivers, valleys, and vast untouched landscapes.",
+        "content": [
+          "Beyond Afghanistan’s historic cities and ancient monuments lies a quieter world—one shaped by mountains, rivers, valleys, forests, and vast open landscapes. A side of Afghanistan rarely seen in the headlines, yet impossible to forget once discovered.",
+          "From the turquoise lakes of Band-e Amir, surrounded by rugged mountains, to the green valleys of Nuristan, where forests rise along clear mountain streams, the country holds landscapes of remarkable contrast. In Bamyan, wide valleys meet dramatic cliffs and high mountains. In the north and west, fertile plains and distant ranges create a different rhythm of life.",
+          "Afghanistan’s natural beauty is not always easy to reach—and that is part of its magic. Some places remain remote, peaceful, and wonderfully untouched, offering travelers a sense of discovery that is increasingly rare in the modern world.",
+          "Sometimes, the most beautiful places are the ones still waiting to be discovered."
+        ],
         "image": "/tours/images/bamyanPictures.webp"
       },
       {
-        "id": "herat-timeless",
-        "date": "08 SEP 2026",
-        "category": "CULTURE",
-        "title": "Exploring Herat's Timeless Beauty",
-        "excerpt": "From ancient architecture to vibrant culture, Herat offers a unique glimpse into Afghanistan's rich past.",
+        "id": "through-the-seasons",
+        "pillar": "discover",
+        "category": "DISCOVER",
+        "date": "12 SEP 2026",
+        "readTime": "4 min",
+        "title": "Afghanistan Through the Seasons",
+        "excerpt": "From flowering spring valleys and golden autumn orchards to snow-covered winter cliffs, each season tells a completely different story.",
+        "content": [
+          "Afghanistan changes with the seasons, and each one reveals a different side of the country.",
+          "In spring, valleys awaken with green fields, wildflowers, and the gentle sound of flowing water. Summer brings clear mountain skies, cool highland escapes, and long days made for exploring. As autumn arrives, the landscape turns golden—orchards fill with color, harvests begin, and mountain villages take on a quiet warmth.",
+          "Then comes winter. Snow covers the high mountains and transforms valleys into peaceful white landscapes. In places like Bamyan, the frozen beauty of the season creates a completely different experience—silent, dramatic, and unforgettable.",
+          "The changing seasons are more than a natural cycle in Afghanistan. They shape agriculture, food, celebrations, travel, and everyday life, connecting people closely to the land around them.",
+          "Come in a different season, and Afghanistan may tell you a completely different story."
+        ],
+        "image": "/images/provinces/bamyan/bamyan-hero.webp"
+      },
+      {
+        "id": "ancient-cities-landscapes",
+        "pillar": "discover",
+        "category": "DISCOVER",
+        "date": "05 SEP 2026",
+        "readTime": "5 min",
+        "title": "From Ancient Cities to Timeless Landscapes",
+        "excerpt": "A journey through civilizations—from the ancient city of Balkh to the Minaret of Jam and Herat's historic architecture.",
+        "content": [
+          "Afghanistan is a land where history and landscape exist side by side. Across its valleys and mountains, ancient cities, forgotten fortresses, sacred sites, and centuries-old monuments remain woven into the natural world around them.",
+          "From the ancient city of Balkh, once a great center of civilization and trade, to the dramatic Minaret of Jam rising from the mountains of Ghor, the country carries traces of cultures that shaped the history of this region. In Bamyan, monumental cliffs and ancient Buddhist heritage stand together beneath the vast mountain sky. In Ghazni and Herat, historic architecture tells stories of powerful kingdoms, scholars, artists, and travelers who once passed through these lands.",
+          "Here, heritage is never far from nature. A journey through Afghanistan can take you from a historic city to a mountain valley, from an ancient monument to a landscape that seems unchanged for centuries.",
+          "Walk through Afghanistan, and history may appear where you least expect it."
+        ],
         "image": "/tours/images/heratPictures.webp"
       },
       {
-        "id": "travel-tips",
-        "date": "03 SEP 2026",
-        "category": "TRAVEL TIPS",
-        "title": "Travel Tips for Visiting Afghanistan",
-        "excerpt": "Essential tips to help you plan a safe, comfortable and rewarding journey across Afghanistan.",
-        "image": "/images/provinces/kabul/bagh-e-babur.webp"
-      },
-      {
-        "id": "balkh-history",
-        "date": "28 AUG 2026",
-        "category": "HERITAGE",
-        "title": "The History of Balkh: The Ancient Jewel",
-        "excerpt": "Discover the historical significance of Balkh, one of the oldest cities in the world.",
-        "image": "/tours/images/mazarPictures.webp"
-      },
-      {
-        "id": "nuristan-hiking",
-        "date": "20 AUG 2026",
-        "category": "ADVENTURE",
-        "title": "Hiking in Nuristan: Nature at Its Purest",
-        "excerpt": "Explore pristine valleys, crystal rivers and breathtaking mountain trails in Nuristan.",
+        "id": "nuristan-mountains",
+        "pillar": "discover",
+        "category": "DISCOVER",
+        "date": "29 AUG 2026",
+        "readTime": "4 min",
+        "title": "Nuristan: Where the Mountains Still Breathe",
+        "excerpt": "Deep eastern valleys, pine-covered slopes, rushing crystal rivers, and distinctive wooden architecture where nature remains untamed.",
+        "content": [
+          "Far in the eastern mountains of Afghanistan lies a world of deep valleys, forest-covered slopes, clear rivers, and villages shaped by the rhythm of the mountains. This is Nuristan—a place where nature feels close, quiet, and wonderfully untamed.",
+          "Here, forests climb the mountainsides, streams flow through narrow valleys, and snow-covered peaks rise above traditional villages. The landscape changes with every turn, revealing a new view, a new trail, or a quiet corner far from the noise of modern life.",
+          "But Nuristan is more than spectacular scenery. Its remote valleys have preserved distinctive traditions, architecture, and ways of life closely connected to the surrounding environment. For travelers seeking a different side of Afghanistan, Nuristan offers something rare: the feeling of entering a world that has remained deeply connected to nature.",
+          "Come to Nuristan, slow down, breathe deeply, and discover the wild beauty of Afghanistan, A Journey into Untouched Beauty."
+        ],
         "image": "/tours/images/noristanPictures.webp"
       },
       {
-        "id": "kandahar-hospitality",
+        "id": "soul-culture-identity",
+        "pillar": "understand",
+        "category": "UNDERSTAND",
+        "date": "22 AUG 2026",
+        "readTime": "4 min",
+        "title": "The Soul of Afghanistan: Its Culture & Identity",
+        "excerpt": "To understand Afghanistan, look beyond the mountains. Its deepest story lives in family, community, respect, and enduring resilience.",
+        "content": [
+          "To understand Afghanistan, you have to look beyond its mountains and ancient cities. Its deepest story lives in the people, traditions, values, and memories passed from one generation to the next.",
+          "Afghanistan is home to diverse communities, languages, traditions, and ways of life. Yet across this diversity runs a strong sense of family, community, respect, and belonging. From the warmth of a shared meal to the rhythm of traditional music, from colorful celebrations to quiet moments of hospitality, culture is woven into everyday life.",
+          "Much of Afghan culture has been shaped by centuries of history and by the many civilizations that crossed these lands. But it is not simply a story preserved in the past. It continues to evolve through the people who live it today.",
+          "To discover Afghanistan is to discover more than a place. It is to meet a culture with depth, resilience, and a soul of its own.",
+          "Look closer, listen deeper, and discover the soul of Afghanistan."
+        ],
+        "image": "/images/provinces/kabul/kabul-culture.webp"
+      },
+      {
+        "id": "people-behind-land",
+        "pillar": "understand",
+        "category": "UNDERSTAND",
         "date": "15 AUG 2026",
-        "category": "EXPERIENCES",
-        "title": "Kandahar: Where History Meets Hospitality",
-        "excerpt": "Experience the cultural heart of Afghanistan with its rich history and warm people.",
+        "readTime": "4 min",
+        "title": "The People Behind the Land",
+        "excerpt": "Every mountain village and bazaar carries the human stories of dignity, generosity, and connections forged over cups of tea.",
+        "content": [
+          "Every country has its landscapes, but it is the people who give those landscapes a soul. In Afghanistan, every mountain village, ancient city, and busy bazaar carries the stories of the people who have called this land home.",
+          "Afghans are known for the importance they place on family, community, dignity, and generosity. Life often revolves around shared meals, conversations over tea, gatherings with family and friends, and traditions passed quietly from one generation to the next.",
+          "Across Afghanistan, travelers encounter different languages, customs, clothing, foods, and ways of life. From the highland communities of Bamyan to the historic streets of Herat and the mountain valleys of Nuristan, each region adds another chapter to the country’s human story.",
+          "What makes these encounters special is their simplicity: a conversation, a smile, an invitation to tea, or a story shared with a stranger.",
+          "Behind every landscape is a human story. Come closer, and discover the people behind Afghanistan."
+        ],
         "image": "/tours/images/kandaharPictures.webp"
       },
       {
-        "id": "samangan-beauty",
-        "date": "10 AUG 2026",
-        "category": "CULTURE",
-        "title": "The Beauty of Samangan's Historical Sites",
-        "excerpt": "Uncover the hidden gems of Samangan, from ancient sites to stunning landscapes.",
-        "image": "/images/provinces/bamyan/Buddha-1.webp"
+        "id": "afghan-hospitality",
+        "pillar": "understand",
+        "category": "UNDERSTAND",
+        "date": "08 AUG 2026",
+        "readTime": "4 min",
+        "title": "Afghan Hospitality: A Welcome from the Heart",
+        "excerpt": "In Afghanistan, a guest is never a stranger for long. Generosity at the table and genuine smiles create bonds that last a lifetime.",
+        "content": [
+          "In Afghanistan, a guest is rarely treated as a stranger for long. A cup of tea, a shared meal, or a warm invitation can quickly turn a first meeting into a moment of connection.",
+          "Hospitality is deeply woven into Afghan life. Families welcome guests with generosity, offering what they have and making space at their table. In homes, villages, and gatherings across the country, sharing food and conversation is more than a social custom—it is a way of showing respect, friendship, and goodwill.",
+          "For travelers, some of the most memorable moments may happen away from famous landmarks: sitting with a local family, sharing stories over tea, tasting a homemade dish, or simply being welcomed with a genuine smile.",
+          "These encounters reveal something that photographs cannot capture—the warmth of a people and the beauty of human connection.",
+          "Come as a traveler. Leave with a story, a memory, and perhaps a new friend."
+        ],
+        "image": "/images/provinces/kabul/bagh-e-babur.webp"
       },
       {
-        "id": "ghor-mountains",
-        "date": "02 AUG 2026",
-        "category": "DESTINATIONS",
-        "title": "Ghor's Majestic Mountains",
-        "excerpt": "A journey through dramatic peaks, remote villages and untouched nature.",
-        "image": "/tours/images/ghorPictures.webp"
+        "id": "traditions-alive",
+        "pillar": "understand",
+        "category": "UNDERSTAND",
+        "date": "01 AUG 2026",
+        "readTime": "4 min",
+        "title": "Traditions That Keep Afghanistan Alive",
+        "excerpt": "Some traditions are lived daily. From family gatherings to vibrant celebrations of Nowruz and weddings, customs connect generations.",
+        "content": [
+          "Some traditions are not simply remembered—they are lived. In Afghanistan, generations of customs continue to shape everyday life, bringing families and communities together through shared moments, celebrations, and stories.",
+          "From the welcoming rituals of a family gathering to the colors and music of traditional celebrations, Afghan traditions reflect values of respect, generosity, family, and community. Weddings bring together entire families, Nowruz fills communities with the promise of spring, and traditional foods bring people around the same table.",
+          "Across different regions, traditions take many forms. Clothing, music, crafts, celebrations, and local customs may change from one place to another, creating a rich cultural landscape shaped by Afghanistan’s diversity.",
+          "What makes these traditions meaningful is their continuity. They connect the present with generations before it, while continuing to evolve with the people who carry them forward.",
+          "Discover the traditions that connect generations—and keep the spirit of Afghanistan alive."
+        ],
+        "image": "/images/provinces/kabul/kabul-history.webp"
       },
       {
-        "id": "visit-afghanistan-now",
+        "id": "taste-of-afghanistan",
+        "pillar": "experience",
+        "category": "EXPERIENCE",
         "date": "25 JUL 2026",
-        "category": "TRAVEL TIPS",
-        "title": "Why You Should Visit Afghanistan Now",
-        "excerpt": "Experience authentic culture, warm hospitality and breathtaking landscapes before the world discovers it.",
-        "image": "/images/provinces/kabul/kabul-hero.webp"
+        "readTime": "4 min",
+        "title": "The Taste of Afghanistan",
+        "excerpt": "Food is an invitation to gather. From iconic Qabuli Pulao and savory Mantu to Chainaki and fresh Afghan kebabs, discover culinary traditions.",
+        "content": [
+          "In Afghanistan, food is rarely just food. It is an invitation, a gesture of respect, and a reason to gather around the same table. A meal often begins with welcoming words and a cup of tea, then grows into conversation, laughter, and shared stories.",
+          "At the heart of the Afghan table is Qabuli Pulao (Kabuli Pulao)—fragrant rice layered with tender meat, sweet carrots, and raisins. Often prepared for guests, celebrations, and family gatherings, it represents the generosity and warmth deeply woven into Afghan hospitality.",
+          "But the Afghan table is rich with many other flavors. Mantu, delicate steamed dumplings filled with meat and topped with yogurt and sauces; Chainaki, a traditional local dish enjoyed in Afghan homes; and Afghan Kebab, prepared with flavorful meat and served fresh, each offers a different taste of the country.",
+          "In Afghanistan, sharing a meal means sharing a moment.",
+          "Come to the table, taste the tradition, and discover Afghanistan through its flavors."
+        ],
+        "image": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1000&q=80"
+      },
+      {
+        "id": "jewelry-stones-crafts",
+        "pillar": "experience",
+        "category": "EXPERIENCE",
+        "date": "18 JUL 2026",
+        "readTime": "4 min",
+        "title": "Afghanistan’s Treasures: Jewelry, Stones & Crafts",
+        "excerpt": "Artisans transform emeralds, vibrant lapis lazuli, and natural stones into elegant jewelry and handmade treasures carrying the land's history.",
+        "content": [
+          "Some memories are meant to be carried home. Across Afghanistan, skilled artisans turn natural stones, traditional designs, and generations of craftsmanship into beautiful objects that tell a story of the land.",
+          "Afghanistan is especially known for its precious and semi-precious stones. Deep green emeralds, rich blue lapis lazuli, and other natural stones are crafted into elegant jewelry, decorative pieces, and traditional ornaments. Each piece can carry the character of the region where its materials and craftsmanship were found.",
+          "In traditional markets and artisan shops, travelers can discover rings, necklaces, bracelets, stone carvings, and other handmade treasures. Beyond their beauty, these objects offer a tangible connection to Afghanistan’s artistic traditions and natural heritage.",
+          "Choosing a handmade piece can become more than shopping—it can become a personal reminder of a journey through a remarkable country.",
+          "Take home more than a souvenir. Take home a small piece of Afghanistan’s story."
+        ],
+        "image": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=1000&q=80"
+      },
+      {
+        "id": "afghan-carpets",
+        "pillar": "experience",
+        "category": "EXPERIENCE",
+        "date": "11 JUL 2026",
+        "readTime": "5 min",
+        "title": "Afghan Carpets: Stories Woven Into Every Thread",
+        "excerpt": "Thread by thread, knot by knot, Afghan carpet weavers transform fine wool and vegetable dyes into timeless masterpieces of patience and art.",
+        "content": [
+          "In Afghanistan, a carpet is more than something beautiful beneath your feet. It is a story woven by hand—a quiet expression of patience, identity, and generations of tradition.",
+          "Afghan carpets have earned a lasting reputation around the world for their distinctive designs, rich colours, fine wool, and remarkable craftsmanship. From traditional geometric patterns to intricate regional styles, each carpet carries something of the place and people who created it.",
+          "But perhaps the most beautiful part is how they are made. Thread by thread, knot by knot, Afghan artisans transform simple materials into works of art. Behind every carpet are skilled hands, hours of patience, and a tradition passed from one generation to the next. A carpet does not simply carry a pattern; it carries the touch, time, and story of the person who made it.",
+          "For travellers, choosing an Afghan carpet can become a deeply personal experience—a beautiful piece of Afghanistan to live with long after the journey ends.",
+          "Take home a story woven by hand, and let its threads carry a piece of Afghanistan into your home."
+        ],
+        "image": "https://images.unsplash.com/photo-1600121848594-d8644e57abab?auto=format&fit=crop&w=1000&q=80"
+      },
+      {
+        "id": "afghan-saffron",
+        "pillar": "experience",
+        "category": "EXPERIENCE",
+        "date": "04 JUL 2026",
+        "readTime": "4 min",
+        "title": "Afghan Saffron: The Red Gold of Herat",
+        "excerpt": "In the fertile soils of Herat, delicate purple flowers yield the world's most prized spice—Afghan red gold, harvested with dedication and care.",
+        "content": [
+          "In the fields of Herat, among the colours of the western Afghan landscape, a small purple flower produces one of the world’s most precious spices. This is Afghan saffron—delicate, rare, and deeply connected to the land and the people who cultivate it.",
+          "Afghan saffron has earned international recognition for its exceptional quality, rich aroma, vivid colour, and distinctive flavour. Often described as the “Red Gold” of Afghanistan, it represents not only a valuable agricultural product but also the patience and dedication of Afghan farmers.",
+          "Each crimson thread is carefully harvested by hand. What appears small and delicate carries hours of work, generations of agricultural knowledge, and the character of Herat’s fertile lands.",
+          "For travellers, saffron offers a simple way to take a taste of Afghanistan home. A small box can carry the fragrance of Herat long after the journey has ended.",
+          "Take home a touch of Herat—the fragrance, colour, and golden story of Afghan saffron."
+        ],
+        "image": "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=1000&q=80"
+      },
+      {
+        "id": "fruits-dry-fruits",
+        "pillar": "experience",
+        "category": "EXPERIENCE",
+        "date": "27 JUN 2026",
+        "readTime": "4 min",
+        "title": "A Taste of the Harvest: Afghan Fruits & Dry Fruits",
+        "excerpt": "From Kandahar's rubies-like pomegranates and sweet grapes to Herat's melons and prized Jalghoza pine nuts, taste the bounty of Afghan orchards.",
+        "content": [
+          "Afghanistan’s valleys and orchards produce an extraordinary variety of fruits, many of which are prized far beyond the country’s borders. From the famous pomegranates of Kandahar and sweet grapes of the northern and western valleys to Herat’s melons, apricots, peaches, and apples, each region brings its own flavour to the Afghan harvest.",
+          "Fresh fruit is only part of the story. Afghanistan is also renowned for its high-quality raisins, dried apricots, figs, mulberries, almonds, pistachios, and other dry fruits. Among them, pine nuts (Jalghoza) hold a special place. Harvested from the forests of eastern and southeastern Afghanistan, they are prized for their rich flavour and distinctive character and have become one of the country’s most valued natural products.",
+          "The harvest is deeply connected to Afghan life. Fresh fruits fill local markets in season, while much of the abundance is carefully dried and preserved for the months ahead. Sharing fruit and dry fruits with guests is also a familiar expression of Afghan generosity.",
+          "For travellers, these flavours offer a simple way to take Afghanistan home.",
+          "Taste the harvest, discover its regions, and carry a little of Afghanistan’s abundance with you."
+        ],
+        "image": "https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?auto=format&fit=crop&w=1000&q=80"
       }
-    ]
+    ],
+    "pillars": {
+      "all": "All Stories",
+      "discover": {
+        "label": "Discover",
+        "title": "Explore the Land",
+        "question": "What is Afghanistan really like?"
+      },
+      "understand": {
+        "label": "Understand",
+        "title": "Discover Its Soul",
+        "question": "Who are its people? What defines them?"
+      },
+      "experience": {
+        "label": "Experience",
+        "title": "Live Its Stories",
+        "question": "What can I taste, feel and take home?"
+      }
+    },
+    "filterAll": "All",
+    "readTimeLabel": "Read time"
   }
 }

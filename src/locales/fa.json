@@ -1328,5 +1328,49 @@
         }
       ]
     }
+  },
+  "destinationsPage": {
+    "breadcrumbDestinations": "مقاصد گردشگری",
+    "exploreProvinces": "کشف ولایات",
+    "heroTitle": "مقاصد رویایی در سراسر افغانستان",
+    "heroSubtitle": "از پایتخت تاریخی کابل تا دره‌های زمردین بامیان و شکوه تمدنی هرات و بلخ باستان.",
+    "viewDestination": "مشاهده جزئیات مقصد",
+    "historyEyebrow": "تاریخ",
+    "historyTitle": "پژواک روزگار کهن",
+    "cultureEyebrow": "فرهنگ",
+    "cultureTitle": "میراث زنده",
+    "discoverEyebrow": "دیدنی‌ها",
+    "discoverTitle": "جاهای دیدنی و جاذبه‌های برتر",
+    "all": "همه",
+    "museumAndGalleries": "موزه‌ها و گالری‌ها",
+    "gardensAndParks": "باغ‌ها و بوستان‌ها",
+    "palaces": "کاخ‌ها و بناهای سلطنتی",
+    "archeologicalSites": "محوطه‌های باستانی و تاریخی",
+    "historicLandmarks": "بناها و یادمان‌های کهن",
+    "traditionalMarkets": "بازارهای سنتی و گذرگاه‌های کهن",
+    "modernDistricts": "محله‌ها و نقاط مدرن",
+    "exploreDetails": "مشاهده جزئیات",
+    "viewAvailableTours": "مشاهده تورهای موجود",
+    "ctaReady": "آماده آغاز سفر هستید؟",
+    "ctaTitleSuffix": "در انتظار شماست",
+    "ctaDesc": "تاریخ، فرهنگ غنی و شگفتی‌های طبیعی این ولایت تماشایی را با آمووی تجربه کنید.",
+    "requestPackage": "ثبت درخواست این سفر",
+    "contactAmovi": "تماس با ما"
+  },
+  "placeDetailPage": {
+    "quickFacts": "اطلاعات کلیدی",
+    "openingHours": "ساعات بازدید",
+    "entryTickets": "بهای بلیت و ورودی",
+    "dressCode": "نکات و پوشش مناسب",
+    "bestTimeToVisit": "بهترین زمان بازدید",
+    "location": "موقعیت جغرافیایی",
+    "generalOverview": "نمای کلی و معرفی",
+    "historicalContext": "پیشینه و اهمیت تاریخی",
+    "thingsToDo": "فعالیت‌ها و تجربیات برتر",
+    "whyVisit": "چرا باید بازدید کرد؟",
+    "readyToExplore": "آماده سفر به این مقصد شگفت‌انگیز هستید؟",
+    "amoviHandle": "برنامه‌ریزی، ترانسفر و راهنمایی سفر خود را با اطمینان به آمووی بسپارید.",
+    "inquireTrip": "استعلام و رزرو این سفر",
+    "backToProvince": "بازگشت به"
   }
 }

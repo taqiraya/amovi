@@ -59,20 +59,30 @@ export default function ProvinceHero({ province, localData, isRtl }) {
           {localData?.intro}
         </p>
 
-        {/* دکمه اکشن هدایت به بخش فیلترینگ زیرین */}
-        <div className="flex">
+        {/* دکمه‌های اکشن هیرو (مطابق دیزاین mockup) */}
+        <div className="flex flex-wrap items-center gap-4">
+          <a
+            href="/tours"
+            className="inline-flex items-center gap-2 bg-[#FCA311] hover:bg-amber-500 text-[#14213D] font-extrabold py-3.5 px-8 rounded-full shadow-lg transition-all duration-300 transform active:scale-[0.98] cursor-pointer text-xs sm:text-sm font-[Inter] tracking-wider uppercase"
+          >
+            <span style={{ fontFamily: isRtl ? 'Sahel, sans-serif' : 'Inter, sans-serif' }}>
+              {isRtl ? "مشاهده تورهای موجود" : "View Available Tours"}
+            </span>
+            <span className={`text-base font-bold transition-transform duration-200 ${isRtl ? 'rotate-180' : ''}`}>→</span>
+          </a>
+
           <button 
             type="button"
             onClick={() => {
               const targetSection = document.getElementById("explore-hub");
               if (targetSection) targetSection.scrollIntoView({ behavior: "smooth" });
             }}
-            className="flex items-center gap-3 bg-amovi-gold hover:bg-amber-500 text-amovi-navy font-extrabold py-3.5 px-8 rounded-full shadow-lg transition-all duration-300 transform active:scale-[0.98] cursor-pointer hover:gap-4 pointer-events-auto"
+            className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-semibold py-3.5 px-6 rounded-full border border-white/25 backdrop-blur-sm transition-all duration-200 text-xs sm:text-sm cursor-pointer"
           >
             <span style={{ fontFamily: isRtl ? 'Sahel, sans-serif' : 'Inter, sans-serif' }}>
-              {isRtl ? "مشاهده جاهای دیدنی" : "Explore Sights"}
+              {isRtl ? "دیدنی‌های برتر" : "Explore Places"}
             </span>
-            <span className={`text-base font-bold transition-transform duration-200 ${isRtl ? 'rotate-180' : ''}`}>+</span>
+            <span>↓</span>
           </button>
         </div>
 

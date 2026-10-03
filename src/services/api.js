@@ -39,6 +39,12 @@ export const getProvinceBySlug = async (slug) => {
   return (localDb.provinces || []).find((p) => p.slug === slug);
 };
 
+export const getPlaceBySlug = async (provinceSlug, placeId) => {
+  const province = await getProvinceBySlug(provinceSlug);
+  if (!province || !province.sub_destinations) return null;
+  return province.sub_destinations.find((p) => p.id === placeId) || null;
+};
+
 // Tours
 export const getTours = async () => {
   return fetchWithFallback('/tours', localDb.tours || []);

@@ -1,16 +1,28 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { 
+  MapPin, 
+  ArrowRight, 
+  ArrowLeft, 
+  Sparkles, 
+  Heart, 
+  Utensils, 
+  Award,
+  Compass
+} from 'lucide-react';
 import { useLangStore } from '../../store/useLangStore';
 import ProvinceHero from './components/ProvinceHero';
 import { getProvinceBySlug } from '../../services/api';
 
 export default function ProvinceView() {
-  const { slug } = useParams(); // استخراج نام ولایت از آدرس مرورگر (مثلاً: kabul)
-  const { currentLang } = useLangStore();
+  const { slug } = useParams();
+  const { currentLang, translations } = useLangStore();
   const isRtl = currentLang === 'fa';
+  const t = useMemo(() => translations?.destinationsPage || {}, [translations?.destinationsPage]);
 
   const [province, setProvince] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState('all');
 
   useEffect(() => {
     let isMounted = true;
@@ -27,49 +39,364 @@ export default function ProvinceView() {
     };
   }, [slug]);
 
+  const categories = useMemo(() => [
+    { id: 'all', label: t.all || (isRtl ? 'همه' : 'All') },
+    { id: 'museum-and-galleries', label: t.museumAndGalleries || (isRtl ? 'موزه‌ها و گالری‌ها' : 'Museum and Galleries') },
+    { id: 'gardens-and-parks', label: t.gardensAndParks || (isRtl ? 'باغ‌ها و بوستان‌ها' : 'Gardens and Parks') },
+    { id: 'palaces', label: t.palaces || (isRtl ? 'کاخ‌ها و بناهای سلطنتی' : 'Palaces') },
+    { id: 'archeological-sites', label: t.archeologicalSites || (isRtl ? 'محوطه‌های باستانی و تاریخی' : 'Archeological and Historical Sites') },
+    { id: 'historic-landmarks', label: t.historicLandmarks || (isRtl ? 'بناها و یادمان‌های کهن' : 'Historic Structures and Landmarks') },
+    { id: 'traditional-markets', label: t.traditionalMarkets || (isRtl ? 'بازارهای سنتی و گذرگاه‌های کهن' : 'Traditional Markets & Old Cities') },
+    { id: 'modern-districts', label: t.modernDistricts || (isRtl ? 'محله‌ها و نقاط مدرن' : 'Modern Districts') },
+  ], [isRtl, t]);
+
+  const filteredPlaces = useMemo(() => {
+    if (!province?.sub_destinations) return [];
+    if (selectedCategory === 'all') return province.sub_destinations;
+    return province.sub_destinations.filter(
+      (place) => place.filter_category === selectedCategory
+    );
+  }, [province, selectedCategory]);
+
   if (loading) {
     return (
-      <div className="min-h-[60vh] flex items-center justify-center pt-32">
-        <div className="text-xl font-bold text-slate-500 animate-pulse font-[Inter]">
-          {isRtl ? 'در حال بارگذاری...' : 'Loading...'}
+      <div className="min-h-[70vh] flex items-center justify-center pt-32">
+        <div className="flex flex-col items-center gap-3">
+          <div className="w-10 h-10 border-4 border-[#FCA311] border-t-transparent rounded-full animate-spin" />
+          <div className="text-base font-bold text-slate-500 font-[Inter]">
+            {isRtl ? 'در حال بارگذاری اطلاعات ولایت...' : 'Loading Province Details...'}
+          </div>
         </div>
       </div>
     );
   }
 
-  // لایه دفاعی: در صورتی که ولایت در دیتابیس پیدا نشود
   if (!province) {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center text-center p-4 pt-36">
         <h2 className="text-2xl font-bold text-[#14213D] mb-4">
           {isRtl ? "ولایت مورد نظر پیدا نشد" : "Province Not Found"}
         </h2>
-        <Link to="/destinations" className="bg-[#FCA311] text-[#14213D] font-bold py-2.5 px-6 rounded-full shadow-md">
+        <Link 
+          to="/destinations" 
+          className="bg-[#FCA311] hover:bg-amber-500 text-[#14213D] font-bold py-2.5 px-6 rounded-full shadow-md transition-colors"
+        >
           {isRtl ? "مشاهده تمام ولایات" : "View All Destinations"}
         </Link>
       </div>
     );
   }
 
-  // استخراج داده‌های دوزبانه ولایت جاری بر اساس زبان فعال سیستم
   const localData = province[currentLang] || province.en || {};
+  const livingHeritage = province.living_heritage || {};
 
   return (
-    <div className="w-full bg-[#F8FAFC] pb-12">
-      {/* 👑 صدا زدن کامپوننت هیرو سکشن ولایت */}
+    <div className={`w-full bg-[#F8FAFC] pb-16 ${isRtl ? 'font-[Sahel]' : 'font-[Inter]'}`}>
+      
+      {/* ========================================================
+          ۱. هیرو سکشن ولایت (Province Hero)
+      ======================================================== */}
       <ProvinceHero 
         province={province} 
         localData={localData} 
         isRtl={isRtl} 
       />
 
-      {/* 📥 نگه‌دارنده بخش‌های بعدی (تاریخ، فرهنگ و دیدنی‌ها) */}
-      <div id="explore-hub" className="w-[96%] max-w-[1600px] mx-auto mt-12 py-12 text-center text-slate-400 border border-dashed border-slate-200 rounded-3xl bg-white shadow-sm">
-        <p style={{ fontFamily: isRtl ? 'Sahel, sans-serif' : 'Inter, sans-serif' }}>
-          {isRtl 
-            ? "بخش‌های بعدی (داستان تاریخ و فرهنگ ولایت) در گام بعدی به این قسمت اضافه می‌شوند..." 
-            : "The next sections (History and Culture Story) will be added here in the next step..."}
-        </p>
+      {/* نگهدارنده محتوای اصلی */}
+      <div id="explore-hub" className="max-w-6xl mx-auto px-6 space-y-20 sm:space-y-28 pt-16 sm:pt-24">
+
+        {/* ========================================================
+            ۲. بخش تاریخ - پژواک گذشته (Echoes of the Past)
+        ======================================================== */}
+        <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center" dir={isRtl ? 'rtl' : 'ltr'}>
+          <div className={`lg:col-span-6 space-y-4 ${isRtl ? 'text-right' : 'text-left'}`}>
+            <div className="flex items-center gap-2">
+              <span className="w-8 h-0.5 bg-[#FCA311] inline-block" />
+              <span className="text-[#FCA311] text-xs font-bold uppercase tracking-widest font-[Inter]">
+                {t.historyEyebrow || (isRtl ? 'تاریخ' : 'HISTORY')}
+              </span>
+            </div>
+
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-[#14213D] tracking-tight">
+              {localData.history_title || t.historyTitle || (isRtl ? 'پژواک روزگار کهن' : 'Echoes of the Past')}
+            </h2>
+
+            <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-normal pt-2">
+              {localData.history_text || localData.intro}
+            </p>
+          </div>
+
+          <div className="lg:col-span-6">
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-slate-200 aspect-[16/10] group">
+              <img
+                src={province.images?.history_img || province.images?.hero_cover}
+                alt={localData.history_title || localData.name}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+            </div>
+          </div>
+        </section>
+
+        {/* ========================================================
+            ۳. بخش فرهنگ و میراث زنده (Living Heritage)
+        ======================================================== */}
+        <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center" dir={isRtl ? 'rtl' : 'ltr'}>
+          {/* کلاژ تصاویر فرهنگ */}
+          <div className="lg:col-span-6 order-2 lg:order-1">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="rounded-2xl overflow-hidden shadow-xl border-4 border-white aspect-[4/3] group">
+                <img
+                  src={province.images?.culture_img || province.images?.hero_cover}
+                  alt={localData.culture_title || localData.name}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  loading="lazy"
+                />
+              </div>
+              <div className="rounded-2xl overflow-hidden shadow-xl border-4 border-white aspect-[4/3] group mt-6">
+                <img
+                  src={province.images?.culture_img2 || province.images?.history_img || province.images?.hero_cover}
+                  alt={localData.culture_title || localData.name}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* متن فرهنگ و ۴ ویژگی شاخص */}
+          <div className={`lg:col-span-6 order-1 lg:order-2 space-y-4 ${isRtl ? 'text-right' : 'text-left'}`}>
+            <div className="flex items-center gap-2">
+              <span className="w-8 h-0.5 bg-[#FCA311] inline-block" />
+              <span className="text-[#FCA311] text-xs font-bold uppercase tracking-widest font-[Inter]">
+                {t.cultureEyebrow || (isRtl ? 'فرهنگ' : 'CULTURE')}
+              </span>
+            </div>
+
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-[#14213D] tracking-tight">
+              {localData.culture_title || t.cultureTitle || (isRtl ? 'میراث زنده' : 'Living Heritage')}
+            </h2>
+
+            <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-normal">
+              {localData.culture_text || localData.marketing_pitch}
+            </p>
+
+            {/* گرید ۲در۲ ویژگی‌های فرهنگی */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+              {/* ویژگی ۱: صنایع دستی */}
+              <div className="flex items-start gap-3 p-3 rounded-2xl bg-white border border-slate-200/80 shadow-sm">
+                <div className="w-10 h-10 rounded-full bg-amber-500/15 text-[#FCA311] flex items-center justify-center shrink-0">
+                  <Sparkles size={18} />
+                </div>
+                <div>
+                  <h4 className="text-xs sm:text-sm font-bold text-[#14213D]">
+                    {livingHeritage.crafts?.[currentLang]?.title || (isRtl ? 'صنایع دستی و سنتی' : 'Traditional Crafts')}
+                  </h4>
+                  <p className="text-[11px] sm:text-xs text-slate-500 mt-0.5 leading-relaxed">
+                    {livingHeritage.crafts?.[currentLang]?.desc || (isRtl ? 'قالین‌های دستباف و آثار هنری بومی.' : 'Handmade products, carpets and local art.')}
+                  </p>
+                </div>
+              </div>
+
+              {/* ویژگی ۲: مهمان‌نوازی */}
+              <div className="flex items-start gap-3 p-3 rounded-2xl bg-white border border-slate-200/80 shadow-sm">
+                <div className="w-10 h-10 rounded-full bg-orange-500/15 text-orange-500 flex items-center justify-center shrink-0">
+                  <Heart size={18} />
+                </div>
+                <div>
+                  <h4 className="text-xs sm:text-sm font-bold text-[#14213D]">
+                    {livingHeritage.hospitality?.[currentLang]?.title || (isRtl ? 'مهمان‌نوازی اصیل' : 'Warm Hospitality')}
+                  </h4>
+                  <p className="text-[11px] sm:text-xs text-slate-500 mt-0.5 leading-relaxed">
+                    {livingHeritage.hospitality?.[currentLang]?.desc || (isRtl ? 'استقبال گرم و فرهنگ صمیمانه مردم.' : 'Friendly people and rich traditions.')}
+                  </p>
+                </div>
+              </div>
+
+              {/* ویژگی ۳: خوراک محلی */}
+              <div className="flex items-start gap-3 p-3 rounded-2xl bg-white border border-slate-200/80 shadow-sm">
+                <div className="w-10 h-10 rounded-full bg-amber-500/15 text-amber-600 flex items-center justify-center shrink-0">
+                  <Utensils size={18} />
+                </div>
+                <div>
+                  <h4 className="text-xs sm:text-sm font-bold text-[#14213D]">
+                    {livingHeritage.cuisine?.[currentLang]?.title || (isRtl ? 'خوراک‌های لذیذ محلی' : 'Local Cuisine')}
+                  </h4>
+                  <p className="text-[11px] sm:text-xs text-slate-500 mt-0.5 leading-relaxed">
+                    {livingHeritage.cuisine?.[currentLang]?.desc || (isRtl ? 'غذاهای لذیذ و طعم‌های اصیل افغانی.' : 'Authentic flavors and traditional dishes.')}
+                  </p>
+                </div>
+              </div>
+
+              {/* ویژگی ۴: آیین‌ها و سنت‌ها */}
+              <div className="flex items-start gap-3 p-3 rounded-2xl bg-white border border-slate-200/80 shadow-sm">
+                <div className="w-10 h-10 rounded-full bg-yellow-500/15 text-yellow-600 flex items-center justify-center shrink-0">
+                  <Award size={18} />
+                </div>
+                <div>
+                  <h4 className="text-xs sm:text-sm font-bold text-[#14213D]">
+                    {livingHeritage.traditions?.[currentLang]?.title || (isRtl ? 'آیین‌ها و رسوم کهن' : 'Unique Traditions')}
+                  </h4>
+                  <p className="text-[11px] sm:text-xs text-slate-500 mt-0.5 leading-relaxed">
+                    {livingHeritage.traditions?.[currentLang]?.desc || (isRtl ? 'جشنواره‌ها، موسیقی سنتی و تجارب ناب.' : 'Festivals, music and cultural experiences.')}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ========================================================
+            ۴. بخش جاهای دیدنی (Discover Places to Visit)
+        ======================================================== */}
+        <section id="places-to-visit" className="space-y-8 scroll-mt-24">
+          <div className="text-center max-w-2xl mx-auto">
+            <div className="flex items-center justify-center gap-2 mb-2">
+              <span className="w-6 h-0.5 bg-[#FCA311] inline-block" />
+              <span className="text-[#FCA311] text-xs font-bold uppercase tracking-widest font-[Inter]">
+                {t.discoverEyebrow || (isRtl ? 'دیدنی‌ها' : 'DISCOVER')}
+              </span>
+              <span className="w-6 h-0.5 bg-[#FCA311] inline-block" />
+            </div>
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-[#14213D] tracking-tight">
+              {t.discoverTitle || (isRtl ? 'جاهای دیدنی و جاذبه‌های برتر' : 'Discover Places to Visit')}
+            </h2>
+          </div>
+
+          {/* تب‌های دسته‌بندی فیلتر (۸ دسته‌بندی مطابق دیزاین) */}
+          <div className="flex flex-wrap items-center justify-center gap-2 pt-2">
+            {categories.map((cat) => {
+              const isActive = selectedCategory === cat.id;
+              return (
+                <button
+                  key={cat.id}
+                  type="button"
+                  onClick={() => setSelectedCategory(cat.id)}
+                  className={`px-4 py-2 rounded-full text-xs font-semibold transition-all duration-200 cursor-pointer ${
+                    isActive
+                      ? 'bg-[#14213D] text-[#FCA311] shadow-md border border-[#14213D]'
+                      : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
+                  }`}
+                >
+                  {cat.label}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* گرید ۳ ستونه کارت‌های جاذبه‌ها */}
+          {filteredPlaces.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 pt-4">
+              {filteredPlaces.map((place) => {
+                const placeData = place[currentLang] || place.en || {};
+                return (
+                  <div
+                    key={place.id}
+                    className="bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1"
+                    dir={isRtl ? 'rtl' : 'ltr'}
+                  >
+                    {/* تصویر جاذبه */}
+                    <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
+                      <img
+                        src={place.image}
+                        alt={placeData.name}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+                      
+                      {/* بج دسته‌بندی در بالای عکس */}
+                      <span className={`absolute top-3 ${isRtl ? 'right-3' : 'left-3'} px-2.5 py-1 rounded-full bg-[#14213D]/80 backdrop-blur-md text-[#FCA311] text-[11px] font-semibold border border-white/20`}>
+                        {isRtl ? (place.categoryNameFa || place.categoryNameEn) : (place.categoryNameEn || 'Attraction')}
+                      </span>
+                    </div>
+
+                    {/* محتوای متنی کارت */}
+                    <div className="p-6 flex flex-col justify-between flex-grow space-y-4">
+                      <div className="space-y-2">
+                        <h3 className="text-lg sm:text-xl font-bold text-[#14213D] group-hover:text-[#FCA311] transition-colors">
+                          {placeData.name}
+                        </h3>
+                        <p className="text-slate-600 text-xs sm:text-sm leading-relaxed line-clamp-3">
+                          {placeData.teaser || placeData.lead}
+                        </p>
+                      </div>
+
+                      {/* برچسب لوکیشن و دکمه مشاهده جزئیات */}
+                      <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
+                        <div className="flex items-center gap-1.5 text-xs text-slate-500 font-medium">
+                          <MapPin size={14} className="text-[#FCA311]" />
+                          <span>{localData.name}</span>
+                        </div>
+
+                        <Link
+                          to={`/destinations/${slug}/${place.id}`}
+                          className="inline-flex items-center gap-1.5 bg-[#FCA311] hover:bg-amber-500 text-[#14213D] font-bold py-2 px-4 rounded-full text-xs transition-colors shadow-sm cursor-pointer"
+                        >
+                          <span>{t.exploreDetails || (isRtl ? 'مشاهده جزئیات' : 'Explore Details')}</span>
+                          {isRtl ? <ArrowLeft size={13} /> : <ArrowRight size={13} />}
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          ) : (
+            <div className="py-16 text-center text-slate-400 bg-white rounded-3xl border border-dashed border-slate-200">
+              <Compass size={36} className="mx-auto mb-2 text-slate-300" />
+              <p className="text-sm">
+                {isRtl ? 'در این دسته‌بندی جاذبه‌ای ثبت نشده است.' : 'No destinations found in this category.'}
+              </p>
+            </div>
+          )}
+        </section>
+
+        {/* ========================================================
+            ۵. بنر دعوت به سفر (Your Journey Awaits CTA)
+        ======================================================== */}
+        <section className="relative rounded-3xl overflow-hidden shadow-2xl bg-[#14213D] text-white p-8 sm:p-14">
+          <div 
+            className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-35 scale-105"
+            style={{ backgroundImage: `url(${province.images?.hero_cover})` }}
+          />
+          <div className="absolute inset-0 z-10 bg-gradient-to-r from-[#14213D]/95 via-[#14213D]/85 to-[#14213D]/90 pointer-events-none" />
+
+          <div className="relative z-20 flex flex-col md:flex-row items-center justify-between gap-8" dir={isRtl ? 'rtl' : 'ltr'}>
+            <div className={`space-y-3 max-w-xl ${isRtl ? 'text-right' : 'text-left'}`}>
+              <span className="text-[#FCA311] text-xs font-bold uppercase tracking-widest block font-[Inter]">
+                {t.ctaReady || (isRtl ? 'آماده آغاز سفر هستید؟' : 'READY TO EXPLORE')}
+              </span>
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-white leading-tight">
+                {isRtl ? `سفر رویایی شما به ${localData.name} در انتظار شماست` : `Your ${localData.name} Journey Awaits`}
+              </h3>
+              <p className="text-slate-300 text-xs sm:text-sm leading-relaxed font-light">
+                {t.ctaDesc || (isRtl 
+                  ? `تاریخ، فرهنگ غنی و شگفتی‌های طبیعی این ولایت تماشایی را با همراهی آمووی تجربه کنید.` 
+                  : `Discover the history, culture and natural beauty of this remarkable province.`)}
+              </p>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-3 shrink-0">
+              <Link
+                to="/services"
+                className="inline-flex items-center gap-2 bg-[#FCA311] hover:bg-amber-500 text-[#14213D] font-bold py-3.5 px-7 rounded-full shadow-lg transition-all duration-200 text-xs sm:text-sm uppercase font-[Inter] tracking-wider"
+              >
+                <span>{t.requestPackage || (isRtl ? 'ثبت درخواست سفر' : 'Request This Package')}</span>
+                {isRtl ? <ArrowLeft size={16} /> : <ArrowRight size={16} />}
+              </Link>
+
+              <Link
+                to="/contact"
+                className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-semibold py-3.5 px-6 rounded-full border border-white/25 backdrop-blur-sm transition-all duration-200 text-xs sm:text-sm"
+              >
+                <span>{t.contactAmovi || (isRtl ? 'تماس با ما' : 'Contact Amovi')}</span>
+              </Link>
+            </div>
+          </div>
+        </section>
+
       </div>
     </div>
   );

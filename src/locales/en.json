@@ -1328,5 +1328,49 @@
         }
       ]
     }
+  },
+  "destinationsPage": {
+    "breadcrumbDestinations": "Destinations",
+    "exploreProvinces": "EXPLORE PROVINCES",
+    "heroTitle": "Iconic Destinations Across Afghanistan",
+    "heroSubtitle": "From the ancient capital of Kabul to the emerald valleys of Bamyan and the historic splendors of Herat and Balkh.",
+    "viewDestination": "View Destination",
+    "historyEyebrow": "HISTORY",
+    "historyTitle": "Echoes of the Past",
+    "cultureEyebrow": "CULTURE",
+    "cultureTitle": "Living Heritage",
+    "discoverEyebrow": "DISCOVER",
+    "discoverTitle": "Discover Places to Visit",
+    "all": "All",
+    "museumAndGalleries": "Museum and Galleries",
+    "gardensAndParks": "Gardens and Parks",
+    "palaces": "Palaces",
+    "archeologicalSites": "Archeological and Historical Sites",
+    "historicLandmarks": "Historic Structures and Landmarks",
+    "traditionalMarkets": "Traditional Markets & Old Cities",
+    "modernDistricts": "Modern Districts",
+    "exploreDetails": "Explore Details",
+    "viewAvailableTours": "View Available Tours",
+    "ctaReady": "READY TO EXPLORE",
+    "ctaTitleSuffix": "Journey Awaits",
+    "ctaDesc": "Discover the history, culture and natural beauty of this remarkable province.",
+    "requestPackage": "Request This Package",
+    "contactAmovi": "Contact Amovi"
+  },
+  "placeDetailPage": {
+    "quickFacts": "Quick Facts",
+    "openingHours": "Opening Hours",
+    "entryTickets": "Entry Tickets / Fees",
+    "dressCode": "Dress Code / Guidelines",
+    "bestTimeToVisit": "Best Time to Visit",
+    "location": "Location",
+    "generalOverview": "GENERAL OVERVIEW",
+    "historicalContext": "HISTORICAL CONTEXT & SIGNIFICANCE",
+    "thingsToDo": "THINGS TO DO",
+    "whyVisit": "WHY VISIT",
+    "readyToExplore": "Ready to explore this destination?",
+    "amoviHandle": "Let Amovi handle your itinerary safely and elegantly.",
+    "inquireTrip": "Inquire / Book This Trip",
+    "backToProvince": "Back to"
   }
 }

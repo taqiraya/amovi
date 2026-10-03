@@ -1,27 +1,27 @@
 {
-    "users": [
+  "users": [
     {
-    "id": "user-001",
-    "fullName": {
-    "fa": "مدیر سیستم",
-    "en": "Admin User"
-    },
-    "email": "[admin@amovi-travel.com](mailto:admin@amovi-travel.com)",
-    "phoneWhatsApp": "+93700000000",
-    "role": "admin",
-    "isActive": true,
-    "createdAt": "2026-09-28T08:00:00Z"
+      "id": "user-001",
+      "fullName": {
+        "fa": "مدیر سیستم",
+        "en": "Admin User"
+      },
+      "email": "[admin@amovi-travel.com](mailto:admin@amovi-travel.com)",
+      "phoneWhatsApp": "+93700000000",
+      "role": "admin",
+      "isActive": true,
+      "createdAt": "2026-09-28T08:00:00Z"
     }
-    ],
-
+  ],
   "provinces": [
     {
       "id": "kabul",
       "slug": "kabul",
       "images": {
-         "hero_cover": "/images/provinces/kabul/kabul-hero.webp",
-         "history_img": "/images/provinces/kabul/kabul-history.webp",
-         "culture_img": "/images/provinces/kabul/kabul-culture.webp"
+        "hero_cover": "/images/provinces/kabul/kabul-hero.webp",
+        "history_img": "/images/provinces/kabul/kabul-history.webp",
+        "culture_img": "/images/provinces/kabul/kabul-culture.webp",
+        "culture_img2": "/images/provinces/kabul/bibi-mahro.webp"
       },
       "en": {
         "name": "Kabul",
@@ -45,40 +45,417 @@
       },
       "sub_destinations": [
         {
-          "id": "bibi-mahro-hill",
+          "id": "bagh-e-babur",
           "filter_category": "gardens-and-parks",
-          "image": "/images/provinces/kabul/bibi-mahro.webp",
+          "categoryNameEn": "Gardens & Parks",
+          "categoryNameFa": "باغ‌ها و بوستان‌ها",
+          "image": "/images/provinces/kabul/bagh-e-babur.webp",
+          "gallery": [
+            "/images/provinces/kabul/bagh-e-babur.webp",
+            "/images/provinces/kabul/kabul-hero.webp",
+            "/images/provinces/kabul/kabul-culture.webp"
+          ],
           "en": {
-            "name": "Bibi Mahro Hill",
-            "teaser": "Bibi Mahro Hill, also known as Wazir Akbar Khan Hill, is one of Kabul’s prominent elevated landmarks and a popular recreational destination featuring the national flag monument."
+            "name": "Bagh-e Babur",
+            "subtitle": "A Garden of History, Peace and Natural Beauty",
+            "teaser": "A historic 16th-century Mughal garden terraced across the slopes of Sher Darwaza Mountain.",
+            "lead": "Bagh-e Babur is one of Kabul's most treasured historical gardens, offering a unique blend of natural beauty, royal history and peaceful atmosphere. The garden is a place where history, nature and culture come together in the heart of the city.",
+            "overview": "Bagh-e Babur is a historical garden and tomb complex in Kabul, known for its beautiful landscapes, terraced design, and the resting place of the Mughal emperor Babur. The garden offers a peaceful escape from the city, with shaded walkways, flowing water, and stunning views of Kabul and the surrounding mountains.",
+            "historicalContext": "The garden was built in the 16th century by Emperor Babur, the founder of the Mughal Empire. It holds great historical and cultural significance as a symbol of his connection to Afghanistan and the region. Today, it remains one of the most important cultural landmarks in Kabul, visited by locals and travelers alike.",
+            "thingsToDo": [
+              {
+                "title": "Explore the Royal Tomb",
+                "desc": "Visit the resting place of Emperor Babur and see the beautiful historical marble structures."
+              },
+              {
+                "title": "Walk Through the Gardens",
+                "desc": "Enjoy the peaceful paths, age-old plane trees, vibrant roses and the sound of flowing water."
+              },
+              {
+                "title": "Enjoy the City Views",
+                "desc": "Take in panoramic views of Kabul city and the surrounding snow-capped peaks."
+              },
+              {
+                "title": "Learn About History",
+                "desc": "Discover the story of Babur, early Mughal architecture and the garden's conservation legacy."
+              }
+            ],
+            "quote": "Bagh-e Babur is more than a garden — it's a place where history comes to life.",
+            "quoteAuthor": "A must-visit destination for anyone who wants to experience the natural beauty, rich history and peaceful atmosphere of Kabul.",
+            "quickFacts": {
+              "openingHours": "8:00 AM – 6:00 PM (Daily)",
+              "tickets": "AFN 50 (Local visitors) / AFN 200 (International visitors)",
+              "dressCode": "Modest dress is recommended. Comfortable walking shoes are advised.",
+              "bestTime": "Spring (March – May) and Autumn (September – November)",
+              "location": "Bagh-e Babur, Shahre Kohna, Kabul, Afghanistan",
+              "coordinates": {
+                "lat": 34.5028,
+                "lng": 69.1594
+              }
+            }
           },
           "fa": {
-            "name": "تپه بی‌بی مهرو",
-            "teaser": "تپه بی‌بی مهرو که به نام تپه وزیر اکبرخان نیز شناخته می‌شود، یکی از بناهای مرتفع برجسته و یک مقصد تفریحی محبوب در قلب پایتخت همراه با بنای یادبود پرچم ملی است."
+            "name": "باغ بابر شاه",
+            "subtitle": "باغی از تاریخ، آرامش و زیبایی‌های طبیعی",
+            "teaser": "باغی تاریخی متعلق به قرن شانزدهم میلادی با چشم‌اندازی پلکانی در دامنه کوه شیردروازه.",
+            "lead": "باغ بابر یکی از گرانبهاترین باغ‌های تاریخی کابل است که پیوندی کم‌نظیر از جلوه‌های طبیعی، تاریخ شاهانه و فضایی سرشار از آرامش را ارائه می‌دهد. جایی در قلب پایتخت که تاریخ، طبیعت و فرهنگ در کنار هم تنفس می‌کنند.",
+            "overview": "باغ بابر یک مجموعه تاریخی از باغ و آرامگاه در کابل است که با طراحی پلکانی، درختان کهنسال چنار و مقبره ظهیرالدین محمد بابر، بنیان‌گذار امپراتوری گورکانی، شناخته می‌شود. این باغ پناهگاهی آرامش‌بخش از هیاهوی شهر با جویبارهای روان و منظره‌ای فراخ به شهر و کوه‌های اطراف است.",
+            "historicalContext": "این باغ در اوایل سده شانزدهم میلادی به دستور بابر شاه احداث شد و از اهمیت تاریخی و فرهنگی والایی در پیوند افغانستان با تاریخ آسیای میانه برخوردار است. امروزه این مکان به عنوان یکی از نمادهای هویت و میراث تاریخی کابل، میزبان گردشگران بومی و جهانی است.",
+            "thingsToDo": [
+              {
+                "title": "زیارت آرامگاه سلطنتی بابر",
+                "desc": "بازدید از مدفن تاریخی بابر شاه و مسجد مرمرین سفید ساخته شده به دست شاه جهان."
+              },
+              {
+                "title": "گشت‌وگذار در باغ‌های پلکانی",
+                "desc": "پیاده‌روی در میان چنارهای کهنسال، گل‌های رز و نوای جویبارهای سنگی زلال."
+              },
+              {
+                "title": "تماشای چشم‌انداز سراسری کابل",
+                "desc": "لذت بردن از دید پانورامای شهر کابل و کوه‌های سربه‌فلک‌کشیده هندوکش."
+              },
+              {
+                "title": "آشنایی با تاریخ و معماری",
+                "desc": "کشف سرگذشت حکومت بابری، بازسازی‌های بین‌المللی بنیاد آقاخان و سیر تمدنی شهر."
+              }
+            ],
+            "quote": "باغ بابر فراتر از یک بوستان است — این مکان جایی است که تاریخ در آن زنده می‌شود.",
+            "quoteAuthor": "مقصدی ضروری برای هر مسافری که می‌خواهد تاریخ کهن، طبیعت زیبا و آرامش اصیل کابل را تجربه کند.",
+            "quickFacts": {
+              "openingHours": "۸:۰۰ صبح تا ۶:۰۰ بعد از ظهر (همه‌روزه)",
+              "tickets": "۵۰ افغانی (مسافران داخلی) / ۲۰۰ افغانی (گردشگران بین‌المللی)",
+              "dressCode": "پوشش آراسته و محترمانه توصیه می‌شود. کفش راحتی برای پیاده‌روی پیشنهاد می‌گردد.",
+              "bestTime": "فصل بهار (حمل تا ثور) و پاییز (سنبله تا عقرب)",
+              "location": "کابل، گذرگاه، دامنه کوه شیردروازه، باغ بابر",
+              "coordinates": {
+                "lat": 34.5028,
+                "lng": 69.1594
+              }
+            }
           }
         },
         {
-          "id": "bagh-e-babur",
-          "filter_category": "gardens-and-parks",
-          "image": "/images/provinces/kabul/bagh-e-babur.webp",
+          "id": "bibi-mahro-hill",
+          "filter_category": "modern-districts",
+          "categoryNameEn": "Modern Districts & Viewpoints",
+          "categoryNameFa": "محله‌ها و چشم‌اندازهای نوین",
+          "image": "/images/provinces/kabul/bibi-mahro.webp",
+          "gallery": [
+            "/images/provinces/kabul/bibi-mahro.webp",
+            "/images/provinces/kabul/kabul-hero.webp",
+            "/images/provinces/kabul/bagh-e-babur.webp"
+          ],
           "en": {
-            "name": "Bagh-e Babur",
-            "teaser": "A historic garden where Mughal heritage, Afghan culture, architecture, and the natural beauty of Kabul come together."
+            "name": "Bibi Mahro Hill (Wazir Akbar Khan)",
+            "subtitle": "Panoramic Vistas and the National Flag Landmark",
+            "teaser": "Kabul's most famous central hill offering a 360-degree panoramic view of the entire metropolis.",
+            "lead": "Perched above the diplomat district of Wazir Akbar Khan, Bibi Mahro Hill is an iconic vantage point where Kabulis gather to watch glowing sunsets and feel the cool mountain breeze.",
+            "overview": "Bibi Mahro Hill offers an unrivaled panoramic perspective of Kabul's expanding urban valley, framed by dramatic mountain ridges. It hosts the towering monument of the national flag, walking trails, and open spaces popular among evening strollers and photographers.",
+            "historicalContext": "Steeped in folklore dating back to the First Anglo-Afghan War, the hill honors Bibi Mahro, a revered historical figure. Over recent decades, it has evolved into a symbol of modern urban Kabul, juxtaposing embassy compounds with vibrant street life.",
+            "thingsToDo": [
+              {
+                "title": "Admire 360-Degree Views",
+                "desc": "Gaze over the presidential palace, Shahr-e Naw, and distant snow-capped mountains."
+              },
+              {
+                "title": "Sunset Photography",
+                "desc": "Capture golden hour light illuminating the terraced houses climbing the Kabul hillsides."
+              },
+              {
+                "title": "Sample Local Street Food",
+                "desc": "Enjoy roasted corn, bolani, and fresh seasonal fruit from friendly hill vendors."
+              },
+              {
+                "title": "Brisk Walk & Relaxation",
+                "desc": "Join local families and travelers for an invigorating elevated afternoon walk."
+              }
+            ],
+            "quote": "Standing on Bibi Mahro, Kabul unfolds before you like a living, breathing tapestry of history and hope.",
+            "quoteAuthor": "The definitive Kabul viewpoint for travelers seeking a bird's-eye panorama.",
+            "quickFacts": {
+              "openingHours": "Open 24/7 (Recommended: 7:00 AM – 7:00 PM)",
+              "tickets": "Free Admission (رایگان)",
+              "dressCode": "Comfortable casual attire suitable for city walking.",
+              "bestTime": "Late afternoon for stunning sunset vistas year-round.",
+              "location": "Wazir Akbar Khan, District 10, Kabul, Afghanistan",
+              "coordinates": {
+                "lat": 34.5422,
+                "lng": 69.1834
+              }
+            }
           },
           "fa": {
-            "name": "باغ بابر",
-            "teaser": "باغی تاریخی که در آن میراث مغول، فرهنگ افغانی، معماری و زیبایی‌های طبیعی کابل با هم پیوند می‌خورند."
+            "name": "تپه بی‌بی مهرو (وزیر اکبرخان)",
+            "subtitle": "چشم‌انداز ۳۶۰ درجه و نماد پرچم ملی",
+            "teaser": "معروف‌ترین تپه تفریحی کابل با دید سراسری به تمام پایتخت و کوه‌های پیرامون.",
+            "lead": "تپه بی‌بی مهرو واقع در منطقه دیپلماتیک وزیر اکبرخان، دیدگاهی بی‌نظیر برای تماشای غروب‌های تماشایی پایتخت و لمس نسیم خنک کوهستانی است.",
+            "overview": "این تپه نمای کاملی از بافت شهری کابل و دامنه‌های هندوکش را پیش روی بیننده قرار می‌دهد. میزبانی از یادمان پرچم ملی، مسیرهای پیاده‌روی و دستفروشان سنتی خوراکی‌های محلی، آن را به پاتوقی محبوب برای گردشگران بدل کرده است.",
+            "historicalContext": "نام این تپه با روایات کهن تاریخی و فداکاری‌های دوران مبارزات مردم کابل گره خورده است. در دهه‌های اخیر این نقطه به یکی از نمادهای پایتخت معاصر بدل شده است.",
+            "thingsToDo": [
+              {
+                "title": "تماشای پانورامای پایتخت",
+                "desc": "دید ۳۶۰ درجه به کاخ ریاست جمهوری، شهرنو و خانه‌های پلکانی کابل."
+              },
+              {
+                "title": "عکاسی از غروب خورشید",
+                "desc": "ثبت درخشش انوار طلایی عصرگاهی بر بام خانه‌ها و رشته‌کوه‌ها."
+              },
+              {
+                "title": "امتحان خوراکی‌های خیابانی",
+                "desc": "چشیدن بلانی داغ، جواری کباب‌شده و شیرچای محلی."
+              },
+              {
+                "title": "پیاده‌روی عصرگاهی",
+                "desc": "همراهی با مردم محلی و خانواده‌ها در فضایی باطراوت و باز."
+              }
+            ],
+            "quote": "از فراز بی‌بی مهرو، کابل چون فرشی هزارنقش از تاریخ، شجاعت و زندگی نمایان می‌شود.",
+            "quoteAuthor": "بهترین نقطه پایتخت برای تماشای کابل از نگاه عقاب‌ها.",
+            "quickFacts": {
+              "openingHours": "شبکه‌باز همه‌روزه (بهترین زمان: ۷:۰۰ صبح تا ۷:۰۰ عصر)",
+              "tickets": "ورودی رایگان",
+              "dressCode": "لباس راحت مناسب پیاده‌روی شهری.",
+              "bestTime": "ساعات پایانی بعدازظهر و هنگام غروب آفتاب.",
+              "location": "کابل، وزیر اکبرخان، تپه بی‌بی مهرو",
+              "coordinates": {
+                "lat": 34.5422,
+                "lng": 69.1834
+              }
+            }
+          }
+        },
+        {
+          "id": "national-museum",
+          "filter_category": "museum-and-galleries",
+          "categoryNameEn": "Museum and Galleries",
+          "categoryNameFa": "موزه‌ها و گالری‌ها",
+          "image": "/images/provinces/kabul/kabul-culture.webp",
+          "gallery": [
+            "/images/provinces/kabul/kabul-culture.webp",
+            "/images/provinces/kabul/kabul-history.webp",
+            "/images/provinces/kabul/kabul-hero.webp"
+          ],
+          "en": {
+            "name": "National Museum of Afghanistan",
+            "subtitle": "Treasury of 50,000 Years of Central Asian History",
+            "teaser": "Once one of the world's most magnificent collections of Greco-Bactrian, Buddhist, and Islamic antiquities.",
+            "lead": "The National Museum of Afghanistan houses remarkable relics tracing human civilization from Paleolithic roots through Silk Road splendors, Kushan treasures, and Islamic golden age masterpieces.",
+            "overview": "Located opposite the grand Darul Aman Palace, the National Museum represents the soul of Afghan heritage. Its preserved galleries display the famous Begram ivories, Greco-Bactrian coins, Bamyan Buddhist artifacts, and Timurid calligraphy.",
+            "historicalContext": "Established in 1919 under King Amanullah Khan, the museum survived intense conflict through heroic curators who concealed its priceless treasures in underground vaults, embodying the resilience inscribed on its entrance: 'A nation stays alive when its culture stays alive.'",
+            "thingsToDo": [
+              {
+                "title": "Marvel at Buddhist Antiquities",
+                "desc": "View intricate statues of the Buddha from Hadda, Bamyan, and Kapisa."
+              },
+              {
+                "title": "Examine Begram Glass & Ivories",
+                "desc": "Inspect 2,000-year-old carved Indian ivories and Roman glassware."
+              },
+              {
+                "title": "Discover Ancient Coinage",
+                "desc": "See Greco-Bactrian, Kushan, and Sassanian coins minted over millennia."
+              },
+              {
+                "title": "Admire Timurid Calligraphy",
+                "desc": "Study illuminated Quranic manuscripts and miniature paintings."
+              }
+            ],
+            "quote": "A nation stays alive when its culture stays alive.",
+            "quoteAuthor": "Inscription carved onto the stone entrance plaque of the National Museum.",
+            "quickFacts": {
+              "openingHours": "8:30 AM – 3:30 PM (Saturday – Thursday)",
+              "tickets": "AFN 100 (Domestic) / AFN 500 (Foreign Visitors)",
+              "dressCode": "Modest and respectful museum attire.",
+              "bestTime": "Morning hours for quiet gallery viewing.",
+              "location": "Darul Aman Boulevard, Kabul, Afghanistan",
+              "coordinates": {
+                "lat": 34.4678,
+                "lng": 69.1235
+              }
+            }
+          },
+          "fa": {
+            "name": "موزه ملی افغانستان",
+            "subtitle": "گنجینه ۵۰ هزار سال تاریخ و تمدن آسیای میانه",
+            "teaser": "یکی از باارزش‌ترین مجموعه‌های باستان‌شناسی دوره باختری، بودایی و اسلامی در جهان.",
+            "lead": "موزه ملی افغانستان نماد تاب‌آوری فرهنگی و گنجینه غنی تمدن‌هایی است که در طول هزاران سال در این خاک کهن شکوفا شده‌اند.",
+            "overview": "این موزه در خیابان دارالامان کابل، آثاری چون عاج‌های مشهور بگرام، سکه‌های یونان‌وباختری، کتیبه‌های تاریخی سرخ‌کوتل و نسخ خطی زرین دوره تیموری را به نمایش گذاشته است.",
+            "historicalContext": "موزه ملی در سال ۱۹۱۹ در عصر شاه امان‌الله خان تأسیس شد و با تلاش کارمندان فداکار خود که آثار را در گاوصندوق‌های زیرزمینی پنهان کردند از نابودی نجات یافت.",
+            "thingsToDo": [
+              {
+                "title": "تماشای آثار شگفت‌انگیز بودایی",
+                "desc": "بازدید از تندیس‌های گلی و سنگی هده، بامیان و کاپیسا."
+              },
+              {
+                "title": "دیدن عاج‌ها و شیشه‌های بگرام",
+                "desc": "مشاهده صنایع دستی ظریف تجار رومی و هندی در جاده ابریشم."
+              },
+              {
+                "title": "بررسی سکه‌های دوران باستان",
+                "desc": "سکه‌های شاهان یونان‌وباختری و کوشانیان."
+              },
+              {
+                "title": "شاهکارهای خطاطی و تذهیب",
+                "desc": "قرآن‌های کهن خطی و مینیاتورهای عصر تیموریان."
+              }
+            ],
+            "quote": "ملت زنده است تا هنگامی که فرهنگش زنده است.",
+            "quoteAuthor": "شعار منقوش بر لوح ورودی موزه ملی افغانستان.",
+            "quickFacts": {
+              "openingHours": "۸:۳۰ صبح تا ۳:۳۰ بعدازظهر (شنبه تا پنج‌شنبه)",
+              "tickets": "۱۰۰ افغانی (داخلی) / ۵۰۰ افغانی (گردشگران خارجی)",
+              "dressCode": "پوشش رسمی و محترمانه.",
+              "bestTime": "ساعات صبحگاهی برای بازدید آرام.",
+              "location": "کابل، جاده دارالامان، روبروی قصر دارالامان",
+              "coordinates": {
+                "lat": 34.4678,
+                "lng": 69.1235
+              }
+            }
+          }
+        },
+        {
+          "id": "darul-aman-palace",
+          "filter_category": "palaces",
+          "categoryNameEn": "Palaces",
+          "categoryNameFa": "کاخ‌ها و بناهای سلطنتی",
+          "image": "/images/provinces/kabul/kabul-hero.webp",
+          "gallery": [
+            "/images/provinces/kabul/kabul-hero.webp",
+            "/images/provinces/kabul/kabul-history.webp",
+            "/images/provinces/kabul/bagh-e-babur.webp"
+          ],
+          "en": {
+            "name": "Darul Aman Palace",
+            "subtitle": "Monuments of Modernist Afghan Ambition",
+            "teaser": "The grand neoclassical European-style palace built by King Amanullah Khan in the 1920s.",
+            "lead": "Rising majestically at the southwestern end of Kabul, Darul Aman Palace is a poignant symbol of Afghanistan's 20th-century modernization and its triumphant contemporary restoration.",
+            "overview": "Designed by German and French architects in the 1920s as the centerpiece of a new European-style capital, the palace features imposing Corinthian columns, grand marble courtyards, and over 150 rooms. After years of war damage, it was painstakingly restored to its neoclassical glory in 2019.",
+            "historicalContext": "King Amanullah Khan intended Darul Aman ('Abode of Peace') to house the national parliament and symbolize an independent, progressive Afghanistan. Today, its grand facade gleams as a beacon of national heritage.",
+            "thingsToDo": [
+              {
+                "title": "Admire Neoclassical Architecture",
+                "desc": "Study the blend of Western neoclassical facades with Afghan craftsmanship."
+              },
+              {
+                "title": "Photograph the Grand Boulevards",
+                "desc": "Take sweeping photos of the tree-lined ceremonial approach."
+              },
+              {
+                "title": "Learn the Restoration Story",
+                "desc": "Understand how young Afghan engineers and artisans rebuilt the palace."
+              },
+              {
+                "title": "Visit Nearby Heritage Sites",
+                "desc": "Combine with the National Museum and Tajbeg Palace nearby."
+              }
+            ],
+            "quote": "Darul Aman stands as proof that beauty and pride can rise from any chapter of history.",
+            "quoteAuthor": "Historic architectural landmark of modern Kabul.",
+            "quickFacts": {
+              "openingHours": "9:00 AM – 4:00 PM (Official tours / guided access)",
+              "tickets": "Guided ticket access / special permits for interiors",
+              "dressCode": "Formal or smart casual attire required.",
+              "bestTime": "Late morning for optimal sunlight on the palace facade.",
+              "location": "Darul Aman, District 6, Kabul, Afghanistan",
+              "coordinates": {
+                "lat": 34.4653,
+                "lng": 69.1192
+              }
+            }
+          },
+          "fa": {
+            "name": "قصر دارالامان",
+            "subtitle": "شکوه معماری نوگرایانه و نماد احیای ملی",
+            "teaser": "قصر باشکوه نئوکلاسیک ساخته‌شده در عصر شاه امان‌الله خان در دهه ۱۹۲۰ میلادی.",
+            "lead": "قصر دارالامان در انتهای بلوار غربی کابل، بنایی باعظمت و نمادی از مدرنیزاسیون قرن بیستم و بازسازی شکوهمندانه افغانستان نوین است.",
+            "overview": "این قصر با ستون‌های سبک کورینتی، تالارهای مرمرین و بیش از ۱۵۰ اتاق توسط معماران اروپایی طراحی شد. بنا پس از دهه‌ها آسیب جنگی، در سال ۲۰۱۹ به صورت کامل و اصیل بازسازی گردید.",
+            "historicalContext": "امان‌الله خان قصد داشت دارالامان را به عنوان مقر پارلمان و قلب کابل نوین بنا نهد. امروزه نمای سفید و طلایی این قصر جلوه‌ای بی‌نظیر به افق پایتخت بخشیده است.",
+            "thingsToDo": [
+              {
+                "title": "تحسین معماری باشکوه",
+                "desc": "مشاهده ترکیب متوازن سبک نئوکلاسیک با تزیینات افغانی."
+              },
+              {
+                "title": "عکاسی از نمای سلطنتی",
+                "desc": "ثبت تصاویر کارت‌پستالی از باغ‌ها و بلوار سرسبز مقابل قصر."
+              },
+              {
+                "title": "شنیدن داستان بازسازی",
+                "desc": "آشنایی با شاهکار مهندسان جوان افغان در مرمت صفر تا صد قصر."
+              },
+              {
+                "title": "بازدید از محوطه دارالامان",
+                "desc": "پیاده‌روی و بازدید هم‌زمان از موزه ملی در همسایگی بنا."
+              }
+            ],
+            "quote": "دارالامان اثباتی است بر اینکه اصالت و غرور ملی از هر کوران حوادثی سر برمی‌آورد.",
+            "quoteAuthor": "شاخص‌ترین نماد هویت معماری معاصر پایتخت.",
+            "quickFacts": {
+              "openingHours": "۹:۰۰ صبح تا ۴:۰۰ بعدازظهر (بازدید با هماهنگی تور)",
+              "tickets": "پذیرش با تورهای رسمی راهنما",
+              "dressCode": "پوشش رسمی یا آراسته.",
+              "bestTime": "ساعات میانی روز با تابش نور خورشید به نمای مرمرین.",
+              "location": "کابل، ناحیه ۶، دارالامان",
+              "coordinates": {
+                "lat": 34.4653,
+                "lng": 69.1192
+              }
+            }
           }
         }
-      ]
+      ],
+      "living_heritage": {
+        "crafts": {
+          "en": {
+            "title": "Traditional Crafts",
+            "desc": "Handmade carpets, copperware and Afghan jewelry."
+          },
+          "fa": {
+            "title": "صنایع دستی و سنتی",
+            "desc": "قالین‌های دستباف، ظروف مسی و زیورآلات اصیل افغانی."
+          }
+        },
+        "hospitality": {
+          "en": {
+            "title": "Warm Hospitality",
+            "desc": "Generous tea houses, welcoming locals, and timeless camaraderie."
+          },
+          "fa": {
+            "title": "مهمان‌نوازی اصیل",
+            "desc": "چای‌خانه‌های صمیمی و استقبال گرم مردم پایتخت."
+          }
+        },
+        "cuisine": {
+          "en": {
+            "title": "Local Cuisine",
+            "desc": "Authentic Kabuli Palaw, mantu, ashak, and kebabs."
+          },
+          "fa": {
+            "title": "غذاهای لذیذ محلی",
+            "desc": "قابلی پلو اصیل کابلی، منتو، آشک و کباب‌های معروف."
+          }
+        },
+        "traditions": {
+          "en": {
+            "title": "Unique Traditions",
+            "desc": "Poetry circles, traditional festivals, and historic bazaars."
+          },
+          "fa": {
+            "title": "آیین‌ها و رسوم کهن",
+            "desc": "شب‌های شعر و غزل، جشن‌های کهن نوروز و بازارهای قدیمی."
+          }
+        }
+      }
     },
     {
       "id": "bamyan",
       "slug": "bamyan",
       "images": {
-         "hero_cover": "/images/provinces/bamyan/bamyan-hero.webp",
-         "history_img": "/images/provinces/bamyan/Buddha-1.webp",
-         "culture_img": "/images/provinces/bamyan/Buddha-1.webp"
+        "hero_cover": "/images/provinces/bamyan/bamyan-hero.webp",
+        "history_img": "/images/provinces/bamyan/Buddha-1.webp",
+        "culture_img": "/tours/images/bamyanPictures.webp",
+        "culture_img2": "/images/provinces/bamyan/bamyan-hero.webp"
       },
       "en": {
         "name": "Bamyan",
@@ -102,96 +479,372 @@
       },
       "sub_destinations": [
         {
-          "id": "band-e-amir",
-          "filter_category": "natural-wonders",
-          "image": "/images/provinces/bamyan/bamyan-hero.webp",
+          "id": "buddha-niches",
+          "filter_category": "archeological-sites",
+          "categoryNameEn": "Archeological and Historical Sites",
+          "categoryNameFa": "محوطه‌های باستانی و تاریخی",
+          "image": "/images/provinces/bamyan/Buddha-1.webp",
+          "gallery": [
+            "/images/provinces/bamyan/Buddha-1.webp",
+            "/images/provinces/bamyan/bamyan-hero.webp",
+            "/tours/images/bamyanPictures.webp"
+          ],
           "en": {
-            "name": "Band-e Amir National Park",
-            "teaser": "Afghanistan's first national park featuring six stunning deep-blue mineral lakes."
+            "name": "Bamyan Buddha Niches & Caves",
+            "subtitle": "Echoes of the Ancient Silk Road Monastic Civilization",
+            "teaser": "The monumental 6th-century cliff niches where the world's tallest standing Buddhas once watched over the valley.",
+            "lead": "The cliff-face of Bamyan is an awe-inspiring open-air UNESCO World Heritage site, honeycombed with over a thousand monastic caves and the soaring niches of Salsal and Shamama.",
+            "overview": "Carved directly into the sandstone cliffs in the 6th century, the Bamyan Buddhas stood at 55 and 38 meters tall, representing a masterpiece of Gandharan and Silk Road art. Visitors can walk into the cave networks, explore ancient meditation chambers adorned with remnant frescoes, and stand inside the giant niches overlooking the emerald valley.",
+            "historicalContext": "For centuries, Chinese pilgrims such as Xuanzang described Bamyan as a bustling Buddhist kingdom glistening with gold leaf and chanting monks. It remains one of the most culturally revered landscapes on earth.",
+            "thingsToDo": [
+              {
+                "title": "Stand in the Great Niches",
+                "desc": "Experience the monumental scale of the 55-meter Salsal niche."
+              },
+              {
+                "title": "Explore Monastic Caves",
+                "desc": "Venture through the labyrinth of rock-carved sanctuaries and monk quarters."
+              },
+              {
+                "title": "View Ancient Frescoes",
+                "desc": "Observe traces of early oil paintings and Gandharan Buddhist art."
+              },
+              {
+                "title": "Sunset Valley View",
+                "desc": "Watch the golden sandstone cliffs glow at sunset across the potato fields."
+              }
+            ],
+            "quote": "The colossal niches of Bamyan speak louder than any words about the grandeur of human history.",
+            "quoteAuthor": "UNESCO World Heritage Cultural Landscape of Bamyan.",
+            "quickFacts": {
+              "openingHours": "8:00 AM – 5:30 PM (Daily)",
+              "tickets": "AFN 60 (Domestic) / AFN 300 (International visitors)",
+              "dressCode": "Comfortable hiking boots for cave stairways and rocky paths.",
+              "bestTime": "April through October for clear sunny skies and green valleys.",
+              "location": "Bamyan Cliffside, Bamyan City, Afghanistan",
+              "coordinates": {
+                "lat": 34.8322,
+                "lng": 67.8286
+              }
+            }
           },
           "fa": {
-            "name": "پارک ملی بند امیر",
-            "teaser": "نخستین پارک ملی افغانستان با شش دریاچه طبیعی با آب زلال و فیروزه‌ای."
+            "name": "تندیس‌های بودای بامیان (صلصال و شهمامه)",
+            "subtitle": "پژواک تمدن کهن بودایی در مسیر جاده باستانی ابریشم",
+            "teaser": "رواق‌های صخره‌ای قرن ششم میلادی در دل کوه، یادگار بلندترین تندیس‌های ایستاده بودا در جهان باستان.",
+            "lead": "صخره‌های سرخ‌فام بامیان با بیش از هزار غار راهبان و رواق‌های عظیم صلصال و شهمامه، یکی از شگفت‌انگیزترین محوطه‌های ثبت‌شده در میراث جهانی یونسکو است.",
+            "overview": "این تندیس‌های عظیم ۵۵ و ۳۸ متری در قرن ششم میلادی مستقیماً در دل صخره‌ها تراشیده شدند و شاهکار هنر گندهارا به‌شمار می‌آمدند. گردشگران می‌توانند در میان غارهای تاریخی قدم بزنند و بقایای نقاشی‌های دیواری باستانی را مشاهده نمایند.",
+            "historicalContext": "جهانگردان کهنی چون شوان‌زانگ بامیان را شهری درخشان از زیارتگاه‌های زرین با هزاران راهب توصیف کرده‌اند. این صخره‌ها نماد جاودانه تسامح، هنر و تاریخ مشترک بشریت هستند.",
+            "thingsToDo": [
+              {
+                "title": "ایستادن در رواق عظیم صلصال",
+                "desc": "لمس ابهت بی‌مانند رواق ۵۵ متری تراشیده‌شده در دل کوهستان."
+              },
+              {
+                "title": "کاوش در دخمه‌ها و غارهای راهبان",
+                "desc": "پیاده‌روی در راهروها و صومعه‌های دست‌کند صخره‌ای."
+              },
+              {
+                "title": "مشاهده بقایای نقاشی‌های رنگ‌روغن کهن",
+                "desc": "تماشای نخستین نمونه‌های هنر دیوارنگاری جهان باستان."
+              },
+              {
+                "title": "غروب طلایی دره بامیان",
+                "desc": "عکاسی از انوار سرخ و طلایی خورشید بر فراز صخره‌های تاریخی."
+              }
+            ],
+            "quote": "رواق‌های سترگ بامیان فراتر از کلمات، از شکوه و عظمت تاریخ فرهنگ بشر سخن می‌گویند.",
+            "quoteAuthor": "محوطه ثبت‌شده میراث جهانی یونسکو در قلب افغانستان.",
+            "quickFacts": {
+              "openingHours": "۸:۰۰ صبح تا ۵:۳۰ عصر (همه‌روزه)",
+              "tickets": "۶۰ افغانی (داخلی) / ۳۰۰ افغانی (بین‌المللی)",
+              "dressCode": "کفش ورزشی یا کوه‌پیمایی مناسب برای پلکان‌های سنگی.",
+              "bestTime": "ثور تا میزان (بهار تا پاییز) برای بهره‌مندی از هوای مطبوع.",
+              "location": "بامیان، مرکز شهر، دیواره صخره‌ای بودا",
+              "coordinates": {
+                "lat": 34.8322,
+                "lng": 67.8286
+              }
+            }
           }
         },
         {
-          "id": "buddha-niches",
-          "filter_category": "cultural-heritage",
-          "image": "/images/provinces/bamyan/Buddha-1.webp",
+          "id": "band-e-amir",
+          "filter_category": "gardens-and-parks",
+          "categoryNameEn": "Gardens and Parks",
+          "categoryNameFa": "پارک‌های ملی و طبیعی",
+          "image": "/images/provinces/bamyan/bamyan-hero.webp",
+          "gallery": [
+            "/images/provinces/bamyan/bamyan-hero.webp",
+            "/tours/images/bamyanPictures.webp",
+            "/images/provinces/bamyan/Buddha-1.webp"
+          ],
           "en": {
-            "name": "Buddha Niches & Caves",
-            "teaser": "Monuments carving into cliffs where ancient monks meditated."
+            "name": "Band-e Amir National Park",
+            "subtitle": "The Jewel of Afghanistan — Six Turquoise Mineral Lakes",
+            "teaser": "Afghanistan's first official national park, famed for natural travertine dams and vivid azure waters.",
+            "lead": "Hidden in the Hindu Kush mountains, Band-e Amir features six intensely blue mineral lakes formed by travertine dams, creating a landscape of ethereal beauty unlike anywhere else on earth.",
+            "overview": "Band-e Amir sits at an elevation of 3,000 meters, comprising Band-e Haibat, Band-e Zulfiqar, Band-e Pudina, Band-e Panir, Band-e Ghulam, and Band-e Qambar. The crystal waters range in hue from deep cobalt to bright turquoise, contrasted against chalky white limestone dams and jagged pink mountains.",
+            "historicalContext": "Declared Afghanistan's first national park in 2009, the lakes are steeped in local legends and revered for their spiritual tranquility, drawing pilgrims, nature lovers, and travelers worldwide.",
+            "thingsToDo": [
+              {
+                "title": "Swan Pedal Boating",
+                "desc": "Glide across the mirror-like turquoise waters of Band-e Haibat."
+              },
+              {
+                "title": "Hike Natural Travertine Dams",
+                "desc": "Walk along the mineral dams separating the deep lake basins."
+              },
+              {
+                "title": "Stargazing at Night",
+                "desc": "Witness the dazzling Milky Way stretching across crisp, unpolluted night skies."
+              },
+              {
+                "title": "Picnic with Local Bread & Tea",
+                "desc": "Savor warm Afghan bread and hot green tea beside crystal waterfalls."
+              }
+            ],
+            "quote": "The waters of Band-e Amir are so blue and pure they seem to reflect the heavens themselves.",
+            "quoteAuthor": "Afghanistan's First National Park and natural wonder.",
+            "quickFacts": {
+              "openingHours": "Open Daily (Best experienced from sunrise to sunset)",
+              "tickets": "AFN 50 park entry fee per vehicle / visitor",
+              "dressCode": "Warm layers (temperatures drop significantly in the evening).",
+              "bestTime": "June to September for warm sunny days and pleasant lakeside walks.",
+              "location": "Band-e Amir, Yakawlang District, Bamyan Province",
+              "coordinates": {
+                "lat": 34.8367,
+                "lng": 67.2189
+              }
+            }
           },
           "fa": {
-            "name": "صلصال و شهمامه",
-            "teaser": "رواق‌ها و غارهای تاریخی تراشیده‌شده در دل صخره‌های کهن بامیان."
+            "name": "پارک ملی بند امیر",
+            "subtitle": "نگین فیروزه‌ای افغانستان — شش دریاچه زلال و طبیعی",
+            "teaser": "نخستین پارک ملی افغانستان، با دریاچه‌های لاجوردی و سدهای تراورتن طبیعی در دل رشته‌کوه هندوکش.",
+            "lead": "بند امیر در ارتفاع ۳۰۰۰ متری، مجموعه‌ای بی‌بدیل از شش دریاچه با آبی چنان زلال و فیروزه‌ای است که گویی تکه‌ای از آسمان بر زمین فرود آمده است.",
+            "overview": "دریاچه‌های بند هیبت، بند ذوالفقار، بند پودینه، بند پنیر، بند غلامان و بند قنبر با سدهای رسوبی طبیعی از هم جدا شده‌اند. تضاد رنگ آبی کریستالی با صخره‌های مرجانی و کوه‌های سپید، جلوه‌ای ماورایی خلق کرده است.",
+            "historicalContext": "بند امیر در سال ۲۰۰۹ به عنوان نخستین پارک ملی کشور ثبت شد و در باورهای بومی به عنوان مکانی پربرکت و نماد آرامش طبیعت شناخته می‌شود.",
+            "thingsToDo": [
+              {
+                "title": "قایق‌سواری پدالی در بند هیبت",
+                "desc": "حرکت بر پهنه آب‌های شفاف و کریستالی با پس‌زمینه کوه‌های هندوکش."
+              },
+              {
+                "title": "کوه‌پیمایی روی سدهای طبیعی تراورتن",
+                "desc": "قدم زدن در امتداد آبشارهای زلال میان دریاچه‌ها."
+              },
+              {
+                "title": "رصد آسمان شب و راه شیری",
+                "desc": "تماشای خیره‌کننده کهکشان در هوای پاک و زلال کوهستان."
+              },
+              {
+                "title": "چای‌نوشی و پذیرایی محلی",
+                "desc": "نوشیدن چای سبز داغ و نان گرم محلی در حاشیه دریاچه."
+              }
+            ],
+            "quote": "آب‌های بند امیر چنان پاک و نیلگون‌اند که گویی آینه‌ای تمام‌نما از آسمان بر زمین‌اند.",
+            "quoteAuthor": "نخستین پارک ملی افغانستان و شاهکار طبیعت کوهستان.",
+            "quickFacts": {
+              "openingHours": "همه‌روزه باز است (بهترین ساعت: از طلوع تا غروب آفتاب)",
+              "tickets": "۵۰ افغانی ورودی پارک به ازای هر موتر / بازدیدکننده",
+              "dressCode": "لباس گرم همراه داشته باشید (عصرها هوا خنک می‌شود).",
+              "bestTime": "جوزا تا میزان (ژوئن تا سپتامبر) برای لذت کامل از هوای معتدل.",
+              "location": "ولایت بامیان، ولسوالی یکاولنگ، پارک ملی بند امیر",
+              "coordinates": {
+                "lat": 34.8367,
+                "lng": 67.2189
+              }
+            }
+          }
+        },
+        {
+          "id": "shahr-e-gholghola",
+          "filter_category": "historic-landmarks",
+          "categoryNameEn": "Historic Structures and Landmarks",
+          "categoryNameFa": "بناها و یادمان‌های کهن",
+          "image": "/tours/images/bamyanPictures.webp",
+          "gallery": [
+            "/tours/images/bamyanPictures.webp",
+            "/images/provinces/bamyan/Buddha-1.webp",
+            "/images/provinces/bamyan/bamyan-hero.webp"
+          ],
+          "en": {
+            "name": "Shahr-e Gholghola (City of Screams)",
+            "subtitle": "The Ancient Citadel of the Ghorid Kings",
+            "teaser": "An ancient hilltop fortress city bearing witness to the Silk Road and the Mongol sieges of the 13th century.",
+            "lead": "Perched dramatically on a solitary limestone ridge in the center of the Bamyan valley, Shahr-e Gholghola offers a haunting journey through medieval fortifications and the history of Central Asia.",
+            "overview": "Once the proud capital of the Islamic Ghorid rulers of Bamyan, this citadel controlled trade routes connecting Kabul to Balkh. Today, visitors can ascend conserved cobblestone ramps through defensive gateways to reach the highest observation tower, which provides a panoramic 360-degree vista of the entire Bamyan basin and the Buddha cliff.",
+            "historicalContext": "In 1221, Genghis Khan's forces besieged the city after his beloved grandson Mutukan was killed nearby. Its tragic fall gave the citadel its poignant moniker — 'City of Screams' (Shahr-e Gholghola).",
+            "thingsToDo": [
+              {
+                "title": "Climb the Summit Citadel",
+                "desc": "Reach the crowning bastion for unmatched views of the Buddha cliffs."
+              },
+              {
+                "title": "Examine Ancient Architecture",
+                "desc": "Walk through medieval brick arches, storehouses, and defense towers."
+              },
+              {
+                "title": "Panoramic Photography",
+                "desc": "Frame dramatic shots of the green valley floor against stark clay ruins."
+              },
+              {
+                "title": "Reflect on Silk Road History",
+                "desc": "Learn about the Ghorid dynasty and ancient siege warfare."
+              }
+            ],
+            "quote": "Standing on Shahr-e Gholghola, the silence of the valley tells tales of ancient dynasties and lost empires.",
+            "quoteAuthor": "Medieval Citadel of the Ghorid Dynasty.",
+            "quickFacts": {
+              "openingHours": "8:00 AM – 5:00 PM (Daily)",
+              "tickets": "AFN 50 (Domestic) / AFN 200 (International)",
+              "dressCode": "Sturdy walking shoes recommended for the gravel climb.",
+              "bestTime": "Morning or late afternoon light for dramatic photography.",
+              "location": "Central Valley, Bamyan City, Afghanistan",
+              "coordinates": {
+                "lat": 34.8156,
+                "lng": 67.8344
+              }
+            }
+          },
+          "fa": {
+            "name": "شهر غلغله (شهر فریادها)",
+            "subtitle": "ارگ و دارالسلطنه تاریخی پادشاهان غوری",
+            "teaser": "کهن‌دژ صخره‌ای مستحکم در میانه دره بامیان، شاهد محاصره تاریخی مغولان در سده سیزدهم میلادی.",
+            "lead": "شهر غلغله بر فراز تپه‌ای منفرد در میان دره سرسبز بامیان، روایتی تکان‌دهنده از شکوه امپراتوری غوریان و تاریخ گذرگاه‌های جاده ابریشم است.",
+            "overview": "این شهر باستانی پایتخت حاکمان غوری بامیان بود. امروزه مسافران با بالا رفتن از مسیر سنگ‌فرش‌شده، برج‌های دیده‌بانی، طاق‌های خشتی و باروهای دفاعی را مشاهده کرده و بر بام دره به تماشای رواق‌های بودا می‌نشینند.",
+            "historicalContext": "در سال ۱۲۲۱ میلادی، پس از کشته شدن نوه چنگیز خان، شهر پس از مقاومتی حماسی سقوط کرد و به پاس ناله‌ها و فریادهای آن نبرد تاریخی، «شهر غلغله» نام گرفت.",
+            "thingsToDo": [
+              {
+                "title": "صعود به ارگ مرتفع",
+                "desc": "رسیدن به بالاترین نقطه قلعه با دید فراگیر به سراسر دشت بامیان."
+              },
+              {
+                "title": "کاوش در معماری خشتی کهن",
+                "desc": "عبور از دروازه‌های طاقی، انبارها و برج‌های مراقبت قرون‌وسطایی."
+              },
+              {
+                "title": "عکاسی پانورامیک",
+                "desc": "ثبت ترکیب چشم‌نواز مزارع سبز کچالو، ویرانه‌های خشتی و کوه‌های پوشیده از برف."
+              },
+              {
+                "title": "درک تاریخ جاده ابریشم",
+                "desc": "شنیدن سرگذشت شگفت‌انگیز سلسله غوریان و دفاع در برابر ایلغار مغول."
+              }
+            ],
+            "quote": "بر بلندای شهر غلغله، سکوت سنگین کوهستان پژواک داستان‌های شاهان و تمدن‌های کهن را بازمی‌گوید.",
+            "quoteAuthor": "میراث تاریخی و دژ کهن غوریان در بامیان.",
+            "quickFacts": {
+              "openingHours": "۸:۰۰ صبح تا ۵:۰۰ بعدازظهر (همه‌روزه)",
+              "tickets": "۵۰ افغانی (داخلی) / ۲۰۰ افغانی (بین‌المللی)",
+              "dressCode": "کفش مناسب برای بالا رفتن از شیب تپه.",
+              "bestTime": "ساعات اولیه صبح و اواخر بعدازظهر برای عکاسی.",
+              "location": "بامیان، مرکز دره، مجاور شهر کهنه",
+              "coordinates": {
+                "lat": 34.8156,
+                "lng": 67.8344
+              }
+            }
           }
         }
-      ]
+      ],
+      "living_heritage": {
+        "crafts": {
+          "en": {
+            "title": "Traditional Crafts",
+            "desc": "Intricate Hazara needlework, felt carpets, and pottery."
+          },
+          "fa": {
+            "title": "صنایع دستی و سنتی",
+            "desc": "سوزن‌دوزی‌های ظریف هزارگی، نمدبافی و گلیم‌های بومی."
+          }
+        },
+        "hospitality": {
+          "en": {
+            "title": "Warm Hospitality",
+            "desc": "Legendary highland tea ceremonies and welcoming locals."
+          },
+          "fa": {
+            "title": "مهمان‌نوازی اصیل",
+            "desc": "چای‌نوشی‌های پرمهر کوهستان و استقبال گرم مردم بامیان."
+          }
+        },
+        "cuisine": {
+          "en": {
+            "title": "Local Cuisine",
+            "desc": "Qorooti, delicious potato dishes, local breads, and clotted cream."
+          },
+          "fa": {
+            "title": "غذاهای لذیذ محلی",
+            "desc": "قروتی خوش‌طعم بامیانی، نان محلی تنوری و خامه کوهستانی."
+          }
+        },
+        "traditions": {
+          "en": {
+            "title": "Unique Traditions",
+            "desc": "Dambura folk melodies, seasonal harvest festivals, and winter ski culture."
+          },
+          "fa": {
+            "title": "آیین‌ها و نواهای کهن",
+            "desc": "نغمه‌های دلنشین دمبوره، جشن گل کچالو و فرهنگ اسکی زمستانه."
+          }
+        }
+      }
     }
   ],
-
-"tours": [
-
-{
-"id": "tour-001",
-"slug": "discover-afghanistan",
-
-"fa": {
-  "title": "کابل؛ تجربه پایتخت",
-  "description": "تجربه‌ای از شهر و فرهنگ",
-  "days": "۴",
-    "nights": "۳"
-},
-
-"en": {
-"title": "Kabul-The Capital Experince",
-"description": "City & Cultural Experince.",
- "days": 4,
-    "nights": 3 
-},
-"destinationIds": [
-"destination-001",
-"destination-002",
-"destination-003"
-],
-
-    
-
-"price": 0,
-"currency": "USD",
-"image": "/tours/images/kabulPictures.webp",
-"isActive": true,
-"createdAt": "2026-09-28T08:00:00Z"
-},
-
-{
-"id": "tour-002",
-"slug": "bamyan-cultural-tour",
-"fa": {
-"title": "تور فرهنگی بامیان",
-"description": "جاذبه‌های فرهنگی و طبیعی بامیان را کشف کنید.",
-"days": "۴",
-"nights": "۳"
-},
-"en": {
-"title": "Bamyan Cultural Tour",
-"description": "Explore the cultural and natural attractions of Bamyan.",
-"days": 4,
-"nights": 3 
-},
-"destinationIds": [
-"destination-002"
-],
-
-
-"price": 0,
-"currency": "USD",
-"image": "/tours/images/bamyanPictures.webp",
-"isActive": true,
-"createdAt": "2026-09-28T08:00:00Z"
-},
-   {
+  "tours": [
+    {
+      "id": "tour-001",
+      "slug": "discover-afghanistan",
+      "fa": {
+        "title": "کابل؛ تجربه پایتخت",
+        "description": "تجربه‌ای از شهر و فرهنگ",
+        "days": "۴",
+        "nights": "۳"
+      },
+      "en": {
+        "title": "Kabul-The Capital Experince",
+        "description": "City & Cultural Experince.",
+        "days": 4,
+        "nights": 3
+      },
+      "destinationIds": [
+        "destination-001",
+        "destination-002",
+        "destination-003"
+      ],
+      "price": 0,
+      "currency": "USD",
+      "image": "/tours/images/kabulPictures.webp",
+      "isActive": true,
+      "createdAt": "2026-09-28T08:00:00Z"
+    },
+    {
+      "id": "tour-002",
+      "slug": "bamyan-cultural-tour",
+      "fa": {
+        "title": "تور فرهنگی بامیان",
+        "description": "جاذبه‌های فرهنگی و طبیعی بامیان را کشف کنید.",
+        "days": "۴",
+        "nights": "۳"
+      },
+      "en": {
+        "title": "Bamyan Cultural Tour",
+        "description": "Explore the cultural and natural attractions of Bamyan.",
+        "days": 4,
+        "nights": 3
+      },
+      "destinationIds": [
+        "destination-002"
+      ],
+      "price": 0,
+      "currency": "USD",
+      "image": "/tours/images/bamyanPictures.webp",
+      "isActive": true,
+      "createdAt": "2026-09-28T08:00:00Z"
+    },
+    {
       "id": "tour-003",
       "slug": "herat-heritage-experience",
       "fa": {
@@ -406,171 +1059,166 @@
       "isActive": true,
       "createdAt": "2026-09-28T08:00:00Z"
     }
-],
-
-    "services": [
+  ],
+  "services": [
     {
-    "id": "service-001",
-    "slug": "tour-planning",
-    "fa": {
-    "title": "برنامه‌ریزی تور",
-    "description": "برنامه‌ریزی سفری اختصاصی برای افراد و گروه‌ها."
-    },
-    "en": {
-    "title": "Tour Planning",
-    "description": "Customized travel planning for individuals and groups."
-    },
-    "image": "",
-    "isActive": true,
-    "createdAt": "2026-09-28T08:00:00Z"
-    },
-    {
-    "id": "service-002",
-    "slug": "transportation",
-    "fa": {
-    "title": "خدمات ترانسپورت",
-    "description": "تنظیم خدمات ترانسپورت برای سفر شما."
-    },
-    "en": {
-    "title": "Transportation",
-    "description": "Travel transportation arrangements for your journey."
-    },
-    "image": "",
-    "isActive": true,
-    "createdAt": "2026-09-28T08:00:00Z"
+      "id": "service-001",
+      "slug": "tour-planning",
+      "fa": {
+        "title": "برنامه‌ریزی تور",
+        "description": "برنامه‌ریزی سفری اختصاصی برای افراد و گروه‌ها."
+      },
+      "en": {
+        "title": "Tour Planning",
+        "description": "Customized travel planning for individuals and groups."
+      },
+      "image": "",
+      "isActive": true,
+      "createdAt": "2026-09-28T08:00:00Z"
     },
     {
-    "id": "service-003",
-    "slug": "travel-assistance",
-    "fa": {
-    "title": "پشتیبانی سفر",
-    "description": "پشتیبانی و همراهی در طول سفر شما."
+      "id": "service-002",
+      "slug": "transportation",
+      "fa": {
+        "title": "خدمات ترانسپورت",
+        "description": "تنظیم خدمات ترانسپورت برای سفر شما."
+      },
+      "en": {
+        "title": "Transportation",
+        "description": "Travel transportation arrangements for your journey."
+      },
+      "image": "",
+      "isActive": true,
+      "createdAt": "2026-09-28T08:00:00Z"
     },
-    "en": {
-    "title": "Travel Assistance",
-    "description": "Travel support and assistance during your trip."
-    },
-    "image": "",
-    "isActive": true,
-    "createdAt": "2026-09-28T08:00:00Z"
+    {
+      "id": "service-003",
+      "slug": "travel-assistance",
+      "fa": {
+        "title": "پشتیبانی سفر",
+        "description": "پشتیبانی و همراهی در طول سفر شما."
+      },
+      "en": {
+        "title": "Travel Assistance",
+        "description": "Travel support and assistance during your trip."
+      },
+      "image": "",
+      "isActive": true,
+      "createdAt": "2026-09-28T08:00:00Z"
     }
-    ],
-
-    "blogPosts": [
+  ],
+  "blogPosts": [
     {
-    "id": "post-001",
-    "slug": "exploring-afghanistan",
-    "fa": {
-    "title": "کشف افغانستان",
-    "excerpt": "با زیبایی‌ها، فرهنگ و تاریخ افغانستان آشنا شوید.",
-    "content": "محتوای مقاله در این بخش قرار خواهد گرفت.",
-    "author": "اموی تراول"
-    },
-    "en": {
-    "title": "Exploring Afghanistan",
-    "excerpt": "Discover the beauty, culture and history of Afghanistan.",
-    "content": "Blog content will be added here.",
-    "author": "Amovi Travel"
-    },
-    "image": "",
-    "isPublished": true,
-    "publishedAt": "2026-09-28T08:00:00Z",
-    "createdAt": "2026-09-28T08:00:00Z"
+      "id": "post-001",
+      "slug": "exploring-afghanistan",
+      "fa": {
+        "title": "کشف افغانستان",
+        "excerpt": "با زیبایی‌ها، فرهنگ و تاریخ افغانستان آشنا شوید.",
+        "content": "محتوای مقاله در این بخش قرار خواهد گرفت.",
+        "author": "اموی تراول"
+      },
+      "en": {
+        "title": "Exploring Afghanistan",
+        "excerpt": "Discover the beauty, culture and history of Afghanistan.",
+        "content": "Blog content will be added here.",
+        "author": "Amovi Travel"
+      },
+      "image": "",
+      "isPublished": true,
+      "publishedAt": "2026-09-28T08:00:00Z",
+      "createdAt": "2026-09-28T08:00:00Z"
     }
-    ],
-
-    "masterRequests": [
-        {
-          "id": "request-001",
-          "fullName": "Test Customer",
-          "email": "[customer@example.com](mailto:customer@example.com)",
-          "phoneWhatsApp": "+93700000001",
-          "preferredDate": "2026-10-15",
-          "travelersCount": 2,
-          "packageOrService": {
-          "fa": "تور فرهنگی بامیان",
-          "en": "Bamyan Cultural Tour"
-        },
-          "additionalRequirements": {
-          "fa": "",
-          "en": ""
-        },
-         "privacyConsent": true,
-         "status": "pending",
-         "createdAt": "2026-09-28T08:00:00Z"
-        }
-    ],
-
-    "testimonials": [
-        {
-            "id": "testimonial-001",
-            "fa": {
-                "name": "سارا جانسون",
-                "country": "بریتانیا",
-                "message": "سفر ما به شکل بسیار خوبی سازماندهی شده بود و تیم در تمام طول سفر بسیار همکاری و کمک کرد."
-            },
-            "en": {
-                 "name": "Sarah Johnson",
-                 "country": "United Kingdom",
-            "message": "Our trip was beautifully organized and the team was very helpful throughout the journey."
-            },
-            "rating": 5,
-            "image": "",
-            "isPublished": true,
-            "createdAt": "2026-09-28T08:00:00Z"
-        },
-        {
-          "id": "testimonial-002",
-          "fa": {
-            "name": "محمد علی",
-            "country": "امارات متحده عربی",
-            "message": "یک تجربه عالی از سفر با پشتیبانی حرفه‌ای و ارتباطات بسیار خوب."
-          },
-          "en": {
-             "name": "Mohammad Ali",
-             "country": "United Arab Emirates",
-             "message": "A great travel experience with professional support and excellent communication."
-          },
-          "image": "",
-          "rating": 5,
-          "isPublished": true,
-          "createdAt": "2026-09-28T08:00:00Z"
-        },
-        {
-         "id": "testimonial-003",
-             "fa": {
-             "name": "اما ویلسون",
-             "country": "کانادا",
-             "message": "برنامه سفر به خوبی تنظیم شده بود و این تجربه برای من خاطره‌انگیز بود."
-         },
-         "en": {
-             "name": "Emma Wilson",
-             "country": "Canada",
-             "message": "The itinerary was well planned and the experience was memorable."
-         },
-         "rating": 4,
-         "image": "",
-         "isPublished": true,
-         "createdAt": "2026-09-28T08:00:00Z"
-        }
-    ],
-
-    "contactMessages": [
-        {
-         "id": "message-001",
-         "fullName": "Test Visitor",
-         "email": "[visitor@example.com](mailto:visitor@example.com)",
-         "phone": "+93700000002",
-         "subject": {
-         "fa": "سوال عمومی",
-         "en": "General Inquiry"
-        },
-         "message": {
-         "fa": "این یک پیام آزمایشی برای بخش تماس است.",
-         "en": "This is a test contact message."
-        },
-            "status": "unread",
-            "createdAt": "2026-09-28T08:00:00Z"
-        }
-    ]
+  ],
+  "masterRequests": [
+    {
+      "id": "request-001",
+      "fullName": "Test Customer",
+      "email": "[customer@example.com](mailto:customer@example.com)",
+      "phoneWhatsApp": "+93700000001",
+      "preferredDate": "2026-10-15",
+      "travelersCount": 2,
+      "packageOrService": {
+        "fa": "تور فرهنگی بامیان",
+        "en": "Bamyan Cultural Tour"
+      },
+      "additionalRequirements": {
+        "fa": "",
+        "en": ""
+      },
+      "privacyConsent": true,
+      "status": "pending",
+      "createdAt": "2026-09-28T08:00:00Z"
+    }
+  ],
+  "testimonials": [
+    {
+      "id": "testimonial-001",
+      "fa": {
+        "name": "سارا جانسون",
+        "country": "بریتانیا",
+        "message": "سفر ما به شکل بسیار خوبی سازماندهی شده بود و تیم در تمام طول سفر بسیار همکاری و کمک کرد."
+      },
+      "en": {
+        "name": "Sarah Johnson",
+        "country": "United Kingdom",
+        "message": "Our trip was beautifully organized and the team was very helpful throughout the journey."
+      },
+      "rating": 5,
+      "image": "",
+      "isPublished": true,
+      "createdAt": "2026-09-28T08:00:00Z"
+    },
+    {
+      "id": "testimonial-002",
+      "fa": {
+        "name": "محمد علی",
+        "country": "امارات متحده عربی",
+        "message": "یک تجربه عالی از سفر با پشتیبانی حرفه‌ای و ارتباطات بسیار خوب."
+      },
+      "en": {
+        "name": "Mohammad Ali",
+        "country": "United Arab Emirates",
+        "message": "A great travel experience with professional support and excellent communication."
+      },
+      "image": "",
+      "rating": 5,
+      "isPublished": true,
+      "createdAt": "2026-09-28T08:00:00Z"
+    },
+    {
+      "id": "testimonial-003",
+      "fa": {
+        "name": "اما ویلسون",
+        "country": "کانادا",
+        "message": "برنامه سفر به خوبی تنظیم شده بود و این تجربه برای من خاطره‌انگیز بود."
+      },
+      "en": {
+        "name": "Emma Wilson",
+        "country": "Canada",
+        "message": "The itinerary was well planned and the experience was memorable."
+      },
+      "rating": 4,
+      "image": "",
+      "isPublished": true,
+      "createdAt": "2026-09-28T08:00:00Z"
+    }
+  ],
+  "contactMessages": [
+    {
+      "id": "message-001",
+      "fullName": "Test Visitor",
+      "email": "[visitor@example.com](mailto:visitor@example.com)",
+      "phone": "+93700000002",
+      "subject": {
+        "fa": "سوال عمومی",
+        "en": "General Inquiry"
+      },
+      "message": {
+        "fa": "این یک پیام آزمایشی برای بخش تماس است.",
+        "en": "This is a test contact message."
+      },
+      "status": "unread",
+      "createdAt": "2026-09-28T08:00:00Z"
+    }
+  ]
 }

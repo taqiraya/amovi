@@ -13,6 +13,7 @@ import Services from './pages/services/Services';
 import Tours from './pages/tours/Tours';
 import Destinations from './pages/destinations/Destinations';
 import ProvinceView from './pages/destinations/ProvinceView';
+import PlaceDetail from './pages/destinations/PlaceDetail';
 import Blog from './pages/blog/Blog';
 import BlogDetail from './pages/blog/BlogDetail';
 import Contact from './pages/contact/Contact';
@@ -39,6 +40,7 @@ function App() {
           <Route path="/services" element={<Services />} />
           <Route path="/destinations" element={<Destinations />} />
           <Route path="/destinations/:slug" element={<ProvinceView />} />
+          <Route path="/destinations/:slug/:placeId" element={<PlaceDetail />} />
           <Route path="/tours" element={<Tours />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:id" element={<BlogDetail />} />

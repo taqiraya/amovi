@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Shield, FileText, CalendarCheck, CheckCircle2 } from 'lucide-react';
 import { useLangStore } from '../../store/useLangStore';
+import SEO from '../../components/SEO';
 import heroBg from '../../assets/images/hero-bg.webp';
 
 export default function Policy({ defaultTab = 'privacy' }) {
@@ -26,6 +27,13 @@ export default function Policy({ defaultTab = 'privacy' }) {
 
   return (
     <div className={`w-full bg-[#F8FAFC] min-h-screen text-[#14213D] ${isRtl ? 'font-[Sahel]' : 'font-[Inter]'}`}>
+      <SEO 
+        title={isRtl ? `${currentDoc.title || 'قوانین و مقررات'} | آمووی ترول` : `${currentDoc.title || 'Legal & Terms'} | Amovi Travel`}
+        description={isRtl 
+          ? (currentDoc.subtitle || 'قوانین، مقررات رزرو و حفظ حریم خصوصی آژانس مسافرتی آمووی ترول.')
+          : (currentDoc.subtitle || 'Legal policies, terms and conditions, and booking regulations for Amovi Travel.')}
+        canonicalUrl={`https://amovi.travel/policy?tab=${activeTab}`}
+      />
       
       {/* ========================================================
           ۱. هیرو سکشن مرکز قوانین و حریم خصوصی

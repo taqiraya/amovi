@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Mail, MapPin, ArrowRight, ArrowLeft, MessageCircle, CheckCircle2 } from 'lucide-react';
 import { useLangStore } from '../../store/useLangStore';
 import { createContactMessage } from '../../services/api';
+import SEO from '../../components/SEO';
 import heroBg from '../../assets/images/hero-bg.webp';
 
 export default function Contact() {
@@ -55,6 +56,13 @@ export default function Contact() {
 
   return (
     <div className={`w-full bg-[#F8FAFC] min-h-screen ${isRtl ? 'font-[Sahel]' : 'font-[Inter]'}`}>
+      <SEO 
+        title={isRtl ? 'تماس با ما | آمووی ترول' : 'Contact Us | Amovi Travel'}
+        description={isRtl 
+          ? 'با آمووی ترول در تماس باشید. آدرس دفتر: کابل، شهر نو، چهارراهی انصاری. پاسخگویی به سوالات، مشاوره اختصاصی سفر و راهنمایی تورهای افغانستان.'
+          : 'Contact Amovi Travel. Kabul Office: Ansari Square, Shahr-e Naw, Kabul, Afghanistan. Dedicated tour consulting and expedition planning.'}
+        canonicalUrl="https://amovi.travel/contact"
+      />
       
       {/* ========================================================
           ۱. هیرو سکشن اصلی صفحه تماس (با الهام مستقیم از تمپلت)

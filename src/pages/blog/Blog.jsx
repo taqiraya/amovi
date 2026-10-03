@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ArrowLeft, Clock, ChevronLeft, ChevronRight, Compass } from 'lucide-react';
 import { useLangStore } from '../../store/useLangStore';
+import SEO from '../../components/SEO';
 import heroBg from '../../assets/images/hero-bg.webp';
 
 const ITEMS_PER_PAGE = 6;
@@ -44,6 +45,13 @@ export default function Blog() {
 
   return (
     <div className={`w-full bg-[#F8FAFC] min-h-screen text-[#14213D] ${isRtl ? 'font-[Sahel]' : 'font-[Inter]'}`}>
+      <SEO 
+        title={isRtl ? 'وبلاگ و روایت‌های سفر در افغانستان | آمووی ترول' : 'Travel Blog & Stories from Afghanistan | Amovi Travel'}
+        description={isRtl 
+          ? 'روایت‌ها، راهنماهای سفر، فرهنگ و میراث تاریخی افغانستان به قلم کارشناسان آمووی ترول.' 
+          : 'Authentic travel stories, deep cultural insights, and field travel guides across Afghanistan with Amovi Travel.'}
+        canonicalUrl="https://amovi.travel/blog"
+      />
       
       {/* ========================================================
           ۱. هیرو سکشن اصلی وبلاگ (Stories From Afghanistan)

@@ -18,6 +18,7 @@ import {
 import { useLangStore } from '../../store/useLangStore';
 import ProvinceHero from './components/ProvinceHero';
 import { getProvinceBySlug } from '../../services/api';
+import SEO from '../../components/SEO';
 
 export default function ProvinceView() {
   const { slug } = useParams();
@@ -154,8 +155,28 @@ export default function ProvinceView() {
   const localData = province[currentLang] || province.en || {};
   const livingHeritage = province.living_heritage || {};
 
+  const destinationSchema = {
+    "@context": "https://schema.org",
+    "@type": "TouristDestination",
+    "name": localData.name,
+    "description": localData.intro || localData.history_text,
+    "image": province.images?.hero_cover,
+    "touristType": ["Cultural Tourism", "Adventure Tourism", "Heritage Tourism"],
+    "containedInPlace": {
+      "@type": "Country",
+      "name": "Afghanistan"
+    }
+  };
+
   return (
     <div className={`w-full bg-[#F8FAFC] pb-16 ${isRtl ? 'font-[Sahel]' : 'font-[Inter]'}`}>
+      <SEO 
+        title={`${localData.name} — ${localData.tagline || (isRtl ? 'راهنمای سفر و جاذبه‌های گردشگری' : 'Travel Guide & Attractions')}`}
+        description={localData.intro || localData.history_text}
+        ogImage={province.images?.hero_cover}
+        keywords={`${localData.name}, Afghanistan travel, visit ${localData.name}, ${localData.name} tourism, Amovi Travel`}
+        schema={destinationSchema}
+      />
       
       {/* ========================================================
           ۱. هیرو سکشن ولایت (Province Hero)

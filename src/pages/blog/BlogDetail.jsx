@@ -15,6 +15,7 @@ import {
   Send
 } from 'lucide-react';
 import { useLangStore } from '../../store/useLangStore';
+import SEO from '../../components/SEO';
 import heroBg from '../../assets/images/hero-bg.webp';
 
 export default function BlogDetail() {
@@ -91,8 +92,45 @@ export default function BlogDetail() {
   const shareUrl = encodeURIComponent(window.location.href);
   const shareTitle = encodeURIComponent(currentArticle.title);
 
+  // Schema.org BlogPosting
+  const blogPostingSchema = useMemo(() => {
+    if (!currentArticle) return null;
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'BlogPosting',
+      headline: currentArticle.title,
+      description: currentArticle.excerpt,
+      image: currentArticle.image ? (currentArticle.image.startsWith('http') ? currentArticle.image : `https://amovi.travel${currentArticle.image}`) : 'https://amovi.travel/logo.png',
+      author: {
+        '@type': 'Organization',
+        name: 'Amovi Travel',
+        url: 'https://amovi.travel'
+      },
+      publisher: {
+        '@type': 'Organization',
+        name: 'Amovi Travel',
+        logo: {
+          '@type': 'ImageObject',
+          url: 'https://amovi.travel/logo.png'
+        }
+      },
+      mainEntityOfPage: {
+        '@type': 'WebPage',
+        '@id': `https://amovi.travel/blog/${currentArticle.id}`
+      }
+    };
+  }, [currentArticle]);
+
   return (
     <div className={`w-full bg-[#F8FAFC] min-h-screen text-[#14213D] ${isRtl ? 'font-[Sahel]' : 'font-[Inter]'}`}>
+      <SEO 
+        title={currentArticle.title}
+        description={currentArticle.excerpt}
+        canonicalUrl={`https://amovi.travel/blog/${currentArticle.id}`}
+        ogImage={currentArticle.image}
+        ogType="article"
+        schema={blogPostingSchema}
+      />
       
       {/* ========================================================
           ۱. هیرو بنر جزئیات مقاله (Hero Banner - عینا مطابق دیزاین)

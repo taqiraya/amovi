@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { useLangStore } from '../../store/useLangStore';
 import { createMasterRequest } from '../../services/api';
+import SEO from '../../components/SEO';
 
 // ایمپورت تصاویر اصلی
 import heroBg from '../../assets/images/hero-bg.webp';
@@ -94,6 +95,13 @@ export default function About() {
 
   return (
     <div className={`w-full bg-[#F8FAFC] min-h-screen text-[#14213D] ${isRtl ? 'font-[Sahel]' : 'font-[Inter]'}`}>
+      <SEO 
+        title={isRtl ? 'درباره ما | آمووی ترول' : 'About Us | Amovi Travel'}
+        description={isRtl 
+          ? 'آشنایی با آمووی ترول؛ پیشگام در ارائه سفرهای اصیل، مسئولانه و برنامه‌ریزی‌شده در افغانستان با تاکید بر امنیت، احترام به فرهنگ محلی و تعالی حرفه‌ای.'
+          : 'About Amovi Travel — Pioneering authentic, safe, and thoughtfully planned journeys across Afghanistan with deep cultural respect and uncompromising safety standards.'}
+        canonicalUrl="https://amovi.travel/about"
+      />
       
       {/* ========================================================
           ۱. هیرو سکشن اصلی صفحه درباره ما (Brand Profile: Amovi Explore Afghanistan)

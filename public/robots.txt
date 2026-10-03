@@ -1,0 +1,12 @@
+# Robots.txt for Amovi Travel (Explore Afghanistan)
+User-agent: *
+Allow: /
+
+# Disallow internal administrative & system paths
+Disallow: /admin
+Disallow: /admin/
+Disallow: /admin/*
+
+# Host & Sitemaps
+Host: https://amovi.travel
+Sitemap: https://amovi.travel/sitemap.xml

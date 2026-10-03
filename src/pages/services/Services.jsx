@@ -18,6 +18,7 @@ import {
 import { useLangStore } from '../../store/useLangStore';
 import { createMasterRequest } from '../../services/api';
 import heroBg from '../../assets/images/hero-bg.webp';
+import SEO from '../../components/SEO';
 
 export default function Services() {
   const { currentLang, translations } = useLangStore();
@@ -116,6 +117,13 @@ export default function Services() {
 
   return (
     <div className={`w-full bg-[#F8FAFC] min-h-screen text-[#14213D] ${isRtl ? 'font-[Sahel]' : 'font-[Inter]'}`}>
+      <SEO 
+        title={isRtl ? 'خدمات جامع سفر به افغانستان | ویزا، اقامتگاه، ترانسفر و راهنما' : 'Comprehensive Afghanistan Travel Services | Visa, Accommodation, Transport, VIP'}
+        description={isRtl 
+          ? 'ارائه ۷ خدمت جامع سفر به افغانستان: تسهیلات ویزا، اقامتگاه‌های منتخب، حمل‌ونقل و ترانسفر امن، راهنمایان مجرب، پشتیبانی سلامت و سفرهای تشریفاتی VIP آمووی ترول.' 
+          : 'From visa assistance and accommodation to transportation, professional guides, health assistance and VIP travel, Amovi provides essential services for exploring Afghanistan.'}
+        keywords="Afghanistan travel services, Afghanistan visa assistance, Afghanistan hotel booking, private driver Afghanistan, tour guides Afghanistan, Amovi Travel services"
+      />
       
       {/* ========================================================
           ۱. هیرو سکشن اصلی صفحه خدمات (Services Hero)

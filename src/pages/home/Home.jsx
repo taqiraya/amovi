@@ -6,11 +6,12 @@ import Hero from './components/Hero';
 import AboutExperience from './components/AboutExperience';
 import ServicesHighlights from './components/ServicesHighlights';
 import Testimonials from './components/Testimonials';
-// ۱. ایمپورت کردن کامپوننت بنر دعوت به سفر منطبق بر تمپلت
 import CallToAction from './components/CallToAction';
+import SEO from '../../components/SEO';
 
 export default function Home() {
   const { currentLang, translations } = useLangStore();
+  const isRtl = currentLang === 'fa';
   const [destinations, setDestinations] = useState([]);
   const [tours, setTours] = useState([]);
   const [testimonials, setTestimonials] = useState([]);
@@ -32,6 +33,13 @@ export default function Home() {
 
   return (
     <main className={`w-full max-w-[1440px] mx-auto bg-[#14213D] text-white overflow-x-hidden ${currentLang === 'fa' ? 'font-[Sahel]' : 'font-[Inter]'} shadow-2xl`}>
+      <SEO 
+        title={isRtl ? 'کشف شگفتی‌ها، فرهنگ و تاریخ اصیل افغانستان' : 'Explore Afghanistan with Confidence & Authentic Experiences'}
+        description={isRtl 
+          ? 'سفرهای امن، معتبر و به‌یادماندنی در افغانستان با هدایت کارشناسان محلی و باسابقه آمووی ترول. خدمات کامل ویزا، اقامتگاه، ترانسفر اختصاصی و راهنمایان بومی.' 
+          : 'Authentic, safe and memorable travel experiences across Afghanistan with trusted local expertise. Visa assistance, stays, transport and experienced guides.'}
+        keywords="Amovi Travel, Afghanistan tourism, Kabul, Bamyan, Herat, visit Afghanistan, Band-e Amir, travel Afghanistan"
+      />
       {/* هیرو سکشن اصلی */}
       <Hero currentLang={currentLang} />
       

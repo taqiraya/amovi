@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 import { useLangStore } from '../../store/useLangStore';
 import { getPlaceBySlug, getProvinceBySlug } from '../../services/api';
+import SEO from '../../components/SEO';
 
 export default function PlaceDetail() {
   const { slug, placeId } = useParams();
@@ -97,8 +98,33 @@ export default function PlaceDetail() {
   const bboxPadding = 0.015;
   const mapBbox = `${mapLng - bboxPadding},${mapLat - bboxPadding},${mapLng + bboxPadding},${mapLat + bboxPadding}`;
 
+  const attractionSchema = {
+    "@context": "https://schema.org",
+    "@type": "TouristAttraction",
+    "name": placeData.name,
+    "description": placeData.lead || placeData.overview || placeData.teaser,
+    "image": gallery[0] || place.image,
+    "touristType": ["Historical Tourism", "Sightseeing", "Cultural Heritage"],
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": mapLat,
+      "longitude": mapLng
+    },
+    "containedInPlace": {
+      "@type": "City",
+      "name": provData.name
+    }
+  };
+
   return (
     <div className={`w-full bg-[#F8FAFC] pt-28 sm:pt-36 pb-20 ${isRtl ? 'font-[Sahel]' : 'font-[Inter]'}`}>
+      <SEO 
+        title={`${placeData.name} — ${provData.name}`}
+        description={placeData.lead || placeData.overview || placeData.teaser}
+        ogImage={gallery[0] || place.image}
+        keywords={`${placeData.name}, ${provData.name}, Afghanistan tourism, things to do in ${provData.name}, visit ${placeData.name}`}
+        schema={attractionSchema}
+      />
       
       {/* ========================================================
           ۱. نوار آدرس و مسیر پیمایش (Breadcrumb Navigation)

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useLangStore } from '../../store/useLangStore';
+import SEO from '../../components/SEO';
 
 const featuredProvinces = [
   {
@@ -42,6 +43,13 @@ export default function Destinations() {
 
   return (
     <div className={`pt-32 pb-24 px-6 max-w-7xl mx-auto ${isRtl ? 'text-right font-[Sahel]' : 'text-left font-[Inter]'}`}>
+      <SEO 
+        title={isRtl ? 'مقاصد رویایی در سراسر افغانستان' : 'Iconic Destinations Across Afghanistan'}
+        description={isRtl 
+          ? 'از پایتخت کهن کابل تا دره‌های زمردین بامیان و شکوه تاریخی هرات و بلخ، سفرهای منحصربه‌فرد با آمووی ترول.' 
+          : 'Explore iconic destinations across Afghanistan: Kabul, Bamyan, Herat, Balkh and beyond with Amovi Travel.'}
+        keywords="Afghanistan destinations, Kabul, Bamyan, Herat, Balkh, visit Afghanistan, Amovi Travel"
+      />
       <div className="text-center max-w-2xl mx-auto mb-14">
         <span className="text-[#FCA311] font-bold text-xs uppercase tracking-widest block mb-2 font-[Inter]">
           {isRtl ? 'کشف ولایات' : 'EXPLORE PROVINCES'}

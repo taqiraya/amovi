@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Core Pages -->
+  <url>
+    <loc>https://amovi.travel/</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/destinations?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/destinations?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/tours</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/tours?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/tours?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/services</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/services?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/services?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/about</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/about?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/about?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/blog</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/blog?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/blog?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/contact</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/contact?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/contact?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/policy</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://amovi.travel/policy?lang=en" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://amovi.travel/policy?lang=fa" />
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/privacy-policy</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/terms-and-conditions</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/booking-terms</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Provinces -->
+  <url>
+    <loc>https://amovi.travel/destinations/kabul</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/bamyan</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/herat</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/balkh</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Attractions & Sub-Destinations -->
+  <url>
+    <loc>https://amovi.travel/destinations/kabul/bagh-e-babur</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/kabul/bibi-mahro-hill</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/kabul/national-museum</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/kabul/darul-aman-palace</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/bamyan/band-e-amir</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/bamyan/buddha-niches</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/destinations/bamyan/shahr-e-gholghola</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Blog Articles -->
+  <url>
+    <loc>https://amovi.travel/blog/beyond-headlines</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/blog/hidden-natural-beauty</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/blog/through-the-seasons</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/blog/ancient-cities-landscapes</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/blog/nuristan-mountains</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/blog/soul-culture-identity</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/blog/people-behind-land</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/blog/afghan-hospitality</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/blog/traditions-alive</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/blog/taste-of-afghanistan</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/blog/jewelry-stones-crafts</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/blog/afghan-carpets</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/blog/afghan-saffron</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://amovi.travel/blog/fruits-dry-fruits</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+</urlset>

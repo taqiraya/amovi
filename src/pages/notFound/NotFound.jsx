@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useLangStore } from '../../store/useLangStore';
+import SEO from '../../components/SEO';
 
 export default function NotFound() {
   const { currentLang } = useLangStore();
@@ -7,6 +8,10 @@ export default function NotFound() {
 
   return (
     <div className={`pt-36 pb-24 px-6 text-center max-w-xl mx-auto ${isRtl ? 'font-[Sahel]' : 'font-[Inter]'}`}>
+      <SEO 
+        title={isRtl ? 'صفحه مورد نظر پیدا نشد (۴۰۴) | آمووی ترول' : 'Page Not Found (404) | Amovi Travel'}
+        description={isRtl ? 'متاسفانه صفحه مورد نظر شما در آمووی ترول پیدا نشد.' : 'The requested page was not found on Amovi Travel.'}
+      />
       <h1 className="text-8xl font-black text-[#FCA311] mb-2 tracking-tight">404</h1>
       <h2 className="text-2xl sm:text-3xl font-bold text-[#14213D] mb-4">
         {isRtl ? 'صفحه مورد نظر پیدا نشد!' : 'Page Not Found!'}

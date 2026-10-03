@@ -9,7 +9,7 @@ export default function Hero({ currentLang }) {
   const isRtl = currentLang === 'fa';
 
   return (
-    <section className="relative w-full h-[95vh] min-h-[720px] sm:min-h-[800px] md:min-h-[750px] max-h-[950px] flex flex-col justify-center overflow-hidden bg-[#14213D]" dir="ltr">
+    <section className="relative w-full min-h-[640px] py-14 sm:py-20 md:py-0 md:h-[95vh] md:min-h-[720px] md:max-h-[950px] flex flex-col justify-center overflow-hidden bg-[#14213D]" dir="ltr">
 
       {/* تصویر پس‌زمینه سراسری - در حالت دری عکس فلیپ می‌شود */}
       <div 
@@ -26,7 +26,7 @@ export default function Hero({ currentLang }) {
       />
 
       {/* ۳. کانتینر اصلی محتوا با عرض دقیق ۱۲۲۰ پیکسل */}
-      <div className="w-full max-w-[1220px] mx-auto px-6 md:px-8 grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-4 lg:gap-8 items-center relative z-20 h-full pt-24 pb-12 md:py-0 text-left" dir="ltr">
+      <div className="w-full max-w-[1220px] mx-auto px-4 sm:px-6 md:px-8 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-4 lg:gap-8 items-center relative z-20 h-full pt-16 pb-8 md:py-0 text-left" dir="ltr">
         
         {/* بخش متن هیرو */}
         <div 
@@ -84,26 +84,26 @@ export default function Hero({ currentLang }) {
         <div className={`w-full md:col-span-6 flex items-center relative mt-4 md:mt-0 lg:mt-12 pb-6 md:pb-0
           ${isRtl ? 'md:order-1 justify-start' : 'md:order-2 justify-end'}`}
         >
-          {/* کانتینر اصلی کلاژ: دایره‌ها در موبایل (۳۲۵ تا ۴۲۵) بزرگ‌تر و با فاصله بیشتر از لبه‌ها (px-4) و در تبلت فیکس دسکتاپ هستند */}
-          <div className="relative mx-auto md:mx-0 w-[290px] h-[290px] xs:w-[320px] xs:h-[320px] sm:w-[410px] sm:h-[410px] md:w-[360px] md:h-[360px] lg:w-[480px] lg:h-[480px] xl:w-[550px] xl:h-[550px]">
+          {/* کانتینر اصلی کلاژ دایره‌ای با ابعاد واکنش‌گرا برای موبایل، آیپد و دسکتاپ */}
+          <div className="relative mx-auto md:mx-0 w-[270px] h-[270px] sm:w-[350px] sm:h-[350px] md:w-[320px] md:h-[320px] lg:w-[460px] lg:h-[460px] xl:w-[540px] xl:h-[540px]">
             
             {/* دایره بزرگ پایه در بالا */}
-            <div className={`absolute w-[190px] h-[190px] sm:w-[280px] sm:h-[280px] md:w-[250px] md:h-[250px] lg:w-[330px] lg:h-[330px] xl:w-[380px] xl:h-[380px] rounded-full border-4 lg:border-[6px] border-[#FCA311] overflow-hidden shadow-2xl z-10 top-4 transition-all duration-500
-              ${isRtl ? 'left-2 sm:left-8' : 'right-2 sm:right-8'}`}
+            <div className={`absolute w-[180px] h-[180px] sm:w-[240px] sm:h-[240px] md:w-[220px] md:h-[220px] lg:w-[320px] lg:h-[320px] xl:w-[370px] xl:h-[370px] rounded-full border-4 lg:border-[6px] border-[#FCA311] overflow-hidden shadow-2xl z-10 top-2 sm:top-4 transition-all duration-500
+              ${isRtl ? 'left-2 sm:left-6 md:left-4 lg:left-8' : 'right-2 sm:right-6 md:right-4 lg:right-8'}`}
             >
               <img src={heroMain} alt="Main Luxury View" className="w-full h-full object-cover" />
             </div>
 
             {/* دایره متوسط سمت چپ */}
-            <div className={`absolute w-[140px] h-[140px] sm:w-[200px] sm:h-[200px] md:w-[180px] md:h-[180px] lg:w-[230px] lg:h-[230px] xl:w-[270px] xl:h-[270px] rounded-full border-4 lg:border-[6px] border-[#FCA311] overflow-hidden shadow-2xl z-20 bottom-2 transition-all duration-500
-              ${isRtl ? 'right-2 sm:right-6' : 'left-2 sm:left-6'}`}
+            <div className={`absolute w-[130px] h-[130px] sm:w-[170px] sm:h-[170px] md:w-[160px] md:h-[160px] lg:w-[220px] lg:h-[220px] xl:w-[260px] xl:h-[260px] rounded-full border-4 lg:border-[6px] border-[#FCA311] overflow-hidden shadow-2xl z-20 bottom-2 transition-all duration-500
+              ${isRtl ? 'right-2 sm:right-5 md:right-3 lg:right-6' : 'left-2 sm:left-5 md:left-3 lg:left-6'}`}
             >
               <img src={heroTop} alt="Top Experience" className="w-full h-full object-cover" />
             </div>
 
             {/* دایره کوچک رویی */}
-            <div className={`absolute w-[110px] h-[110px] sm:w-[160px] sm:h-[160px] md:w-[140px] md:h-[140px] lg:w-[180px] lg:h-[180px] xl:w-[210px] xl:h-[210px] rounded-full border-4 lg:border-[6px] border-[#FCA311] overflow-hidden shadow-2xl z-30 bottom-10 transition-all duration-500
-              ${isRtl ? 'left-0 sm:-left-2' : '-right-2 sm:-right-8 xl:-right-12'}`}
+            <div className={`absolute w-[100px] h-[100px] sm:w-[130px] sm:h-[130px] md:w-[125px] md:h-[125px] lg:w-[170px] lg:h-[170px] xl:w-[200px] xl:h-[200px] rounded-full border-4 lg:border-[6px] border-[#FCA311] overflow-hidden shadow-2xl z-30 bottom-8 sm:bottom-10 transition-all duration-500
+              ${isRtl ? 'left-0 sm:-left-2' : 'right-0 sm:-right-2 md:right-0 lg:-right-4 xl:-right-8'}`}
             >
               <img src={heroBottom} alt="Bottom Experience" className="w-full h-full object-cover" />
             </div>

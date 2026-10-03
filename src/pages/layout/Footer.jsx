@@ -32,10 +32,10 @@ function Footer() {
       dir={isRtl ? "rtl" : "ltr"}
     >
       {/* کانتینر اصلی محتوای فوتر با عرض استاندارد پروژه */}
-      <div className="mx-auto max-w-[1440px] px-3 xs:px-6 py-12 md:py-14 sm:px-8 lg:px-10">
+      <div className="mx-auto max-w-[1440px] px-4 sm:px-6 md:px-8 lg:px-10 py-12 md:py-14">
         
-        {/* گرید هوشمند مچ‌شده با عکس: در موبایل ۲ ستونه با فاصله‌های افقی بهینه شده برای ۳۲۵ پیکسل */}
-        <div className="grid gap-y-8 gap-x-3 xs:gap-8 grid-cols-2 md:grid-cols-4 lg:grid-cols-[1.5fr_1fr_1.2fr_1fr] lg:gap-8 xl:gap-14">
+        {/* گرید هوشمند مچ‌شده با عکس: در موبایل ۲ ستونه با فاصله‌های بهینه شده */}
+        <div className="grid gap-y-8 gap-x-6 sm:gap-x-8 grid-cols-2 md:grid-cols-4 lg:grid-cols-[1.5fr_1fr_1.2fr_1fr] lg:gap-8 xl:gap-14">
           
           {/* ستون اول: معرفی آژانس و شبکه‌های اجتماعی */}
           <div className="col-span-2 md:col-span-1 flex flex-col items-start">
@@ -94,7 +94,7 @@ function Footer() {
                 className={`inline-flex items-center gap-2 text-[13px] text-slate-300 transition-colors duration-200 hover:text-[#FCA311] font-medium group cursor-pointer w-fit ${isRtl ? 'flex-row-reverse' : ''}`}
               >
                 <Mail size={14} className="text-slate-400 group-hover:text-[#FCA311] shrink-0" />
-                <span className="font-[Inter] text-xs sm:text-sm tracking-tighter xs:tracking-normal">info@amovitravel.com</span>
+                <span className="font-[Inter] text-xs sm:text-sm">info@amovitravel.com</span>
               </a>
 
               <a 
@@ -103,12 +103,12 @@ function Footer() {
                 dir="ltr"
               >
                 <Phone size={14} className="text-slate-400 group-hover:text-[#FCA311] shrink-0" />
-                <span className="font-[Inter] text-xs xs:text-sm">+93 700 000 000</span>
+                <span className="font-[Inter] text-xs sm:text-sm">+93 700 000 000</span>
               </a>
 
               <div className={`inline-flex items-center gap-2 text-[13px] text-slate-300 transition-colors duration-200 hover:text-[#FCA311] font-medium group w-fit ${isRtl ? 'flex-row-reverse' : ''}`}>
                 <MapPin size={14} className="text-slate-400 group-hover:text-[#FCA311] shrink-0" />
-                <span className="text-xs xs:text-sm">{isRtl ? "چهارراهی انصاری، شهرنو، کابل" : "Ansari Square, Shahr-e Naw, Kabul"}</span>
+                <span className="text-xs sm:text-sm">{isRtl ? "چهارراهی انصاری، شهرنو، کابل" : "Ansari Square, Shahr-e Naw, Kabul"}</span>
               </div>
             </nav>
           </div>

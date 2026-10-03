@@ -94,13 +94,13 @@ export default function ServicesHighlights({ currentLang }) {
         {/* ==================== گرید کارت‌های ۶گانه خدمات ==================== */}
         {/* ریسپانسیو اختصاصی: در عرض‌های بحرانی ۳۲۵پیکسل به صورت تک‌ستونه، در موبایل‌های استاندارد ۲ستونه و از تبلت به بالا کاملاً ۳ ستونه تراز می‌شود */}
         <div 
-          className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full"
+          className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full"
           dir={isRtl ? "rtl" : "ltr"}
         >
           {amoviServices.map((service) => (
             <div 
               key={service.id} 
-              className={`group flex flex-col justify-between p-6 sm:p-8 rounded-2xl bg-white border border-slate-100/80 hover:shadow-xl hover:border-slate-200/60 transition-all duration-300 hover:-translate-y-1 ${isRtl ? 'text-right' : 'text-left'}`}
+              className={`group flex flex-col justify-between p-6 sm:p-7 lg:p-8 rounded-2xl bg-white border border-slate-100/80 hover:shadow-xl hover:border-slate-200/60 transition-all duration-300 hover:-translate-y-1 ${isRtl ? 'text-right' : 'text-left'}`}
             >
               <div className="space-y-4">
                 {/* دایره نارنجی دکوراتیو آیکون‌ها عینا مطابق تمپلت */}

@@ -12,7 +12,7 @@ export default function AboutExperience({ currentLang }) {
     <section className="w-full py-10 md:py-14 bg-[#E5E5E5] text-[#14213D] overflow-hidden flex items-center justify-center">
       
       {/* کانتینر اصلی با عرض دقیق ۱۲۲۰ پیکسل استاندارد پروژه */}
-      <div className={`w-full max-w-[1220px] mx-auto px-4 sm:px-6 md:px-8 flex flex-col md:grid md:grid-cols-12 gap-8 md:gap-4 lg:gap-12 items-center h-full ${isRtl ? 'md:flex-row-reverse' : ''}`}>
+      <div className="w-full max-w-[1220px] mx-auto px-4 sm:px-6 md:px-8 flex flex-col md:grid md:grid-cols-12 gap-8 md:gap-6 lg:gap-12 items-center h-full">
         
         {/* بخش کلاژ تصاویر */}
         <div 
@@ -21,8 +21,8 @@ export default function AboutExperience({ currentLang }) {
           dir="ltr"
         >
           
-          {/* کانتینر کلاژ تصاویر */}
-          <div className="relative w-[280px] h-[200px] xs:w-[310px] xs:h-[220px] sm:w-[410px] sm:h-[280px] md:w-[350px] md:h-[250px] lg:w-[450px] lg:h-[310px] xl:w-[490px] xl:h-[330px]">
+          {/* کانتینر کلاژ تصاویر با موقعیت واکنش‌گرا در مرکز برای موبایل */}
+          <div className="relative mx-auto md:mx-0 w-[280px] h-[200px] sm:w-[380px] sm:h-[260px] md:w-[330px] md:h-[240px] lg:w-[450px] lg:h-[310px] xl:w-[490px] xl:h-[330px]">
 
             {/* =====================================================
                 SVG عکس بزرگ
@@ -134,7 +134,7 @@ export default function AboutExperience({ currentLang }) {
         <div 
           className={`w-full md:col-span-6 flex flex-col justify-center space-y-4 ${
             isRtl 
-              ? 'md:order-1 items-end text-right' 
+              ? 'md:order-1 items-stretch text-right' 
               : 'md:order-2 items-start text-left'
           }`}
           dir={isRtl ? "rtl" : "ltr"}

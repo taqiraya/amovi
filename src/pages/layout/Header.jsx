@@ -190,7 +190,7 @@ function Header() {
       </div>
 
       {/* ========================================== MOBILE RESPONSIVE ACCORDION MENU ========================================== */}
-      <div className={`overflow-hidden bg-white rounded-b-2xl border-t border-slate-100 lg:hidden transition-all duration-300 ${mobileMenuOpen ? "max-h-[800px] opacity-100" : "max-h-0 opacity-0"}`}>
+      <div className={`bg-white rounded-b-2xl border-t border-slate-100 lg:hidden transition-all duration-300 ${mobileMenuOpen ? "max-h-[85vh] overflow-y-auto opacity-100 shadow-2xl" : "max-h-0 overflow-hidden opacity-0"}`}>
         <div className="px-6 pb-6 pt-2">
           <nav className="flex flex-col">
             {/* رندر ۳ آیتم اول در منوی موبایل */}

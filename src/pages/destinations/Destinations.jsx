@@ -26,7 +26,7 @@ export default function Destinations() {
   }, []);
 
   return (
-    <div className={`pt-32 pb-24 px-6 max-w-7xl mx-auto ${isRtl ? 'text-right font-[Sahel]' : 'text-left font-[Inter]'}`}>
+    <div className={`pt-28 sm:pt-36 pb-16 sm:pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto ${isRtl ? 'text-right font-[Sahel]' : 'text-left font-[Inter]'}`}>
       <SEO 
         title={isRtl ? 'مقاصد رویایی در سراسر افغانستان | آمووی ترول' : 'Iconic Destinations Across Afghanistan | Amovi Travel'}
         description={isRtl 
@@ -36,14 +36,14 @@ export default function Destinations() {
         canonicalUrl="https://amovi.travel/destinations"
       />
 
-      <div className="text-center max-w-3xl mx-auto mb-14">
+      <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
         <span className="text-[#FCA311] font-bold text-xs uppercase tracking-widest block mb-2 font-[Inter]">
           {isRtl ? 'کشف ولایات و مقاصد گردشگری' : 'EXPLORE PROVINCES & DESTINATIONS'}
         </span>
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#14213D] mb-4">
+        <h1 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-[#14213D] mb-3 sm:mb-4">
           {isRtl ? 'مقاصد رویایی در سراسر افغانستان' : 'Iconic Destinations Across Afghanistan'}
         </h1>
-        <p className="text-slate-600 leading-relaxed text-sm sm:text-base">
+        <p className="text-slate-600 leading-relaxed text-xs sm:text-sm md:text-base">
           {isRtl
             ? 'سفر به زیباترین ولایات و شاهکارهای تمدنی افغانستان؛ از پایتخت تاریخی تا کوهساران سرسبز و آبدات باستانی ثبت‌شده.'
             : 'From the historic capital of Kabul to the emerald valleys of Bamyan, minarets of Herat, and sacred shrines of Balkh.'}
@@ -55,7 +55,7 @@ export default function Destinations() {
           <div className="w-10 h-10 border-4 border-[#FCA311] border-t-transparent rounded-full animate-spin" />
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" dir={isRtl ? 'rtl' : 'ltr'}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6" dir={isRtl ? 'rtl' : 'ltr'}>
           {provinces.map((prov) => {
             const name = isRtl ? (prov.fa?.name || prov.nameFa || prov.slug) : (prov.en?.name || prov.nameEn || prov.slug);
             const tagline = isRtl ? (prov.fa?.tagline || prov.descFa || prov.fa?.intro) : (prov.en?.tagline || prov.descEn || prov.en?.intro);
@@ -66,9 +66,9 @@ export default function Destinations() {
               <Link
                 key={prov.slug || prov.id}
                 to={`/destinations/${prov.slug}`}
-                className="group relative overflow-hidden rounded-3xl bg-white border border-slate-200/80 shadow-sm hover:shadow-2xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between"
+                className="group relative overflow-hidden rounded-2xl sm:rounded-3xl bg-white border border-slate-200/80 shadow-sm hover:shadow-2xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between"
               >
-                <div className="h-56 w-full overflow-hidden relative bg-slate-100">
+                <div className="h-52 sm:h-56 w-full overflow-hidden relative bg-slate-100">
                   <img
                     src={coverImage}
                     alt={name}
@@ -92,12 +92,12 @@ export default function Destinations() {
                     </div>
                   )}
 
-                  <h2 className={`absolute bottom-3 ${isRtl ? 'right-4 left-4' : 'left-4 right-4'} text-white text-xl font-black drop-shadow`}>
+                  <h2 className={`absolute bottom-3 ${isRtl ? 'right-4 left-4' : 'left-4 right-4'} text-white text-lg sm:text-xl font-black drop-shadow`}>
                     {name}
                   </h2>
                 </div>
 
-                <div className="p-5 flex flex-col justify-between flex-grow">
+                <div className="p-4 sm:p-5 flex flex-col justify-between flex-grow">
                   <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4 line-clamp-3 font-normal">
                     {tagline}
                   </p>

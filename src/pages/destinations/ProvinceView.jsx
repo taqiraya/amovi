@@ -196,7 +196,7 @@ export default function ProvinceView() {
       />
 
       {/* نگهدارنده محتوای اصلی */}
-      <div id="explore-hub" className="max-w-6xl mx-auto px-6 space-y-20 sm:space-y-28 pt-16 sm:pt-24">
+      <div id="explore-hub" className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16 sm:space-y-24 lg:space-y-28 pt-12 sm:pt-20">
 
         {/* ========================================================
             ۲. بخش تاریخ - پژواک گذشته (Echoes of the Past)
@@ -214,13 +214,13 @@ export default function ProvinceView() {
               {localData.history_title || t.historyTitle || (isRtl ? 'پژواک روزگار کهن' : 'Echoes of the Past')}
             </h2>
 
-            <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-normal pt-2">
+            <p className="text-slate-600 text-xs sm:text-sm md:text-base leading-relaxed font-normal pt-2">
               {localData.history_text || localData.intro}
             </p>
           </div>
 
-          <div className="lg:col-span-6">
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-slate-200 aspect-[16/10] group">
+          <div className="lg:col-span-6 max-w-xl mx-auto lg:max-w-none w-full">
+            <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border-2 sm:border-4 border-white bg-slate-200 aspect-[16/10] group">
               <img
                 src={province.images?.history_img || province.images?.hero_cover}
                 alt={localData.history_title || localData.name}
@@ -237,9 +237,9 @@ export default function ProvinceView() {
         ======================================================== */}
         <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center" dir={isRtl ? 'rtl' : 'ltr'}>
           {/* کلاژ تصاویر فرهنگ */}
-          <div className="lg:col-span-6 order-2 lg:order-1">
-            <div className="grid grid-cols-2 gap-4">
-              <div className="rounded-2xl overflow-hidden shadow-xl border-4 border-white aspect-[4/3] group">
+          <div className="lg:col-span-6 order-2 lg:order-1 max-w-lg lg:max-w-none mx-auto w-full">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
+              <div className="rounded-xl sm:rounded-2xl overflow-hidden shadow-xl border-2 sm:border-4 border-white aspect-[4/3] group">
                 <img
                   src={province.images?.culture_img || province.images?.hero_cover}
                   alt={localData.culture_title || localData.name}
@@ -247,7 +247,7 @@ export default function ProvinceView() {
                   loading="lazy"
                 />
               </div>
-              <div className="rounded-2xl overflow-hidden shadow-xl border-4 border-white aspect-[4/3] group mt-6">
+              <div className="rounded-xl sm:rounded-2xl overflow-hidden shadow-xl border-2 sm:border-4 border-white aspect-[4/3] group mt-4 sm:mt-6">
                 <img
                   src={province.images?.culture_img2 || province.images?.history_img || province.images?.hero_cover}
                   alt={localData.culture_title || localData.name}
@@ -271,16 +271,16 @@ export default function ProvinceView() {
               {localData.culture_title || t.cultureTitle || (isRtl ? 'میراث زنده' : 'Living Heritage')}
             </h2>
 
-            <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-normal">
+            <p className="text-slate-600 text-xs sm:text-sm md:text-base leading-relaxed font-normal">
               {localData.culture_text || localData.marketing_pitch}
             </p>
 
             {/* گرید ۲در۲ ویژگی‌های فرهنگی */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 pt-3 sm:pt-4">
               {/* ویژگی ۱: صنایع دستی */}
-              <div className="flex items-start gap-3 p-3 rounded-2xl bg-white border border-slate-200/80 shadow-sm">
-                <div className="w-10 h-10 rounded-full bg-amber-500/15 text-[#FCA311] flex items-center justify-center shrink-0">
-                  <Sparkles size={18} />
+              <div className="flex items-start gap-3 p-3 sm:p-3.5 rounded-2xl bg-white border border-slate-200/80 shadow-sm">
+                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-amber-500/15 text-[#FCA311] flex items-center justify-center shrink-0">
+                  <Sparkles size={17} />
                 </div>
                 <div>
                   <h4 className="text-xs sm:text-sm font-bold text-[#14213D]">
@@ -293,9 +293,9 @@ export default function ProvinceView() {
               </div>
 
               {/* ویژگی ۲: مهمان‌نوازی */}
-              <div className="flex items-start gap-3 p-3 rounded-2xl bg-white border border-slate-200/80 shadow-sm">
-                <div className="w-10 h-10 rounded-full bg-orange-500/15 text-orange-500 flex items-center justify-center shrink-0">
-                  <Heart size={18} />
+              <div className="flex items-start gap-3 p-3 sm:p-3.5 rounded-2xl bg-white border border-slate-200/80 shadow-sm">
+                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-orange-500/15 text-orange-500 flex items-center justify-center shrink-0">
+                  <Heart size={17} />
                 </div>
                 <div>
                   <h4 className="text-xs sm:text-sm font-bold text-[#14213D]">
@@ -308,9 +308,9 @@ export default function ProvinceView() {
               </div>
 
               {/* ویژگی ۳: خوراک محلی */}
-              <div className="flex items-start gap-3 p-3 rounded-2xl bg-white border border-slate-200/80 shadow-sm">
-                <div className="w-10 h-10 rounded-full bg-amber-500/15 text-amber-600 flex items-center justify-center shrink-0">
-                  <Utensils size={18} />
+              <div className="flex items-start gap-3 p-3 sm:p-3.5 rounded-2xl bg-white border border-slate-200/80 shadow-sm">
+                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-amber-500/15 text-amber-600 flex items-center justify-center shrink-0">
+                  <Utensils size={17} />
                 </div>
                 <div>
                   <h4 className="text-xs sm:text-sm font-bold text-[#14213D]">
@@ -323,9 +323,9 @@ export default function ProvinceView() {
               </div>
 
               {/* ویژگی ۴: آیین‌ها و سنت‌ها */}
-              <div className="flex items-start gap-3 p-3 rounded-2xl bg-white border border-slate-200/80 shadow-sm">
-                <div className="w-10 h-10 rounded-full bg-yellow-500/15 text-yellow-600 flex items-center justify-center shrink-0">
-                  <Award size={18} />
+              <div className="flex items-start gap-3 p-3 sm:p-3.5 rounded-2xl bg-white border border-slate-200/80 shadow-sm">
+                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-yellow-500/15 text-yellow-600 flex items-center justify-center shrink-0">
+                  <Award size={17} />
                 </div>
                 <div>
                   <h4 className="text-xs sm:text-sm font-bold text-[#14213D]">
@@ -343,7 +343,7 @@ export default function ProvinceView() {
         {/* ========================================================
             ۴. بخش جاهای دیدنی و تب‌های فیلتر (Discover Places to Visit)
         ======================================================== */}
-        <section id="places-to-visit" className="space-y-8 scroll-mt-24">
+        <section id="places-to-visit" className="space-y-6 sm:space-y-8 scroll-mt-24">
           <div className="text-center max-w-2xl mx-auto">
             <div className="flex items-center justify-center gap-2 mb-2">
               <span className="w-6 h-0.5 bg-[#FCA311] inline-block" />
@@ -358,7 +358,7 @@ export default function ProvinceView() {
           </div>
 
           {/* تب‌های دسته‌بندی فیلتر (شامل تب جدید گالری) */}
-          <div className="flex flex-wrap items-center justify-center gap-2 pt-2">
+          <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 pt-2">
             {categories.map((cat) => {
               const isActive = selectedCategory === cat.id;
               return (
@@ -366,7 +366,7 @@ export default function ProvinceView() {
                   key={cat.id}
                   type="button"
                   onClick={() => setSelectedCategory(cat.id)}
-                  className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold transition-all duration-200 cursor-pointer ${
+                  className={`inline-flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-xs font-semibold transition-all duration-200 cursor-pointer ${
                     isActive
                       ? 'bg-[#14213D] text-[#FCA311] shadow-md border border-[#14213D]'
                       : cat.isGallery
@@ -396,14 +396,14 @@ export default function ProvinceView() {
               </div>
 
               {galleryItems.length > 0 ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                   {galleryItems.map((item, gIdx) => {
                     const itemData = item[currentLang] || item.en || {};
                     return (
                       <div
                         key={item.id || gIdx}
                         onClick={() => setLightboxIndex(gIdx)}
-                        className="group relative rounded-3xl overflow-hidden aspect-[4/3] bg-slate-200 shadow-md hover:shadow-2xl transition-all duration-500 cursor-pointer border-4 border-white"
+                        className="group relative rounded-2xl sm:rounded-3xl overflow-hidden aspect-[4/3] bg-slate-200 shadow-md hover:shadow-2xl transition-all duration-500 cursor-pointer border-2 sm:border-4 border-white"
                       >
                         <img
                           src={item.image}
@@ -411,7 +411,7 @@ export default function ProvinceView() {
                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                           loading="lazy"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#14213D]/90 via-[#14213D]/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5 text-white" dir={isRtl ? 'rtl' : 'ltr'}>
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#14213D]/90 via-[#14213D]/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4 sm:p-5 text-white" dir={isRtl ? 'rtl' : 'ltr'}>
                           <div className="flex items-center justify-between">
                             <span className="text-xs text-[#FCA311] font-semibold flex items-center gap-1">
                               <MapPin size={12} />
@@ -421,7 +421,7 @@ export default function ProvinceView() {
                               <Maximize2 size={14} />
                             </div>
                           </div>
-                          <h4 className="text-sm sm:text-base font-bold text-white mt-1 drop-shadow">
+                          <h4 className="text-xs sm:text-sm md:text-base font-bold text-white mt-1 drop-shadow">
                             {itemData.title}
                           </h4>
                         </div>
@@ -439,15 +439,15 @@ export default function ProvinceView() {
               )}
             </div>
           ) : (
-            /* حالت دوم: گرید ۳ ستونه کارت‌های جاذبه‌ها */
+            /* حالت دوم: گرید کارت‌های جاذبه‌ها */
             filteredPlaces.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 pt-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8 pt-4">
                 {filteredPlaces.map((place) => {
                   const placeData = place[currentLang] || place.en || {};
                   return (
                     <div
                       key={place.id}
-                      className="bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1"
+                      className="bg-white rounded-2xl sm:rounded-3xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1"
                       dir={isRtl ? 'rtl' : 'ltr'}
                     >
                       {/* تصویر جاذبه */}
@@ -473,9 +473,9 @@ export default function ProvinceView() {
                       </div>
 
                       {/* محتوای متنی کارت */}
-                      <div className="p-6 flex flex-col justify-between flex-grow space-y-4">
-                        <div className="space-y-2">
-                          <h3 className="text-lg sm:text-xl font-bold text-[#14213D] group-hover:text-[#FCA311] transition-colors">
+                      <div className="p-4 sm:p-6 flex flex-col justify-between flex-grow space-y-3.5 sm:space-y-4">
+                        <div className="space-y-1.5 sm:space-y-2">
+                          <h3 className="text-base sm:text-lg lg:text-xl font-bold text-[#14213D] group-hover:text-[#FCA311] transition-colors">
                             {placeData.name}
                           </h3>
                           <p className="text-slate-600 text-xs sm:text-sm leading-relaxed line-clamp-3">
@@ -484,15 +484,15 @@ export default function ProvinceView() {
                         </div>
 
                         {/* برچسب لوکیشن و دکمه مشاهده جزئیات */}
-                        <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
-                          <div className="flex items-center gap-1.5 text-xs text-slate-500 font-medium">
-                            <MapPin size={14} className="text-[#FCA311]" />
-                            <span>{localData.name}</span>
+                        <div className="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+                          <div className="flex items-center gap-1.5 text-xs text-slate-500 font-medium truncate">
+                            <MapPin size={14} className="text-[#FCA311] shrink-0" />
+                            <span className="truncate">{localData.name}</span>
                           </div>
 
                           <Link
                             to={`/destinations/${slug}/${place.id}`}
-                            className="inline-flex items-center gap-1.5 bg-[#FCA311] hover:bg-amber-500 text-[#14213D] font-bold py-2 px-4 rounded-full text-xs transition-colors shadow-sm cursor-pointer"
+                            className="inline-flex items-center gap-1.5 bg-[#FCA311] hover:bg-amber-500 text-[#14213D] font-bold py-2 px-3 sm:px-4 rounded-full text-xs transition-colors shadow-sm cursor-pointer shrink-0"
                           >
                             <span>{t.exploreDetails || (isRtl ? 'مشاهده جزئیات' : 'Explore Details')}</span>
                             {isRtl ? <ArrowLeft size={13} /> : <ArrowRight size={13} />}
@@ -517,19 +517,19 @@ export default function ProvinceView() {
         {/* ========================================================
             ۵. بنر دعوت به سفر (Your Journey Awaits CTA)
         ======================================================== */}
-        <section className="relative rounded-3xl overflow-hidden shadow-2xl bg-[#14213D] text-white p-8 sm:p-14">
+        <section className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl bg-[#14213D] text-white p-6 sm:p-10 lg:p-14">
           <div 
             className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-35 scale-105"
             style={{ backgroundImage: `url(${province.images?.hero_cover})` }}
           />
           <div className="absolute inset-0 z-10 bg-gradient-to-r from-[#14213D]/95 via-[#14213D]/85 to-[#14213D]/90 pointer-events-none" />
 
-          <div className="relative z-20 flex flex-col md:flex-row items-center justify-between gap-8" dir={isRtl ? 'rtl' : 'ltr'}>
-            <div className={`space-y-3 max-w-xl ${isRtl ? 'text-right' : 'text-left'}`}>
+          <div className="relative z-20 flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-8" dir={isRtl ? 'rtl' : 'ltr'}>
+            <div className={`space-y-2 sm:space-y-3 max-w-xl ${isRtl ? 'text-right' : 'text-left'}`}>
               <span className="text-[#FCA311] text-xs font-bold uppercase tracking-widest block font-[Inter]">
                 {t.ctaReady || (isRtl ? 'آماده آغاز سفر هستید؟' : 'READY TO EXPLORE')}
               </span>
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-white leading-tight">
+              <h3 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-white leading-tight">
                 {isRtl ? `سفر رویایی شما به ${localData.name} در انتظار شماست` : `Your ${localData.name} Journey Awaits`}
               </h3>
               <p className="text-slate-300 text-xs sm:text-sm leading-relaxed font-light">
@@ -539,10 +539,10 @@ export default function ProvinceView() {
               </p>
             </div>
 
-            <div className="flex flex-wrap items-center gap-3 shrink-0">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0 w-full md:w-auto">
               <Link
                 to="/services"
-                className="inline-flex items-center gap-2 bg-[#FCA311] hover:bg-amber-500 text-[#14213D] font-bold py-3.5 px-7 rounded-full shadow-lg transition-all duration-200 text-xs sm:text-sm uppercase font-[Inter] tracking-wider"
+                className="inline-flex items-center justify-center gap-2 bg-[#FCA311] hover:bg-amber-500 text-[#14213D] font-bold py-3.5 px-7 rounded-full shadow-lg transition-all duration-200 text-xs sm:text-sm uppercase font-[Inter] tracking-wider w-full sm:w-auto"
               >
                 <span>{t.requestPackage || (isRtl ? 'ثبت درخواست سفر' : 'Request This Package')}</span>
                 {isRtl ? <ArrowLeft size={16} /> : <ArrowRight size={16} />}
@@ -550,7 +550,7 @@ export default function ProvinceView() {
 
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-semibold py-3.5 px-6 rounded-full border border-white/25 backdrop-blur-sm transition-all duration-200 text-xs sm:text-sm"
+                className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white font-semibold py-3.5 px-6 rounded-full border border-white/25 backdrop-blur-sm transition-all duration-200 text-xs sm:text-sm w-full sm:w-auto"
               >
                 <span>{t.contactAmovi || (isRtl ? 'تماس با ما' : 'Contact Amovi')}</span>
               </Link>
@@ -565,51 +565,51 @@ export default function ProvinceView() {
       ======================================================== */}
       {lightboxIndex !== null && galleryItems[lightboxIndex] && (
         <div 
-          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-4"
+          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-3 sm:p-4"
           onClick={() => setLightboxIndex(null)}
         >
           {/* دکمه بستن لایت‌باکس */}
           <button
             type="button"
             onClick={() => setLightboxIndex(null)}
-            className="absolute top-5 right-5 z-50 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
+            className="absolute top-3.5 right-3.5 sm:top-5 sm:right-5 z-50 p-2 sm:p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
             aria-label="Close"
           >
-            <X size={24} />
+            <X size={22} />
           </button>
 
           {/* دکمه قبلی */}
           <button
             type="button"
             onClick={handlePrevLightbox}
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-50 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
+            className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-50 p-2 sm:p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
             aria-label="Previous image"
           >
-            <ChevronLeft size={28} />
+            <ChevronLeft size={24} />
           </button>
 
           {/* دکمه بعدی */}
           <button
             type="button"
             onClick={handleNextLightbox}
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-50 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
+            className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-50 p-2 sm:p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
             aria-label="Next image"
           >
-            <ChevronRight size={28} />
+            <ChevronRight size={24} />
           </button>
 
           {/* کانتینر تصویر و کپشن */}
           <div 
-            className="max-w-4xl w-full max-h-[85vh] flex flex-col items-center"
+            className="max-w-4xl w-full max-h-[85vh] flex flex-col items-center px-4"
             onClick={(e) => e.stopPropagation()}
           >
             <img
               src={galleryItems[lightboxIndex].image}
               alt={galleryItems[lightboxIndex][currentLang]?.title || 'Enlarged photo'}
-              className="max-h-[75vh] w-auto object-contain rounded-2xl shadow-2xl border border-white/10"
+              className="max-h-[68vh] sm:max-h-[75vh] w-auto object-contain rounded-xl sm:rounded-2xl shadow-2xl border border-white/10"
             />
-            <div className="mt-4 text-center text-white space-y-1">
-              <h3 className="text-base sm:text-lg font-bold">
+            <div className="mt-3 sm:mt-4 text-center text-white space-y-1 px-4">
+              <h3 className="text-sm sm:text-base md:text-lg font-bold">
                 {galleryItems[lightboxIndex][currentLang]?.title || galleryItems[lightboxIndex].en?.title}
               </h3>
               <p className="text-xs text-slate-400">

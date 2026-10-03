@@ -8,7 +8,12 @@ import {
   Heart, 
   Utensils, 
   Award,
-  Compass
+  Compass,
+  Camera,
+  Maximize2,
+  X,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
 import { useLangStore } from '../../store/useLangStore';
 import ProvinceHero from './components/ProvinceHero';
@@ -23,6 +28,7 @@ export default function ProvinceView() {
   const [province, setProvince] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [lightboxIndex, setLightboxIndex] = useState(null);
 
   useEffect(() => {
     let isMounted = true;
@@ -48,15 +54,73 @@ export default function ProvinceView() {
     { id: 'historic-landmarks', label: t.historicLandmarks || (isRtl ? 'بناها و یادمان‌های کهن' : 'Historic Structures and Landmarks') },
     { id: 'traditional-markets', label: t.traditionalMarkets || (isRtl ? 'بازارهای سنتی و گذرگاه‌های کهن' : 'Traditional Markets & Old Cities') },
     { id: 'modern-districts', label: t.modernDistricts || (isRtl ? 'محله‌ها و نقاط مدرن' : 'Modern Districts') },
+    { id: 'gallery', label: t.gallery || (isRtl ? 'گالری' : 'Gallery'), isGallery: true },
   ], [isRtl, t]);
 
   const filteredPlaces = useMemo(() => {
     if (!province?.sub_destinations) return [];
     if (selectedCategory === 'all') return province.sub_destinations;
+    if (selectedCategory === 'gallery') return [];
     return province.sub_destinations.filter(
       (place) => place.filter_category === selectedCategory
     );
   }, [province, selectedCategory]);
+
+  const galleryItems = useMemo(() => {
+    if (!province) return [];
+    if (province.gallery && province.gallery.length > 0) {
+      return province.gallery;
+    }
+    // Fallback if province.gallery is empty
+    const items = [];
+    if (province.images?.hero_cover) {
+      items.push({
+        id: 'hero',
+        image: province.images.hero_cover,
+        en: { title: `${province.en?.name || 'Province'} Landscape`, location: province.en?.name },
+        fa: { title: `چشم‌انداز طبیعی ${province.fa?.name || 'ولایت'}`, location: province.fa?.name }
+      });
+    }
+    if (province.images?.history_img) {
+      items.push({
+        id: 'hist',
+        image: province.images.history_img,
+        en: { title: 'Historical Heritage', location: province.en?.name },
+        fa: { title: 'میراث و بناهای تاریخی', location: province.fa?.name }
+      });
+    }
+    if (province.images?.culture_img) {
+      items.push({
+        id: 'cult',
+        image: province.images.culture_img,
+        en: { title: 'Living Culture & Traditions', location: province.en?.name },
+        fa: { title: 'فرهنگ و سنت‌های بومی', location: province.fa?.name }
+      });
+    }
+    if (province.sub_destinations) {
+      province.sub_destinations.forEach((sub, sIdx) => {
+        items.push({
+          id: `sub-${sIdx}`,
+          image: sub.image,
+          en: { title: sub.en?.name || 'Attraction', location: province.en?.name },
+          fa: { title: sub.fa?.name || 'جاذبه', location: province.fa?.name }
+        });
+      });
+    }
+    return items;
+  }, [province]);
+
+  const handleNextLightbox = (e) => {
+    e.stopPropagation();
+    if (galleryItems.length === 0) return;
+    setLightboxIndex((prev) => (prev + 1) % galleryItems.length);
+  };
+
+  const handlePrevLightbox = (e) => {
+    e.stopPropagation();
+    if (galleryItems.length === 0) return;
+    setLightboxIndex((prev) => (prev - 1 + galleryItems.length) % galleryItems.length);
+  };
 
   if (loading) {
     return (
@@ -248,7 +312,7 @@ export default function ProvinceView() {
         </section>
 
         {/* ========================================================
-            ۴. بخش جاهای دیدنی (Discover Places to Visit)
+            ۴. بخش جاهای دیدنی و تب‌های فیلتر (Discover Places to Visit)
         ======================================================== */}
         <section id="places-to-visit" className="space-y-8 scroll-mt-24">
           <div className="text-center max-w-2xl mx-auto">
@@ -264,7 +328,7 @@ export default function ProvinceView() {
             </h2>
           </div>
 
-          {/* تب‌های دسته‌بندی فیلتر (۸ دسته‌بندی مطابق دیزاین) */}
+          {/* تب‌های دسته‌بندی فیلتر (شامل تب جدید گالری) */}
           <div className="flex flex-wrap items-center justify-center gap-2 pt-2">
             {categories.map((cat) => {
               const isActive = selectedCategory === cat.id;
@@ -273,83 +337,143 @@ export default function ProvinceView() {
                   key={cat.id}
                   type="button"
                   onClick={() => setSelectedCategory(cat.id)}
-                  className={`px-4 py-2 rounded-full text-xs font-semibold transition-all duration-200 cursor-pointer ${
+                  className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold transition-all duration-200 cursor-pointer ${
                     isActive
                       ? 'bg-[#14213D] text-[#FCA311] shadow-md border border-[#14213D]'
                       : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
                   }`}
                 >
-                  {cat.label}
+                  {cat.isGallery && <Camera size={13} className="text-[#FCA311]" />}
+                  <span>{cat.label}</span>
                 </button>
               );
             })}
           </div>
 
-          {/* گرید ۳ ستونه کارت‌های جاذبه‌ها */}
-          {filteredPlaces.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 pt-4">
-              {filteredPlaces.map((place) => {
-                const placeData = place[currentLang] || place.en || {};
-                return (
-                  <div
-                    key={place.id}
-                    className="bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1"
-                    dir={isRtl ? 'rtl' : 'ltr'}
-                  >
-                    {/* تصویر جاذبه */}
-                    <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
-                      <img
-                        src={place.image}
-                        alt={placeData.name}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        loading="lazy"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
-                      
-                      {/* بج دسته‌بندی در بالای عکس */}
-                      <span className={`absolute top-3 ${isRtl ? 'right-3' : 'left-3'} px-2.5 py-1 rounded-full bg-[#14213D]/80 backdrop-blur-md text-[#FCA311] text-[11px] font-semibold border border-white/20`}>
-                        {isRtl ? (place.categoryNameFa || place.categoryNameEn) : (place.categoryNameEn || 'Attraction')}
-                      </span>
-                    </div>
+          {/* حالت اول: نمایش گالری عکس (وقتی تب گالری انتخاب شده است) */}
+          {selectedCategory === 'gallery' ? (
+            <div className="space-y-6 pt-4">
+              <div className="text-center max-w-xl mx-auto">
+                <span className="text-[#FCA311] text-xs font-bold uppercase tracking-widest block font-[Inter]">
+                  {isRtl ? 'گالری تصاویر منتخب' : 'PHOTO GALLERY'}
+                </span>
+                <p className="text-slate-500 text-xs sm:text-sm mt-1">
+                  {isRtl 
+                    ? `جلوه‌های بصری، طبیعت شگفت‌انگیز و معماری تاریخی ولایت ${localData.name}` 
+                    : `Visual beauty, stunning landscapes and historic heritage of ${localData.name}`}
+                </p>
+              </div>
 
-                    {/* محتوای متنی کارت */}
-                    <div className="p-6 flex flex-col justify-between flex-grow space-y-4">
-                      <div className="space-y-2">
-                        <h3 className="text-lg sm:text-xl font-bold text-[#14213D] group-hover:text-[#FCA311] transition-colors">
-                          {placeData.name}
-                        </h3>
-                        <p className="text-slate-600 text-xs sm:text-sm leading-relaxed line-clamp-3">
-                          {placeData.teaser || placeData.lead}
-                        </p>
-                      </div>
-
-                      {/* برچسب لوکیشن و دکمه مشاهده جزئیات */}
-                      <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
-                        <div className="flex items-center gap-1.5 text-xs text-slate-500 font-medium">
-                          <MapPin size={14} className="text-[#FCA311]" />
-                          <span>{localData.name}</span>
+              {galleryItems.length > 0 ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {galleryItems.map((item, gIdx) => {
+                    const itemData = item[currentLang] || item.en || {};
+                    return (
+                      <div
+                        key={item.id || gIdx}
+                        onClick={() => setLightboxIndex(gIdx)}
+                        className="group relative rounded-3xl overflow-hidden aspect-[4/3] bg-slate-200 shadow-md hover:shadow-2xl transition-all duration-500 cursor-pointer border-4 border-white"
+                      >
+                        <img
+                          src={item.image}
+                          alt={itemData.title || `Gallery photo ${gIdx + 1}`}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                          loading="lazy"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#14213D]/90 via-[#14213D]/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5 text-white" dir={isRtl ? 'rtl' : 'ltr'}>
+                          <div className="flex items-center justify-between">
+                            <span className="text-xs text-[#FCA311] font-semibold flex items-center gap-1">
+                              <MapPin size={12} />
+                              <span>{itemData.location || localData.name}</span>
+                            </span>
+                            <div className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white">
+                              <Maximize2 size={14} />
+                            </div>
+                          </div>
+                          <h4 className="text-sm sm:text-base font-bold text-white mt-1 drop-shadow">
+                            {itemData.title}
+                          </h4>
                         </div>
-
-                        <Link
-                          to={`/destinations/${slug}/${place.id}`}
-                          className="inline-flex items-center gap-1.5 bg-[#FCA311] hover:bg-amber-500 text-[#14213D] font-bold py-2 px-4 rounded-full text-xs transition-colors shadow-sm cursor-pointer"
-                        >
-                          <span>{t.exploreDetails || (isRtl ? 'مشاهده جزئیات' : 'Explore Details')}</span>
-                          {isRtl ? <ArrowLeft size={13} /> : <ArrowRight size={13} />}
-                        </Link>
                       </div>
-                    </div>
-                  </div>
-                );
-              })}
+                    );
+                  })}
+                </div>
+              ) : (
+                <div className="py-16 text-center text-slate-400 bg-white rounded-3xl border border-dashed border-slate-200">
+                  <Camera size={36} className="mx-auto mb-2 text-slate-300" />
+                  <p className="text-sm">
+                    {isRtl ? 'تصویری در این گالری موجود نیست.' : 'No photos available in this gallery.'}
+                  </p>
+                </div>
+              )}
             </div>
           ) : (
-            <div className="py-16 text-center text-slate-400 bg-white rounded-3xl border border-dashed border-slate-200">
-              <Compass size={36} className="mx-auto mb-2 text-slate-300" />
-              <p className="text-sm">
-                {isRtl ? 'در این دسته‌بندی جاذبه‌ای ثبت نشده است.' : 'No destinations found in this category.'}
-              </p>
-            </div>
+            /* حالت دوم: گرید ۳ ستونه کارت‌های جاذبه‌ها */
+            filteredPlaces.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 pt-4">
+                {filteredPlaces.map((place) => {
+                  const placeData = place[currentLang] || place.en || {};
+                  return (
+                    <div
+                      key={place.id}
+                      className="bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1"
+                      dir={isRtl ? 'rtl' : 'ltr'}
+                    >
+                      {/* تصویر جاذبه */}
+                      <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
+                        <img
+                          src={place.image}
+                          alt={placeData.name}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          loading="lazy"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+                        
+                        {/* بج دسته‌بندی در بالای عکس */}
+                        <span className={`absolute top-3 ${isRtl ? 'right-3' : 'left-3'} px-2.5 py-1 rounded-full bg-[#14213D]/80 backdrop-blur-md text-[#FCA311] text-[11px] font-semibold border border-white/20`}>
+                          {isRtl ? (place.categoryNameFa || place.categoryNameEn) : (place.categoryNameEn || 'Attraction')}
+                        </span>
+                      </div>
+
+                      {/* محتوای متنی کارت */}
+                      <div className="p-6 flex flex-col justify-between flex-grow space-y-4">
+                        <div className="space-y-2">
+                          <h3 className="text-lg sm:text-xl font-bold text-[#14213D] group-hover:text-[#FCA311] transition-colors">
+                            {placeData.name}
+                          </h3>
+                          <p className="text-slate-600 text-xs sm:text-sm leading-relaxed line-clamp-3">
+                            {placeData.teaser || placeData.lead}
+                          </p>
+                        </div>
+
+                        {/* برچسب لوکیشن و دکمه مشاهده جزئیات */}
+                        <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
+                          <div className="flex items-center gap-1.5 text-xs text-slate-500 font-medium">
+                            <MapPin size={14} className="text-[#FCA311]" />
+                            <span>{localData.name}</span>
+                          </div>
+
+                          <Link
+                            to={`/destinations/${slug}/${place.id}`}
+                            className="inline-flex items-center gap-1.5 bg-[#FCA311] hover:bg-amber-500 text-[#14213D] font-bold py-2 px-4 rounded-full text-xs transition-colors shadow-sm cursor-pointer"
+                          >
+                            <span>{t.exploreDetails || (isRtl ? 'مشاهده جزئیات' : 'Explore Details')}</span>
+                            {isRtl ? <ArrowLeft size={13} /> : <ArrowRight size={13} />}
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className="py-16 text-center text-slate-400 bg-white rounded-3xl border border-dashed border-slate-200">
+                <Compass size={36} className="mx-auto mb-2 text-slate-300" />
+                <p className="text-sm">
+                  {isRtl ? 'در این دسته‌بندی جاذبه‌ای ثبت نشده است.' : 'No destinations found in this category.'}
+                </p>
+              </div>
+            )
           )}
         </section>
 
@@ -398,6 +522,67 @@ export default function ProvinceView() {
         </section>
 
       </div>
+
+      {/* ========================================================
+          ۶. مودال تمام‌صفحه لایت‌باکس عکس (Lightbox Modal)
+      ======================================================== */}
+      {lightboxIndex !== null && galleryItems[lightboxIndex] && (
+        <div 
+          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-4"
+          onClick={() => setLightboxIndex(null)}
+        >
+          {/* دکمه بستن لایت‌باکس */}
+          <button
+            type="button"
+            onClick={() => setLightboxIndex(null)}
+            className="absolute top-5 right-5 z-50 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
+            aria-label="Close"
+          >
+            <X size={24} />
+          </button>
+
+          {/* دکمه قبلی */}
+          <button
+            type="button"
+            onClick={handlePrevLightbox}
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-50 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
+            aria-label="Previous image"
+          >
+            <ChevronLeft size={28} />
+          </button>
+
+          {/* دکمه بعدی */}
+          <button
+            type="button"
+            onClick={handleNextLightbox}
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-50 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
+            aria-label="Next image"
+          >
+            <ChevronRight size={28} />
+          </button>
+
+          {/* کانتینر تصویر و کپشن */}
+          <div 
+            className="max-w-4xl w-full max-h-[85vh] flex flex-col items-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src={galleryItems[lightboxIndex].image}
+              alt={galleryItems[lightboxIndex][currentLang]?.title || 'Enlarged photo'}
+              className="max-h-[75vh] w-auto object-contain rounded-2xl shadow-2xl border border-white/10"
+            />
+            <div className="mt-4 text-center text-white space-y-1">
+              <h3 className="text-base sm:text-lg font-bold">
+                {galleryItems[lightboxIndex][currentLang]?.title || galleryItems[lightboxIndex].en?.title}
+              </h3>
+              <p className="text-xs text-slate-400">
+                {galleryItems[lightboxIndex][currentLang]?.location || localData.name} — {lightboxIndex + 1} / {galleryItems.length}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }

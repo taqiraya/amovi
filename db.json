@@ -446,7 +446,81 @@
             "desc": "شب‌های شعر و غزل، جشن‌های کهن نوروز و بازارهای قدیمی."
           }
         }
-      }
+      },
+      "gallery": [
+        {
+          "id": "kab-g1",
+          "image": "/images/provinces/kabul/bagh-e-babur.webp",
+          "en": {
+            "title": "Bagh-e Babur Terraces & Waterways",
+            "location": "Kabul"
+          },
+          "fa": {
+            "title": "باغ‌های پلکانی و جویبارهای باغ بابر شاه",
+            "location": "کابل"
+          }
+        },
+        {
+          "id": "kab-g2",
+          "image": "/images/provinces/kabul/bibi-mahro.webp",
+          "en": {
+            "title": "Bibi Mahro Hill Sunset Panorama",
+            "location": "Wazir Akbar Khan, Kabul"
+          },
+          "fa": {
+            "title": "غروب تماشایی تپه بی‌بی مهرو و پرچم ملی",
+            "location": "وزیر اکبرخان، کابل"
+          }
+        },
+        {
+          "id": "kab-g3",
+          "image": "/images/provinces/kabul/kabul-hero.webp",
+          "en": {
+            "title": "Darul Aman Boulevard & Grand Facade",
+            "location": "Darul Aman, Kabul"
+          },
+          "fa": {
+            "title": "بلوار سرسبز و قصر باشکوه دارالامان",
+            "location": "دارالامان، کابل"
+          }
+        },
+        {
+          "id": "kab-g4",
+          "image": "/images/provinces/kabul/kabul-culture.webp",
+          "en": {
+            "title": "National Museum Antiquities & Heritage",
+            "location": "Kabul"
+          },
+          "fa": {
+            "title": "گنجینه‌های باستانی موزه ملی افغانستان",
+            "location": "کابل"
+          }
+        },
+        {
+          "id": "kab-g5",
+          "image": "/images/provinces/kabul/kabul-history.webp",
+          "en": {
+            "title": "Old Kabul City & Sher Darwaza Ridges",
+            "location": "Old Kabul"
+          },
+          "fa": {
+            "title": "بافت تاریخی کابل کهن و کوه شیردروازه",
+            "location": "کابل کهنه"
+          }
+        },
+        {
+          "id": "kab-g6",
+          "image": "/tours/images/kabulPictures.webp",
+          "en": {
+            "title": "Vibrant City Life & Historic Bazaars",
+            "location": "Kabul"
+          },
+          "fa": {
+            "title": "هیاهوی زندگی شهری و بازارهای سنتی",
+            "location": "کابل"
+          }
+        }
+      ]
     },
     {
       "id": "bamyan",
@@ -790,7 +864,81 @@
             "desc": "نغمه‌های دلنشین دمبوره، جشن گل کچالو و فرهنگ اسکی زمستانه."
           }
         }
-      }
+      },
+      "gallery": [
+        {
+          "id": "bam-g1",
+          "image": "/images/provinces/bamyan/bamyan-hero.webp",
+          "en": {
+            "title": "Band-e Amir Deep Azure Lakes",
+            "location": "Band-e Amir, Bamyan"
+          },
+          "fa": {
+            "title": "دریاچه‌های فیروزه‌ای و زلال بند امیر",
+            "location": "بند امیر، بامیان"
+          }
+        },
+        {
+          "id": "bam-g2",
+          "image": "/images/provinces/bamyan/Buddha-1.webp",
+          "en": {
+            "title": "Ancient Salsal Buddha Cliff Niche",
+            "location": "Bamyan Valley"
+          },
+          "fa": {
+            "title": "رواق عظیم و تاریخی بودای صلصال در صخره‌ها",
+            "location": "دره بامیان"
+          }
+        },
+        {
+          "id": "bam-g3",
+          "image": "/tours/images/bamyanPictures.webp",
+          "en": {
+            "title": "Shahr-e Gholghola Ghorid Fortress",
+            "location": "Bamyan"
+          },
+          "fa": {
+            "title": "ارگ تاریخی شهر غلغله بر فراز تپه",
+            "location": "بامیان"
+          }
+        },
+        {
+          "id": "bam-g4",
+          "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80",
+          "en": {
+            "title": "Koh-e Baba Mountain Ranges & Valleys",
+            "location": "Highlands, Bamyan"
+          },
+          "fa": {
+            "title": "رشته‌کوه‌های پربرف کوه بابا و دشت‌های سرسبز",
+            "location": "ارتفاعات بامیان"
+          }
+        },
+        {
+          "id": "bam-g5",
+          "image": "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1200&q=80",
+          "en": {
+            "title": "Rural Highland Traditions & Clay Hamlets",
+            "location": "Bamyan Villages"
+          },
+          "fa": {
+            "title": "خانه‌ها و روستاهای سنتی خشتی در دامنه کوه",
+            "location": "روستاهای بامیان"
+          }
+        },
+        {
+          "id": "bam-g6",
+          "image": "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=80",
+          "en": {
+            "title": "Crystal Waterfall Travertine Barriers",
+            "location": "Band-e Amir, Bamyan"
+          },
+          "fa": {
+            "title": "آبشارهای طبیعی بر سدهای رسوبی بند امیر",
+            "location": "بند امیر، بامیان"
+          }
+        }
+      ]
     }
   ],
   "tours": [

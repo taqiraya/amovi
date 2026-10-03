@@ -106,7 +106,7 @@ function Footer() {
 
               <div className={`inline-flex items-center gap-2 text-[13px] text-slate-300 transition-colors duration-200 hover:text-[#FCA311] font-medium group w-fit ${isRtl ? 'flex-row-reverse' : ''}`}>
                 <MapPin size={14} className="text-slate-400 group-hover:text-[#FCA311] shrink-0" />
-                <span className="text-xs xs:text-sm">{isRtl ? "کابل، افغانستان" : "Kabul, Afghanistan"}</span>
+                <span className="text-xs xs:text-sm">{isRtl ? "چهارراهی انصاری، شهرنو، کابل" : "Ansari Square, Shahr-e Naw, Kabul"}</span>
               </div>
             </nav>
           </div>

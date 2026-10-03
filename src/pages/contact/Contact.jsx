@@ -323,10 +323,10 @@ export default function Contact() {
       <section id="office-map" className="max-w-6xl mx-auto px-6 pb-20">
         <div className="relative w-full h-[360px] sm:h-[420px] rounded-3xl overflow-hidden border border-slate-200 shadow-xl bg-slate-100">
           
-          {/* نقشه اینتراکتیو با تایل‌های دقیق کابل */}
+          {/* نقشه اینتراکتیو با تایل‌های دقیق کابل - شهرنو چهارراهی انصاری */}
           <iframe
             title="Amovi Travel Kabul Office Location"
-            src="https://www.openstreetmap.org/export/embed.html?bbox=69.160,34.525,69.195,34.545&layer=mapnik&marker=34.5350,69.1775"
+            src="https://www.openstreetmap.org/export/embed.html?bbox=69.155,34.524,69.180,34.544&layer=mapnik&marker=34.5338,69.1668"
             className="w-full h-full border-0 filter contrast-[1.02] brightness-[0.98]"
             loading="lazy"
           />
@@ -341,11 +341,11 @@ export default function Contact() {
             </h3>
             <div className="flex items-start gap-2 text-xs sm:text-sm text-slate-600 mb-5 leading-relaxed">
               <MapPin size={16} className="text-[#FCA311] shrink-0 mt-0.5" />
-              <span>{t.officeAddress || (isRtl ? 'سرک ۲، وزیر اکبرخان، کابل، افغانستان' : 'Street 2, Wazir Akbar Khan, Kabul, Afghanistan')}</span>
+              <span>{t.officeAddress || (isRtl ? 'چهارراهی انصاری، شهرنو، کابل، افغانستان' : 'Ansari Square, Shahr-e Naw, Kabul, Afghanistan')}</span>
             </div>
             
             <a
-              href="https://www.google.com/maps/search/?api=1&query=Wazir+Akbar+Khan+Kabul+Afghanistan"
+              href="https://www.google.com/maps/search/?api=1&query=Char+Rahi+Ansari+Shahr-e+Naw+Kabul+Afghanistan"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-[#FCA311] hover:bg-amber-500 text-[#14213D] text-xs sm:text-sm font-bold py-2.5 px-5 rounded-full shadow-md transition-all duration-200 group"
@@ -365,7 +365,7 @@ export default function Contact() {
               <MapPin size={22} className="fill-[#14213D]" />
             </div>
             <span className="bg-[#14213D] text-white text-[11px] font-bold px-2.5 py-0.5 rounded-full shadow-md mt-1 font-[Inter]">
-              Kabul
+              Shahr-e Naw, Kabul
             </span>
           </div>
 

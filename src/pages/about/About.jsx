@@ -183,6 +183,12 @@ export default function About() {
                   src={aboutImg1}
                   alt="Afghanistan Landscapes"
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                  onError={(e) => {
+                    if (!e.target.dataset.tried) {
+                      e.target.dataset.tried = 'true';
+                      e.target.src = '/images/provinces/kabul/kabul-hero.webp';
+                    }
+                  }}
                 />
               </div>
 
@@ -192,6 +198,12 @@ export default function About() {
                   src={aboutImg2}
                   alt="Cultural Heritage"
                   className="w-full h-full object-cover"
+                  onError={(e) => {
+                    if (!e.target.dataset.tried) {
+                      e.target.dataset.tried = 'true';
+                      e.target.src = '/images/provinces/kabul/kabul-culture.webp';
+                    }
+                  }}
                 />
               </div>
 

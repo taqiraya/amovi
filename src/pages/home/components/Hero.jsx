@@ -91,21 +91,51 @@ export default function Hero({ currentLang }) {
             <div className={`absolute w-[180px] h-[180px] sm:w-[240px] sm:h-[240px] md:w-[220px] md:h-[220px] lg:w-[320px] lg:h-[320px] xl:w-[370px] xl:h-[370px] rounded-full border-4 lg:border-[6px] border-[#FCA311] overflow-hidden shadow-2xl z-10 top-2 sm:top-4 transition-all duration-500
               ${isRtl ? 'left-2 sm:left-6 md:left-4 lg:left-8' : 'right-2 sm:right-6 md:right-4 lg:right-8'}`}
             >
-              <img src={heroMain} alt="Main Luxury View" className="w-full h-full object-cover" />
+              <img 
+                src={heroMain} 
+                alt="Main Luxury View" 
+                className="w-full h-full object-cover" 
+                onError={(e) => {
+                  if (!e.target.dataset.tried) {
+                    e.target.dataset.tried = 'true';
+                    e.target.src = '/images/provinces/kabul/kabul-hero.webp';
+                  }
+                }}
+              />
             </div>
 
             {/* دایره متوسط سمت چپ */}
             <div className={`absolute w-[130px] h-[130px] sm:w-[170px] sm:h-[170px] md:w-[160px] md:h-[160px] lg:w-[220px] lg:h-[220px] xl:w-[260px] xl:h-[260px] rounded-full border-4 lg:border-[6px] border-[#FCA311] overflow-hidden shadow-2xl z-20 bottom-2 transition-all duration-500
               ${isRtl ? 'right-2 sm:right-5 md:right-3 lg:right-6' : 'left-2 sm:left-5 md:left-3 lg:left-6'}`}
             >
-              <img src={heroTop} alt="Top Experience" className="w-full h-full object-cover" />
+              <img 
+                src={heroTop} 
+                alt="Top Experience" 
+                className="w-full h-full object-cover" 
+                onError={(e) => {
+                  if (!e.target.dataset.tried) {
+                    e.target.dataset.tried = 'true';
+                    e.target.src = '/tours/images/bamyanPictures.webp';
+                  }
+                }}
+              />
             </div>
 
             {/* دایره کوچک رویی */}
             <div className={`absolute w-[100px] h-[100px] sm:w-[130px] sm:h-[130px] md:w-[125px] md:h-[125px] lg:w-[170px] lg:h-[170px] xl:w-[200px] xl:h-[200px] rounded-full border-4 lg:border-[6px] border-[#FCA311] overflow-hidden shadow-2xl z-30 bottom-8 sm:bottom-10 transition-all duration-500
               ${isRtl ? 'left-0 sm:-left-2' : 'right-0 sm:-right-2 md:right-0 lg:-right-4 xl:-right-8'}`}
             >
-              <img src={heroBottom} alt="Bottom Experience" className="w-full h-full object-cover" />
+              <img 
+                src={heroBottom} 
+                alt="Bottom Experience" 
+                className="w-full h-full object-cover" 
+                onError={(e) => {
+                  if (!e.target.dataset.tried) {
+                    e.target.dataset.tried = 'true';
+                    e.target.src = '/tours/images/heratPictures.webp';
+                  }
+                }}
+              />
             </div>
 
           </div>

@@ -33,7 +33,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className={`w-full max-w-[1440px] mx-auto bg-[#14213D] text-white overflow-x-hidden ${currentLang === 'fa' ? 'font-[Sahel]' : 'font-[Inter]'} shadow-2xl`}>
+    <div className={`w-full bg-[#14213D] text-white overflow-x-hidden ${currentLang === 'fa' ? 'font-[Sahel]' : 'font-[Inter]'}`}>
       <SEO 
         title={isRtl ? 'کشف شگفتی‌ها، فرهنگ و تاریخ اصیل افغانستان' : 'Explore Afghanistan with Confidence & Authentic Experiences'}
         description={isRtl 
@@ -67,6 +67,6 @@ export default function Home() {
 
       {/* ۲. افزودن سکشن بنر دعوت به سفر (CTA) عینا مطابق با تصویر تمپلت */}
       <CallToAction currentLang={currentLang} />
-    </main>
+    </div>
   );
 }

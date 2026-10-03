@@ -271,6 +271,12 @@ export default function BlogDetail() {
                 src="/images/provinces/bamyan/bamyan-hero.webp"
                 alt="Exploring Afghanistan Landscapes"
                 className="w-full h-full object-cover hover:scale-103 transition-transform duration-700"
+                onError={(e) => {
+                  if (!e.target.dataset.tried) {
+                    e.target.dataset.tried = 'true';
+                    e.target.src = '/images/provinces/kabul/kabul-hero.webp';
+                  }
+                }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#14213D]/30 via-transparent to-transparent pointer-events-none" />
             </div>

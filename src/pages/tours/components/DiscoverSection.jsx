@@ -1,4 +1,4 @@
-import imageTwo from "../components/images/imageTwo.webp";
+import imageTwo from "./images/imageTwo.webp";
 import { useLangStore } from "../../../store/useLangStore";
 const DiscoverSection = () => {
   const { translations } = useLangStore();
@@ -21,6 +21,12 @@ const DiscoverSection = () => {
           src={imageTwo}
           alt={discover.title}
           loading="lazy"
+          onError={(e) => {
+            if (!e.target.dataset.tried) {
+              e.target.dataset.tried = 'true';
+              e.target.src = '/tours/images/bamyanPictures.webp';
+            }
+          }}
         />
       </div>
     </section>

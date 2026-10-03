@@ -94,6 +94,12 @@ export default function AboutExperience({ currentLang }) {
                 src={about1} 
                 alt="Afghanistan Landscapes" 
                 className="w-full h-full object-cover"
+                onError={(e) => {
+                  if (!e.target.dataset.tried) {
+                    e.target.dataset.tried = 'true';
+                    e.target.src = '/images/provinces/kabul/kabul-hero.webp';
+                  }
+                }}
               />
             </div>
 
@@ -124,6 +130,12 @@ export default function AboutExperience({ currentLang }) {
                 src={about2} 
                 alt="Afghanistan History" 
                 className="w-full h-full object-cover"
+                onError={(e) => {
+                  if (!e.target.dataset.tried) {
+                    e.target.dataset.tried = 'true';
+                    e.target.src = '/images/provinces/kabul/kabul-culture.webp';
+                  }
+                }}
               />
             </div>
 

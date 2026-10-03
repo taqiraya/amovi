@@ -44,6 +44,12 @@ function Footer() {
                 src={amoviLogo} 
                 alt="Amovi Travel" 
                 className="h-10 w-auto object-contain rounded-xl border border-[#FCA311]"
+                onError={(e) => {
+                  if (!e.target.dataset.tried) {
+                    e.target.dataset.tried = 'true';
+                    e.target.src = '/logo.png';
+                  }
+                }}
               />
               <div dir="ltr" className="text-left">
                 <span className="block text-[16px] font-extrabold leading-tight tracking-wide text-white font-[Inter]">

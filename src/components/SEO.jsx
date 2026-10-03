@@ -78,7 +78,7 @@ export default function SEO({
     updateHreflang('x-default');
 
     // 4. Open Graph Meta Tags
-    const defaultImage = 'https://amovi.travel/src/assets/images/hero-bg.webp';
+    const defaultImage = 'https://amovi.travel/images/provinces/kabul/kabul-hero.webp';
     const finalImage = ogImage ? (ogImage.startsWith('http') ? ogImage : `https://amovi.travel${ogImage}`) : defaultImage;
 
     updateMeta('meta[property="og:title"]', 'content', fullTitle);

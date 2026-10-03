@@ -400,6 +400,12 @@ export default function Gallery() {
               src={filteredPhotos[lightboxIndex].image}
               alt={filteredPhotos[lightboxIndex][currentLang]?.title || 'Gallery'}
               className="max-w-full max-h-[68vh] sm:max-h-[75vh] object-contain rounded-xl sm:rounded-2xl shadow-2xl border border-white/15"
+              onError={(e) => {
+                if (!e.target.dataset.tried) {
+                  e.target.dataset.tried = 'true';
+                  e.target.src = '/images/provinces/kabul/kabul-hero.webp';
+                }
+              }}
             />
             
             <div className={`mt-3 sm:mt-4 text-center max-w-2xl px-4 ${isRtl ? 'font-[Sahel]' : 'font-[Inter]'}`}>

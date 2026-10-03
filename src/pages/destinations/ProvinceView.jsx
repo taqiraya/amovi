@@ -222,10 +222,16 @@ export default function ProvinceView() {
           <div className="lg:col-span-6 max-w-xl mx-auto lg:max-w-none w-full">
             <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border-2 sm:border-4 border-white bg-slate-200 aspect-[16/10] group">
               <img
-                src={province.images?.history_img || province.images?.hero_cover}
+                src={province.images?.history_img || province.images?.hero_cover || '/images/provinces/kabul/kabul-history.webp'}
                 alt={localData.history_title || localData.name}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 loading="lazy"
+                onError={(e) => {
+                  if (!e.target.dataset.tried) {
+                    e.target.dataset.tried = 'true';
+                    e.target.src = '/images/provinces/kabul/kabul-history.webp';
+                  }
+                }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
             </div>
@@ -241,18 +247,30 @@ export default function ProvinceView() {
             <div className="grid grid-cols-2 gap-3 sm:gap-4">
               <div className="rounded-xl sm:rounded-2xl overflow-hidden shadow-xl border-2 sm:border-4 border-white aspect-[4/3] group">
                 <img
-                  src={province.images?.culture_img || province.images?.hero_cover}
+                  src={province.images?.culture_img || province.images?.hero_cover || '/images/provinces/kabul/kabul-culture.webp'}
                   alt={localData.culture_title || localData.name}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   loading="lazy"
+                  onError={(e) => {
+                    if (!e.target.dataset.tried) {
+                      e.target.dataset.tried = 'true';
+                      e.target.src = '/images/provinces/kabul/kabul-culture.webp';
+                    }
+                  }}
                 />
               </div>
               <div className="rounded-xl sm:rounded-2xl overflow-hidden shadow-xl border-2 sm:border-4 border-white aspect-[4/3] group mt-4 sm:mt-6">
                 <img
-                  src={province.images?.culture_img2 || province.images?.history_img || province.images?.hero_cover}
+                  src={province.images?.culture_img2 || province.images?.history_img || province.images?.hero_cover || '/images/provinces/bamyan/bamyan-hero.webp'}
                   alt={localData.culture_title || localData.name}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   loading="lazy"
+                  onError={(e) => {
+                    if (!e.target.dataset.tried) {
+                      e.target.dataset.tried = 'true';
+                      e.target.src = '/images/provinces/bamyan/bamyan-hero.webp';
+                    }
+                  }}
                 />
               </div>
             </div>
@@ -410,6 +428,12 @@ export default function ProvinceView() {
                           alt={itemData.title || `Gallery photo ${gIdx + 1}`}
                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                           loading="lazy"
+                          onError={(e) => {
+                            if (!e.target.dataset.tried) {
+                              e.target.dataset.tried = 'true';
+                              e.target.src = '/images/provinces/kabul/kabul-hero.webp';
+                            }
+                          }}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-[#14213D]/90 via-[#14213D]/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4 sm:p-5 text-white" dir={isRtl ? 'rtl' : 'ltr'}>
                           <div className="flex items-center justify-between">
@@ -607,6 +631,12 @@ export default function ProvinceView() {
               src={galleryItems[lightboxIndex].image}
               alt={galleryItems[lightboxIndex][currentLang]?.title || 'Enlarged photo'}
               className="max-h-[68vh] sm:max-h-[75vh] w-auto object-contain rounded-xl sm:rounded-2xl shadow-2xl border border-white/10"
+              onError={(e) => {
+                if (!e.target.dataset.tried) {
+                  e.target.dataset.tried = 'true';
+                  e.target.src = '/images/provinces/kabul/kabul-hero.webp';
+                }
+              }}
             />
             <div className="mt-3 sm:mt-4 text-center text-white space-y-1 px-4">
               <h3 className="text-sm sm:text-base md:text-lg font-bold">

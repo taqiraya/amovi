@@ -52,6 +52,12 @@ function Header() {
             src={amoviLogo} 
             alt="Amovi Travel Logo" 
             className="h-8 sm:h-12 w-auto object-contain rounded-xl border border-white/20 shadow-sm"
+            onError={(e) => {
+              if (!e.target.dataset.tried) {
+                e.target.dataset.tried = 'true';
+                e.target.src = '/logo.png';
+              }
+            }}
           />
           <div dir="ltr" className="text-left">
             <span 

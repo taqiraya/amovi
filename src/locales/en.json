@@ -178,5 +178,44 @@
     "officeCity": "Kabul, Afghanistan",
     "officeAddress": "Street 2, Wazir Akbar Khan, Kabul, Afghanistan",
     "getDirections": "Get Directions"
+  },
+  "aboutPage": {
+    "heroEyebrow": "WHO WE ARE",
+    "heroTitlePrefix": "Our Story ",
+    "heroTitleHighlight": "& Legacy",
+    "heroSubtitle": "Discover the vision, values and people behind Amovi Travel.",
+    "missionEyebrow": "OUR MISSION",
+    "missionTitle": "Redefining Luxury Travel in Afghanistan",
+    "missionText": "At Amovi Travel, we are committed to delivering world-class hospitality with a local heart. Our mission is to create meaningful journeys that connect travelers with Afghanistan's rich culture, breathtaking landscapes and enduring heritage — while supporting the people and communities that make this country so extraordinary.",
+    "missionQuote": "“Luxury should never come at the expense of authenticity.”",
+    "valuesEyebrow": "OUR VALUES",
+    "valuesTitle": "What Defines Amovi",
+    "valuesSubtitle": "Three principles guide every journey we create.",
+    "values": {
+      "authenticityTitle": "Authenticity",
+      "authenticityDesc": "We connect travelers with genuine Afghan culture, landscapes and local experiences.",
+      "excellenceTitle": "Excellence",
+      "excellenceDesc": "We maintain the highest standards in service, safety and personalized travel experiences.",
+      "safetyTitle": "Safe Accompaniment",
+      "safetyDesc": "Your safety and comfort are our priority, from the moment you arrive until you return."
+    },
+    "statsEyebrow": "OUR ACHIEVEMENTS",
+    "statsTitle": "Numbers That Tell Our Story",
+    "stats": {
+      "gemsNumber": "50+",
+      "gemsLabel": "Hidden Gems Explored",
+      "toursNumber": "100%",
+      "toursLabel": "Secure Tours",
+      "provincesNumber": "12+",
+      "provincesLabel": "Afghan Provinces",
+      "ratingNumber": "5★",
+      "ratingLabel": "VIP Rating"
+    },
+    "ctaEyebrow": "READY TO PLAN?",
+    "ctaTitle": "Request Your Experience",
+    "ctaSubtitle": "Tell us what you need and our team can help plan the next step.",
+    "ctaButton": "Contact Us",
+    "formTitle": "Request This Package / Service",
+    "formSubmit": "Submit Request"
   }
 }

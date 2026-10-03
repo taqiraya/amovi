@@ -85,7 +85,7 @@ function Header() {
             </NavLink>
           ))}
 
-          {/* 👑 PREMIUM DESTINATIONS INTERACTIVE STATE-DRIVEN DROPDOWN */}
+          {/* DESTINATIONS INTERACTIVE STATE-DRIVEN DROPDOWN */}
           <div 
             className="relative py-4"
             onMouseEnter={() => setDesktopDestOpen(true)}

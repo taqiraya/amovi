@@ -73,7 +73,7 @@ export default function ServicesHighlights({ currentLang }) {
   ];
 
   return (
-    /* 🔴 بخش اصلی سکشن مجهز به شناسه id جهت فعال شدن اسکرول نرم دکمه هیرو */
+    /* بخش اصلی سکشن مجهز به شناسه id جهت فعال شدن اسکرول نرم دکمه هیرو */
     <section id="featured-tours" className="w-full py-14 sm:py-16 bg-[#F4F6F9] text-[#14213D] flex items-center justify-center">
       {/* کانتینر اصلی با کادر دقیق ۱۲۲۰ پیکسل استاندارد پروژه */}
       <div className="w-full max-w-[1220px] mx-auto px-6 md:px-8 space-y-12">

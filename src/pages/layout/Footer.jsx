@@ -138,8 +138,8 @@ function Footer() {
         <div className="mx-auto flex max-w-[1440px] items-center justify-center px-4 text-center">
           <p className="text-[11px] text-slate-400 font-light tracking-wide font-[Inter]">
             {isRtl 
-              ? `©️ ${new Date().getFullYear()} آمووی ترول. تمامی حقوق محفوظ است.`
-              : `©️ ${new Date().getFullYear()} Amovi Travel. All Rights Reserved.`}
+              ? `© ${new Date().getFullYear()} آمووی ترول. تمامی حقوق محفوظ است.`
+              : `© ${new Date().getFullYear()} Amovi Travel. All Rights Reserved.`}
           </p>
         </div>
       </div>

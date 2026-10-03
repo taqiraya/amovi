@@ -64,7 +64,7 @@ export default function Home() {
         loading={loading} 
       />
 
-      {/* 🔴 ۲. افزودن سکشن بنر دعوت به سفر (CTA) عینا مطابق با تصویر تمپلت */}
+      {/* ۲. افزودن سکشن بنر دعوت به سفر (CTA) عینا مطابق با تصویر تمپلت */}
       <CallToAction currentLang={currentLang} />
     </main>
   );

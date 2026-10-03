@@ -29,7 +29,7 @@ export default function CallToAction({ currentLang }) {
           </h2>
         </div>
 
-        {/* 🔴 دکمه کپسولی زرد/طلایی لوکس مجهز به آیکون فیزیکی تیرک (ArrowRight) با قابلیت چرخش هوشمند در زبان فارسی */}
+        {/* دکمه ارتباطی مجهز به آیکون ArrowRight با چرخش هوشمند در زبان فارسی */}
         <Link
           to="/contact"
           className="inline-flex items-center gap-2 bg-[#FCA311] hover:bg-amber-500 text-[#14213D] font-extrabold px-6 py-3 rounded-full shadow-lg transition-all duration-300 hover:-translate-y-0.5 group text-xs sm:text-sm tracking-wide font-[Inter] uppercase"

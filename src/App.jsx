@@ -33,7 +33,7 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900 font-sans">
       <Routes>
-        {/* 🔹 گروه اول روت‌ها: تمام صفحات داخل لایوت اصلی (همراه هدر و فوتر) */}
+        {/* گروه اول روت‌ها: تمام صفحات داخل لایوت اصلی (همراه هدر و فوتر) */}
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -53,7 +53,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Route>
 
-        {/* 🔸 گروه دوم روت‌ها: صفحه ادمین کاملاً مستقل (بدون هدر و فوتر) */}
+        {/* گروه دوم روت‌ها: صفحه ادمین کاملاً مستقل (بدون هدر و فوتر) */}
         <Route path="/admin" element={<AdminPanel />} />
       </Routes>
     </div>

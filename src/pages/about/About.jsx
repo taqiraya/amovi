@@ -355,8 +355,9 @@ export default function About() {
 
             {/* ۴. امتیاز VIP */}
             <div className="space-y-1">
-              <span className="text-3xl sm:text-5xl font-black text-[#FCA311] font-[Inter] tracking-tight block">
-                {t.stats?.ratingNumber || '5★'}
+              <span className="text-3xl sm:text-5xl font-black text-[#FCA311] font-[Inter] tracking-tight flex items-center justify-start gap-1.5">
+                <span>{t.stats?.ratingNumber || (isRtl ? '۵.۰' : '5.0')}</span>
+                <Star size={28} className="fill-[#FCA311] text-[#FCA311] inline shrink-0" />
               </span>
               <p className="text-xs sm:text-sm text-slate-300 font-medium font-sans">
                 {t.stats?.ratingLabel || (isRtl ? 'امتیاز مسافران VIP' : 'VIP Rating')}

@@ -1,6 +1,6 @@
 export default function ProvinceHero({ province, localData, isRtl }) {
   return (
-    /* 👑 هیرو با قد عمیق، هماهنگ با لایوت و هدر سراسری */
+    /* هیرو با قد عمیق، هماهنگ با لایوت و هدر سراسری */
     <section className="w-[100%] max-w-[1600px] mx-auto relative h-[95vh] md:h-[88vh] overflow-hidden shadow-2xl group z-0 bg-black">
       
       {/* ۱. عکس پس‌زمینه پانورامیک (تضمین لود کامل) */}
@@ -14,7 +14,7 @@ export default function ProvinceHero({ province, localData, isRtl }) {
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent md:hidden" />
       </div>
 
-      {/* ۲. 👑 لایه گرادینت تیره عمیق دوزبانه (اصلاح شده با کدهای رنگی بومی سیستم برای ایجاد شفافیت واقعی) */}
+      {/* ۲. لایه گرادینت تیره عمیق دوزبانه (اصلاح شده با کدهای رنگی بومی سیستم برای ایجاد شفافیت واقعی) */}
       <div 
         className={`absolute inset-0 z-10 pointer-events-none w-full h-full hidden md:block ${
           isRtl 

@@ -195,7 +195,7 @@ export default function PlaceDetail() {
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start" dir={isRtl ? 'rtl' : 'ltr'}>
           
-          {/* 🔹 ستون اصلی محتوا (۸ ستون در دسکتاپ) */}
+          {/* ستون اصلی محتوا (۸ ستون در دسکتاپ) */}
           <div className={`lg:col-span-8 space-y-10 ${isRtl ? 'text-right' : 'text-left'}`}>
             
             {/* عنوان، زیرعنوان و تگ دسته‌بندی */}
@@ -305,7 +305,7 @@ export default function PlaceDetail() {
 
           </div>
 
-          {/* 🔹 ستون راست: کارت اطلاعات کلیدی چسبان (Sticky Quick Facts Card) */}
+          {/* ستون راست: کارت اطلاعات کلیدی چسبان (Sticky Quick Facts Card) */}
           <div className="lg:col-span-4 sticky top-28 space-y-6">
             <div className="bg-[#14213D] text-white rounded-3xl p-6 sm:p-7 shadow-2xl border border-white/10 space-y-6">
               

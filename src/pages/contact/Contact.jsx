@@ -102,7 +102,7 @@ export default function Contact() {
       <section className="max-w-6xl mx-auto px-6 py-12 sm:py-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start" dir={isRtl ? 'rtl' : 'ltr'}>
           
-          {/* 🔴 ستون اول (چپ): Let's Talk و کارت‌های اطلاعات ارتباطی */}
+          {/* ستون اول (چپ): Let's Talk و کارت‌های اطلاعات ارتباطی */}
           <div className={`lg:col-span-5 space-y-6 ${isRtl ? 'text-right' : 'text-left'}`}>
             <div>
               <h2 className="text-2xl sm:text-3xl font-black text-[#14213D] tracking-tight">
@@ -189,7 +189,7 @@ export default function Contact() {
             </div>
           </div>
 
-          {/* 🔴 ستون دوم (راست): فرم Send Us a Message */}
+          {/* ستون دوم (راست): فرم Send Us a Message */}
           <div className="lg:col-span-7 bg-white p-6 sm:p-10 rounded-3xl border border-slate-200/90 shadow-xl space-y-6">
             <div>
               <h2 className="text-2xl sm:text-3xl font-black text-[#14213D] tracking-tight">

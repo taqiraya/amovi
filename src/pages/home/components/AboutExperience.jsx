@@ -14,7 +14,7 @@ export default function AboutExperience({ currentLang }) {
       {/* کانتینر اصلی با عرض دقیق ۱۲۲۰ پیکسل استاندارد پروژه */}
       <div className={`w-full max-w-[1220px] mx-auto px-4 sm:px-6 md:px-8 flex flex-col md:grid md:grid-cols-12 gap-8 md:gap-4 lg:gap-12 items-center h-full ${isRtl ? 'md:flex-row-reverse' : ''}`}>
         
-        {/* 🔴 بخش کلاژ تصاویر */}
+        {/* بخش کلاژ تصاویر */}
         <div 
           className={`w-full md:col-span-6 flex items-center relative pb-6 md:pb-0
           ${isRtl ? 'md:order-2 justify-start' : 'md:order-1 justify-end'}`} 
@@ -130,7 +130,7 @@ export default function AboutExperience({ currentLang }) {
           </div>
         </div>
 
-        {/* 🔴 ستون متون و داستان برند */}
+        {/* ستون متون و داستان برند */}
         <div 
           className={`w-full md:col-span-6 flex flex-col justify-center space-y-4 ${
             isRtl 
@@ -221,7 +221,7 @@ export default function AboutExperience({ currentLang }) {
             </p>
           </div>
 
-          {/* 🔴 دکمه اختصاصی متصل به صفحه درباره ما */}
+          {/* دکمه اختصاصی متصل به صفحه درباره ما */}
           <div className={`flex w-full ${
             isRtl ? 'justify-start' : 'justify-start'
           } pt-1`}>

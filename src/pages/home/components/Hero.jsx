@@ -27,7 +27,7 @@ export default function Hero({ currentLang }) {
       {/* ۳. کانتینر اصلی محتوا با عرض دقیق ۱۲۲۰ پیکسل */}
       <div className="w-full max-w-[1220px] mx-auto px-6 md:px-8 grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-4 lg:gap-8 items-center relative z-20 h-full pt-24 pb-12 md:py-0 text-left" dir="ltr">
         
-        {/* 🔴 بخش متن هیرو */}
+        {/* بخش متن هیرو */}
         <div 
           className={`w-full md:col-span-6 flex flex-col justify-center space-y-4 sm:space-y-6 lg:-mt-6 
             ${isRtl ? 'md:order-2 items-stretch text-right' : 'md:order-1 items-start text-left'}`}
@@ -81,7 +81,7 @@ export default function Hero({ currentLang }) {
           </div>
         </div>
 
-        {/* 🔴 ۴. بخش کلاژ تصاویر دایره‌ای - ارتقای ابعاد و ایجاد فاصله ایمن از لبه‌ها در تبلت و موبایل */}
+        {/* ۴. بخش تصاویر دایره‌ای هیرو */}
         <div className={`w-full md:col-span-6 flex items-center relative mt-4 md:mt-0 lg:mt-12 pb-6 md:pb-0
           ${isRtl ? 'md:order-1 justify-start' : 'md:order-2 justify-end'}`}
         >

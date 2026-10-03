@@ -244,96 +244,631 @@
   },
   "servicesPage": {
     "heroEyebrow": "SERVICES",
-    "heroTitlePrefix": "Travel Beyond ",
-    "heroTitleHighlight": "Expectations",
-    "heroSubtitle": "From planning to arrival, experience Afghanistan with trusted local expertise.",
+    "heroTitlePrefix": "Everything You Need for a ",
+    "heroTitleHighlight": "Smooth Journey",
+    "heroSubtitle": "From visa assistance and accommodation to transportation, professional guides, and personalized travel support, Amovi provides the essential services you need to explore Afghanistan with confidence and peace of mind.",
+    "planJourney": "Plan Your Journey",
+    "exploreServices": "Explore Our Services",
     "sectionEyebrow": "OUR SERVICES",
-    "sectionTitle": "Designed Around Your Journey",
-    "sectionSubtitle": "From visa assistance to secure transportation, Amovi Travel handles the details so you can focus on the experience.",
+    "sectionTitle": "Support for Every Step of Your Journey",
+    "sectionSubtitle": "At Amovi, we provide practical and reliable travel services designed to make your journey across Afghanistan smoother, more comfortable, and well supported.",
+    "learnMore": "Learn More",
     "requestService": "Request This Service",
+    "close": "Close",
+    "whatWeProvideTitle": "What We Provide",
+    "howItWorksTitle": "How It Works",
+    "importantNoticeTitle": "Important Information",
+    "optionsTitle": "Available Options & Formats",
     "services": [
       {
         "id": "visa",
-        "tag": "VISA ASSISTANCE",
+        "number": "01",
+        "tag": "01 — VISA ASSISTANCE",
         "title": "Visa Assistance",
-        "description": "We help simplify your visa process with expert guidance and full support.",
-        "bullets": [
-          "Application guidance",
-          "Document preparation",
-          "Process support"
+        "heroTagline": "Guidance and support for a smoother journey to Afghanistan.",
+        "description": "Guidance and support with visa applications, required documents, and visa extension procedures where applicable.",
+        "intro": "Planning a trip to Afghanistan begins with understanding the visa process. Amovi provides practical guidance and personalized support to help travelers prepare their visa application clearly and confidently.",
+        "whatWeProvide": [
+          {
+            "title": "Visa Requirement Guidance",
+            "desc": "Understand the applicable visa requirements for your trip."
+          },
+          {
+            "title": "Document Preparation Support",
+            "desc": "Guidance on preparing the required documents."
+          },
+          {
+            "title": "Application Process Guidance",
+            "desc": "Support in understanding and navigating the application process."
+          },
+          {
+            "title": "Personalized Assistance",
+            "desc": "Practical assistance based on your travel plans and circumstances."
+          }
         ],
-        "image": "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1000&q=80"
+        "howItWorks": [
+          {
+            "step": "1",
+            "title": "Tell Us About Your Trip",
+            "desc": "Share your nationality, travel purpose, and planned dates."
+          },
+          {
+            "step": "2",
+            "title": "Receive Guidance",
+            "desc": "We explain the applicable requirements and process."
+          },
+          {
+            "step": "3",
+            "title": "Prepare Your Documents",
+            "desc": "Organize the necessary information and documents."
+          },
+          {
+            "step": "4",
+            "title": "Move Forward with Confidence",
+            "desc": "Proceed with your application and travel preparations."
+          }
+        ],
+        "disclaimer": "Visa requirements and procedures may vary depending on nationality, travel purpose, and applicable Afghan regulations. Amovi provides visa guidance and assistance but does not make visa decisions or guarantee approval. Final decisions are made by the relevant Afghan authorities.",
+        "bullets": [
+          "Visa requirement guidance & criteria assessment",
+          "Official document & paperwork preparation support",
+          "Transparent step-by-step application guidance",
+          "Personalized support tailored to your journey"
+        ],
+        "image": "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1200&q=80"
       },
       {
         "id": "accommodations",
-        "tag": "ACCOMMODATIONS",
-        "title": "Accommodations",
-        "description": "Comfortable stays selected around your itinerary for a better travel experience.",
-        "bullets": [
-          "Carefully selected hotels",
-          "Location-focused options",
-          "Comfortable arrangements"
+        "number": "02",
+        "tag": "02 — ACCOMMODATION",
+        "title": "Accommodation",
+        "heroTagline": "Comfortable stays, carefully selected for your journey.",
+        "description": "Selected accommodation options, from comfortable local hotels to premium stays, based on your destination and travel preferences.",
+        "intro": "Amovi helps you find suitable accommodation based on your destination, itinerary, preferences, and travel needs.",
+        "whatWeProvide": [
+          {
+            "title": "Hotel Selection",
+            "desc": "Suitable accommodation options based on your journey."
+          },
+          {
+            "title": "Booking Assistance",
+            "desc": "Support with reservation and booking arrangements."
+          },
+          {
+            "title": "Location & Convenience",
+            "desc": "Options selected for accessibility and travel convenience."
+          },
+          {
+            "title": "Travel-Specific Options",
+            "desc": "Accommodation suited to your itinerary and preferences."
+          }
         ],
-        "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1000&q=80"
+        "options": [
+          {
+            "title": "City Hotels",
+            "desc": "Comfortable stays in convenient central locations."
+          },
+          {
+            "title": "Boutique & Character Stays",
+            "desc": "Distinctive options with local Afghan charm and character."
+          },
+          {
+            "title": "Practical Local Stays",
+            "desc": "Suitable choices for simple, authentic, and convenient travel."
+          },
+          {
+            "title": "Premium Accommodation",
+            "desc": "Higher-comfort options for premium and VIP journeys."
+          }
+        ],
+        "howItWorks": [
+          {
+            "step": "1",
+            "title": "Share Your Plans",
+            "desc": "Tell us your destination, dates, and preferences."
+          },
+          {
+            "step": "2",
+            "title": "Explore Suitable Options",
+            "desc": "We present available options matching your needs."
+          },
+          {
+            "step": "3",
+            "title": "Confirm Your Choice",
+            "desc": "Select your preferred accommodation and arrangement."
+          },
+          {
+            "step": "4",
+            "title": "Enjoy Your Stay",
+            "desc": "Travel with your accommodation arranged in advance."
+          }
+        ],
+        "disclaimer": "Availability, facilities, and rates vary by destination, travel dates, and property. All accommodation arrangements are subject to availability and final confirmation.",
+        "bullets": [
+          "Hand-picked hotels with verified standards",
+          "Booking and reservation management",
+          "Prime locations for ease and security",
+          "Flexible options from local boutiques to luxury"
+        ],
+        "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80"
       },
       {
         "id": "transportation",
-        "tag": "TRANSPORTATION",
+        "number": "03",
+        "tag": "03 — TRANSPORTATION",
         "title": "Transportation",
-        "description": "Safe and reliable transportation throughout your journey.",
-        "bullets": [
-          "Airport transfers",
-          "Private transportation",
-          "Route coordination"
+        "heroTagline": "Reliable transportation, coordinated around your journey.",
+        "description": "Safe and reliable transportation for airport transfers, city travel, intercity journeys, and private tours.",
+        "intro": "Amovi helps coordinate transportation based on your itinerary, destinations, group size, and travel needs.",
+        "whatWeProvide": [
+          {
+            "title": "Airport Transfers",
+            "desc": "Convenient transportation to and from the airport."
+          },
+          {
+            "title": "Private Transportation",
+            "desc": "Private vehicles arranged around your travel plans."
+          },
+          {
+            "title": "Intercity Travel",
+            "desc": "Transportation support for journeys between destinations."
+          },
+          {
+            "title": "Journey Coordination",
+            "desc": "Transportation planned and coordinated as part of your itinerary."
+          }
         ],
-        "image": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=1000&q=80"
+        "options": [
+          {
+            "title": "Airport Transfers",
+            "desc": "Easy, punctual transfers between airports and accommodation."
+          },
+          {
+            "title": "Private Vehicles",
+            "desc": "Flexible, modern 4WDs and vans for individuals and groups."
+          },
+          {
+            "title": "Intercity Travel",
+            "desc": "Coordinated travel between Afghan cities and provinces."
+          },
+          {
+            "title": "Custom Transportation",
+            "desc": "Arrangements tailored to specific travel requirements."
+          }
+        ],
+        "howItWorks": [
+          {
+            "step": "1",
+            "title": "Share Your Itinerary",
+            "desc": "Tell us your destinations, dates, and transportation needs."
+          },
+          {
+            "step": "2",
+            "title": "Review Options",
+            "desc": "We identify suitable transportation arrangements."
+          },
+          {
+            "step": "3",
+            "title": "Confirm Your Arrangement",
+            "desc": "Select and confirm your preferred vehicle and route."
+          },
+          {
+            "step": "4",
+            "title": "Travel with Confidence",
+            "desc": "Your transportation is coordinated around your journey."
+          }
+        ],
+        "disclaimer": "Vehicle types, availability, and rates may vary depending on destination, travel dates, road conditions, and specific requirements. All transportation arrangements are subject to availability and final confirmation.",
+        "bullets": [
+          "Punctual airport meet-and-greet transfers",
+          "Air-conditioned modern 4WD and private vehicles",
+          "Intercity transport with experienced drivers",
+          "Real-time route planning and road coordination"
+        ],
+        "image": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=1200&q=80"
       },
       {
         "id": "guides",
-        "tag": "PROFESSIONAL GUIDES",
+        "number": "04",
+        "tag": "04 — PROFESSIONAL GUIDES",
         "title": "Professional Guides",
-        "description": "Discover Afghanistan through knowledgeable and friendly local guides.",
+        "heroTagline": "Discover Afghanistan with knowledgeable local guidance.",
+        "description": "Experienced local and multilingual guides to help you discover Afghanistan’s history, culture, nature, and local life.",
+        "intro": "Our local guides help you discover Afghanistan through its history, culture, people, and landscapes, while providing practical support throughout your journey.",
+        "whatWeProvide": [
+          {
+            "title": "Local Knowledge",
+            "desc": "Discover destinations through authentic local insight."
+          },
+          {
+            "title": "Cultural Guidance",
+            "desc": "Understand local history, traditions, and cultural heritage."
+          },
+          {
+            "title": "Language Support",
+            "desc": "Guidance and multilingual communication support."
+          },
+          {
+            "title": "On-Trip Assistance",
+            "desc": "Practical support throughout your guided experience."
+          }
+        ],
+        "options": [
+          {
+            "title": "City & Heritage Guides",
+            "desc": "Explore historic sites, ancient cities, and cultural landmarks."
+          },
+          {
+            "title": "Nature & Adventure Guides",
+            "desc": "Support for outdoor, mountain, and nature-focused journeys."
+          },
+          {
+            "title": "Private Guides",
+            "desc": "Personalized guiding for individual travelers and private groups."
+          },
+          {
+            "title": "Group Guides",
+            "desc": "Guiding support for organized groups and shared expeditions."
+          }
+        ],
+        "howItWorks": [
+          {
+            "step": "1",
+            "title": "Tell Us About Your Journey",
+            "desc": "Share your destinations, interests, and travel plans."
+          },
+          {
+            "step": "2",
+            "title": "Match Your Needs",
+            "desc": "We identify a suitable guide based on your journey."
+          },
+          {
+            "step": "3",
+            "title": "Confirm Your Guide",
+            "desc": "Review and confirm the guiding arrangement."
+          },
+          {
+            "step": "4",
+            "title": "Explore & Experience",
+            "desc": "Discover Afghanistan with local guidance and support."
+          }
+        ],
+        "disclaimer": "Guide availability, language, experience, and rates may vary by destination and travel period. All guiding arrangements are subject to availability and final confirmation.",
         "bullets": [
-          "Local expertise",
-          "Cultural insight",
-          "Personalized experiences"
+          "Certified native and multilingual expert guides",
+          "Deep cultural, architectural, and historical narration",
+          "Custom pacing for photographers and explorers",
+          "Support with local customs, markets, and etiquette"
         ],
         "image": "/tours/images/heratPictures.webp"
       },
       {
         "id": "security",
-        "tag": "TRAVEL SECURITY & SUPPORT",
-        "title": "Travel Security & Support",
-        "description": "Your safety and comfort are our top priority from start to finish.",
+        "number": "05",
+        "tag": "05 — SECURITY & TRAVEL SUPPORT",
+        "title": "Security & Travel Support",
+        "heroTagline": "Thoughtful planning and practical support throughout your journey.",
+        "description": "Travel coordination, secure transportation arrangements, route planning, and ongoing support throughout your journey.",
+        "intro": "Amovi provides practical planning, local coordination, and travel support to help you navigate your journey with greater confidence.",
+        "whatWeProvide": [
+          {
+            "title": "Journey Planning",
+            "desc": "Plan your travel with destination-specific considerations."
+          },
+          {
+            "title": "Local Coordination",
+            "desc": "Coordinate travel arrangements and local requirements."
+          },
+          {
+            "title": "Travel Updates",
+            "desc": "Stay informed about relevant changes affecting your journey."
+          },
+          {
+            "title": "On-Trip Support",
+            "desc": "Receive practical assistance throughout your travel."
+          }
+        ],
+        "options": [
+          {
+            "title": "Before Travel",
+            "desc": "Thorough planning, coordination, and pre-departure preparation."
+          },
+          {
+            "title": "During Travel",
+            "desc": "Ongoing communication and reliable operational support."
+          },
+          {
+            "title": "Local Assistance",
+            "desc": "On-the-ground support with local permits and logistics."
+          },
+          {
+            "title": "24/7 Monitoring",
+            "desc": "Dedicated emergency and communication channel."
+          }
+        ],
+        "howItWorks": [
+          {
+            "step": "1",
+            "title": "Understand Your Journey",
+            "desc": "Share your itinerary and specific travel needs."
+          },
+          {
+            "step": "2",
+            "title": "Plan & Coordinate",
+            "desc": "We organize relevant arrangements and local support."
+          },
+          {
+            "step": "3",
+            "title": "Stay Informed",
+            "desc": "Receive important updates related to your journey."
+          },
+          {
+            "step": "4",
+            "title": "Travel with Support",
+            "desc": "Stay connected with Amovi throughout your trip."
+          }
+        ],
+        "disclaimer": "Travel conditions may change due to local circumstances, weather, road conditions, or other factors. Amovi provides travel planning, coordination, and support but cannot guarantee personal safety or the absence of unexpected events. Specific security-related arrangements, when required, are discussed and confirmed separately.",
         "bullets": [
-          "Traveler assistance",
-          "Local support",
-          "Journey coordination"
+          "Pre-trip advisory and local safety briefings",
+          "Proactive route assessment and checkpoint coordination",
+          "Direct local contacts across all major Afghan provinces",
+          "Dedicated on-trip communication channel"
         ],
         "image": "/tours/images/bamyanPictures.webp"
+      },
+      {
+        "id": "health",
+        "number": "06",
+        "tag": "06 — TRAVEL & HEALTH ASSISTANCE",
+        "title": "Travel & Health Assistance",
+        "heroTagline": "Practical support to help you travel with greater peace of mind.",
+        "description": "Practical assistance with travel insurance guidance, medical coordination, and emergency support when required.",
+        "intro": "Amovi provides practical travel and health-related coordination to help travelers prepare for their journey and receive appropriate support when needed.",
+        "whatWeProvide": [
+          {
+            "title": "Pre-Travel Guidance",
+            "desc": "Practical information to help you prepare for your trip."
+          },
+          {
+            "title": "Local Health Coordination",
+            "desc": "Support in connecting with appropriate local health services."
+          },
+          {
+            "title": "Emergency Coordination",
+            "desc": "Assistance with coordination during unexpected situations."
+          },
+          {
+            "title": "Travel Assistance",
+            "desc": "Practical support with travel-related needs during your journey."
+          }
+        ],
+        "options": [
+          {
+            "title": "Pre-Travel Guidance",
+            "desc": "Health advisory, vaccination info, and medical preparation."
+          },
+          {
+            "title": "During Travel Support",
+            "desc": "Liaison with local clinics and medical coordination."
+          },
+          {
+            "title": "Emergency Coordination",
+            "desc": "Rapid response support during unexpected situations."
+          },
+          {
+            "title": "Insurance Liaison",
+            "desc": "Guidance on travel insurance requirements and documentation."
+          }
+        ],
+        "howItWorks": [
+          {
+            "step": "1",
+            "title": "Tell Us What You Need",
+            "desc": "Share your travel or health-related requirements."
+          },
+          {
+            "step": "2",
+            "title": "Assess & Coordinate",
+            "desc": "We identify appropriate support or local services."
+          },
+          {
+            "step": "3",
+            "title": "Receive Support",
+            "desc": "We coordinate the relevant assistance and facilities."
+          },
+          {
+            "step": "4",
+            "title": "Continue Your Journey",
+            "desc": "Return to your travel plans with greater peace of mind."
+          }
+        ],
+        "disclaimer": "Amovi provides travel assistance and coordination, not medical diagnosis or treatment. Healthcare services are provided by qualified local medical professionals or facilities and depend on availability. For serious or life-threatening emergencies, contact appropriate local emergency services immediately.",
+        "bullets": [
+          "Travel health advice and checklist for Afghanistan",
+          "Liaison with verified clinics and medical centers",
+          "Emergency logistics and evacuation coordination",
+          "24/7 dedicated contact for health inquiries"
+        ],
+        "image": "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=1200&q=80"
+      },
+      {
+        "id": "vip",
+        "number": "07",
+        "tag": "07 — CUSTOMIZED & VIP TRAVEL",
+        "title": "Customized & VIP Travel",
+        "heroTagline": "A journey designed around you.",
+        "description": "Personalized travel arrangements with premium accommodation, private transportation, dedicated guides, and tailored experiences.",
+        "intro": "Amovi creates customized travel arrangements based on your interests, schedule, destinations, and preferred level of comfort.",
+        "whatWeProvide": [
+          {
+            "title": "Customized Itineraries",
+            "desc": "Travel plans designed around your interests and schedule."
+          },
+          {
+            "title": "Private Travel Arrangements",
+            "desc": "Flexible arrangements for individuals and private groups."
+          },
+          {
+            "title": "Premium Accommodation",
+            "desc": "Comfort-focused accommodation options for premium journeys."
+          },
+          {
+            "title": "Private Transportation",
+            "desc": "Transportation arranged around your itinerary and preferences."
+          },
+          {
+            "title": "Dedicated Travel Support",
+            "desc": "Personalized assistance throughout your entire journey."
+          }
+        ],
+        "options": [
+          {
+            "title": "Cultural Journeys",
+            "desc": "Explore Afghanistan's deep history, heritage, and living traditions."
+          },
+          {
+            "title": "Private Explorations",
+            "desc": "Discover remote landscapes and destinations at your own pace."
+          },
+          {
+            "title": "Premium Travel",
+            "desc": "Enjoy higher comfort, private logistics, and curated dining."
+          },
+          {
+            "title": "Special Requests",
+            "desc": "Tailored solutions for media, researchers, delegations, and VIPs."
+          }
+        ],
+        "howItWorks": [
+          {
+            "step": "1",
+            "title": "Tell Us Your Vision",
+            "desc": "Share your destinations, interests, dates, and preferences."
+          },
+          {
+            "step": "2",
+            "title": "Build Your Journey",
+            "desc": "We develop a tailored travel plan around your requirements."
+          },
+          {
+            "step": "3",
+            "title": "Refine & Confirm",
+            "desc": "Review the details and finalize your arrangements."
+          },
+          {
+            "step": "4",
+            "title": "Experience Afghanistan",
+            "desc": "Enjoy a journey designed exclusively around you."
+          }
+        ],
+        "disclaimer": "Customized and VIP arrangements depend on destination, availability, local conditions, and specific requirements. All services, accommodation, transportation, and other arrangements are confirmed individually based on the final itinerary.",
+        "bullets": [
+          "Bespoke itineraries tailored to your exact pace",
+          "Dedicated private vehicle and veteran guide",
+          "Hand-picked premium hotels and secluded retreats",
+          "White-glove coordination from arrival to departure"
+        ],
+        "image": "/images/provinces/bamyan/bamyan-hero.webp"
       }
     ],
-    "ctaEyebrow": "READY TO PLAN?",
+    "howServicesWork": {
+      "eyebrow": "HOW OUR SERVICES WORK",
+      "title": "A Simple Process from Request to Confirmation",
+      "subtitle": "Whether you need a single service or support for a complete journey, our process is clear and straightforward.",
+      "steps": [
+        {
+          "step": "01",
+          "title": "REQUEST",
+          "desc": "Tell us what you need and share your travel details."
+        },
+        {
+          "step": "02",
+          "title": "REVIEW",
+          "desc": "Our team reviews your request and available options."
+        },
+        {
+          "step": "03",
+          "title": "QUOTATION",
+          "desc": "We prepare a clear quotation based on your requirements."
+        },
+        {
+          "step": "04",
+          "title": "APPROVAL",
+          "desc": "Review the details and confirm your request with Amovi."
+        },
+        {
+          "step": "05",
+          "title": "PAYMENT",
+          "desc": "Complete the required payment through the available method."
+        },
+        {
+          "step": "06",
+          "title": "CONFIRMATION",
+          "desc": "Once your payment is verified, your service or booking is confirmed."
+        }
+      ]
+    },
+    "whyChoose": {
+      "eyebrow": "WHY CHOOSE AMOVI?",
+      "title": "Travel with Confidence. Supported Every Step of the Way.",
+      "subtitle": "Amovi combines local knowledge, professional coordination, and personalized support to help make your journey across Afghanistan smoother and more comfortable.",
+      "features": [
+        {
+          "id": "professional",
+          "title": "Trusted & Professional",
+          "desc": "Clear communication, organized arrangements, and reliable service throughout your journey."
+        },
+        {
+          "id": "local",
+          "title": "Local Knowledge",
+          "desc": "Local insight and destination knowledge to help you experience Afghanistan with greater understanding."
+        },
+        {
+          "id": "personalized",
+          "title": "Personalized Support",
+          "desc": "Services tailored to your destination, schedule, travel style, and individual requirements."
+        },
+        {
+          "id": "ongoing",
+          "title": "Ongoing Travel Support",
+          "desc": "Practical assistance and coordination before and during your journey when you need it."
+        }
+      ]
+    },
+    "personalizedCta": {
+      "eyebrow": "CUSTOM SOLUTIONS",
+      "title": "Need Something More Personalized?",
+      "subtitle": "Tell Us What You Need",
+      "desc": "Every traveler is different. If you need a combination of services, have special requirements, or cannot find exactly what you are looking for, our team can help arrange a solution based on your journey.",
+      "requestBtn": "Request a Service",
+      "contactBtn": "Contact Amovi"
+    },
+    "ctaEyebrow": "READY TO BEGIN YOUR JOURNEY?",
     "ctaTitle": "Request Your Experience",
-    "ctaSubtitle": "Tell us what you need and our team can help plan the next step.",
-    "ctaButton": "Contact Us",
-    "formTitle": "Request This Package / Service",
-    "formSubtitle": "Submit your inquiry and we will arrange everything for you.",
+    "ctaSubtitle": "Let Amovi help you take the first step toward a smoother journey to Afghanistan.",
+    "ctaButton": "Contact Amovi",
+    "formTitle": "Inquiry & Service Request Form",
+    "formSubtitle": "Tell us a little about your trip, and our team will guide you through the next steps.",
     "fullName": "Full Name",
     "fullNamePlaceholder": "Enter your full name",
+    "nationality": "Nationality",
+    "nationalityPlaceholder": "e.g. German, French, Canadian...",
     "email": "Email Address",
     "emailPlaceholder": "Enter your email address",
     "phone": "Phone / WhatsApp",
     "phonePlaceholder": "+93 700 000 000",
-    "preferredDate": "Preferred Travel Date",
+    "preferredDate": "Estimated Travel Date",
     "travelers": "Number of Travelers",
-    "packageOrService": "Package / Service Name",
-    "requirements": "Additional Requirements",
-    "requirementsPlaceholder": "Tell us anything else we should know about your trip...",
+    "purposeOfTravel": "Purpose of Travel",
+    "purposePlaceholder": "Tourism, Culture, Photography, Business...",
+    "packageOrService": "Requested Service",
+    "requirements": "Message / Additional Information",
+    "requirementsPlaceholder": "Share specific details, destination preferences, or special requirements...",
     "agreeTerms": "I agree to the terms and privacy policy of Amovi Travel.",
     "submit": "Submit Request",
     "submitting": "Submitting...",
-    "success": "Your request has been submitted successfully! We will contact you soon."
+    "success": "Your inquiry has been submitted successfully! Our team will contact you shortly."
   },
   "blogPage": {
     "heroEyebrow": "TRAVEL STORIES",

@@ -19,6 +19,7 @@ import { useLangStore } from '../../store/useLangStore';
 import ProvinceHero from './components/ProvinceHero';
 import { getProvinceBySlug } from '../../services/api';
 import SEO from '../../components/SEO';
+import { getAssetUrl } from '../../config/assets';
 
 export default function ProvinceView() {
   const { slug } = useParams();
@@ -120,16 +121,31 @@ export default function ProvinceView() {
   }, [province]);
 
   const handleNextLightbox = (e) => {
-    e.stopPropagation();
+    if (e) e.stopPropagation();
     if (galleryItems.length === 0) return;
     setLightboxIndex((prev) => (prev + 1) % galleryItems.length);
   };
 
   const handlePrevLightbox = (e) => {
-    e.stopPropagation();
+    if (e) e.stopPropagation();
     if (galleryItems.length === 0) return;
     setLightboxIndex((prev) => (prev - 1 + galleryItems.length) % galleryItems.length);
   };
+
+  useEffect(() => {
+    if (lightboxIndex === null) return;
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setLightboxIndex(null);
+      } else if (e.key === 'ArrowRight') {
+        setLightboxIndex((prev) => (prev === null ? null : (prev + 1) % galleryItems.length));
+      } else if (e.key === 'ArrowLeft') {
+        setLightboxIndex((prev) => (prev === null ? null : (prev - 1 + galleryItems.length) % galleryItems.length));
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [lightboxIndex, galleryItems.length]);
 
   if (loading) {
     return (
@@ -222,14 +238,14 @@ export default function ProvinceView() {
           <div className="lg:col-span-6 max-w-xl mx-auto lg:max-w-none w-full">
             <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border-2 sm:border-4 border-white bg-slate-200 aspect-[16/10] group">
               <img
-                src={province.images?.history_img || province.images?.hero_cover || '/images/provinces/kabul/kabul-history.webp'}
+                src={getAssetUrl(province.images?.history_img || province.images?.hero_cover || '/images/provinces/kabul/kabul-history.webp')}
                 alt={localData.history_title || localData.name}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 loading="lazy"
                 onError={(e) => {
                   if (!e.target.dataset.tried) {
                     e.target.dataset.tried = 'true';
-                    e.target.src = '/images/provinces/kabul/kabul-history.webp';
+                    e.target.src = getAssetUrl('/images/provinces/kabul/kabul-history.webp');
                   }
                 }}
               />
@@ -247,28 +263,28 @@ export default function ProvinceView() {
             <div className="grid grid-cols-2 gap-3 sm:gap-4">
               <div className="rounded-xl sm:rounded-2xl overflow-hidden shadow-xl border-2 sm:border-4 border-white aspect-[4/3] group">
                 <img
-                  src={province.images?.culture_img || province.images?.hero_cover || '/images/provinces/kabul/kabul-culture.webp'}
+                  src={getAssetUrl(province.images?.culture_img || province.images?.hero_cover || '/images/provinces/kabul/kabul-culture.webp')}
                   alt={localData.culture_title || localData.name}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   loading="lazy"
                   onError={(e) => {
                     if (!e.target.dataset.tried) {
                       e.target.dataset.tried = 'true';
-                      e.target.src = '/images/provinces/kabul/kabul-culture.webp';
+                      e.target.src = getAssetUrl('/images/provinces/kabul/kabul-culture.webp');
                     }
                   }}
                 />
               </div>
               <div className="rounded-xl sm:rounded-2xl overflow-hidden shadow-xl border-2 sm:border-4 border-white aspect-[4/3] group mt-4 sm:mt-6">
                 <img
-                  src={province.images?.culture_img2 || province.images?.history_img || province.images?.hero_cover || '/images/provinces/bamyan/bamyan-hero.webp'}
+                  src={getAssetUrl(province.images?.culture_img2 || province.images?.history_img || province.images?.hero_cover || '/images/provinces/bamyan/bamyan-hero.webp')}
                   alt={localData.culture_title || localData.name}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   loading="lazy"
                   onError={(e) => {
                     if (!e.target.dataset.tried) {
                       e.target.dataset.tried = 'true';
-                      e.target.src = '/images/provinces/bamyan/bamyan-hero.webp';
+                      e.target.src = getAssetUrl('/images/provinces/bamyan/bamyan-hero.webp');
                     }
                   }}
                 />
@@ -420,22 +436,30 @@ export default function ProvinceView() {
                     return (
                       <div
                         key={item.id || gIdx}
+                        role="button"
+                        tabIndex={0}
                         onClick={() => setLightboxIndex(gIdx)}
-                        className="group relative rounded-2xl sm:rounded-3xl overflow-hidden aspect-[4/3] bg-slate-200 shadow-md hover:shadow-2xl transition-all duration-500 cursor-pointer border-2 sm:border-4 border-white"
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            setLightboxIndex(gIdx);
+                          }
+                        }}
+                        className="group relative rounded-2xl sm:rounded-3xl overflow-hidden aspect-[4/3] bg-slate-200 shadow-md hover:shadow-2xl transition-all duration-500 cursor-pointer border-2 sm:border-4 border-white focus:outline-none focus:ring-2 focus:ring-[#FCA311]"
                       >
                         <img
-                          src={item.image}
+                          src={getAssetUrl(item.image)}
                           alt={itemData.title || `Gallery photo ${gIdx + 1}`}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 select-none"
                           loading="lazy"
                           onError={(e) => {
                             if (!e.target.dataset.tried) {
                               e.target.dataset.tried = 'true';
-                              e.target.src = '/images/provinces/kabul/kabul-hero.webp';
+                              e.target.src = getAssetUrl('/images/provinces/kabul/kabul-hero.webp');
                             }
                           }}
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#14213D]/90 via-[#14213D]/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4 sm:p-5 text-white" dir={isRtl ? 'rtl' : 'ltr'}>
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#14213D]/90 via-[#14213D]/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4 sm:p-5 text-white pointer-events-none" dir={isRtl ? 'rtl' : 'ltr'}>
                           <div className="flex items-center justify-between">
                             <span className="text-xs text-[#FCA311] font-semibold flex items-center gap-1">
                               <MapPin size={12} />
@@ -477,14 +501,14 @@ export default function ProvinceView() {
                       {/* تصویر جاذبه */}
                       <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
                         <img
-                          src={place.image}
+                          src={getAssetUrl(place.image)}
                           alt={placeData.name}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 select-none"
                           loading="lazy"
                           onError={(e) => {
                             if (!e.target.dataset.tried) {
                               e.target.dataset.tried = 'true';
-                              e.target.src = province.images?.hero_cover || '/images/provinces/kabul/kabul-hero.webp';
+                              e.target.src = getAssetUrl(province.images?.hero_cover || '/images/provinces/kabul/kabul-hero.webp');
                             }
                           }}
                         />
@@ -628,13 +652,13 @@ export default function ProvinceView() {
             onClick={(e) => e.stopPropagation()}
           >
             <img
-              src={galleryItems[lightboxIndex].image}
+              src={getAssetUrl(galleryItems[lightboxIndex].image)}
               alt={galleryItems[lightboxIndex][currentLang]?.title || 'Enlarged photo'}
-              className="max-h-[68vh] sm:max-h-[75vh] w-auto object-contain rounded-xl sm:rounded-2xl shadow-2xl border border-white/10"
+              className="max-h-[68vh] sm:max-h-[75vh] w-auto object-contain rounded-xl sm:rounded-2xl shadow-2xl border border-white/10 select-none"
               onError={(e) => {
                 if (!e.target.dataset.tried) {
                   e.target.dataset.tried = 'true';
-                  e.target.src = '/images/provinces/kabul/kabul-hero.webp';
+                  e.target.src = getAssetUrl('/images/provinces/kabul/kabul-hero.webp');
                 }
               }}
             />

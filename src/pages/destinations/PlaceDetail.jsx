@@ -20,6 +20,7 @@ import {
 import { useLangStore } from '../../store/useLangStore';
 import { getPlaceBySlug, getProvinceBySlug } from '../../services/api';
 import SEO from '../../components/SEO';
+import { getAssetUrl } from '../../config/assets';
 
 export default function PlaceDetail() {
   const { slug, placeId } = useParams();
@@ -163,13 +164,13 @@ export default function PlaceDetail() {
           {/* عکس اصلی بزرگ چپ */}
           <div className="lg:col-span-8 rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl border-2 sm:border-4 border-white bg-slate-200 aspect-[16/10] lg:aspect-auto lg:h-full group">
             <img
-              src={gallery[0] || place.image}
+              src={getAssetUrl(gallery[0] || place.image)}
               alt={placeData.name}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 select-none"
               onError={(e) => {
                 if (!e.target.dataset.tried) {
                   e.target.dataset.tried = 'true';
-                  e.target.src = '/images/provinces/kabul/kabul-hero.webp';
+                  e.target.src = getAssetUrl('/images/provinces/kabul/kabul-hero.webp');
                 }
               }}
             />
@@ -179,26 +180,26 @@ export default function PlaceDetail() {
           <div className="lg:col-span-4 grid grid-cols-2 lg:grid-cols-1 gap-3 sm:gap-4 lg:h-full">
             <div className="rounded-xl sm:rounded-2xl lg:rounded-3xl overflow-hidden shadow-lg border-2 sm:border-4 border-white bg-slate-200 aspect-[16/10] lg:aspect-auto lg:h-[calc(50%-8px)] group">
               <img
-                src={gallery[1] || gallery[0] || place.image}
+                src={getAssetUrl(gallery[1] || gallery[0] || place.image)}
                 alt={`${placeData.name} gallery 1`}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 select-none"
                 onError={(e) => {
                   if (!e.target.dataset.tried) {
                     e.target.dataset.tried = 'true';
-                    e.target.src = '/images/provinces/kabul/kabul-culture.webp';
+                    e.target.src = getAssetUrl('/images/provinces/kabul/kabul-culture.webp');
                   }
                 }}
               />
             </div>
             <div className="rounded-xl sm:rounded-2xl lg:rounded-3xl overflow-hidden shadow-lg border-2 sm:border-4 border-white bg-slate-200 aspect-[16/10] lg:aspect-auto lg:h-[calc(50%-8px)] group">
               <img
-                src={gallery[2] || gallery[0] || place.image}
+                src={getAssetUrl(gallery[2] || gallery[0] || place.image)}
                 alt={`${placeData.name} gallery 2`}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 select-none"
                 onError={(e) => {
                   if (!e.target.dataset.tried) {
                     e.target.dataset.tried = 'true';
-                    e.target.src = '/images/provinces/bamyan/bamyan-hero.webp';
+                    e.target.src = getAssetUrl('/images/provinces/bamyan/bamyan-hero.webp');
                   }
                 }}
               />

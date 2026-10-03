@@ -4,6 +4,7 @@ import { useLangStore } from '../../store/useLangStore';
 import { getProvinces } from '../../services/api';
 import SEO from '../../components/SEO';
 import { MapPin, ArrowRight, ArrowLeft } from 'lucide-react';
+import { getAssetUrl } from '../../config/assets';
 
 export default function Destinations() {
   const { currentLang } = useLangStore();
@@ -70,14 +71,14 @@ export default function Destinations() {
               >
                 <div className="h-52 sm:h-56 w-full overflow-hidden relative bg-slate-100">
                   <img
-                    src={coverImage}
+                    src={getAssetUrl(coverImage)}
                     alt={name}
                     className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700 select-none"
                     loading="lazy"
                     onError={(e) => {
                       if (!e.target.dataset.tried) {
                         e.target.dataset.tried = 'true';
-                        e.target.src = '/images/provinces/kabul/kabul-hero.webp';
+                        e.target.src = getAssetUrl('/images/provinces/kabul/kabul-hero.webp');
                       }
                     }}
                   />

@@ -1,3 +1,5 @@
+import { getAssetUrl } from '../../../config/assets';
+
 export default function ProvinceHero({ province, localData, isRtl }) {
   return (
     /* هیرو با قد عمیق، هماهنگ با لایوت و هدر سراسری */
@@ -6,13 +8,13 @@ export default function ProvinceHero({ province, localData, isRtl }) {
       {/* ۱. عکس پس‌زمینه پانورامیک (تضمین لود کامل) */}
       <div className="absolute inset-0 z-0">
         <img 
-          src={province.images?.hero_cover || '/images/provinces/kabul/kabul-hero.webp'} 
+          src={getAssetUrl(province.images?.hero_cover || '/images/provinces/kabul/kabul-hero.webp')} 
           alt={localData?.name} 
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
           onError={(e) => {
             if (!e.target.dataset.tried) {
               e.target.dataset.tried = 'true';
-              e.target.src = '/images/provinces/kabul/kabul-hero.webp';
+              e.target.src = getAssetUrl('/images/provinces/kabul/kabul-hero.webp');
             }
           }}
         />

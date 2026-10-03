@@ -1,8 +1,9 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Camera, X, ChevronLeft, ChevronRight, Eye, MapPin } from 'lucide-react';
 import { useLangStore } from '../../store/useLangStore';
 import SEO from '../../components/SEO';
 import heroBg from '../../assets/images/hero-bg.webp';
+import { getAssetUrl } from '../../config/assets';
 
 // لیست جامع تصاویر منتخب و واقعی گالری سراسری افغانستان با تصاویر بهینه‌شده WebP
 const galleryDatabase = [
@@ -90,14 +91,14 @@ const galleryDatabase = [
     id: 12,
     category: 'bamyan',
     image: '/images/destinations/bamyan/1eead6bc-cc50-42af-a15c-986112fda6c0.webp',
-    en: { title: 'Shahr-e Gholghola (City of Screams)', location: 'Bamyan', desc: '5th-century fortified citadel citadel overlooking the Bamyan valley, conquered during the Mongol era.' },
+    en: { title: 'Shahr-e Gholghola (City of Screams)', location: 'Bamyan', desc: '5th-century fortified citadel overlooking the Bamyan valley, conquered during the Mongol era.' },
     fa: { title: 'شهر غلغله بامیان', location: 'بامیان', desc: 'دژ استوار تاریخی سده پنجم میلادی مشرف بر دره باستانی بامیان و شاهدی بر گذر دوران‌ها.' }
   },
   {
     id: 13,
     category: 'bamyan',
     image: '/images/destinations/bamyan/127c717c46db98c65f3cd9600051faaf.webp',
-    en: { title: 'Shahr-e Zohak (The Red Fortress)', location: 'Bamyan', desc: 'Strategic citadel perched on towering crimson mudstone cliffs guard the entrance to the Bamyan basin.' },
+    en: { title: 'Shahr-e Zohak (The Red Fortress)', location: 'Bamyan', desc: 'Strategic citadel perched on towering crimson mudstone cliffs guarding the entrance to the Bamyan basin.' },
     fa: { title: 'شهر ضحاک (دژ سرخ)', location: 'بامیان', desc: 'باروی سرخ‌رنگ صخره‌ای مستحکم در مدخل دره بامیان و دژ دیدبانی باستانی جاده ابریشم.' }
   },
   {
@@ -107,111 +108,153 @@ const galleryDatabase = [
     en: { title: 'Bamyan Valley Panoramic Landscape', location: 'Bamyan', desc: 'Golden wheat terraces, willow trees, and mountain backdrop of the central highlands.' },
     fa: { title: 'دشت و دره‌های سرسبز بامیان', location: 'بامیان', desc: 'مزارع پلکانی، درختان بید و دورنمای برفی قله‌های سرفراز کوه بابا.' }
   },
+  {
+    id: 15,
+    category: 'bamyan',
+    image: '/images/destinations/bamyan/70323baeabf95a8d97239fb23b7b678f.webp',
+    en: { title: 'Bamyan Historic Cliff Formations', location: 'Bamyan', desc: 'Towering ochre cliff walls and thousand-year cave dwellings carved directly into the rock face.' },
+    fa: { title: 'صخره‌ها و دیواره‌های باستانی بامیان', location: 'بامیان', desc: 'صخره‌های سربه فلک کشیده و مغاره‌های تاریخی تراشیده در دل کوهستان بامیان.' }
+  },
+  {
+    id: 16,
+    category: 'bamyan',
+    image: '/images/destinations/bamyan/68691934e7c293018a1e7d67ba600dd6.webp',
+    en: { title: 'Band-e Panir Turquoise Waters', location: 'Bamyan', desc: 'Crystalline cascading travertine terraces forming pristine white-rimmed natural mineral pools.' },
+    fa: { title: 'چشمه‌سارها و دریاچه‌های بند پنیر', location: 'بامیان', desc: 'تراس‌های کلسیمی سپیدفام و زلال‌ترین حوضچه‌های فیروزه‌ای در دل پارک ملی.' }
+  },
 
   // ==================== هرات (Herat) ====================
   {
-    id: 15,
+    id: 17,
     category: 'herat',
     image: '/images/destinations/herat/12_58_291.webp',
     en: { title: 'Citadel of Herat (Qala Ikhtiyaruddin)', location: 'Herat', desc: 'Alexander the Great era fortress towering over the city, featuring Timurid towers and museum halls.' },
     fa: { title: 'ارگ باستانی اختیارالدین هرات', location: 'هرات', desc: 'قلعه تاریخی و استوار هرات با پیشینه‌ای بیش از ۲۰۰۰ سال، برج‌های تیموری و موزه میراث.' }
   },
   {
-    id: 16,
+    id: 18,
     category: 'herat',
     image: '/images/destinations/herat/4c3n5fe27845be2bxjs_800c450.webp',
     en: { title: 'Great Mosque of Herat (Masjid Jami)', location: 'Herat', desc: 'Masterpiece of Persian turquoise and cobalt mosaic tiles with a grand 800-year courtyard.' },
     fa: { title: 'مسجد جامع بزرگ هرات', location: 'هرات', desc: 'شاهکار هنر کاشی‌کاری معرق لاجوردی و فیروزه‌ای غوری و تیموری با حیاطی به قدمت ۸ سده.' }
   },
   {
-    id: 17,
+    id: 19,
     category: 'herat',
     image: '/images/destinations/herat/240752b59ed183d8bb6995f0e94bcd01.webp',
     en: { title: 'Musalla Complex & Minarets', location: 'Herat', desc: 'Slender 15th-century Timurid minarets adorned with intricate geometric and floral glazed bricks.' },
     fa: { title: 'مناره‌های تاریخی مصلی هرات', location: 'هرات', desc: 'مناره‌های برافراشته سده پانزدهم میلادی تیموری آراسته به نقوش هندسی و لعاب‌های نیلگون.' }
   },
   {
-    id: 18,
+    id: 20,
     category: 'herat',
     image: '/images/destinations/herat/435b386fc33a5548dc01eb9976aa3a87.webp',
-    en: { title: 'Mausoleum of Gawhar Shad Begum', location: 'Herat', desc: 'Timurid architectural crown jewel featuring ribbed turquoise turquoise dome and muqarnas.' },
+    en: { title: 'Mausoleum of Gawhar Shad Begum', location: 'Herat', desc: 'Timurid architectural crown jewel featuring ribbed turquoise dome and intricate muqarnas.' },
     fa: { title: 'آرامگاه گوهرشاد بیگم', location: 'هرات', desc: 'نگین معماری رنسانس تیموری با گنبد ترک‌دار فیروزه‌ای و مقرنس‌های ظریف و چشم‌نواز.' }
   },
   {
-    id: 19,
+    id: 21,
     category: 'herat',
     image: '/images/destinations/herat/4c3n09dc3285002bxjx_800c450.webp',
     en: { title: 'Gazargah Shrine of Khwaja Abdullah Ansari', location: 'Herat', desc: 'Historic 15th-century Sufi pilgrimage complex with intricate stonework and tranquil pine gardens.' },
     fa: { title: 'زیارتگاه گازرگاه خواجه عبدالله انصاری', location: 'هرات', desc: 'آرامگاه عارف نامدار در فضایی آرام‌بخش با سنگ‌تراشی‌های نفیس هفت‌قلم و کاشی‌های کهن.' }
   },
   {
-    id: 20,
+    id: 22,
     category: 'herat',
     image: '/images/destinations/herat/4c3nafe7d552982bxjn_800c450.webp',
     en: { title: 'Mausoleum of Nur al-Din Jami', location: 'Herat', desc: 'Resting place of the celebrated 15th-century Persian poet surrounded by shaded gardens.' },
     fa: { title: 'آرامگاه مولانا عبدالرحمن جامی', location: 'هرات', desc: 'مزار شاعر و ادیب بزرگ مشرق‌زمین احاطه‌شده در سایه‌سار درختان و باغ‌های هرات.' }
   },
+  {
+    id: 23,
+    category: 'herat',
+    image: '/images/destinations/herat/qala-ikhtiaruddin-herat.webp',
+    en: { title: 'Panoramic Citadel Bastions', location: 'Herat', desc: 'Majestic brick ramparts overlooking the western jewel city of Afghanistan along the Silk Route.' },
+    fa: { title: 'باروهای شکوهمند ارگ هرات', location: 'هرات', desc: 'دیوارهای خشتی و برج‌های دیده‌بانی سترگ با اشراف کامل بر تمامیت کهن‌شهر هرات.' }
+  },
+  {
+    id: 24,
+    category: 'herat',
+    image: '/images/destinations/herat/herat-afghanistan-2007.webp',
+    en: { title: 'Historic Herat Architectural Heritage', location: 'Herat', desc: 'Timeless mudbrick skyline and heritage alleys whispering centuries of culture.' },
+    fa: { title: 'چشم‌انداز معماری سنتی هرات', location: 'هرات', desc: 'بافت بومی و معماری سنتی هرات باستان در تلاقی هنر و اصالت چندصدساله.' }
+  },
 
   // ==================== بلخ و مزار شریف (Balkh & Mazar) ====================
   {
-    id: 21,
+    id: 25,
     category: 'balkh',
     image: '/tours/images/mazarPictures.webp',
     en: { title: 'Blue Mosque (Rawza-e Sharif)', location: 'Mazar-i-Sharif', desc: 'Vibrant cobalt and turquoise tiled sacred complex glowing under northern Afghan skies.' },
     fa: { title: 'مسجد کبود (روضه شریف مزار)', location: 'مزار شریف', desc: 'مجموعه زیارتی منحصربه‌فرد با کاشی‌کاری‌های لاجوردی و فیروزه‌ای در قلب شمال افغانستان.' }
   },
   {
-    id: 22,
+    id: 26,
     category: 'balkh',
-    image: '/images/provinces/kabul/kabul-history.webp',
-    en: { title: 'Ancient City Walls of Balkh (Bactra)', location: 'Balkh', desc: 'Massive earthen fortifications of the "Mother of Cities" along the ancient Silk Route.' },
-    fa: { title: 'دیوارهای کهن شهر باستانی بلخ', location: 'بلخ', desc: 'باروهای خشتی سترگ ام‌البلاد (باختر باستان) در پیوندگاه تجارت کهن جاده ابریشم.' }
+    image: '/tours/images/mazarPictures.webp',
+    en: { title: 'Historic Silk Route Center of Balkh', location: 'Balkh', desc: 'Ancient cultural crossroads known as the Mother of Cities, rich in spiritual and trade heritage.' },
+    fa: { title: 'تمدن کهن ام‌البلاد بلخ', location: 'بلخ', desc: 'کهن‌ترین کانون تمدنی و پیوندگاه کاروان‌های بازرگانی در پهنه باختر باستان.' }
   },
 
   // ==================== طبیعت و مناظر (Nature & Landscapes) ====================
   {
-    id: 23,
+    id: 27,
     category: 'nature',
     image: '/tours/images/noristanPictures.webp',
     en: { title: 'Nuristan Alpine Valleys & Cedar Forests', location: 'Nuristan', desc: 'Lush alpine evergreen woodlands, terraced wooden villages and clear crystal rivers.' },
     fa: { title: 'دره‌های سرسبز و جنگل‌های سدر نورستان', location: 'نورستان', desc: 'طبیعت بکر و جنگل‌های انبوه، روستاهای چوبی پلکانی و رودهای خروشان کوهستانی.' }
   },
   {
-    id: 24,
+    id: 28,
     category: 'nature',
     image: '/tours/images/ghorPictures.webp',
     en: { title: 'Minaret of Jam & River Canyons', location: 'Ghor', desc: 'UNESCO World Heritage 65-meter minaret soaring from a dramatic canyon in Ghor province.' },
     fa: { title: 'منار باستانی جام و دره‌های غور', location: 'غور', desc: 'منار ۶۵ متری ثبت یونسکو از دوره غوریان برافراشته در میان صخره‌های تنگه هریرود.' }
   },
   {
-    id: 25,
+    id: 29,
     category: 'nature',
     image: '/images/destinations/bamyan/4df3b4c6e1f2016ab693f906a5d1aed5.webp',
     en: { title: 'Band-e Haibat Crystal Waters', location: 'Bamyan', desc: 'Deep sapphire-blue water framed by pure mineral travertine shores at Band-e-Amir.' },
     fa: { title: 'آب‌های نیلگون بند هیبت', location: 'بامیان', desc: 'رنگ شگفت‌انگیز آب‌های عمیق بند هیبت در پهنه پارک ملی بند امیر.' }
   },
+  {
+    id: 30,
+    category: 'nature',
+    image: '/images/destinations/bamyan/622f149f01df7e419fa7c3b37ff0a260.webp',
+    en: { title: 'Highland Mountain Ranges & Valleys', location: 'Bamyan', desc: 'Untouched mountain peaks and rolling valleys bathed in crystalline mountain sunlight.' },
+    fa: { title: 'رشته‌کوه‌های مرتفع و دره‌های کوهستانی', location: 'بامیان', desc: 'ارتفاعات سر به فلک کشیده و مناظر کم‌نظیر کوهستانی در قلب کوه بابا.' }
+  },
 
   // ==================== فرهنگ و سنت‌ها (Culture & Heritage) ====================
   {
-    id: 26,
+    id: 31,
     category: 'culture',
     image: '/tours/images/kandaharPictures.webp',
     en: { title: 'Kandahar Architecture & Heritage', location: 'Kandahar', desc: 'Ahmad Shah Durrani mausoleum, historic bazaars and famed pomegranate orchards.' },
     fa: { title: 'معماری و میراث تاریخی قندهار', location: 'قندهار', desc: 'گنبد آرامگاه احمد شاه بابا، بازارهای چهارسو و شکوه تاریخی جنوب افغانستان.' }
   },
   {
-    id: 27,
+    id: 32,
     category: 'culture',
     image: '/images/destinations/kabul/4b1c96e9a0f11fec4e20a870caa2cea9.webp',
     en: { title: 'Ka Faroshi Historic Bird Market', location: 'Kabul', desc: 'Centuries-old lively alleyways filled with singing canaries, partridges, and heritage birdcages.' },
     fa: { title: 'بازار سنتی کوچه کاه فروشی', location: 'کابل', desc: 'گذرگاهی چند صد ساله از نغمه کبک‌ها و قناری‌ها در بافت سنتی و نوستالژیک کابل.' }
   },
   {
-    id: 28,
+    id: 33,
     category: 'culture',
     image: '/images/destinations/herat/763de7666e6b4b239ec31a8833cfd756.webp',
     en: { title: 'Traditional Tile & Craft Guilds of Herat', location: 'Herat', desc: 'Living tradition of handmade glaze tiles, glassblowing, and miniature painting schools.' },
     fa: { title: 'هنر کاشی‌سازی سنتی و صنایع دستی هرات', location: 'هرات', desc: 'میراث زنده کارگاه‌های کاشی معرق، شیشه‌گری سنتی و مکتب نگارگری کهن هرات.' }
+  },
+  {
+    id: 34,
+    category: 'culture',
+    image: '/images/destinations/kabul/2f29d4f2a2e712e893270523f17bf5d9.webp',
+    en: { title: 'Historic Woodcarving & Artisan Crafts', location: 'Kabul', desc: 'Authentic woodworking, calligraphy, and centuries-old architectural crafts of old Kabul.' },
+    fa: { title: 'صنایع دستی و چوب‌تراشی سنتی', location: 'کابل', desc: 'هنرهای دستی کهن، درودگری و معماری اصیل بازمانده از استادکاران کابل قدیم.' }
   }
 ];
 
@@ -238,16 +281,32 @@ export default function Gallery() {
   }, [activeCategory]);
 
   const handleNext = (e) => {
-    e.stopPropagation();
+    if (e) e.stopPropagation();
     if (lightboxIndex === null) return;
     setLightboxIndex((prev) => (prev + 1) % filteredPhotos.length);
   };
 
   const handlePrev = (e) => {
-    e.stopPropagation();
+    if (e) e.stopPropagation();
     if (lightboxIndex === null) return;
     setLightboxIndex((prev) => (prev - 1 + filteredPhotos.length) % filteredPhotos.length);
   };
+
+  // کیبورد نویگیشن برای بستن و تعویض عکس‌ها در حالت باز بودن لایت‌باکس
+  useEffect(() => {
+    if (lightboxIndex === null) return;
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setLightboxIndex(null);
+      } else if (e.key === 'ArrowRight') {
+        setLightboxIndex((prev) => (prev === null ? null : (prev + 1) % filteredPhotos.length));
+      } else if (e.key === 'ArrowLeft') {
+        setLightboxIndex((prev) => (prev === null ? null : (prev - 1 + filteredPhotos.length) % filteredPhotos.length));
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [lightboxIndex, filteredPhotos.length]);
 
   return (
     <div className={`w-full bg-[#F8FAFC] min-h-screen text-[#14213D] pb-24 ${isRtl ? 'font-[Sahel]' : 'font-[Inter]'}`}>
@@ -318,27 +377,35 @@ export default function Gallery() {
             return (
               <div
                 key={item.id}
+                role="button"
+                tabIndex={0}
                 onClick={() => setLightboxIndex(idx)}
-                className="group relative rounded-2xl sm:rounded-3xl overflow-hidden aspect-[4/3] bg-slate-100 shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-1.5 cursor-pointer border border-slate-200/80"
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setLightboxIndex(idx);
+                  }
+                }}
+                className="group relative rounded-2xl sm:rounded-3xl overflow-hidden aspect-[4/3] bg-slate-100 shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-1.5 cursor-pointer border border-slate-200/80 focus:outline-none focus:ring-2 focus:ring-[#FCA311]"
               >
                 <img
-                  src={item.image}
+                  src={getAssetUrl(item.image)}
                   alt={text.title}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-108 select-none"
                   loading="lazy"
                   onError={(e) => {
                     if (!e.target.dataset.tried) {
                       e.target.dataset.tried = 'true';
-                      e.target.src = '/images/provinces/kabul/kabul-hero.webp';
+                      e.target.src = getAssetUrl('/images/provinces/kabul/kabul-hero.webp');
                     }
                   }}
                 />
 
                 {/* گرادینت تاریک شیک برای خوانایی متن */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#14213D]/90 via-[#14213D]/20 to-transparent opacity-80 group-hover:opacity-95 transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#14213D]/90 via-[#14213D]/20 to-transparent opacity-80 group-hover:opacity-95 transition-opacity duration-300 pointer-events-none" />
 
                 {/* نشان لوکیشن در بالا */}
-                <div className={`absolute top-3.5 ${isRtl ? 'right-3.5' : 'left-3.5'} z-10`}>
+                <div className={`absolute top-3.5 ${isRtl ? 'right-3.5' : 'left-3.5'} z-10 pointer-events-none`}>
                   <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-[#14213D]/80 backdrop-blur-md text-[#FCA311] text-[11px] font-bold shadow-md">
                     <MapPin size={12} />
                     <span>{text.location}</span>
@@ -353,7 +420,7 @@ export default function Gallery() {
                 </div>
 
                 {/* عنوان و توضیحات پایین کارت */}
-                <div className={`absolute bottom-0 inset-x-0 p-4 sm:p-5 z-10 ${isRtl ? 'text-right' : 'text-left'}`}>
+                <div className={`absolute bottom-0 inset-x-0 p-4 sm:p-5 z-10 pointer-events-none ${isRtl ? 'text-right' : 'text-left'}`}>
                   <h3 className="text-white text-sm sm:text-base md:text-lg font-black leading-tight drop-shadow-sm group-hover:text-[#FCA311] transition-colors">
                     {text.title}
                   </h3>
@@ -378,6 +445,7 @@ export default function Gallery() {
             type="button"
             onClick={() => setLightboxIndex(null)}
             className="absolute top-4 right-4 sm:top-6 sm:right-6 z-50 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors cursor-pointer"
+            aria-label="Close"
           >
             <X size={20} />
           </button>
@@ -387,6 +455,7 @@ export default function Gallery() {
             type="button"
             onClick={handlePrev}
             className="absolute left-2 sm:left-8 z-50 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 hover:bg-[#FCA311] hover:text-[#14213D] text-white flex items-center justify-center transition-all cursor-pointer shadow-lg"
+            aria-label="Previous image"
           >
             <ChevronLeft size={24} />
           </button>
@@ -397,13 +466,13 @@ export default function Gallery() {
             onClick={(e) => e.stopPropagation()}
           >
             <img
-              src={filteredPhotos[lightboxIndex].image}
+              src={getAssetUrl(filteredPhotos[lightboxIndex].image)}
               alt={filteredPhotos[lightboxIndex][currentLang]?.title || 'Gallery'}
-              className="max-w-full max-h-[68vh] sm:max-h-[75vh] object-contain rounded-xl sm:rounded-2xl shadow-2xl border border-white/15"
+              className="max-w-full max-h-[68vh] sm:max-h-[75vh] object-contain rounded-xl sm:rounded-2xl shadow-2xl border border-white/15 select-none"
               onError={(e) => {
                 if (!e.target.dataset.tried) {
                   e.target.dataset.tried = 'true';
-                  e.target.src = '/images/provinces/kabul/kabul-hero.webp';
+                  e.target.src = getAssetUrl('/images/provinces/kabul/kabul-hero.webp');
                 }
               }}
             />
@@ -429,6 +498,7 @@ export default function Gallery() {
             type="button"
             onClick={handleNext}
             className="absolute right-2 sm:right-8 z-50 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 hover:bg-[#FCA311] hover:text-[#14213D] text-white flex items-center justify-center transition-all cursor-pointer shadow-lg"
+            aria-label="Next image"
           >
             <ChevronRight size={24} />
           </button>

@@ -335,9 +335,11 @@ export default function Contact() {
           <iframe
             title="Amovi Travel Kabul Office Location"
             src="https://www.openstreetmap.org/export/embed.html?bbox=69.155,34.524,69.180,34.544&layer=mapnik&marker=34.5338,69.1668"
-            className="w-full h-full border-0 filter contrast-[1.02] brightness-[0.98]"
+            className="w-full h-[calc(100%+48px)] -mb-[48px] border-0 filter contrast-[1.02] brightness-[0.98]"
             loading="lazy"
           />
+          {/* نوار پوشاننده کف نقشه جهت جلوگیری از نمایش لینک‌های زاید */}
+          <div className="absolute inset-x-0 bottom-0 h-8 bg-slate-900/10 pointer-events-none z-10" />
 
           {/* کارت شناور مشخصات دفتر روی نقشه (عینا مطابق تصویر تمپلت) */}
           <div className={`absolute top-6 ${isRtl ? 'right-6 text-right' : 'left-6 text-left'} z-20 bg-white/95 backdrop-blur-md p-6 rounded-2xl shadow-2xl border border-slate-100 max-w-xs sm:max-w-sm`}>

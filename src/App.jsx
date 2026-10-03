@@ -17,6 +17,7 @@ import PlaceDetail from './pages/destinations/PlaceDetail';
 import Blog from './pages/blog/Blog';
 import BlogDetail from './pages/blog/BlogDetail';
 import Contact from './pages/contact/Contact';
+import Gallery from './pages/gallery/Gallery';
 import Policy from './pages/policy/Policy';
 import PaymentMethods from './pages/payment/PaymentMethods';
 import NotFound from './pages/notFound/NotFound';
@@ -47,6 +48,7 @@ function App() {
           <Route path="/tours" element={<Tours />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:id" element={<BlogDetail />} />
+          <Route path="/gallery" element={<Gallery />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/policy" element={<Policy />} />
           <Route path="/privacy-policy" element={<Policy defaultTab="privacy" />} />

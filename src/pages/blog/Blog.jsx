@@ -158,15 +158,17 @@ export default function Blog() {
               className="bg-white rounded-3xl overflow-hidden border border-slate-200/90 shadow-sm hover:shadow-2xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col cursor-pointer group"
             >
               {/* تصویر مقاله با بج تاریخ و افکت زوم */}
-              <div className="relative aspect-[16/10] overflow-hidden bg-slate-200">
+              <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
                 <img
-                  src={article.image}
+                  src={article.image || '/images/provinces/kabul/kabul-hero.webp'}
                   alt={article.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 select-none"
                   loading="lazy"
                   onError={(e) => {
-                    // در صورت خطای لود عکس‌های اکسترنال، از عکس محلی پروژه استفاده می‌شود
-                    e.target.src = '/tours/images/bamyanPictures.webp';
+                    if (!e.target.dataset.tried) {
+                      e.target.dataset.tried = 'true';
+                      e.target.src = '/images/provinces/kabul/kabul-hero.webp';
+                    }
                   }}
                 />
                 

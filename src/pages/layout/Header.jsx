@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { Menu, X, Globe, ArrowRight, ChevronDown } from "lucide-react";
+import { Menu, X, Globe, ArrowRight, ChevronDown, Camera } from "lucide-react";
 import { useLangStore } from "../../store/useLangStore";
 
 // لود فایل لوگوی رسمی
@@ -35,6 +35,7 @@ function Header() {
     { name: translations.nav?.services || (isRtl ? "خدمات" : "Services"), path: "/services" },
     { name: translations.nav?.tours || (isRtl ? "تورها" : "Tours"), path: "/tours" },
     { name: translations.nav?.blog || (isRtl ? "بلاگ" : "Blog"), path: "/blog" },
+    { name: translations.nav?.gallery || (isRtl ? "گالری" : "Gallery"), path: "/gallery" },
   ];
 
   const handleLanguageToggle = () => {
@@ -122,6 +123,16 @@ function Header() {
                     {isRtl ? prov.fa : prov.en}
                   </Link>
                 ))}
+                <div className="col-span-2 pt-2 border-t border-slate-100 mt-1">
+                  <Link
+                    to="/gallery"
+                    onClick={() => setDesktopDestOpen(false)}
+                    className={`flex items-center justify-between p-2 rounded-xl text-xs font-bold text-[#FCA311] hover:bg-amber-50/70 transition-colors ${isRtl ? 'flex-row-reverse text-right font-[Sahel]' : 'text-left font-[Inter]'}`}
+                  >
+                    <span>{isRtl ? 'مشاهده گالری تصاویر ولایات' : 'View Provinces Photo Gallery'}</span>
+                    <Camera size={14} className="shrink-0" />
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
@@ -220,6 +231,16 @@ function Header() {
                     {isRtl ? prov.fa : prov.en}
                   </Link>
                 ))}
+                <div className="col-span-2 pt-2 border-t border-slate-200/60 mt-1">
+                  <Link
+                    to="/gallery"
+                    onClick={() => { setMobileMenuOpen(false); setMobileDestOpen(false); }}
+                    className={`flex items-center justify-between py-2 px-3 rounded-lg bg-amber-500/10 text-sm font-bold text-[#FCA311] ${isRtl ? 'flex-row-reverse text-right font-[Sahel]' : 'text-left font-[Inter]'}`}
+                  >
+                    <span>{isRtl ? 'گالری تصاویر ولایات' : 'Provinces Photo Gallery'}</span>
+                    <Camera size={14} className="shrink-0" />
+                  </Link>
+                </div>
               </div>
             </div>
 

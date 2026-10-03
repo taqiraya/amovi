@@ -194,13 +194,16 @@ export default function BlogDetail() {
           <article className="lg:col-span-8 space-y-8">
             
             {/* عکس شاخص مقاله (Featured Image - Full Width 16:9) */}
-            <div className="relative aspect-[16/9] w-full rounded-3xl overflow-hidden shadow-xl border-4 border-white bg-slate-200 group">
+            <div className="relative aspect-[16/9] w-full rounded-3xl overflow-hidden shadow-xl border-4 border-white bg-slate-100 group">
               <img
-                src={currentArticle.image}
+                src={currentArticle.image || '/images/provinces/kabul/kabul-hero.webp'}
                 alt={currentArticle.title}
-                className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700"
+                className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-102 select-none"
                 onError={(e) => {
-                  e.target.src = '/images/provinces/kabul/kabul-hero.webp';
+                  if (!e.target.dataset.tried) {
+                    e.target.dataset.tried = 'true';
+                    e.target.src = '/images/provinces/kabul/kabul-hero.webp';
+                  }
                 }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
@@ -388,7 +391,10 @@ export default function BlogDetail() {
                         alt={relItem.title}
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                         onError={(e) => {
-                          e.target.src = '/tours/images/bamyanPictures.webp';
+                          if (!e.target.dataset.tried) {
+                            e.target.dataset.tried = 'true';
+                            e.target.src = '/tours/images/bamyanPictures.webp';
+                          }
                         }}
                       />
                     </div>

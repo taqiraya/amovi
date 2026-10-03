@@ -6,6 +6,7 @@
     "destinations": "Destinations",
     "tours": "Tours",
     "blog": "Blog",
+    "gallery": "Gallery",
     "contact": "Contact Us",
     "policy": "Privacy Policy"
   },
@@ -1049,7 +1050,7 @@
           "In Afghanistan, sharing a meal means sharing a moment.",
           "Come to the table, taste the tradition, and discover Afghanistan through its flavors."
         ],
-        "image": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1000&q=80"
+        "image": "/images/provinces/kabul/kabul-culture.webp"
       },
       {
         "id": "jewelry-stones-crafts",
@@ -1066,7 +1067,7 @@
           "Choosing a handmade piece can become more than shopping—it can become a personal reminder of a journey through a remarkable country.",
           "Take home more than a souvenir. Take home a small piece of Afghanistan’s story."
         ],
-        "image": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=1000&q=80"
+        "image": "/tours/images/heratPictures.webp"
       },
       {
         "id": "afghan-carpets",
@@ -1083,7 +1084,7 @@
           "For travellers, choosing an Afghan carpet can become a deeply personal experience—a beautiful piece of Afghanistan to live with long after the journey ends.",
           "Take home a story woven by hand, and let its threads carry a piece of Afghanistan into your home."
         ],
-        "image": "https://images.unsplash.com/photo-1600121848594-d8644e57abab?auto=format&fit=crop&w=1000&q=80"
+        "image": "/tours/images/mazarPictures.webp"
       },
       {
         "id": "afghan-saffron",
@@ -1100,7 +1101,7 @@
           "For travellers, saffron offers a simple way to take a taste of Afghanistan home. A small box can carry the fragrance of Herat long after the journey has ended.",
           "Take home a touch of Herat—the fragrance, colour, and golden story of Afghan saffron."
         ],
-        "image": "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=1000&q=80"
+        "image": "/tours/images/ghorPictures.webp"
       },
       {
         "id": "fruits-dry-fruits",
@@ -1117,7 +1118,7 @@
           "For travellers, these flavours offer a simple way to take Afghanistan home.",
           "Taste the harvest, discover its regions, and carry a little of Afghanistan’s abundance with you."
         ],
-        "image": "https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?auto=format&fit=crop&w=1000&q=80"
+        "image": "/tours/images/kandaharPictures.webp"
       }
     ],
     "pillars": {

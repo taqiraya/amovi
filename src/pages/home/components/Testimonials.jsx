@@ -55,7 +55,7 @@ export default function Testimonials({ currentLang }) {
           100% { transform: translate3d(-33.3333%, 0, 0); }
         }
         .animate-marquee-infinite {
-          animation: amoviInfiniteMarquee 35s linear infinite;
+          animation: amoviInfiniteMarquee 75s linear infinite;
         }
         .marquee-viewport:hover .animate-marquee-infinite {
           animation-play-state: paused;

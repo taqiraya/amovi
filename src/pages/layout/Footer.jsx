@@ -16,6 +16,7 @@ function Footer() {
     { name: translations.destinations || (isRtl ? "مقاصد رویایی" : "Destinations"), path: "/destinations" },
     { name: translations.tours || (isRtl ? "تورهای ویژه" : "Tours"), path: "/tours" },
     { name: translations.blog || (isRtl ? "مجله سفر" : "Blog"), path: "/blog" },
+    { name: translations.nav?.gallery || (isRtl ? "گالری تصاویر" : "Gallery"), path: "/gallery" },
   ];
 
   // بخش قوانین و حقوقی

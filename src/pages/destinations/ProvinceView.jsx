@@ -48,6 +48,7 @@ export default function ProvinceView() {
 
   const categories = useMemo(() => [
     { id: 'all', label: t.all || (isRtl ? 'همه' : 'All') },
+    { id: 'gallery', label: t.gallery || (isRtl ? 'گالری تصاویر' : 'Photo Gallery'), isGallery: true },
     { id: 'museum-and-galleries', label: t.museumAndGalleries || (isRtl ? 'موزه‌ها و گالری‌ها' : 'Museum and Galleries') },
     { id: 'gardens-and-parks', label: t.gardensAndParks || (isRtl ? 'باغ‌ها و بوستان‌ها' : 'Gardens and Parks') },
     { id: 'palaces', label: t.palaces || (isRtl ? 'کاخ‌ها و بناهای سلطنتی' : 'Palaces') },
@@ -55,7 +56,6 @@ export default function ProvinceView() {
     { id: 'historic-landmarks', label: t.historicLandmarks || (isRtl ? 'بناها و یادمان‌های کهن' : 'Historic Structures and Landmarks') },
     { id: 'traditional-markets', label: t.traditionalMarkets || (isRtl ? 'بازارهای سنتی و گذرگاه‌های کهن' : 'Traditional Markets & Old Cities') },
     { id: 'modern-districts', label: t.modernDistricts || (isRtl ? 'محله‌ها و نقاط مدرن' : 'Modern Districts') },
-    { id: 'gallery', label: t.gallery || (isRtl ? 'گالری' : 'Gallery'), isGallery: true },
   ], [isRtl, t]);
 
   const filteredPlaces = useMemo(() => {
@@ -361,7 +361,9 @@ export default function ProvinceView() {
                   className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold transition-all duration-200 cursor-pointer ${
                     isActive
                       ? 'bg-[#14213D] text-[#FCA311] shadow-md border border-[#14213D]'
-                      : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
+                      : cat.isGallery
+                        ? 'bg-amber-50/80 text-[#14213D] hover:bg-amber-100 border border-amber-300/80 shadow-sm'
+                        : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
                   }`}
                 >
                   {cat.isGallery && <Camera size={13} className="text-[#FCA311]" />}

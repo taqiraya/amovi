@@ -573,5 +573,28 @@
     },
     "filterAll": "All",
     "readTimeLabel": "Read time"
+  },
+  "blogDetailPage": {
+    "author": "By Amovi Travel",
+    "views": "1.2K views",
+    "defaultReadTime": "7 min read",
+    "tapestryTitle": "The Rich Cultural Tapestry",
+    "quoteText": "“Afghanistan is not simply a destination; it is a story waiting to be experienced.”",
+    "highlightsTitle": "Why Cultural Travel Matters",
+    "highlights": [
+      "Connect with local communities and traditions",
+      "Explore historical landmarks and ancient sites",
+      "Support cultural preservation and local economies"
+    ],
+    "shareArticle": "Share this article:",
+    "searchPlaceholder": "Search articles...",
+    "relatedArticles": "Related Articles",
+    "subscribeTitle": "Subscribe to Our Journal",
+    "subscribeSubtitle": "Get the latest travel stories, destinations and exclusive insights from Afghanistan.",
+    "subscribeButton": "Subscribe",
+    "subscribing": "Subscribing...",
+    "subscribedSuccess": "Thank you for subscribing to our journal!",
+    "backToBlog": "Back to Stories",
+    "copied": "Link copied to clipboard!"
   }
 }

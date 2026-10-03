@@ -14,6 +14,7 @@ import Tours from './pages/tours/Tours';
 import Destinations from './pages/destinations/Destinations';
 import ProvinceView from './pages/destinations/ProvinceView';
 import Blog from './pages/blog/Blog';
+import BlogDetail from './pages/blog/BlogDetail';
 import Contact from './pages/contact/Contact';
 import Policy from './pages/policy/Policy';
 import PaymentMethods from './pages/payment/PaymentMethods';
@@ -40,6 +41,7 @@ function App() {
           <Route path="/destinations/:slug" element={<ProvinceView />} />
           <Route path="/tours" element={<Tours />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:id" element={<BlogDetail />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/policy" element={<Policy />} />
           <Route path="/payment-methods" element={<PaymentMethods />} />

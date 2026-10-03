@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
-import { ArrowRight, ArrowLeft, Calendar, Tag, Clock, X, ChevronLeft, ChevronRight, Compass } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ArrowRight, ArrowLeft, Clock, ChevronLeft, ChevronRight, Compass } from 'lucide-react';
 import { useLangStore } from '../../store/useLangStore';
 import heroBg from '../../assets/images/hero-bg.webp';
 
@@ -12,7 +13,6 @@ export default function Blog() {
 
   const [activePillar, setActivePillar] = useState('all');
   const [currentPage, setCurrentPage] = useState(1);
-  const [selectedArticle, setSelectedArticle] = useState(null);
 
   // فیلتر مقالات بر اساس پیلار انتخابی
   const filteredArticles = useMemo(() => {
@@ -33,14 +33,6 @@ export default function Blog() {
   const handleSelectPillar = (pillarKey) => {
     setActivePillar(pillarKey);
     setCurrentPage(1);
-  };
-
-  const handleOpenArticle = (article) => {
-    setSelectedArticle(article);
-  };
-
-  const handleCloseArticle = () => {
-    setSelectedArticle(null);
   };
 
   const pillarsData = t.pillars || {};
@@ -152,9 +144,9 @@ export default function Blog() {
       <section className="max-w-6xl mx-auto px-6 pb-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" dir={isRtl ? 'rtl' : 'ltr'}>
           {paginatedArticles.map((article) => (
-            <article
+            <Link
               key={article.id}
-              onClick={() => handleOpenArticle(article)}
+              to={`/blog/${article.id}`}
               className="bg-white rounded-3xl overflow-hidden border border-slate-200/90 shadow-sm hover:shadow-2xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col cursor-pointer group"
             >
               {/* تصویر مقاله با بج تاریخ و افکت زوم */}
@@ -209,7 +201,7 @@ export default function Blog() {
                   </span>
                 </div>
               </div>
-            </article>
+            </Link>
           ))}
         </div>
 
@@ -252,102 +244,6 @@ export default function Blog() {
           </div>
         )}
       </section>
-
-      {/* ========================================================
-          ۵. مودال نمایش کامل متن مقاله اصلی (Full Story Modal)
-      ======================================================== */}
-      {selectedArticle && (
-        <div 
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fadeIn"
-          onClick={handleCloseArticle}
-        >
-          <div 
-            className="bg-white w-full max-w-2xl rounded-3xl overflow-hidden shadow-2xl max-h-[90vh] flex flex-col relative"
-            dir={isRtl ? 'rtl' : 'ltr'}
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* دکمه بستن */}
-            <button
-              onClick={handleCloseArticle}
-              className={`absolute top-4 ${isRtl ? 'left-4' : 'right-4'} z-10 w-9 h-9 rounded-full bg-[#14213D]/80 text-white hover:bg-[#14213D] flex items-center justify-center transition-colors shadow-md cursor-pointer`}
-              aria-label="Close Modal"
-            >
-              <X size={18} />
-            </button>
-
-            {/* تصویر بالای مودال */}
-            <div className="relative aspect-[16/9] w-full bg-slate-200 shrink-0">
-              <img
-                src={selectedArticle.image}
-                alt={selectedArticle.title}
-                className="w-full h-full object-cover"
-                onError={(e) => {
-                  e.target.src = '/tours/images/bamyanPictures.webp';
-                }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none" />
-              <div className={`absolute bottom-4 ${isRtl ? 'right-6' : 'left-6'} text-white`}>
-                <span className="bg-[#FCA311] text-[#14213D] px-3.5 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider font-[Inter]">
-                  {selectedArticle.category}
-                </span>
-              </div>
-            </div>
-
-            {/* بدنه و متن کامل پاراگراف‌های مقاله */}
-            <div className="p-6 sm:p-8 overflow-y-auto space-y-4">
-              <div className="flex items-center gap-4 text-xs text-slate-400 font-medium">
-                <span className="flex items-center gap-1.5">
-                  <Calendar size={14} className="text-[#FCA311]" />
-                  <span>{selectedArticle.date}</span>
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <Clock size={14} className="text-[#FCA311]" />
-                  <span>{selectedArticle.readTime || '4 min'}</span>
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <Tag size={14} className="text-[#FCA311]" />
-                  <span>Amovi Travel Editorial</span>
-                </span>
-              </div>
-
-              <h2 className="text-xl sm:text-2xl font-black text-[#14213D] leading-tight">
-                {selectedArticle.title}
-              </h2>
-
-              <p className="text-[#14213D] font-semibold text-sm sm:text-base leading-relaxed bg-amber-50/50 p-3.5 rounded-2xl border-l-4 rtl:border-r-4 rtl:border-l-0 border-[#FCA311]">
-                {selectedArticle.excerpt}
-              </p>
-
-              {/* پاراگراف‌های تفصیلی مقاله */}
-              <div className="space-y-3.5 pt-2 text-slate-700 text-sm sm:text-base leading-relaxed font-normal">
-                {selectedArticle.content && Array.isArray(selectedArticle.content) ? (
-                  selectedArticle.content.map((paragraph, pIdx) => (
-                    <p key={pIdx} className="leading-relaxed">
-                      {paragraph}
-                    </p>
-                  ))
-                ) : (
-                  <p>{selectedArticle.excerpt}</p>
-                )}
-              </div>
-
-              <div className="pt-5 flex items-center justify-between border-t border-slate-100">
-                <span className="text-xs text-slate-400">
-                  {isRtl ? 'آمووی ترول | روایت‌های ماندگار افغانستان' : 'Amovi Travel | Authentic Afghanistan Stories'}
-                </span>
-                <button
-                  type="button"
-                  onClick={handleCloseArticle}
-                  className="bg-[#14213D] hover:bg-slate-800 text-white font-bold py-2 px-6 rounded-xl text-xs transition-colors cursor-pointer"
-                >
-                  {t.close || (isRtl ? 'بستن' : 'Close')}
-                </button>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      )}
 
     </div>
   );

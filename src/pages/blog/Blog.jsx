@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowLeft, Calendar, User, Search } from 'lucide-react';
+import { ArrowRight, ArrowLeft, Calendar, User, Search, Compass, BookOpen, Sparkles } from 'lucide-react';
 import { useLangStore } from '../../store/useLangStore';
 import SEO from '../../components/SEO';
 import heroBg from '../../assets/images/hero-bg.webp';
@@ -14,6 +14,7 @@ export default function Blog() {
 
   const [posts, setPosts] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [activePillar, setActivePillar] = useState('all');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -36,22 +37,53 @@ export default function Blog() {
     return () => { isMounted = false; };
   }, [t.articles]);
 
+  const pillarsList = [
+    { id: 'all', label: isRtl ? 'همه مقالات' : 'All Articles', icon: null },
+    { id: 'discover', label: isRtl ? 'کشف سرزمین' : 'Discover', icon: Compass },
+    { id: 'understand', label: isRtl ? 'شناخت فرهنگ و مردم' : 'Understand', icon: BookOpen },
+    { id: 'experience', label: isRtl ? 'تجربه‌ها و سوغات' : 'Experience', icon: Sparkles }
+  ];
+
   const filteredPosts = useMemo(() => {
+    let list = posts;
+
+    // فیلتر بر اساس ستون / دسته‌بندی
+    if (activePillar !== 'all') {
+      list = list.filter((p) => (p.pillar || '').toLowerCase() === activePillar.toLowerCase());
+    }
+
+    // فیلتر بر اساس جستجو
     const q = searchTerm.toLowerCase().trim();
-    if (!q) return posts;
-    return posts.filter((p) => {
-      const title = (p.title || (p[currentLang]?.title) || '').toLowerCase();
-      const content = (p.content || (p[currentLang]?.content) || p.excerpt || '').toLowerCase();
-      return title.includes(q) || content.includes(q);
+    if (!q) return list;
+
+    return list.filter((p) => {
+      const titleFa = (p.fa?.title || p.title_fa || p.title || '').toLowerCase();
+      const titleEn = (p.en?.title || p.title_en || p.title || '').toLowerCase();
+      const contentFa = (typeof p.fa?.content === 'string' ? p.fa.content : (Array.isArray(p.fa?.content) ? p.fa.content.join(' ') : '')).toLowerCase();
+      const contentEn = (typeof p.en?.content === 'string' ? p.en.content : (Array.isArray(p.en?.content) ? p.en.content.join(' ') : '')).toLowerCase();
+      const excerptFa = (p.fa?.excerpt || '').toLowerCase();
+      const excerptEn = (p.en?.excerpt || '').toLowerCase();
+
+      return (
+        titleFa.includes(q) || 
+        titleEn.includes(q) || 
+        contentFa.includes(q) || 
+        contentEn.includes(q) ||
+        excerptFa.includes(q) ||
+        excerptEn.includes(q)
+      );
     });
-  }, [posts, searchTerm, currentLang]);
+  }, [posts, activePillar, searchTerm]);
 
   return (
-    <div className={`w-full overflow-x-hidden bg-[#F8FAFC] min-h-screen text-[#14213D] ${isRtl ? 'font-[Sahel]' : 'font-[Inter]'}`}>
+    <div 
+      className={`w-full overflow-x-hidden bg-[#F8FAFC] min-h-screen text-[#14213D] ${isRtl ? 'font-[Sahel] text-right' : 'font-[Inter] text-left'}`}
+      dir={isRtl ? 'rtl' : 'ltr'}
+    >
       <SEO 
         title={isRtl ? 'وبلاگ و مقالات گردشگری | آمووی ترول' : 'Travel Blog & Articles | Amovi Travel'}
         description={isRtl 
-          ? 'مقالات، روایت‌ها و راهنماهای سفر در افغانستان به قلم کارشناسان آمووی ترول.' 
+          ? 'مقالات، روایت‌ها و راهنماهای معتبر سفر در افغانستان به قلم کارشناسان آمووی ترول.' 
           : 'Authentic travel articles, stories and destination guides across Afghanistan with Amovi Travel.'}
         canonicalUrl="https://amovi.travel/blog"
       />
@@ -66,7 +98,7 @@ export default function Blog() {
 
         <div className={`relative z-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 ${isRtl ? 'text-right' : 'text-left'}`}>
           <span className="inline-block text-[#FCA311] text-xs font-bold uppercase tracking-[0.2em] mb-2 font-[Inter]">
-            {isRtl ? 'مجله و مقالات گردشگری' : 'TRAVEL JOURNAL & ARTICLES'}
+            {isRtl ? 'مجله و مقالات گردشگری آمووی' : 'AMOVI TRAVEL JOURNAL & ARTICLES'}
           </span>
 
           <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight">
@@ -77,23 +109,48 @@ export default function Blog() {
 
           <p className="mt-3 sm:mt-4 text-slate-300 text-xs sm:text-sm md:text-base max-w-2xl font-light leading-relaxed">
             {isRtl 
-              ? 'کشف مقاصد، تاریخ، فرهنگ و تجربیات ناب از سفر به گوشه‌وکنار افغانستان.' 
-              : 'Discover destinations, culture, history and experiences from journeys across Afghanistan.'}
+              ? 'کشف مقاصد ناب، شناخت فرهنگ و مردمان، و تجربه سوغات و روایت‌های ماندگار افغانستان.' 
+              : 'Discover destinations, understand people & culture, and experience stories and treasures across Afghanistan.'}
           </p>
         </div>
       </section>
 
-      {/* ۲. نوار جستجو ساده */}
-      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-4">
+      {/* ۲. نوار جستجو و تب‌های دسته‌بندی */}
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-4 space-y-4">
+        {/* نوار جستجو */}
         <div className="max-w-md mx-auto relative">
           <input
             type="text"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder={isRtl ? 'جستجو در مقالات وبلاگ...' : 'Search articles...'}
-            className="w-full pr-10 pl-4 py-3 rounded-2xl bg-white border border-slate-200 text-xs sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#FCA311] shadow-xs"
+            className={`w-full py-3 rounded-2xl bg-white border border-slate-200 text-xs sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#FCA311] shadow-xs ${
+              isRtl ? 'pr-10 pl-4' : 'pl-10 pr-4'
+            }`}
           />
           <Search size={16} className={`absolute top-1/2 -translate-y-1/2 text-slate-400 ${isRtl ? 'right-3.5' : 'left-3.5'}`} />
+        </div>
+
+        {/* دکمه‌های فیلتر دسته‌بندی */}
+        <div className="flex flex-wrap items-center justify-center gap-2 pt-2">
+          {pillarsList.map((pill) => {
+            const Icon = pill.icon;
+            const isActive = activePillar === pill.id;
+            return (
+              <button
+                key={pill.id}
+                onClick={() => setActivePillar(pill.id)}
+                className={`px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 cursor-pointer ${
+                  isActive
+                    ? 'bg-[#14213D] text-[#FCA311] shadow-sm'
+                    : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 hover:text-[#14213D]'
+                }`}
+              >
+                {Icon && <Icon size={13} className={isActive ? 'text-[#FCA311]' : 'text-slate-400'} />}
+                <span>{pill.label}</span>
+              </button>
+            );
+          })}
         </div>
       </section>
 
@@ -110,19 +167,41 @@ export default function Blog() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8" dir={isRtl ? 'rtl' : 'ltr'}>
             {filteredPosts.map((post) => {
-              const postId = post.id || post.slug;
-              const postTitle = post.title || post[currentLang]?.title || (isRtl ? 'مقاله آمووی ترول' : 'Amovi Article');
+              const postId = post.slug || post.id;
+              
+              // عنوان دوزبانه دقیق
+              const postTitle = isRtl
+                ? (post.fa?.title || post.title_fa || post.title || 'مقاله وبلاگ')
+                : (post.en?.title || post.title_en || post.title || 'Blog Article');
+
+              // متن خلاصه دوزبانه
+              const rawContent = isRtl
+                ? (post.fa?.excerpt || post.fa?.content || post.content_fa || post.content)
+                : (post.en?.excerpt || post.en?.content || post.content_en || post.content);
+              
+              const postExcerpt = typeof rawContent === 'string'
+                ? rawContent
+                : (Array.isArray(rawContent) ? rawContent[0] : (post.excerpt || ''));
+
               const postImage = post.image || post.image_url || '/images/provinces/kabul/kabul-hero.webp';
-              const postContent = typeof post.content === 'string' ? post.content : (Array.isArray(post.content) ? post.content.join('\n\n') : (post[currentLang]?.content || post.excerpt || ''));
-              const postDate = post.createdAt || post.publishedAt || post.date 
-                ? new Date(post.createdAt || post.publishedAt || post.date).toLocaleDateString(isRtl ? 'fa-IR' : 'en-US') 
-                : (isRtl ? 'اخیر' : 'Recent');
-              const postAuthor = post.author || post[currentLang]?.author || 'Amovi Travel';
+              
+              const postDate = isRtl
+                ? (post.dateFa || (post.createdAt ? new Date(post.createdAt).toLocaleDateString('fa-IR') : 'اخیراً'))
+                : (post.date || (post.createdAt ? new Date(post.createdAt).toLocaleDateString('en-US') : 'Recent'));
+
+              const postAuthor = isRtl
+                ? (post.fa?.author || post.author_fa || 'تیم گردشگری آمووی')
+                : (post.en?.author || post.author_en || 'Amovi Travel Team');
+
+              const postCategory = isRtl
+                ? (post.fa?.category || post.category_fa || 'کشف سرزمین')
+                : (post.en?.category || post.category_en || 'DISCOVER');
 
               return (
                 <article
                   key={postId}
                   className="bg-white rounded-2xl sm:rounded-3xl overflow-hidden border border-slate-200/90 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col group"
+                  dir={isRtl ? 'rtl' : 'ltr'}
                 >
                   {/* عکس در قسمت بالای مقاله */}
                   <Link to={`/blog/${postId}`} className="block relative aspect-[16/10] overflow-hidden bg-slate-100">
@@ -138,6 +217,11 @@ export default function Blog() {
                         }
                       }}
                     />
+                    {postCategory && (
+                      <span className={`absolute top-3 ${isRtl ? 'right-3' : 'left-3'} px-2.5 py-1 rounded-lg bg-[#14213D]/80 backdrop-blur-xs text-[#FCA311] text-[10px] font-bold`}>
+                        {postCategory}
+                      </span>
+                    )}
                   </Link>
 
                   {/* پایین عکس: مشخصات، عنوان و متن */}
@@ -163,7 +247,7 @@ export default function Blog() {
 
                       {/* خلاصه متن مقاله */}
                       <p className="mt-2 text-slate-500 text-xs sm:text-sm line-clamp-3 leading-relaxed font-normal">
-                        {postContent}
+                        {postExcerpt}
                       </p>
                     </div>
 

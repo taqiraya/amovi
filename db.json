@@ -6521,24 +6521,354 @@
   ],
   "blogPosts": [
     {
-      "id": "post-001",
-      "slug": "exploring-afghanistan",
-      "fa": {
-        "title": "کشف افغانستان",
-        "excerpt": "با زیبایی‌ها، فرهنگ و تاریخ افغانستان آشنا شوید.",
-        "content": "محتوای مقاله در این بخش قرار خواهد گرفت.",
-        "author": "اموی تراول"
-      },
-      "en": {
-        "title": "Exploring Afghanistan",
-        "excerpt": "Discover the beauty, culture and history of Afghanistan.",
-        "content": "Blog content will be added here.",
-        "author": "Amovi Travel"
-      },
+      "id": "beyond-headlines",
+      "slug": "beyond-headlines",
+      "pillar": "discover",
       "image": "/images/provinces/kabul/kabul-hero.webp",
       "isPublished": true,
-      "publishedAt": "2026-09-28T08:00:00Z",
-      "createdAt": "2026-09-28T08:00:00Z"
+      "publishedAt": "2026-10-04T11:22:05.490Z",
+      "createdAt": "2026-10-04T11:22:05.490Z",
+      "fa": {
+        "title": "افغانستان فراتر از تیترهای خبری",
+        "category": "کشف سرزمین",
+        "excerpt": "فراتر از تیترهای خبری، افغانستانی دیگر پنهان است؛ سرزمینی با کوه‌های خیره‌کننده، شهرهای کهن، سنت‌های بی‌زمان و مردمانی با نهایت مهمان‌نوازی.",
+        "content": "سال‌هاست که افغانستان اغلب از قاب تیترهای خبری دیده شده است؛ داستان‌هایی از کشمکش، نااطمینانی و کشوری که درک آن از دوردست دشوار به نظر می‌رسد. اما در ورای این تیترها، افغانستانی دیگر جریان دارد: سرزمینی با کوه‌های مسحورکننده، شهرهای کهن، سنت‌های بی‌زمان و مردمانی که گرمای نگاهشان می‌تواند یک دیدار ساده را به خاطره‌ای ماندگار برای یک عمر بدل سازد.\n\nدر اینجا، تاریخ در حصار موزه‌ها محدود نمانده است؛ بلکه در کوچه‌های چندصدساله، دره‌های کوهستانی، ویرانه‌های باستانی، بازارهای پرجنب‌وجوش و روایت‌های سینه‌به‌سینه زنده است. از آب‌های فیروزه‌ای بند امیر تا خیابان‌های تاریخی هرات، از جنگل‌های آرام نورستان تا گنجینه‌های فرهنگی کابل، هر گوشه از این خاک داستانی ناگفته در انتظار کشف شدن دارد.\n\nسفر در پهنه افغانستان، یعنی نگریستن به فراتر از تصویرهای کلیشه‌ای و تجربه واقعی کشور از دریچه مردمان، میراث ماندگار، چشم‌اندازهای بکر و جریان روزمره زندگی.\n\nفراتر از تیترها گام بردارید و افغانستانی را کشف کنید که مشتاقانه در انتظار تجربه شدن است.",
+        "author": "تیم گردشگری آمووی",
+        "readTime": "۴ دقیقه"
+      },
+      "en": {
+        "title": "Afghanistan Beyond the Headlines",
+        "category": "DISCOVER",
+        "excerpt": "Beyond the headlines lies another Afghanistan: a land of breathtaking mountains, ancient cities, timeless traditions, and warm hospitality.",
+        "content": "For years, Afghanistan has often been seen through headlines—stories of conflict, uncertainty, and a country difficult to understand from afar. But beyond those headlines lies another Afghanistan: a land of breathtaking mountains, ancient cities, timeless traditions, and people whose warmth can turn a simple encounter into a lasting memory.\n\nHere, history is not confined to museums. It lives in centuries-old streets, mountain valleys, ancient ruins, bustling bazaars, and stories passed from one generation to the next. From the blue waters of Band-e Amir to the historic streets of Herat, from the quiet forests of Nuristan to the cultural treasures of Kabul, every landscape carries a story waiting to be discovered.\n\nTo travel through Afghanistan is to look beyond the familiar picture and experience the country through its people, heritage, landscapes, and everyday life.\n\nLook beyond the headlines. Discover the Afghanistan that waits to be experienced.",
+        "author": "Amovi Travel Team",
+        "readTime": "4 min"
+      }
+    },
+    {
+      "id": "hidden-natural-beauty",
+      "slug": "hidden-natural-beauty",
+      "pillar": "discover",
+      "image": "/tours/images/bamyanPictures.webp",
+      "isPublished": true,
+      "publishedAt": "2026-10-03T11:22:05.490Z",
+      "createdAt": "2026-10-03T11:22:05.490Z",
+      "fa": {
+        "title": "زیبایی‌های طبیعی و پنهان افغانستان",
+        "category": "کشف سرزمین",
+        "excerpt": "فراتر از شهرهای باستانی، جهانی آرام از کوه‌ها، دریاچه‌های فیروزه‌ای، رودخانه‌های زلال و دشت‌های دست‌نخورده قرار دارد.",
+        "content": "فراتر از شهرهای تاریخی و بناهای باستانی افغانستان، جهانی آرام و بکر نهفته است؛ دنیایی که توسط کوه‌ها، رودها، دره‌ها، جنگل‌ها و چشم‌اندازهای بیکران شکل گرفته است. جلوه‌ای از افغانستان که کمتر در رسانه‌ها به تصویر کشیده شده، اما با یک بار دیدن تا همیشه در ذهن ماندگار می‌شود.\n\nاز دریاچه‌های فیروزه‌ای بند امیر که در محاصره صخره‌های استوار قد برافراشته‌اند تا دره‌های سرسبز نورستان که جنگل‌های انبوه در کنار چشمه‌های زلال کوهستانی روییده‌اند، این کشور تابلویی شگفت‌انگیز از تضادهای طبیعی است. در بامیان، دره‌های پهناور به صخره‌های باشکوه و قله‌های سربه‌فلک‌کشیده می‌پیوندند و در شمال و غرب، دشت‌های حاصلخیز و رشته‌کوه‌های دوردست ریتم متفاوتی از حیات می‌آفرینند.\n\nدست‌یابی به زیبایی‌های طبیعی افغانستان همیشه آسان نیست—و این دقیقاً بخشی از جادوی آن است. برخی نقاط همچنان دست‌نخورده، آرام و شگفت‌انگیز باقی مانده‌اند و به مسافران حس اصیل کشفی را هدیه می‌دهند که در دنیای مدرن امروز به‌ندرت یافت می‌شود.\n\nگاهی اوقات، زیباترین مقاصد همان‌هایی هستند که هنوز در انتظار کشف شدن نشسته‌اند.",
+        "author": "تیم گردشگری آمووی",
+        "readTime": "۵ دقیقه"
+      },
+      "en": {
+        "title": "The Hidden Natural Beauty of Afghanistan",
+        "category": "DISCOVER",
+        "excerpt": "Beyond historic cities lies a quieter world shaped by mountains, turquoise lakes, rivers, valleys, and vast untouched landscapes.",
+        "content": "Beyond Afghanistan’s historic cities and ancient monuments lies a quieter world—one shaped by mountains, rivers, valleys, forests, and vast open landscapes. A side of Afghanistan rarely seen in the headlines, yet impossible to forget once discovered.\n\nFrom the turquoise lakes of Band-e Amir, surrounded by rugged mountains, to the green valleys of Nuristan, where forests rise along clear mountain streams, the country holds landscapes of remarkable contrast. In Bamyan, wide valleys meet dramatic cliffs and high mountains. In the north and west, fertile plains and distant ranges create a different rhythm of life.\n\nAfghanistan’s natural beauty is not always easy to reach—and that is part of its magic. Some places remain remote, peaceful, and wonderfully untouched, offering travelers a sense of discovery that is increasingly rare in the modern world.\n\nSometimes, the most beautiful places are the ones still waiting to be discovered.",
+        "author": "Amovi Travel Team",
+        "readTime": "5 min"
+      }
+    },
+    {
+      "id": "through-the-seasons",
+      "slug": "through-the-seasons",
+      "pillar": "discover",
+      "image": "/images/provinces/bamyan/bamyan-hero.webp",
+      "isPublished": true,
+      "publishedAt": "2026-10-02T11:22:05.490Z",
+      "createdAt": "2026-10-02T11:22:05.490Z",
+      "fa": {
+        "title": "افغانستان در گذر چهار فصل",
+        "category": "کشف سرزمین",
+        "excerpt": "از بهار پرشکوفه و دره‌های سرسبز تا پاییز طلایی باغات و زمستان آرام و برفی صخره‌ها؛ هر فصل روایتی تازه دارد.",
+        "content": "افغانستان همگام با گردش فصل‌ها چهره عوض می‌کند و هر فصل جلوه‌ای کاملاً متفاوت از این سرزمین را آشکار می‌سازد.\n\nدر بهار، دره‌ها با دشت‌های سرسبز، گل‌های وحشی دامنه‌ها و زمزمه آرام جویبارها بیدار می‌شوند. تابستان آسمانی شفاف و صاف بر فراز کوهستان‌ها می‌گسترد، پناهگاهی خنک در ارتفاعات می‌آفریند و روزهای درخشان و طولانی را برای گشت‌وگذار مهیا می‌سازد. با فرارسیدن پاییز، چشم‌اندازها رنگ طلا به خود می‌گیرند؛ باغ‌ها غرق در رنگ و بوی میوه می‌شوند، فصل درو آغاز می‌شود و روستاهای کوهستانی گرمایی صمیمی می‌یابند.\n\nسپس زمستان فرا می‌رسد. برف پاک قله‌های بلند را در بر می‌گیرد و دره‌ها را به چشم‌اندازهایی سفید و آرام بدل می‌سازد. در مناطقی مانند بامیان، شکوه یخ‌زده این فصل تجربه‌ای بی‌بدیل خلق می‌کند—خاموش، شکوهمند و فراموش‌نشدنی.\n\nتغییر فصول در افغانستان صرفاً یک چرخه طبیعی نیست؛ بلکه شکل‌دهنده کشاورزی، غذاها، آیین‌ها، سفرها و زندگی روزمره است و انسان را عمیقاً به سرزمینی که در آن نفس می‌کشد پیوند می‌دهد.\n\nدر فصلی دیگر قدم به این سرزمین بگذارید تا افغانستان داستانی کاملاً نو برایتان روایت کند.",
+        "author": "تیم گردشگری آمووی",
+        "readTime": "۴ دقیقه"
+      },
+      "en": {
+        "title": "Afghanistan Through the Seasons",
+        "category": "DISCOVER",
+        "excerpt": "From flowering spring valleys and golden autumn orchards to snow-covered winter cliffs, each season tells a completely different story.",
+        "content": "Afghanistan changes with the seasons, and each one reveals a different side of the country.\n\nIn spring, valleys awaken with green fields, wildflowers, and the gentle sound of flowing water. Summer brings clear mountain skies, cool highland escapes, and long days made for exploring. As autumn arrives, the landscape turns golden—orchards fill with color, harvests begin, and mountain villages take on a quiet warmth.\n\nThen comes winter. Snow covers the high mountains and transforms valleys into peaceful white landscapes. In places like Bamyan, the frozen beauty of the season creates a completely different experience—silent, dramatic, and unforgettable.\n\nThe changing seasons are more than a natural cycle in Afghanistan. They shape agriculture, food, celebrations, travel, and everyday life, connecting people closely to the land around them.\n\nCome in a different season, and Afghanistan may tell you a completely different story.",
+        "author": "Amovi Travel Team",
+        "readTime": "4 min"
+      }
+    },
+    {
+      "id": "ancient-cities-landscapes",
+      "slug": "ancient-cities-landscapes",
+      "pillar": "discover",
+      "image": "/tours/images/heratPictures.webp",
+      "isPublished": true,
+      "publishedAt": "2026-10-01T11:22:05.490Z",
+      "createdAt": "2026-10-01T11:22:05.490Z",
+      "fa": {
+        "title": "از شهرهای کهن تا چشم‌اندازهای جاودان",
+        "category": "کشف سرزمین",
+        "excerpt": "هم‌نشینی تاریخ و طبیعت؛ از بلخ کهن مهد تمدن تا منار جام در دل کوهستان غور و شکوه معماری فیروزه‌ای هرات.",
+        "content": "افغانستان سرزمینی است که در آن تاریخ و طبیعت شانه به شانه یکدیگر ایستاده‌اند. در سراسر دره‌ها و کوهسارانش، شهرهای باستانی، قلعه‌های خاموش، اماکن مقدس و بناهای چندصدساله در بافت طبیعی پیرامونشان تنیده شده‌اند.\n\nاز شهر باستانی بلخ که روزگاری نگین تمدن و چهارراه تجارت شرق و غرب بود، تا منار باشکوه جام که در دل صخره‌های نفوذناپذیر غور سر به آسمان ساییده است، این خاک ردپای تمدن‌هایی را حفظ کرده که تاریخ منطقه را رقم زده‌اند. در بامیان، صخره‌های عظیم و میراث بودایی در زیر پهنه آسمان گسترده کوهستان جلوه‌گری می‌کنند. در غزنی و هرات، معماری کهن از پادشاهی‌های قدرتمند، ادیبان، نگارگران و کاروان‌های کهنی سخن می‌گوید که از این معبر گذشته‌اند.\n\nدر اینجا میراث گذشته هرگز از آغوش طبیعت جدا نیست. سفر در افغانستان می‌تواند شما را از یک شهر تاریخی به دره‌ای کوهستانی و از بنایی باستانی به چشم‌اندازی هدایت کند که گویی قرن‌هاست دست‌نخورده مانده است.\n\nدر افغانستان گام بردارید؛ تاریخ درست در جایی پیش چشمتان قد علم خواهد کرد که کمترین انتظارش را دارید.",
+        "author": "تیم گردشگری آمووی",
+        "readTime": "۵ دقیقه"
+      },
+      "en": {
+        "title": "From Ancient Cities to Timeless Landscapes",
+        "category": "DISCOVER",
+        "excerpt": "A journey through civilizations—from the ancient city of Balkh to the Minaret of Jam and Herat's historic architecture.",
+        "content": "Afghanistan is a land where history and landscape exist side by side. Across its valleys and mountains, ancient cities, forgotten fortresses, sacred sites, and centuries-old monuments remain woven into the natural world around them.\n\nFrom the ancient city of Balkh, once a great center of civilization and trade, to the dramatic Minaret of Jam rising from the mountains of Ghor, the country carries traces of cultures that shaped the history of this region. In Bamyan, monumental cliffs and ancient Buddhist heritage stand together beneath the vast mountain sky. In Ghazni and Herat, historic architecture tells stories of powerful kingdoms, scholars, artists, and travelers who once passed through these lands.\n\nHere, heritage is never far from nature. A journey through Afghanistan can take you from a historic city to a mountain valley, from an ancient monument to a landscape that seems unchanged for centuries.\n\nWalk through Afghanistan, and history may appear where you least expect it.",
+        "author": "Amovi Travel Team",
+        "readTime": "5 min"
+      }
+    },
+    {
+      "id": "nuristan-mountains",
+      "slug": "nuristan-mountains",
+      "pillar": "discover",
+      "image": "/tours/images/noristanPictures.webp",
+      "isPublished": true,
+      "publishedAt": "2026-09-30T11:22:05.490Z",
+      "createdAt": "2026-09-30T11:22:05.490Z",
+      "fa": {
+        "title": "نورستان: جایی که کوهساران نفس می‌کشند",
+        "category": "کشف سرزمین",
+        "excerpt": "در دل کوه‌های شرقی؛ جهانی از دره‌های عمیق، جنگل‌های انبوه، رودخانه‌های زلال و روستاهایی با معماری چوبی شگفت‌انگیز.",
+        "content": "در اعماق کوهستان‌های شرقی افغانستان، جهانی از دره‌های ژرف، دامنه‌های پوشیده از جنگل‌های کاج، رودخانه‌های شفاف و روستاهایی قرار دارد که با نبض طبیعت کوهستان نبض می‌زنند. این دیار نورستان است—جایی که طبیعت در نزدیک‌ترین، آرام‌ترین و وحشی‌ترین جلوه خود حس می‌شود.\n\nجنگل‌ها بر شیب صخره‌ها بالارفته‌اند، چشمه‌سارها در تنگه‌ها می‌خروشند و قله‌های پوشیده از برف بر فراز دهکده‌های سنتی چوبی قد برافراشته‌اند. در پس هر پیچ جاده، منظره‌ای نو، گذرگاهی بدیع یا کنجی آرام و دور از هیاهوی جهان مدرن به چشم می‌آید.\n\nاما جذابیت نورستان فراتر از زیبایی‌های بصری است. دره‌های دورافتاده آن سنت‌ها، معماری منحصربه‌فرد و سبک زندگی هماهنگ با طبیعت را تا امروز دست‌نخورده حفظ کرده‌اند. برای مسافرانی که در جستجوی چهره‌ای متفاوت از افغانستان هستند، نورستان موهبتی استثنایی است: ورود به جهانی که هنوز پیوند بنیادین خود با طبیعت را نگسسته است.\n\nبه نورستان بیایید، گام‌هایتان را آرام کنید، نفسی عمیق بکشید و شکوه دست‌نخورده طبیعت افغانستان را لمس نمایید.",
+        "author": "تیم گردشگری آمووی",
+        "readTime": "۴ دقیقه"
+      },
+      "en": {
+        "title": "Nuristan: Where the Mountains Still Breathe",
+        "category": "DISCOVER",
+        "excerpt": "Deep eastern valleys, pine-covered slopes, rushing crystal rivers, and distinctive wooden architecture where nature remains untamed.",
+        "content": "Far in the eastern mountains of Afghanistan lies a world of deep valleys, forest-covered slopes, clear rivers, and villages shaped by the rhythm of the mountains. This is Nuristan—a place where nature feels close, quiet, and wonderfully untamed.\n\nHere, forests climb the mountainsides, streams flow through narrow valleys, and snow-covered peaks rise above traditional villages. The landscape changes with every turn, revealing a new view, a new trail, or a quiet corner far from the noise of modern life.\n\nBut Nuristan is more than spectacular scenery. Its remote valleys have preserved distinctive traditions, architecture, and ways of life closely connected to the surrounding environment. For travelers seeking a different side of Afghanistan, Nuristan offers something rare: the feeling of entering a world that has remained deeply connected to nature.\n\nCome to Nuristan, slow down, breathe deeply, and discover the wild beauty of Afghanistan, A Journey into Untouched Beauty.",
+        "author": "Amovi Travel Team",
+        "readTime": "4 min"
+      }
+    },
+    {
+      "id": "soul-culture-identity",
+      "slug": "soul-culture-identity",
+      "pillar": "understand",
+      "image": "/images/provinces/kabul/kabul-culture.webp",
+      "isPublished": true,
+      "publishedAt": "2026-09-29T11:22:05.490Z",
+      "createdAt": "2026-09-29T11:22:05.490Z",
+      "fa": {
+        "title": "روح افغانستان: فرهنگ و هویت ماندگار",
+        "category": "شناخت روح و فرهنگ",
+        "excerpt": "برای درک افغانستان باید فراتر از کوه‌ها نگریست؛ عمیق‌ترین داستان این سرزمین در خانواده، کرامت، احترام و تاب‌آوری مردم زنده است.",
+        "content": "برای شناخت راستین افغانستان، باید از تماشای کوه‌ها و شهرهای کهن فراتر رفت. اصیل‌ترین و ژرف‌ترین داستان این سرزمین در میان مردمان، باورها، سنت‌ها و خاطراتی جریان دارد که نسل به نسل امتداد یافته‌اند.\n\nافغانستان خاستگاه اقوام، زبان‌ها، گویش‌ها و شیوه‌های زیست گوناگون است؛ اما از دل تمامی این گوناگونی‌ها، رشته‌ای استوار از پیوند خانوادگی، ارزش اجتماع، کرامت انسانی و حس تعلق عمیق عبور می‌کند. از گرمای گردهمایی بر سر سفره غذا تا نوای موسیقی سنتی، از جشن‌های رنگارنگ تا لحظات خالصانه مهمان‌نوازی، فرهنگ با تاروپود زندگی روزمره عجین شده است.\n\nفرهنگ افغانستان در بستر قرن‌ها تاریخ و از تلاقی تمدن‌های کهن جاده ابریشم شکل گرفته است؛ اما قصه‌ای منجمد در گذشته نیست، بلکه با نفس‌های نسلی که امروز در آن زندگی می‌کنند پویایی خود را حفظ کرده است.\n\nشناخت افغانستان، کشف سرزمینی صرفاً جغرافیایی نیست؛ رویارویی با فرهنگی عمیق، تاب‌آور و واجد روحی تپنده و مستقل است.\n\nنزدیک‌تر بیایید، با جان دل بشنوید و روح جاودان افغانستان را لمس کنید.",
+        "author": "تیم گردشگری آمووی",
+        "readTime": "۴ دقیقه"
+      },
+      "en": {
+        "title": "The Soul of Afghanistan: Its Culture & Identity",
+        "category": "UNDERSTAND",
+        "excerpt": "To understand Afghanistan, look beyond the mountains. Its deepest story lives in family, community, respect, and enduring resilience.",
+        "content": "To understand Afghanistan, you have to look beyond its mountains and ancient cities. Its deepest story lives in the people, traditions, values, and memories passed from one generation to the next.\n\nAfghanistan is home to diverse communities, languages, traditions, and ways of life. Yet across this diversity runs a strong sense of family, community, respect, and belonging. From the warmth of a shared meal to the rhythm of traditional music, from colorful celebrations to quiet moments of hospitality, culture is woven into everyday life.\n\nMuch of Afghan culture has been shaped by centuries of history and by the many civilizations that crossed these lands. But it is not simply a story preserved in the past. It continues to evolve through the people who live it today.\n\nTo discover Afghanistan is to discover more than a place. It is to meet a culture with depth, resilience, and a soul of its own.\n\nLook closer, listen deeper, and discover the soul of Afghanistan.",
+        "author": "Amovi Travel Team",
+        "readTime": "4 min"
+      }
+    },
+    {
+      "id": "people-behind-land",
+      "slug": "people-behind-land",
+      "pillar": "understand",
+      "image": "/tours/images/kandaharPictures.webp",
+      "isPublished": true,
+      "publishedAt": "2026-09-28T11:22:05.490Z",
+      "createdAt": "2026-09-28T11:22:05.490Z",
+      "fa": {
+        "title": "مردمان در پسِ سیمای سرزمین",
+        "category": "شناخت روح و فرهنگ",
+        "excerpt": "هر روستای کوهستانی و هر بازار پرجنب‌وجوش، حامل داستان‌هایی انسانی از شرافت، سخاوت و پیوندهای صمیمانه‌ای است که بر سر فنجانی چای شکل می‌گیرد.",
+        "content": "هر سرزمینی طبیعتی دارد، اما این انسان‌ها هستند که به آن کالبد روح می‌بخشند. در افغانستان، هر دهکده کوهستانی، هر گذرگاه تاریخی و هر بازار شلوغ، روایتگر داستان زن‌ها و مردهایی است که این خاک را خانه خود نامیده‌اند.\n\nافغان‌ها به اهمیتی که برای کیان خانواده، پیوند محلی، حرمت انسانی و سخاوت قائل‌اند شناخته می‌شوند. جریان روزمره غالباً حول هم‌سفرگی، گفت‌وگوهای آرام کنار استکان چای، دیدارهای خویشاوندی و سنن اصیلی می‌چرخد که بی‌صدا از سلف به خلف می‌رسد.\n\nمسافر در گذر از جغرافیای افغانستان با زبان‌ها، گویش‌ها، البسه فاخر محلی و آیین‌های بومی روبرو می‌شود. از جامعه کوه‌نشین بامیان تا کوی‌های تاریخی هرات و دره‌های نورستان، هر منطقه فصلی درخشان به کتاب روایت‌های انسانی این مرزوبوم می‌افزاید.\n\nزیبایی این دیدارها در سادگی بی‌ریای آنهاست: یک سلام با لبخند، دعوت به پیاله‌ای چای یا روایتی که بی‌چشمداشت با مسافری ناآشنا در میان گذاشته می‌شود.\n\nپشت هر منظره، سرنوشتی انسانی تپنده است؛ نزدیک‌تر آیید و مردم اصیل افغانستان را بشناسید.",
+        "author": "تیم گردشگری آمووی",
+        "readTime": "۴ دقیقه"
+      },
+      "en": {
+        "title": "The People Behind the Land",
+        "category": "UNDERSTAND",
+        "excerpt": "Every mountain village and bazaar carries the human stories of dignity, generosity, and connections forged over cups of tea.",
+        "content": "Every country has its landscapes, but it is the people who give those landscapes a soul. In Afghanistan, every mountain village, ancient city, and busy bazaar carries the stories of the people who have called this land home.\n\nAfghans are known for the importance they place on family, community, dignity, and generosity. Life often revolves around shared meals, conversations over tea, gatherings with family and friends, and traditions passed quietly from one generation to the next.\n\nAcross Afghanistan, travelers encounter different languages, customs, clothing, foods, and ways of life. From the highland communities of Bamyan to the historic streets of Herat and the mountain valleys of Nuristan, each region adds another chapter to the country’s human story.\n\nWhat makes these encounters special is their simplicity: a conversation, a smile, an invitation to tea, or a story shared with a stranger.\n\nBehind every landscape is a human story. Come closer, and discover the people behind Afghanistan.",
+        "author": "Amovi Travel Team",
+        "readTime": "4 min"
+      }
+    },
+    {
+      "id": "afghan-hospitality",
+      "slug": "afghan-hospitality",
+      "pillar": "understand",
+      "image": "/images/provinces/kabul/bagh-e-babur.webp",
+      "isPublished": true,
+      "publishedAt": "2026-09-27T11:22:05.490Z",
+      "createdAt": "2026-09-27T11:22:05.490Z",
+      "fa": {
+        "title": "مهمان‌نوازی افغان: خوش‌آمدی از صمیم دل",
+        "category": "شناخت روح و فرهنگ",
+        "excerpt": "در افغانستان مهمان هرگز بیگانه تلقی نمی‌شود؛ پیاله‌ای چای و طعام سفره، غریبه‌ها را به صمیمی‌ترین یاران بدل می‌سازد.",
+        "content": "در فرهنگ افغانستان، هیچ مهمانی برای مدت طولانی غریبه باقی نمی‌ماند. پیاله‌ای چای خوش‌عطر، لقمه‌ای نان متبرک به سفره خانه یا تعارفی گرم می‌تواند نخستین دیدار را بی‌درنگ به پیوندی دلپذیر بدل سازد.\n\nمهمان‌نوازی در تاروپود حیات افغان‌ها ریشه دارد. خانواده‌ها هر آنچه در توان دارند پیشکش مهمان می‌کنند و صدر مجلس را به او اختصاص می‌دهند. در سراسر کشور، گستراندن سفره و هم‌صحبتی فراتر از آداب معاشرت است؛ ادای احترامی عمیق، اعلام دوستی و نشان پاکی نیت به شمار می‌رود.\n\nبرای مسافران خارجی، ماندگارترین خاطرات دور از بناهای مشهور رقم می‌خورد: در هم‌نشینی صمیمانه با یک خانواده بومی، شنیدن قصه‌ها در کنار سماور، چشیدن طعم اصیل غذای خانگی یا دیدن لبخند محبت‌آمیزی که با هیچ واژه‌ای قابل قیمت‌گذاری نیست.\n\nاین لحظات گوهری را نمایان می‌سازند که هیچ عکسی قادر به ثبت آن نیست—گرمای عاطفه یک ملت و زیبایی اصیل ارتباط انسانی.\n\nبه عنوان مسافر بیایید؛ اما با کوله‌باری از خاطره، قصه و دوستانی پایدار بازگردید.",
+        "author": "تیم گردشگری آمووی",
+        "readTime": "۴ دقیقه"
+      },
+      "en": {
+        "title": "Afghan Hospitality: A Welcome from the Heart",
+        "category": "UNDERSTAND",
+        "excerpt": "In Afghanistan, a guest is never a stranger for long. Generosity at the table and genuine smiles create bonds that last a lifetime.",
+        "content": "In Afghanistan, a guest is rarely treated as a stranger for long. A cup of tea, a shared meal, or a warm invitation can quickly turn a first meeting into a moment of connection.\n\nHospitality is deeply woven into Afghan life. Families welcome guests with generosity, offering what they have and making space at their table. In homes, villages, and gatherings across the country, sharing food and conversation is more than a social custom—it is a way of showing respect, friendship, and goodwill.\n\nFor travelers, some of the most memorable moments may happen away from famous landmarks: sitting with a local family, sharing stories over tea, tasting a homemade dish, or simply being welcomed with a genuine smile.\n\nThese encounters reveal something that photographs cannot capture—the warmth of a people and the beauty of human connection.\n\nCome as a traveler. Leave with a story, a memory, and perhaps a new friend.",
+        "author": "Amovi Travel Team",
+        "readTime": "4 min"
+      }
+    },
+    {
+      "id": "traditions-alive",
+      "slug": "traditions-alive",
+      "pillar": "understand",
+      "image": "/images/provinces/kabul/kabul-history.webp",
+      "isPublished": true,
+      "publishedAt": "2026-09-26T11:22:05.490Z",
+      "createdAt": "2026-09-26T11:22:05.490Z",
+      "fa": {
+        "title": "سنت‌هایی که نبض افغانستان را زنده می‌دارند",
+        "category": "شناخت روح و فرهنگ",
+        "excerpt": "برخی سنت‌ها فقط خاطره نیستند، زندگی می‌شوند. از نوروز باستانی و جشن‌های پیوند تا آیین‌های هم‌نشینی خانوادگی.",
+        "content": "پاره‌ای از آیین‌ها در حافظه محبوس نمانده‌اند، بلکه هر روز زیسته می‌شوند. در افغانستان، نسل‌های متمادی با پایبندی به رسوم بومی، زندگی روزمره را معنا بخشیده و خانواده‌ها و جوامع را در جشن‌ها و رویدادهای مشترک گرد هم می‌آورند.\n\nاز تشریفات احترام‌آمیز دیدوبازدید تا رنگ‌ها و نواهای موسیقی سنتی، سنن افغانی بازتاب‌دهنده ارزش‌های ستودنی احترام، سخاوت، خانواده‌محوری و همدلی است. پیوندهای زناشویی تمام ایل و تبار را گردهم می‌آورد، نوروز نوید طراوت و سرسبزی را در رگ‌های جامعه جاری می‌سازد و غذاهای سنتی همه را بر گرد یک خوان می‌نشاند.\n\nدر ولایات مختلف، این رسوم در پوشش‌های محلی، صنایع‌دستی، لحن‌های موسیقایی و آیین‌های بومی تنوعی شگفت‌انگیز می‌یابد و تابلویی رنگارنگ از گوناگونی فرهنگی افغانستان خلق می‌کند.\n\nشکوه این سنت‌ها در تداوم آنهاست؛ پیوندی استوار میان دیروز و امروز که به دستان نسل‌های آینده سپرده می‌شود.\n\nبا سنت‌هایی آشنا شوید که نسل‌ها را به هم پیوند داده و روح زنده افغانستان را زنده نگه می‌دارند.",
+        "author": "تیم گردشگری آمووی",
+        "readTime": "۴ دقیقه"
+      },
+      "en": {
+        "title": "Traditions That Keep Afghanistan Alive",
+        "category": "UNDERSTAND",
+        "excerpt": "Some traditions are lived daily. From family gatherings to vibrant celebrations of Nowruz and weddings, customs connect generations.",
+        "content": "Some traditions are not simply remembered—they are lived. In Afghanistan, generations of customs continue to shape everyday life, bringing families and communities together through shared moments, celebrations, and stories.\n\nFrom the welcoming rituals of a family gathering to the colors and music of traditional celebrations, Afghan traditions reflect values of respect, generosity, family, and community. Weddings bring together entire families, Nowruz fills communities with the promise of spring, and traditional foods bring people around the same table.\n\nAcross different regions, traditions take many forms. Clothing, music, crafts, celebrations, and local customs may change from one place to another, creating a rich cultural landscape shaped by Afghanistan’s diversity.\n\nWhat makes these traditions meaningful is their continuity. They connect the present with generations before it, while continuing to evolve with the people who carry them forward.\n\nDiscover the traditions that connect generations—and keep the spirit of Afghanistan alive.",
+        "author": "Amovi Travel Team",
+        "readTime": "4 min"
+      }
+    },
+    {
+      "id": "taste-of-afghanistan",
+      "slug": "taste-of-afghanistan",
+      "pillar": "experience",
+      "image": "/images/provinces/kabul/kabul-culture.webp",
+      "isPublished": true,
+      "publishedAt": "2026-09-25T11:22:05.490Z",
+      "createdAt": "2026-09-25T11:22:05.490Z",
+      "fa": {
+        "title": "طعم ناب سفره‌های افغانستان",
+        "category": "تجربه‌ها و سوغات",
+        "excerpt": "غذا در این دیار بهانه هم‌نشینی و تکریم است؛ از قابلی پلو زعفرانی و منتو لطیف تا چاینکی سنتی و کباب‌های لذیذ بومی.",
+        "content": "در فرهنگ غذایی افغانستان، طعام هرگز یک ضرورت زیستی صرف نیست؛ بلکه دعوتی محبت‌آمیز، نشانه‌ای از حرمت‌گذاری و بهانه‌ای برای گردهم آمدن گرد یک سفره است. وعده غذا معمولاً با خوش‌آمدگویی گرم و استکانی چای سبز یا سیاه آغاز می‌شود و در ادامه با گفت‌وگو، لبخند و قصه‌های شیرین همراه می‌گردد.\n\nبر قله سفره‌های افغانی، «قابلی پلو» می‌درخشد؛ برنج خوش‌عطر و دانه دانه همراه با گوشت نرم پخته‌شده، خلال هویج شیرین، کشمش‌های مرغوب و هل. این خوراک شاهانه که پای ثابت مجالس، جشن‌ها و پذیرایی از مهمانان عزیز است، نماد راستین سخاوت و مهمان‌نوازی این سرزمین به شمار می‌رود.\n\nاما سفره افغانی مملو از تنوعی بی‌نظیر است. «منتو»؛ بقچه‌های نازک خمیری بخارپز با مغز گوشت چرخ‌کرده و چاشنی چکه و سس مخصوص، «چاینکی» سنتی که به آرامی در قوری‌های سفالی جا می‌افتد، و انواع «کباب‌های لذیذ» گوسفندی که با ادویه‌های اصیل بر روی آتش زغال طبخ می‌شوند.\n\nدر افغانستان، هم‌سفره شدن به معنای شریک شدن در لحظه‌ای از زندگی است.\n\nبه سر این سفره خوش‌عطر بنشینید، اصالت را بچشید و افغانستان را از طعم‌های دلپذیرش کشف کنید.",
+        "author": "تیم گردشگری آمووی",
+        "readTime": "۴ دقیقه"
+      },
+      "en": {
+        "title": "The Taste of Afghanistan",
+        "category": "EXPERIENCE",
+        "excerpt": "Food is an invitation to gather. From iconic Qabuli Pulao and savory Mantu to Chainaki and fresh Afghan kebabs, discover culinary traditions.",
+        "content": "In Afghanistan, food is rarely just food. It is an invitation, a gesture of respect, and a reason to gather around the same table. A meal often begins with welcoming words and a cup of tea, then grows into conversation, laughter, and shared stories.\n\nAt the heart of the Afghan table is Qabuli Pulao (Kabuli Pulao)—fragrant rice layered with tender meat, sweet carrots, and raisins. Often prepared for guests, celebrations, and family gatherings, it represents the generosity and warmth deeply woven into Afghan hospitality.\n\nBut the Afghan table is rich with many other flavors. Mantu, delicate steamed dumplings filled with meat and topped with yogurt and sauces; Chainaki, a traditional local dish enjoyed in Afghan homes; and Afghan Kebab, prepared with flavorful meat and served fresh, each offers a different taste of the country.\n\nIn Afghanistan, sharing a meal means sharing a moment.\n\nCome to the table, taste the tradition, and discover Afghanistan through its flavors.",
+        "author": "Amovi Travel Team",
+        "readTime": "4 min"
+      }
+    },
+    {
+      "id": "jewelry-stones-crafts",
+      "slug": "jewelry-stones-crafts",
+      "pillar": "experience",
+      "image": "/tours/images/heratPictures.webp",
+      "isPublished": true,
+      "publishedAt": "2026-09-24T11:22:05.490Z",
+      "createdAt": "2026-09-24T11:22:05.490Z",
+      "fa": {
+        "title": "گنجینه‌های افغانستان: لاجورد، زمرد و صنایع دستی",
+        "category": "تجربه‌ها و سوغات",
+        "excerpt": "دستان هنرمند صنعت‌گران با تراش لاجورد بدخشان، زمرد پنجشیر و سنگ‌های معدنی، آثاری جاودان از دل طبیعت خلق می‌کنند.",
+        "content": "برخی خاطرات را باید با خود به خانه برد تا تا ابد لمس شوند. در سراسر افغانستان، استادکاران ماهر با بهره‌گیری از سنگ‌های طبیعی، طرح‌های باستانی و مهارتی چندصدساله، اشیایی چشم‌نواز می‌آفرینند که هر کدام بازگوکننده داستانی از این خاک زرخیز است.\n\nافغانستان در جهان به گنجینه‌های گرانبها و نیمه‌قیمتی خود نام‌آور است. زمرد سبز درخشان پنجشیر، سنگ لاجورد لاجوردی‌فام بدخشان و انواع عقیق و فیروزه، به دست گوهرتراشان به زیورآلاتی ظریف، وسایل تزیینی و تسبیح‌های نفیس بدل می‌شوند.\n\nدر بازارهای سنتی و حجره‌های صنایع‌دستی، مسافران می‌توانند انگشترها، گردنبندها، دست‌بندهای قلم‌زنی‌شده و تراشه‌های سنگی دست‌ساز را پیدا کنند؛ اشیایی که ورای زیبایی مادی، پیوندی ملموس با ذوق هنری و تاریخ طبیعی این فلات کهن برقرار می‌سازند.\n\nانتخاب یکی از این آثار دست‌ساز، فراتر از یک خرید توریستی است؛ نشانی ماندگار از سفری شگفت‌انگیز است.\n\nچیزی بیش از یک سوغات معمولی با خود ببرید؛ تکه‌ای از روح و خاک افغانستان را به خانه ببرید.",
+        "author": "تیم گردشگری آمووی",
+        "readTime": "۴ دقیقه"
+      },
+      "en": {
+        "title": "Afghanistan’s Treasures: Jewelry, Stones & Crafts",
+        "category": "EXPERIENCE",
+        "excerpt": "Artisans transform emeralds, vibrant lapis lazuli, and natural stones into elegant jewelry and handmade treasures carrying the land's history.",
+        "content": "Some memories are meant to be carried home. Across Afghanistan, skilled artisans turn natural stones, traditional designs, and generations of craftsmanship into beautiful objects that tell a story of the land.\n\nAfghanistan is especially known for its precious and semi-precious stones. Deep green emeralds, rich blue lapis lazuli, and other natural stones are crafted into elegant jewelry, decorative pieces, and traditional ornaments. Each piece can carry the character of the region where its materials and craftsmanship were found.\n\nIn traditional markets and artisan shops, travelers can discover rings, necklaces, bracelets, stone carvings, and other handmade treasures. Beyond their beauty, these objects offer a tangible connection to Afghanistan’s artistic traditions and natural heritage.\n\nChoosing a handmade piece can become more than shopping—it can become a personal reminder of a journey through a remarkable country.\n\nTake home more than a souvenir. Take home a small piece of Afghanistan’s story.",
+        "author": "Amovi Travel Team",
+        "readTime": "4 min"
+      }
+    },
+    {
+      "id": "afghan-carpets",
+      "slug": "afghan-carpets",
+      "pillar": "experience",
+      "image": "/tours/images/mazarPictures.webp",
+      "isPublished": true,
+      "publishedAt": "2026-09-23T11:22:05.490Z",
+      "createdAt": "2026-09-23T11:22:05.490Z",
+      "fa": {
+        "title": "قالی‌های دستباف افغانستان: روایت‌های تنیده‌شده در تاروپود",
+        "category": "تجربه‌ها و سوغات",
+        "excerpt": "گره به گره و رج به رج؛ قالی‌بافان افغان با صبر و پشم مرغوب، روایت‌هایی جاودان از هویت و تاریخ را بر دارهای قالی جاودانه می‌سازند.",
+        "content": "در افغانستان، قالی دستباف چیزی بسیار فراتر از یک زیرانداز زیبا است؛ روایتی است که با دستان خستگی‌ناپذیر بافته شده و بیانی آرام از صبر، هویت فرهنگی و میراث کهن نیاکان است.\n\nقالی‌های دستباف افغانی با طرح‌های اصیل هندسی، رنگ‌های گیاهی گرم و درخشان، پشم لطیف کوهستانی و بافت فوق‌العاده مستحکم، شهرتی دیرینه در سراسر بازارهای جهانی دارند. هر نقش و هر ترنج، امضای اقلیمی و قومیتی خاص را بر پیشانی دارد.\n\nاما والاترین جنبه، شیوه خلق آنهاست. تار به تار و گره به گره، زنان و مردان هنرمند مصالح ساده را به شاهکارهای هنری بدل می‌سازند. پشت هر تخته قالی، صدها ساعت شکیبایی، مهارت استادانه و فوت‌وفنی نهفته است که سینه به سینه منتقل شده است.\n\nبرای مسافران خارجی، گزینش یک قالیچه اصیل افغان، تجربه‌ای عمیق و شخصی است؛ اثری زنده از هنر افغانستان که تا سالیان سال زینت‌بخش خانه آنان خواهد بود.\n\nقصه‌ای بافته‌شده با دست را به ارمغان ببرید و اجازه دهید تاروپودش یادگار افغانستان را در کانون خانه‌تان زنده نگه دارد.",
+        "author": "تیم گردشگری آمووی",
+        "readTime": "۵ دقیقه"
+      },
+      "en": {
+        "title": "Afghan Carpets: Stories Woven Into Every Thread",
+        "category": "EXPERIENCE",
+        "excerpt": "Thread by thread, knot by knot, Afghan carpet weavers transform fine wool and vegetable dyes into timeless masterpieces of patience and art.",
+        "content": "In Afghanistan, a carpet is more than something beautiful beneath your feet. It is a story woven by hand—a quiet expression of patience, identity, and generations of tradition.\n\nAfghan carpets have earned a lasting reputation around the world for their distinctive designs, rich colours, fine wool, and remarkable craftsmanship. From traditional geometric patterns to intricate regional styles, each carpet carries something of the place and people who created it.\n\nBut perhaps the most beautiful part is how they are made. Thread by thread, knot by knot, Afghan artisans transform simple materials into works of art. Behind every carpet are skilled hands, hours of patience, and a tradition passed from one generation to the next. A carpet does not simply carry a pattern; it carries the touch, time, and story of the person who made it.\n\nFor travellers, choosing an Afghan carpet can become a deeply personal experience—a beautiful piece of Afghanistan to live with long after the journey ends.\n\nTake home a story woven by hand, and let its threads carry a piece of Afghanistan into your home.",
+        "author": "Amovi Travel Team",
+        "readTime": "5 min"
+      }
+    },
+    {
+      "id": "afghan-saffron",
+      "slug": "afghan-saffron",
+      "pillar": "experience",
+      "image": "/tours/images/ghorPictures.webp",
+      "isPublished": true,
+      "publishedAt": "2026-09-22T11:22:05.490Z",
+      "createdAt": "2026-09-22T11:22:05.490Z",
+      "fa": {
+        "title": "زعفران افغانستان: طلای سرخ هرات باستان",
+        "category": "تجربه‌ها و سوغات",
+        "excerpt": "در مزارع حاصلخیز هرات، گل‌های بنفش رنگ گران‌بهاترین چاشنی جهان را هدیه می‌دهند؛ محصولی برنده جوایز بین‌المللی با عطر و رنگی بی‌همتا.",
+        "content": "در دشت‌های فراخ هرات باستان و در آغوش اقلیم معتدل غرب افغانستان، گل‌های ظریف بنفش‌رنگ یکی از نفیس‌ترین ادویه‌های جهان را به بار می‌آورند. این زعفران اصیل افغان است—کمیاب، ناب و عمیقاً پیوسته به خاک بارور و دستان پرمحبت کشاورزان محلی.\n\nزعفران افغانستان بارها در ارزیابی‌های معتبر بین‌المللی به عنوان باکیفیت‌ترین زعفران جهان با بالاترین درجه عطر، رنگ‌دهی طبیعی و خلوص برگزیده شده است. این محصول که به شایستگی «طلای سرخ» نام گرفته، نماد بردباری و تخصص نسل‌های متمادی کشاورزان هرات است.\n\nتک‌تک کلاله‌های سرخ‌فام با ظرافت تمام با دست چیده می‌شوند. آنچه در شیشه‌ای کوچک به نظر ساده می‌آید، حاصل صدها ساعت تلاش دقیق و بهره‌گیری از خاک غنی هرات است.\n\nبرای مسافران، زعفران بهترین راه برای بردن عطر و طعم افغانستان به آشپزخانه‌های خود است؛ عطری ماندگار که رایحه هرات را حتی پس از پایان سفر زنده می‌دارد.\n\nارمغانی از هرات با خود ببرید؛ عطر، رنگ بی‌نظیر و داستان زرین زعفران افغانستان.",
+        "author": "تیم گردشگری آمووی",
+        "readTime": "۴ دقیقه"
+      },
+      "en": {
+        "title": "Afghan Saffron: The Red Gold of Herat",
+        "category": "EXPERIENCE",
+        "excerpt": "In the fertile soils of Herat, delicate purple flowers yield the world's most prized spice—Afghan red gold, harvested with dedication and care.",
+        "content": "In the fields of Herat, among the colours of the western Afghan landscape, a small purple flower produces one of the world’s most precious spices. This is Afghan saffron—delicate, rare, and deeply connected to the land and the people who cultivate it.\n\nAfghan saffron has earned international recognition for its exceptional quality, rich aroma, vivid colour, and distinctive flavour. Often described as the “Red Gold” of Afghanistan, it represents not only a valuable agricultural product but also the patience and dedication of Afghan farmers.\n\nEach crimson thread is carefully harvested by hand. What appears small and delicate carries hours of work, generations of agricultural knowledge, and the character of Herat’s fertile lands.\n\nFor travellers, saffron offers a simple way to take a taste of Afghanistan home. A small box can carry the fragrance of Herat long after the journey has ended.\n\nTake home a touch of Herat—the fragrance, colour, and golden story of Afghan saffron.",
+        "author": "Amovi Travel Team",
+        "readTime": "4 min"
+      }
+    },
+    {
+      "id": "fruits-dry-fruits",
+      "slug": "fruits-dry-fruits",
+      "pillar": "experience",
+      "image": "/tours/images/kandaharPictures.webp",
+      "isPublished": true,
+      "publishedAt": "2026-09-21T11:22:05.490Z",
+      "createdAt": "2026-09-21T11:22:05.490Z",
+      "fa": {
+        "title": "برکت باغات افغانستان: انار قندهار تا جلغوزه سیاه",
+        "category": "تجربه‌ها و سوغات",
+        "excerpt": "انار یاقوتی قندهار، انگورهای شیرین، بادام، پسته و جلغوزه جنگل‌های شرق؛ طعم سرشار و طبیعی باغات آفتاب‌گیر افغانستان.",
+        "content": "دره‌ها و باغات پهناور افغانستان تنوعی کم‌نظیر از میوه‌های مرغوب تولید می‌کنند که آوازه طعمشان فراتر از مرزها پیچیده است. از انار یاقوتی و شهره قندهار و انگورهای عسلی دره‌های شمالی تا خربزه‌های شیرین هرات، زردآلو، شفتالو و سیب‌های خوش‌عطر، هر ولایت طعم خاص خود را به بار می‌آورند.\n\nمیوه‌های تازه تنها نیمی از داستان‌اند. افغانستان قطب تولید مرغوب‌ترین میوه‌های خشک جهان است؛ انواع کشمش‌های آفتابی و سایه‌خشک، برگه زردآلو، انجیر کوهی، توت خشک، بادام‌های پوست‌کاغذی و پسته وحشی. در این میان، جلغوزه سیاه (چلغوزه) جایگاهی شاهانه دارد؛ دانه‌ای کمیاب و ارزشمند که از دل جنگل‌های بکر شرق و جنوب‌شرقی افغانستان برداشت می‌شود و طعمی روغنی، ترد و بی‌همتا دارد.\n\nفصل برداشت با جان و دل افغان‌ها پیوند خورده است. در روزهای فراوانی، بازارها پر از عطر میوه نوبرانه می‌شوند و بخش عمده آن با دقت برای ماه‌های زمستان خشک و نگهداری می‌شود تا زینتی برای پذیرایی سخاوتمندانه از مهمانان باشد.\n\nبرای مسافران، این محصولات لذیذ طبیعی بهترین سوغات خوراکی از برکت بی‌منتهای خاک افغانستان است.\n\nاز شهد باغات افغانستان بچشید، سرزمین‌ها را از خلال طعم‌ها بشناسید و شیرینی این سفر را با خود به همراه ببرید.",
+        "author": "تیم گردشگری آمووی",
+        "readTime": "۴ دقیقه"
+      },
+      "en": {
+        "title": "A Taste of the Harvest: Afghan Fruits & Dry Fruits",
+        "category": "EXPERIENCE",
+        "excerpt": "From Kandahar's rubies-like pomegranates and sweet grapes to Herat's melons and prized Jalghoza pine nuts, taste the bounty of Afghan orchards.",
+        "content": "Afghanistan’s valleys and orchards produce an extraordinary variety of fruits, many of which are prized far beyond the country’s borders. From the famous pomegranates of Kandahar and sweet grapes of the northern and western valleys to Herat’s melons, apricots, peaches, and apples, each region brings its own flavour to the Afghan harvest.\n\nFresh fruit is only part of the story. Afghanistan is also renowned for its high-quality raisins, dried apricots, figs, mulberries, almonds, pistachios, and other dry fruits. Among them, pine nuts (Jalghoza) hold a special place. Harvested from the forests of eastern and southeastern Afghanistan, they are prized for their rich flavour and distinctive character and have become one of the country’s most valued natural products.\n\nThe harvest is deeply connected to Afghan life. Fresh fruits fill local markets in season, while much of the abundance is carefully dried and preserved for the months ahead. Sharing fruit and dry fruits with guests is also a familiar expression of Afghan generosity.\n\nFor travellers, these flavours offer a simple way to take Afghanistan home.\n\nTaste the harvest, discover its regions, and carry a little of Afghanistan’s abundance with you.",
+        "author": "Amovi Travel Team",
+        "readTime": "4 min"
+      }
     }
   ],
   "masterRequests": [

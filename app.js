@@ -176,31 +176,99 @@ async function initDatabase() {
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
     `);
 
-    // ۵. جدول مقالات وبلاگ داینامیک
+    // ۵. جدول مقالات وبلاگ داینامیک و دوزبانه
     await pool.query(`
       CREATE TABLE IF NOT EXISTS blog_posts (
         id INT AUTO_INCREMENT PRIMARY KEY,
-        title VARCHAR(255) NOT NULL,
-        content LONGTEXT NOT NULL,
+        slug VARCHAR(120) UNIQUE,
+        pillar VARCHAR(50) DEFAULT 'discover',
+        category_fa VARCHAR(100),
+        category_en VARCHAR(100),
+        title_fa VARCHAR(255) NOT NULL,
+        title_en VARCHAR(255) NOT NULL,
+        excerpt_fa TEXT,
+        excerpt_en TEXT,
+        content_fa LONGTEXT NOT NULL,
+        content_en LONGTEXT NOT NULL,
+        author_fa VARCHAR(100) DEFAULT 'تیم گردشگری آمووی',
+        author_en VARCHAR(100) DEFAULT 'Amovi Travel Team',
+        read_time_fa VARCHAR(50) DEFAULT '۴ دقیقه',
+        read_time_en VARCHAR(50) DEFAULT '4 min',
         image_url VARCHAR(500) DEFAULT NULL,
-        author VARCHAR(100) DEFAULT 'Amovi Travel',
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
     `);
 
-    // ثبت مقاله پیش‌فرض در صورت خالی بودن جدول وبلاگ
-    const [existingBlogs] = await pool.query('SELECT id FROM blog_posts LIMIT 1');
-    if (existingBlogs.length === 0) {
-      await pool.query(`
-        INSERT INTO blog_posts (title, content, image_url, author)
-        VALUES (
-          'میراث فرهنگی و شگفتی‌های تاریخی افغانستان',
-          'افغانستان سرزمینی از زیبایی‌های بی‌زمان، تاریخ غنی و میراث فرهنگی استثنایی است. از شهرهای باستانی تا دره‌های پنهان، هر منطقه داستانی از تاب‌آوری، هنر و سنت را روایت می‌کند.\n\nاز بوداهای باشکوه بامیان تا سایت‌های تاریخی هرات، بلخ و کابل، افغانستان ترکیبی منحصربه‌فرد از فرهنگ‌ها، معماری و سنت‌ها را ارائه می‌دهد. مردم، مهمان‌نوازی گرم و داستان‌های آن‌ها هر سفر را فراموش‌نشدنی می‌سازد.\n\nدر آمووی ترول، ما به سفر مسئولانه باور داریم که از جوامع محلی حمایت می‌کند و به حفظ میراث فرهنگی کشور کمک می‌نماید.',
-          '/images/provinces/kabul/kabul-hero.webp',
-          'آمووی ترول'
-        );
-      `);
-      console.log('[Database] Default blog post seeded.');
+    // بررسی و افزودن ستون‌های دوزبانه به جدول وبلاگ در صورت وجود نسخه قدیمی
+    try {
+      const [bCols] = await pool.query('SHOW COLUMNS FROM blog_posts');
+      const bColNames = bCols.map(c => c.Field);
+      const colsToAdd = [
+        { name: 'slug', def: 'VARCHAR(120) UNIQUE' },
+        { name: 'pillar', def: "VARCHAR(50) DEFAULT 'discover'" },
+        { name: 'category_fa', def: 'VARCHAR(100)' },
+        { name: 'category_en', def: 'VARCHAR(100)' },
+        { name: 'title_fa', def: 'VARCHAR(255)' },
+        { name: 'title_en', def: 'VARCHAR(255)' },
+        { name: 'excerpt_fa', def: 'TEXT' },
+        { name: 'excerpt_en', def: 'TEXT' },
+        { name: 'content_fa', def: 'LONGTEXT' },
+        { name: 'content_en', def: 'LONGTEXT' },
+        { name: 'author_fa', def: "VARCHAR(100) DEFAULT 'تیم گردشگری آمووی'" },
+        { name: 'author_en', def: "VARCHAR(100) DEFAULT 'Amovi Travel Team'" },
+        { name: 'read_time_fa', def: "VARCHAR(50) DEFAULT '۴ دقیقه'" },
+        { name: 'read_time_en', def: "VARCHAR(50) DEFAULT '4 min'" }
+      ];
+      for (const c of colsToAdd) {
+        if (!bColNames.includes(c.name)) {
+          await pool.query(`ALTER TABLE blog_posts ADD COLUMN ${c.name} ${c.def}`);
+        }
+      }
+    } catch (e) {
+      console.warn('Blog table migration notice:', e.message);
+    }
+
+    // ثبت خودکار ۱۴ مقاله رسمی آمووی (از پوشه Blog) در دیتابیس
+    try {
+      const dbJsonPath = path.join(__dirname, 'db.json');
+      let defaultArticles = [];
+      if (fs.existsSync(dbJsonPath)) {
+        try {
+          const parsedDb = JSON.parse(fs.readFileSync(dbJsonPath, 'utf8'));
+          defaultArticles = parsedDb.blogPosts || [];
+        } catch (e) { /* ignore */ }
+      }
+      if (Array.isArray(defaultArticles) && defaultArticles.length > 0) {
+        for (const art of defaultArticles) {
+          const [exist] = await pool.query('SELECT id FROM blog_posts WHERE slug = ?', [art.slug]);
+          if (exist.length === 0) {
+            await pool.query(`
+              INSERT INTO blog_posts 
+              (slug, pillar, category_fa, category_en, title_fa, title_en, excerpt_fa, excerpt_en, content_fa, content_en, author_fa, author_en, read_time_fa, read_time_en, image_url)
+              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            `, [
+              art.slug,
+              art.pillar,
+              art.fa.category,
+              art.en.category,
+              art.fa.title,
+              art.en.title,
+              art.fa.excerpt,
+              art.en.excerpt,
+              art.fa.content,
+              art.en.content,
+              art.fa.author,
+              art.en.author,
+              art.fa.readTime,
+              art.en.readTime,
+              art.image
+            ]);
+          }
+        }
+        console.log('[Database] 14 official bilingual blog articles verified in database.');
+      }
+    } catch (e) {
+      console.warn('Seeding blog articles warning:', e.message);
     }
 
     // ثبت کاربر مدیر پیش‌فرض در صورت عدم وجود (admin / admin)
@@ -477,14 +545,40 @@ app.delete('/api/gallery/:id', async (req, res) => {
 ======================================================== */
 app.get(['/api/blog', '/blogPosts'], async (req, res) => {
   try {
-    const [rows] = await pool.query('SELECT * FROM blog_posts ORDER BY created_at DESC');
+    const [rows] = await pool.query('SELECT * FROM blog_posts ORDER BY id ASC');
     res.json(rows.map(r => ({
-      id: r.id,
-      title: r.title,
-      content: r.content,
+      id: r.slug || r.id,
+      dbId: r.id,
+      slug: r.slug || `post-${r.id}`,
+      pillar: r.pillar || 'discover',
       image: r.image_url || '/images/provinces/kabul/kabul-hero.webp',
-      author: r.author || 'Amovi Travel',
-      createdAt: r.created_at
+      image_url: r.image_url || '/images/provinces/kabul/kabul-hero.webp',
+      createdAt: r.created_at,
+      date: r.created_at ? new Date(r.created_at).toLocaleDateString('en-US') : 'Recent',
+      fa: {
+        title: r.title_fa || r.title,
+        category: r.category_fa || 'کشف سرزمین',
+        excerpt: r.excerpt_fa || (r.content_fa ? r.content_fa.slice(0, 150) + '...' : ''),
+        content: r.content_fa || r.content,
+        author: r.author_fa || r.author || 'تیم گردشگری آمووی',
+        readTime: r.read_time_fa || '۴ دقیقه'
+      },
+      en: {
+        title: r.title_en || r.title,
+        category: r.category_en || 'DISCOVER',
+        excerpt: r.excerpt_en || (r.content_en ? r.content_en.slice(0, 150) + '...' : ''),
+        content: r.content_en || r.content,
+        author: r.author_en || r.author || 'Amovi Travel Team',
+        readTime: r.read_time_en || '4 min'
+      },
+      // مشخصات مشترک
+      title: r.title_fa || r.title,
+      title_fa: r.title_fa || r.title,
+      title_en: r.title_en || r.title,
+      content: r.content_fa || r.content,
+      content_fa: r.content_fa || r.content,
+      content_en: r.content_en || r.content,
+      author: r.author_fa || r.author || 'تیم گردشگری آمووی'
     })));
   } catch (error) {
     console.error('Fetch blog error:', error);
@@ -494,18 +588,46 @@ app.get(['/api/blog', '/blogPosts'], async (req, res) => {
 
 app.get('/api/blog/:id', async (req, res) => {
   try {
-    const [rows] = await pool.query('SELECT * FROM blog_posts WHERE id = ?', [req.params.id]);
+    const queryId = req.params.id;
+    const [rows] = await pool.query(
+      'SELECT * FROM blog_posts WHERE id = ? OR slug = ? LIMIT 1', 
+      [queryId, queryId]
+    );
     if (rows.length > 0) {
       const r = rows[0];
       return res.json({
         success: true,
         data: {
-          id: r.id,
-          title: r.title,
-          content: r.content,
+          id: r.slug || r.id,
+          dbId: r.id,
+          slug: r.slug || `post-${r.id}`,
+          pillar: r.pillar || 'discover',
           image: r.image_url || '/images/provinces/kabul/kabul-hero.webp',
-          author: r.author || 'Amovi Travel',
-          createdAt: r.created_at
+          image_url: r.image_url || '/images/provinces/kabul/kabul-hero.webp',
+          createdAt: r.created_at,
+          fa: {
+            title: r.title_fa || r.title,
+            category: r.category_fa || 'کشف سرزمین',
+            excerpt: r.excerpt_fa || (r.content_fa ? r.content_fa.slice(0, 150) + '...' : ''),
+            content: r.content_fa || r.content,
+            author: r.author_fa || r.author || 'تیم گردشگری آمووی',
+            readTime: r.read_time_fa || '۴ دقیقه'
+          },
+          en: {
+            title: r.title_en || r.title,
+            category: r.category_en || 'DISCOVER',
+            excerpt: r.excerpt_en || (r.content_en ? r.content_en.slice(0, 150) + '...' : ''),
+            content: r.content_en || r.content,
+            author: r.author_en || r.author || 'Amovi Travel Team',
+            readTime: r.read_time_en || '4 min'
+          },
+          title: r.title_fa || r.title,
+          title_fa: r.title_fa || r.title,
+          title_en: r.title_en || r.title,
+          content: r.content_fa || r.content,
+          content_fa: r.content_fa || r.content,
+          content_en: r.content_en || r.content,
+          author: r.author_fa || r.author || 'تیم گردشگری آمووی'
         }
       });
     }
@@ -518,9 +640,31 @@ app.get('/api/blog/:id', async (req, res) => {
 
 app.post('/api/blog', upload.single('image'), async (req, res) => {
   try {
-    const { title, content, author } = req.body;
-    if (!title || !content) {
-      return res.status(400).json({ success: false, error: 'عنوان و متن مقاله الزامی است.' });
+    const { 
+      title, 
+      content, 
+      author,
+      title_fa, 
+      title_en, 
+      content_fa, 
+      content_en, 
+      author_fa, 
+      author_en, 
+      category_fa, 
+      category_en,
+      pillar 
+    } = req.body;
+
+    const finalTitleFa = (title_fa || title || '').trim();
+    const finalTitleEn = (title_en || title || '').trim();
+    const finalContentFa = (content_fa || content || '').trim();
+    const finalContentEn = (content_en || content || '').trim();
+
+    if (!finalTitleFa && !finalTitleEn) {
+      return res.status(400).json({ success: false, error: 'عنوان مقاله الزامی است.' });
+    }
+    if (!finalContentFa && !finalContentEn) {
+      return res.status(400).json({ success: false, error: 'متن مقاله الزامی است.' });
     }
 
     let imageUrl = '/images/provinces/kabul/kabul-hero.webp';
@@ -529,20 +673,49 @@ app.post('/api/blog', upload.single('image'), async (req, res) => {
       imageUrl = processed.imageUrl;
     }
 
+    const finalAuthorFa = (author_fa || author || 'تیم گردشگری آمووی').trim();
+    const finalAuthorEn = (author_en || author || 'Amovi Travel Team').trim();
+    const slug = 'post-' + Date.now();
+
     const [result] = await pool.query(
-      'INSERT INTO blog_posts (title, content, image_url, author) VALUES (?, ?, ?, ?)',
-      [title.trim(), content.trim(), imageUrl, (author || 'Amovi Travel').trim()]
+      `INSERT INTO blog_posts 
+      (slug, pillar, category_fa, category_en, title_fa, title_en, content_fa, content_en, author_fa, author_en, image_url) 
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [
+        slug,
+        pillar || 'discover',
+        category_fa || 'کشف سرزمین',
+        category_en || 'DISCOVER',
+        finalTitleFa || finalTitleEn,
+        finalTitleEn || finalTitleFa,
+        finalContentFa || finalContentEn,
+        finalContentEn || finalContentFa,
+        finalAuthorFa,
+        finalAuthorEn,
+        imageUrl
+      ]
     );
 
     res.status(201).json({
       success: true,
-      message: 'مقاله با موفقیت منتشر شد.',
+      message: 'مقاله دوزبانه با موفقیت منتشر شد.',
       data: {
-        id: result.insertId,
-        title: title.trim(),
-        content: content.trim(),
+        id: slug,
+        dbId: result.insertId,
+        slug,
         image: imageUrl,
-        author: (author || 'Amovi Travel').trim(),
+        fa: {
+          title: finalTitleFa || finalTitleEn,
+          content: finalContentFa || finalContentEn,
+          author: finalAuthorFa
+        },
+        en: {
+          title: finalTitleEn || finalTitleFa,
+          content: finalContentEn || finalContentFa,
+          author: finalAuthorEn
+        },
+        title: finalTitleFa || finalTitleEn,
+        content: finalContentFa || finalContentEn,
         createdAt: new Date()
       }
     });
@@ -554,7 +727,8 @@ app.post('/api/blog', upload.single('image'), async (req, res) => {
 
 app.delete('/api/blog/:id', async (req, res) => {
   try {
-    await pool.query('DELETE FROM blog_posts WHERE id = ?', [req.params.id]);
+    const queryId = req.params.id;
+    await pool.query('DELETE FROM blog_posts WHERE id = ? OR slug = ?', [queryId, queryId]);
     res.json({ success: true, message: 'مقاله با موفقیت حذف شد.' });
   } catch (error) {
     console.error('Delete blog post error:', error);

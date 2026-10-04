@@ -1038,9 +1038,11 @@ export default function AdminPanel() {
                             />
                           </div>
                           <div className="min-w-0">
-                            <h5 className="text-xs sm:text-sm font-bold text-slate-900 truncate">{post.title}</h5>
+                            <h5 className="text-xs sm:text-sm font-bold text-slate-900 truncate">
+                              {post.fa?.title || post.title_fa || post.title || post.en?.title || 'مقاله وبلاگ'}
+                            </h5>
                             <div className="flex items-center gap-2 text-[11px] text-slate-400 mt-0.5">
-                              <span>نویسنده: {post.author || 'آمووی'}</span>
+                              <span>نویسنده: {post.fa?.author || post.author_fa || post.author || 'آمووی'}</span>
                               <span>•</span>
                               <span>
                                 {post.createdAt || post.created_at

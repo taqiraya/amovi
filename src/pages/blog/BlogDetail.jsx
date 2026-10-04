@@ -6,7 +6,8 @@ import {
   ArrowLeft, 
   ArrowRight,
   Copy,
-  Check
+  Check,
+  Tag
 } from 'lucide-react';
 import { useLangStore } from '../../store/useLangStore';
 import SEO from '../../components/SEO';
@@ -45,7 +46,7 @@ export default function BlogDetail() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#F8FAFC] flex items-center justify-center p-6 text-slate-500">
+      <div className={`min-h-screen bg-[#F8FAFC] flex items-center justify-center p-6 text-slate-500 ${isRtl ? 'font-[Sahel]' : 'font-[Inter]'}`} dir={isRtl ? 'rtl' : 'ltr'}>
         {isRtl ? 'در حال بارگذاری مقاله...' : 'Loading article...'}
       </div>
     );
@@ -53,7 +54,7 @@ export default function BlogDetail() {
 
   if (!post) {
     return (
-      <div className="min-h-screen bg-[#F8FAFC] flex flex-col items-center justify-center p-6 text-center space-y-4">
+      <div className={`min-h-screen bg-[#F8FAFC] flex flex-col items-center justify-center p-6 text-center space-y-4 ${isRtl ? 'font-[Sahel]' : 'font-[Inter]'}`} dir={isRtl ? 'rtl' : 'ltr'}>
         <h2 className="text-xl font-bold text-[#14213D]">
           {isRtl ? 'مقاله مورد نظر یافت نشد' : 'Article Not Found'}
         </h2>
@@ -61,25 +62,45 @@ export default function BlogDetail() {
           to="/blog" 
           className="px-5 py-2.5 rounded-xl bg-[#FCA311] text-[#14213D] font-bold text-xs"
         >
-          {isRtl ? 'بازگشت به وبلاگ' : 'Back to Blog'}
+          {isRtl ? 'بازگشت به مقالات وبلاگ' : 'Back to Blog'}
         </Link>
       </div>
     );
   }
 
-  const postTitle = post.title || post[currentLang]?.title || (isRtl ? 'مقاله وبلاگ' : 'Blog Article');
-  const postImage = post.image || post.image_url || '/images/provinces/kabul/kabul-hero.webp';
-  const postAuthor = post.author || post[currentLang]?.author || 'Amovi Travel';
-  const postDate = post.createdAt || post.publishedAt || post.date
-    ? new Date(post.createdAt || post.publishedAt || post.date).toLocaleDateString(isRtl ? 'fa-IR' : 'en-US')
-    : (isRtl ? 'اخیر' : 'Recent');
+  // عناوین، مشخصات و متون کاملاً دوزبانه
+  const postTitle = isRtl
+    ? (post.fa?.title || post.title_fa || post.title || 'مقاله وبلاگ')
+    : (post.en?.title || post.title_en || post.title || 'Blog Article');
 
-  const postContent = typeof post.content === 'string' 
-    ? post.content 
-    : (Array.isArray(post.content) ? post.content.join('\n\n') : (post[currentLang]?.content || post.excerpt || ''));
+  const postImage = post.image || post.image_url || '/images/provinces/kabul/kabul-hero.webp';
+  
+  const postAuthor = isRtl
+    ? (post.fa?.author || post.author_fa || 'تیم گردشگری آمووی')
+    : (post.en?.author || post.author_en || 'Amovi Travel Team');
+
+  const postCategory = isRtl
+    ? (post.fa?.category || post.category_fa || 'کشف سرزمین')
+    : (post.en?.category || post.category_en || 'DISCOVER');
+
+  const postDate = isRtl
+    ? (post.dateFa || (post.createdAt ? new Date(post.createdAt).toLocaleDateString('fa-IR') : 'اخیراً'))
+    : (post.date || (post.createdAt ? new Date(post.createdAt).toLocaleDateString('en-US') : 'Recent'));
+
+  // محتوای مقاله (آرایه یا متن)
+  const rawContent = isRtl
+    ? (post.fa?.content || post.content_fa || post.content || '')
+    : (post.en?.content || post.content_en || post.content || '');
+
+  const postContent = typeof rawContent === 'string'
+    ? rawContent
+    : (Array.isArray(rawContent) ? rawContent.join('\n\n') : String(rawContent || ''));
 
   return (
-    <div className={`w-full bg-[#F8FAFC] min-h-screen text-[#14213D] pb-20 ${isRtl ? 'font-[Sahel]' : 'font-[Inter]'}`} dir={isRtl ? 'rtl' : 'ltr'}>
+    <div 
+      className={`w-full bg-[#F8FAFC] min-h-screen text-[#14213D] pb-20 ${isRtl ? 'font-[Sahel] text-right' : 'font-[Inter] text-left'}`} 
+      dir={isRtl ? 'rtl' : 'ltr'}
+    >
       <SEO 
         title={`${postTitle} | ${isRtl ? 'آمووی ترول' : 'Amovi Travel'}`}
         description={postContent.slice(0, 160)}
@@ -101,7 +122,7 @@ export default function BlogDetail() {
         </Link>
       </div>
 
-      {/* کانتینر اصلی مقاله: ساختار ساده و کاربرپسند */}
+      {/* کانتینر اصلی مقاله: ساختار ساده، عکس در بالا و متن در پایین */}
       <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
         
         {/* ۱. عکس در قسمت بالای مقاله */}
@@ -120,8 +141,14 @@ export default function BlogDetail() {
         </div>
 
         {/* ۲. بخش عنوان و مشخصات نویسنده و تاریخ */}
-        <header className="space-y-3.5">
-          <div className="flex flex-wrap items-center gap-3 text-xs text-slate-500 font-mono">
+        <header className={`space-y-3.5 ${isRtl ? 'text-right' : 'text-left'}`}>
+          <div className="flex flex-wrap items-center gap-2.5 text-xs text-slate-500 font-mono">
+            {postCategory && (
+              <span className="flex items-center gap-1.5 bg-[#14213D] text-[#FCA311] px-3 py-1 rounded-full font-bold text-[11px] shadow-xs">
+                <Tag size={12} />
+                <span>{postCategory}</span>
+              </span>
+            )}
             <span className="flex items-center gap-1.5 bg-white px-3 py-1 rounded-full border border-slate-200 shadow-xs">
               <Calendar size={13} className="text-[#FCA311]" />
               <span>{postDate}</span>
@@ -132,14 +159,19 @@ export default function BlogDetail() {
             </span>
           </div>
 
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-[#14213D] tracking-tight leading-tight">
+          <h1 className={`text-2xl sm:text-3xl md:text-4xl font-black text-[#14213D] tracking-tight leading-tight ${isRtl ? 'font-[Sahel] text-right' : 'font-[Inter] text-left'}`}>
             {postTitle}
           </h1>
         </header>
 
-        {/* ۳. متن مقاله در حالت pre به درخواست صریح کاربر (با حفظ کامل سطرها و پاراگراف‌ها) */}
+        {/* ۳. متن مقاله در حالت pre با رعایت کامل راست‌چین برای دری و چپ‌چین برای انگلیسی */}
         <div className="bg-white p-6 sm:p-10 rounded-2xl sm:rounded-3xl border border-slate-200/90 shadow-xs">
-          <pre className="whitespace-pre-wrap font-[Sahel] sm:font-[Inter] text-slate-800 leading-relaxed text-sm sm:text-base text-justify select-text">
+          <pre 
+            dir={isRtl ? 'rtl' : 'ltr'}
+            className={`whitespace-pre-wrap leading-relaxed text-sm sm:text-base select-text ${
+              isRtl ? 'font-[Sahel] text-right text-slate-800' : 'font-[Inter] text-left text-slate-800'
+            }`}
+          >
 {postContent}
           </pre>
         </div>

@@ -1,5 +1,5 @@
 import { useEffect, lazy, Suspense } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { useLangStore } from './store/useLangStore';
 
 // لایوت اصلی و کامپوننت اسکرول به بالا
@@ -61,7 +61,8 @@ function App() {
           </Route>
 
           {/* گروه دوم روت‌ها: صفحه ادمین کاملاً مستقل (بدون هدر و فوتر) */}
-          <Route path="/admin" element={<AdminPanel />} />
+          <Route path="/amovilogin" element={<AdminPanel />} />
+          <Route path="/admin" element={<Navigate to="/amovilogin" replace />} />
         </Routes>
       </Suspense>
     </div>

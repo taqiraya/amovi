@@ -8,7 +8,7 @@ const configuredApiUrl = import.meta.env.VITE_API_URL;
 const shouldSkipRemoteApi = isHttps && (!configuredApiUrl || configuredApiUrl.startsWith('http://'));
 
 const api = axios.create({
-  baseURL: configuredApiUrl || 'http://localhost:5000',
+  baseURL: configuredApiUrl || '',
   headers: {
     'Content-Type': 'application/json',
   },

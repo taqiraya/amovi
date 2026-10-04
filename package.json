@@ -4,11 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "concurrently -n \"VITE,API\" -c \"cyan,magenta\" \"vite\" \"node server/server.js\"",
+    "dev": "vite",
     "client": "vite",
-    "server": "node server/server.js",
-    "start": "node app.js",
     "server": "node app.js",
+    "start": "node app.js",
     "server:dev": "node --watch app.js",
     "build": "vite build",
     "lint": "eslint .",

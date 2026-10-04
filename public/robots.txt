@@ -6,6 +6,9 @@ Allow: /
 Disallow: /admin
 Disallow: /admin/
 Disallow: /admin/*
+Disallow: /amovilogin
+Disallow: /amovilogin/
+Disallow: /amovilogin/*
 
 # Host & Sitemaps
 Host: https://amovi.travel

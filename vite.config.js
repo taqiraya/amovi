@@ -7,6 +7,7 @@ export default defineConfig({
   plugins: [react()],
   base: process.env.VITE_BASE_PATH || '/',
   server: {
+    port: 3000,
     host: true,
     allowedHosts: true,
     proxy: {
@@ -21,6 +22,7 @@ export default defineConfig({
     }
   },
   preview: {
+    port: 3000,
     host: true,
     allowedHosts: true,
   },

@@ -68,7 +68,50 @@ export const getServices = async () => {
 
 // Blog
 export const getBlogPosts = async () => {
-  return fetchWithFallback('/blogPosts', localDb.blogPosts || []);
+  try {
+    const res = await api.get('/api/blog');
+    if (res && res.data && Array.isArray(res.data) && res.data.length > 0) {
+      return res.data;
+    }
+  } catch (error) {
+    console.warn('Could not fetch blog posts from backend, using fallback:', error);
+  }
+  return localDb.blogPosts || [];
+};
+
+export const getBlogPostById = async (id) => {
+  try {
+    const res = await api.get(`/api/blog/${id}`);
+    if (res && res.data && res.data.success && res.data.data) {
+      return res.data.data;
+    }
+  } catch (error) {
+    console.warn('Could not fetch blog post by id, checking fallback:', error);
+  }
+  const all = await getBlogPosts();
+  return all.find((p) => String(p.id) === String(id) || p.slug === id) || null;
+};
+
+export const createBlogPost = async (formData) => {
+  try {
+    const res = await api.post('/api/blog', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    });
+    return res.data;
+  } catch (error) {
+    console.error('Failed to create blog post:', error);
+    throw error;
+  }
+};
+
+export const deleteBlogPost = async (id) => {
+  try {
+    const res = await api.delete(`/api/blog/${id}`);
+    return res.data;
+  } catch (error) {
+    console.error('Failed to delete blog post:', error);
+    throw error;
+  }
 };
 
 // Testimonials

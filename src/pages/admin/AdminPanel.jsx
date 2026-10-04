@@ -18,7 +18,8 @@ import {
   Settings,
   Phone,
   Link as LinkIcon,
-  AlertCircle
+  AlertCircle,
+  BookOpen
 } from 'lucide-react';
 import { 
   getMasterRequests, 
@@ -29,7 +30,10 @@ import {
   updateSettings,
   getGalleryItems,
   uploadGalleryItem,
-  deleteGalleryItem
+  deleteGalleryItem,
+  getBlogPosts,
+  createBlogPost,
+  deleteBlogPost
 } from '../../services/api';
 import localDb from '../../../db.json';
 
@@ -62,6 +66,18 @@ export default function AdminPanel() {
     title: '',
     category: 'kabul',
     location: 'کابل',
+    file: null
+  });
+
+  // دیتای وبلاگ
+  const [blogList, setBlogList] = useState([]);
+  const [blogUploading, setBlogUploading] = useState(false);
+  const [blogSuccess, setBlogSuccess] = useState('');
+  const [blogError, setBlogError] = useState('');
+  const [newBlogForm, setNewBlogForm] = useState({
+    title: '',
+    author: 'تیم گردشگری آمووی',
+    content: '',
     file: null
   });
 
@@ -100,6 +116,9 @@ export default function AdminPanel() {
     });
     getMasterRequests().then((data) => {
       if (Array.isArray(data)) setMasterRequests(data);
+    });
+    getBlogPosts().then((posts) => {
+      if (Array.isArray(posts)) setBlogList(posts);
     });
   };
 
@@ -202,6 +221,60 @@ export default function AdminPanel() {
     }
   };
 
+  // انتشار مقاله جدید وبلاگ
+  const handleCreateBlog = async (e) => {
+    e.preventDefault();
+    if (!newBlogForm.title.trim() || !newBlogForm.content.trim()) {
+      setBlogError('لطفاً عنوان و متن مقاله را وارد فرمایید.');
+      return;
+    }
+    setBlogUploading(true);
+    setBlogError('');
+    setBlogSuccess('');
+
+    const formData = new FormData();
+    if (newBlogForm.file) {
+      formData.append('image', newBlogForm.file);
+    }
+    formData.append('title', newBlogForm.title.trim());
+    formData.append('author', newBlogForm.author.trim() || 'تیم گردشگری آمووی');
+    formData.append('content', newBlogForm.content);
+
+    try {
+      const res = await createBlogPost(formData);
+      if (res.success && res.data) {
+        setBlogList((prev) => [res.data, ...prev]);
+        setBlogSuccess('مقاله جدید با موفقیت ذخیره و منتشر شد.');
+        setNewBlogForm({
+          title: '',
+          author: 'تیم گردشگری آمووی',
+          content: '',
+          file: null
+        });
+        const fileInput = document.getElementById('blogFileInput');
+        if (fileInput) fileInput.value = '';
+        setTimeout(() => setBlogSuccess(''), 5000);
+      }
+    } catch (err) {
+      console.error('Blog create error:', err);
+      setBlogError('خطا در انتشار مقاله. لطفاً دوباره تلاش نمایید.');
+    } finally {
+      setBlogUploading(false);
+    }
+  };
+
+  // حذف مقاله وبلاگ
+  const handleDeleteBlog = async (id) => {
+    if (!window.confirm('آیا از حذف این مقاله وبلاگ اطمینان دارید؟')) return;
+    try {
+      await deleteBlogPost(id);
+      setBlogList((prev) => prev.filter((p) => p.id !== id));
+    } catch (err) {
+      console.error('Blog delete error:', err);
+      alert('خطا در حذف مقاله وبلاگ');
+    }
+  };
+
   // فیلتر جستجوی پیام‌ها
   const filteredMessages = contactMessages.filter((msg) => {
     const q = searchTerm.toLowerCase();
@@ -221,6 +294,7 @@ export default function AdminPanel() {
       contactMessages, 
       settings: settingsForm, 
       gallery: galleryList,
+      blogPosts: blogList,
       masterRequests 
     }, null, 2));
     const downloadAnchor = document.createElement('a');
@@ -385,6 +459,25 @@ export default function AdminPanel() {
             </button>
 
             <button
+              onClick={() => { setActiveTab('blog'); setMobileSidebarOpen(false); }}
+              className={`w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-xs font-bold transition cursor-pointer ${
+                activeTab === 'blog'
+                  ? 'bg-[#14213D] text-white shadow-md'
+                  : 'text-slate-600 hover:bg-slate-100 hover:text-[#14213D]'
+              }`}
+            >
+              <div className="flex items-center gap-2.5">
+                <BookOpen size={16} className={activeTab === 'blog' ? 'text-[#FCA311]' : 'text-slate-400'} />
+                <span>مدیریت مقالات وبلاگ</span>
+              </div>
+              <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
+                activeTab === 'blog' ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-600'
+              }`}>
+                {blogList.length}
+              </span>
+            </button>
+
+            <button
               onClick={() => { setActiveTab('bookings'); setMobileSidebarOpen(false); }}
               className={`w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-xs font-bold transition cursor-pointer ${
                 activeTab === 'bookings'
@@ -441,6 +534,7 @@ export default function AdminPanel() {
                 {activeTab === 'messages' && 'پیام‌های دریافتی فرم تماس با ما'}
                 {activeTab === 'settings' && 'تنظیمات و اطلاعات تماس شرکت'}
                 {activeTab === 'gallery' && 'مدیریت و آپلود تصاویر گالری (WebP)'}
+                {activeTab === 'blog' && 'مدیریت و انتشار مقالات وبلاگ'}
                 {activeTab === 'bookings' && 'درخواست‌های رزرواسیون تورها'}
               </h2>
               <p className="text-[11px] text-slate-500 hidden sm:block">سیستم جامع کنترل و مدیریت عملیات آمووی ترول</p>
@@ -825,7 +919,165 @@ export default function AdminPanel() {
           )}
 
           {/* ========================================================
-              تب ۴: درخواست‌های رزرواسیون
+              تب ۴: مدیریت مقالات وبلاگ (ساده، عکس در بالا، متن در pre)
+          ======================================================== */}
+          {activeTab === 'blog' && (
+            <div className="space-y-6">
+              {/* فرم ایجاد و انتشار مقاله */}
+              <div className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-xs space-y-5">
+                <div>
+                  <h3 className="text-base sm:text-lg font-black text-[#14213D]">انتشار مقاله جدید در وبلاگ</h3>
+                  <p className="text-xs text-slate-500 mt-1">
+                    طراحی ساده و استاندارد: تصویر در بالا، عنوان و متن آزاد در پایین. متن‌های مقاله با حفظ کامل خطوط و پاراگراف‌ها با فرمت <span className="font-mono font-bold text-[#FCA311]">&lt;pre&gt;</span> نمایش داده می‌شوند.
+                  </p>
+                </div>
+
+                {blogSuccess && (
+                  <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 flex items-center gap-2 text-xs font-bold">
+                    <CheckCircle2 size={16} className="text-emerald-600 shrink-0" />
+                    <span>{blogSuccess}</span>
+                  </div>
+                )}
+
+                {blogError && (
+                  <div className="p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 flex items-center gap-2 text-xs font-bold">
+                    <AlertCircle size={16} className="text-rose-600 shrink-0" />
+                    <span>{blogError}</span>
+                  </div>
+                )}
+
+                <form onSubmit={handleCreateBlog} className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
+                    <div className="md:col-span-5">
+                      <label className="block text-xs font-bold text-slate-700 mb-1.5">عنوان مقاله *</label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="مثلاً: راهنمای جامع سفر به دره بامیان و بند امیر"
+                        value={newBlogForm.title}
+                        onChange={(e) => setNewBlogForm({ ...newBlogForm, title: e.target.value })}
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-800 focus:outline-none focus:border-[#FCA311] focus:bg-white"
+                      />
+                    </div>
+
+                    <div className="md:col-span-3">
+                      <label className="block text-xs font-bold text-slate-700 mb-1.5">نویسنده / منبع</label>
+                      <input
+                        type="text"
+                        placeholder="تیم گردشگری آمووی"
+                        value={newBlogForm.author}
+                        onChange={(e) => setNewBlogForm({ ...newBlogForm, author: e.target.value })}
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-800 focus:outline-none focus:border-[#FCA311] focus:bg-white"
+                      />
+                    </div>
+
+                    <div className="md:col-span-4">
+                      <label className="block text-xs font-bold text-slate-700 mb-1.5">تصویر شاخص بالای مقاله</label>
+                      <input
+                        id="blogFileInput"
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => setNewBlogForm({ ...newBlogForm, file: e.target.files[0] })}
+                        className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 file:mr-0 file:ml-2 file:py-1 file:px-2.5 file:rounded-lg file:border-0 file:text-[11px] file:font-bold file:bg-[#14213D] file:text-white cursor-pointer"
+                      />
+                      <span className="block text-[10px] text-slate-400 mt-1">خودکار به فرمت بهینه WebP تبدیل و فشرده می‌شود.</span>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                      متن کامل مقاله (هر تعداد عنوان و پاراگراف دلخواه) *
+                    </label>
+                    <textarea
+                      required
+                      rows={10}
+                      placeholder="متن مقاله را اینجا تایپ کنید یا قرار دهید...&#10;&#10;عنوان بخش اول:&#10;توضیحات و پاراگراف‌ها با هر مقدار طول و شکستگی خطوط..."
+                      value={newBlogForm.content}
+                      onChange={(e) => setNewBlogForm({ ...newBlogForm, content: e.target.value })}
+                      className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 leading-relaxed focus:outline-none focus:border-[#FCA311] focus:bg-white resize-y font-mono sm:font-sans"
+                    />
+                    <p className="text-[11px] text-slate-400 mt-1">
+                      نکته: تمامی فاصله‌ها، اینترها (Enter) و شکستگی‌های خطوط به صورت دقیق در ساختار &lt;pre&gt; صفحه نمایش داده می‌شوند.
+                    </p>
+                  </div>
+
+                  <div className="pt-2 flex justify-end">
+                    <button
+                      type="submit"
+                      disabled={blogUploading}
+                      className="py-3 px-6 rounded-xl bg-[#FCA311] hover:bg-amber-500 text-[#14213D] font-extrabold text-xs transition shadow-md flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                    >
+                      <Upload size={14} />
+                      <span>{blogUploading ? 'در حال بهینه‌سازی و انتشار مقاله...' : 'انتشار مقاله در وبلاگ'}</span>
+                    </button>
+                  </div>
+                </form>
+              </div>
+
+              {/* لیست مقالات منتشر شده */}
+              <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-4">
+                <div className="flex items-center justify-between">
+                  <h4 className="text-sm font-bold text-[#14213D]">مقالات ثبت‌شده در سیستم ({blogList.length})</h4>
+                  <span className="text-[11px] text-slate-400">به ترتیب از جدیدترین به قدیمی‌ترین</span>
+                </div>
+
+                {blogList.length === 0 ? (
+                  <div className="p-10 text-center text-slate-400 text-xs font-medium">
+                    هنوز مقاله‌ای در وبلاگ ثبت نشده است. از فرم بالا برای انتشار اولین مقاله استفاده نمایید.
+                  </div>
+                ) : (
+                  <div className="divide-y divide-slate-100">
+                    {blogList.map((post) => (
+                      <div key={post.id} className="py-4 first:pt-0 last:pb-0 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                        <div className="flex items-center gap-3 min-w-0">
+                          <div className="w-16 h-12 rounded-lg overflow-hidden bg-slate-100 shrink-0 border border-slate-200">
+                            <img
+                              src={post.image || post.image_url || '/images/provinces/kabul/kabul-hero.webp'}
+                              alt={post.title}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                          <div className="min-w-0">
+                            <h5 className="text-xs sm:text-sm font-bold text-slate-900 truncate">{post.title}</h5>
+                            <div className="flex items-center gap-2 text-[11px] text-slate-400 mt-0.5">
+                              <span>نویسنده: {post.author || 'آمووی'}</span>
+                              <span>•</span>
+                              <span>
+                                {post.createdAt || post.created_at
+                                  ? new Date(post.createdAt || post.created_at).toLocaleDateString('fa-IR')
+                                  : 'اخیراً'}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-2 self-end sm:self-center shrink-0">
+                          <Link
+                            to={`/blog/${post.id}`}
+                            target="_blank"
+                            className="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition flex items-center gap-1.5"
+                          >
+                            <Eye size={13} />
+                            <span>مشاهده</span>
+                          </Link>
+                          <button
+                            onClick={() => handleDeleteBlog(post.id)}
+                            className="px-3 py-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer"
+                          >
+                            <Trash2 size={13} />
+                            <span>حذف</span>
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* ========================================================
+              تب ۵: درخواست‌های رزرواسیون
           ======================================================== */}
           {activeTab === 'bookings' && (
             <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">

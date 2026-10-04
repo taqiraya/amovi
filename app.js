@@ -50,7 +50,7 @@ const upload = multer({
 });
 
 // تابع اختصاصی تبدیل عکس به WebP و فشرده‌سازی خودکار در صورت بیشتر بودن از ۱۵۰ کیلوبایت
-async function processAndSaveWebp(buffer, originalname) {
+async function processAndSaveWebp(buffer, originalname, subfolder = 'gallery') {
   let quality = 85;
   let webpBuffer = await sharp(buffer)
     .webp({ quality })
@@ -72,9 +72,9 @@ async function processAndSaveWebp(buffer, originalname) {
     }
   }
 
-  const baseName = path.parse(originalname).name.replace(/[^a-zA-Z0-9_-]/g, '_') || 'gallery';
+  const baseName = path.parse(originalname).name.replace(/[^a-zA-Z0-9_-]/g, '_') || 'image';
   const fileName = `${Date.now()}_${baseName}.webp`;
-  const uploadDir = path.join(__dirname, 'public/images/gallery');
+  const uploadDir = path.join(__dirname, 'public/images', subfolder);
   if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir, { recursive: true });
   }
@@ -83,7 +83,7 @@ async function processAndSaveWebp(buffer, originalname) {
 
   return {
     fileName,
-    imageUrl: `/images/gallery/${fileName}`,
+    imageUrl: `/images/${subfolder}/${fileName}`,
     fileSizeKB: Math.round(webpBuffer.length / 1024)
   };
 }
@@ -176,6 +176,33 @@ async function initDatabase() {
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
     `);
 
+    // ۵. جدول مقالات وبلاگ داینامیک
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS blog_posts (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        title VARCHAR(255) NOT NULL,
+        content LONGTEXT NOT NULL,
+        image_url VARCHAR(500) DEFAULT NULL,
+        author VARCHAR(100) DEFAULT 'Amovi Travel',
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+    `);
+
+    // ثبت مقاله پیش‌فرض در صورت خالی بودن جدول وبلاگ
+    const [existingBlogs] = await pool.query('SELECT id FROM blog_posts LIMIT 1');
+    if (existingBlogs.length === 0) {
+      await pool.query(`
+        INSERT INTO blog_posts (title, content, image_url, author)
+        VALUES (
+          'میراث فرهنگی و شگفتی‌های تاریخی افغانستان',
+          'افغانستان سرزمینی از زیبایی‌های بی‌زمان، تاریخ غنی و میراث فرهنگی استثنایی است. از شهرهای باستانی تا دره‌های پنهان، هر منطقه داستانی از تاب‌آوری، هنر و سنت را روایت می‌کند.\n\nاز بوداهای باشکوه بامیان تا سایت‌های تاریخی هرات، بلخ و کابل، افغانستان ترکیبی منحصربه‌فرد از فرهنگ‌ها، معماری و سنت‌ها را ارائه می‌دهد. مردم، مهمان‌نوازی گرم و داستان‌های آن‌ها هر سفر را فراموش‌نشدنی می‌سازد.\n\nدر آمووی ترول، ما به سفر مسئولانه باور داریم که از جوامع محلی حمایت می‌کند و به حفظ میراث فرهنگی کشور کمک می‌نماید.',
+          '/images/provinces/kabul/kabul-hero.webp',
+          'آمووی ترول'
+        );
+      `);
+      console.log('[Database] Default blog post seeded.');
+    }
+
     // ثبت کاربر مدیر پیش‌فرض در صورت عدم وجود (admin / admin)
     const [existingAdmins] = await pool.query('SELECT id FROM admin_users WHERE username = ?', ['admin']);
     if (existingAdmins.length === 0) {
@@ -230,7 +257,6 @@ app.post('/api/auth/login', async (req, res) => {
 /* ========================================================
    مسیرهای فرم تماس با ما (Contact Messages API)
 ======================================================== */
-// دریافت همه پیام‌ها
 app.get(['/api/contact', '/contactMessages'], async (req, res) => {
   try {
     const [rows] = await pool.query('SELECT * FROM contact_messages ORDER BY created_at DESC');
@@ -254,7 +280,6 @@ app.get(['/api/contact', '/contactMessages'], async (req, res) => {
   }
 });
 
-// ثبت پیام جدید از وب‌سایت
 app.post(['/api/contact', '/contactMessages'], async (req, res) => {
   try {
     const { fullName, full_name, email, phoneWhatsApp, phone_whatsapp, subject, message } = req.body;
@@ -293,7 +318,6 @@ app.post(['/api/contact', '/contactMessages'], async (req, res) => {
   }
 });
 
-// تغییر وضعیت پیام (خوانده‌شده / نخوانده)
 app.patch('/api/contact/:id/status', async (req, res) => {
   try {
     const { status } = req.body;
@@ -305,7 +329,6 @@ app.patch('/api/contact/:id/status', async (req, res) => {
   }
 });
 
-// حذف پیام
 app.delete('/api/contact/:id', async (req, res) => {
   try {
     await pool.query('DELETE FROM contact_messages WHERE id = ?', [req.params.id]);
@@ -401,7 +424,7 @@ app.post('/api/gallery', upload.single('image'), async (req, res) => {
     }
 
     const { title, category, location } = req.body;
-    const { imageUrl, fileSizeKB } = await processAndSaveWebp(req.file.buffer, req.file.originalname);
+    const { imageUrl, fileSizeKB } = await processAndSaveWebp(req.file.buffer, req.file.originalname, 'gallery');
 
     const [result] = await pool.query(
       'INSERT INTO gallery_items (title, category, location, image_url, file_size_kb) VALUES (?, ?, ?, ?, ?)',
@@ -449,6 +472,96 @@ app.delete('/api/gallery/:id', async (req, res) => {
   }
 });
 
+/* ========================================================
+   مسیرهای وبلاگ داینامیک (Blog API)
+======================================================== */
+app.get(['/api/blog', '/blogPosts'], async (req, res) => {
+  try {
+    const [rows] = await pool.query('SELECT * FROM blog_posts ORDER BY created_at DESC');
+    res.json(rows.map(r => ({
+      id: r.id,
+      title: r.title,
+      content: r.content,
+      image: r.image_url || '/images/provinces/kabul/kabul-hero.webp',
+      author: r.author || 'Amovi Travel',
+      createdAt: r.created_at
+    })));
+  } catch (error) {
+    console.error('Fetch blog error:', error);
+    res.status(500).json({ success: false, error: 'خطا در دریافت مقالات وبلاگ.' });
+  }
+});
+
+app.get('/api/blog/:id', async (req, res) => {
+  try {
+    const [rows] = await pool.query('SELECT * FROM blog_posts WHERE id = ?', [req.params.id]);
+    if (rows.length > 0) {
+      const r = rows[0];
+      return res.json({
+        success: true,
+        data: {
+          id: r.id,
+          title: r.title,
+          content: r.content,
+          image: r.image_url || '/images/provinces/kabul/kabul-hero.webp',
+          author: r.author || 'Amovi Travel',
+          createdAt: r.created_at
+        }
+      });
+    }
+    res.status(404).json({ success: false, error: 'مقاله مورد نظر یافت نشد.' });
+  } catch (error) {
+    console.error('Fetch blog post error:', error);
+    res.status(500).json({ success: false, error: 'خطا در دریافت مقاله.' });
+  }
+});
+
+app.post('/api/blog', upload.single('image'), async (req, res) => {
+  try {
+    const { title, content, author } = req.body;
+    if (!title || !content) {
+      return res.status(400).json({ success: false, error: 'عنوان و متن مقاله الزامی است.' });
+    }
+
+    let imageUrl = '/images/provinces/kabul/kabul-hero.webp';
+    if (req.file) {
+      const processed = await processAndSaveWebp(req.file.buffer, req.file.originalname, 'blog');
+      imageUrl = processed.imageUrl;
+    }
+
+    const [result] = await pool.query(
+      'INSERT INTO blog_posts (title, content, image_url, author) VALUES (?, ?, ?, ?)',
+      [title.trim(), content.trim(), imageUrl, (author || 'Amovi Travel').trim()]
+    );
+
+    res.status(201).json({
+      success: true,
+      message: 'مقاله با موفقیت منتشر شد.',
+      data: {
+        id: result.insertId,
+        title: title.trim(),
+        content: content.trim(),
+        image: imageUrl,
+        author: (author || 'Amovi Travel').trim(),
+        createdAt: new Date()
+      }
+    });
+  } catch (error) {
+    console.error('Create blog post error:', error);
+    res.status(500).json({ success: false, error: 'خطا در ثبت و انتشار مقاله.' });
+  }
+});
+
+app.delete('/api/blog/:id', async (req, res) => {
+  try {
+    await pool.query('DELETE FROM blog_posts WHERE id = ?', [req.params.id]);
+    res.json({ success: true, message: 'مقاله با موفقیت حذف شد.' });
+  } catch (error) {
+    console.error('Delete blog post error:', error);
+    res.status(500).json({ success: false, error: 'خطا در حذف مقاله.' });
+  }
+});
+
 // بررسی سلامت API
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', time: new Date().toISOString() });
@@ -488,7 +601,7 @@ app.get('/amovilogin', (req, res) => {
         </div>
         <h1 class="text-2xl font-black text-[#14213D]">Amovi Travel</h1>
         <p class="text-xs uppercase tracking-[0.2em] text-[#FCA311] font-bold mt-1">Management Portal</p>
-        <p class="text-xs text-slate-500 mt-2 font-medium">ورود به پنل مدیریت پیام‌ها، اطلاعات و گالری</p>
+        <p class="text-xs text-slate-500 mt-2 font-medium">ورود به پنل مدیریت پیام‌ها، وبلاگ و اطلاعات</p>
       </div>
 
       <form id="loginForm" class="space-y-4 relative z-10">
@@ -573,6 +686,14 @@ app.get('/amovilogin', (req, res) => {
           <button onclick="switchTab('settings')" id="navBtn-settings" class="w-full flex items-center gap-2.5 px-3.5 py-3 rounded-xl text-xs font-bold transition cursor-pointer text-slate-600 hover:bg-slate-100 hover:text-[#14213D]">
             <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
             <span>اطلاعات و آدرس تماس</span>
+          </button>
+
+          <button onclick="switchTab('blog')" id="navBtn-blog" class="w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-xs font-bold transition cursor-pointer text-slate-600 hover:bg-slate-100 hover:text-[#14213D]">
+            <div class="flex items-center gap-2.5">
+              <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
+              <span>مدیریت مقالات وبلاگ</span>
+            </div>
+            <span id="blogCountBadge" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-600">0</span>
           </button>
 
           <button onclick="switchTab('gallery')" id="navBtn-gallery" class="w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-xs font-bold transition cursor-pointer text-slate-600 hover:bg-slate-100 hover:text-[#14213D]">
@@ -731,7 +852,55 @@ app.get('/amovilogin', (req, res) => {
           </div>
         </div>
 
-        <!-- ۳. تب مدیریت و آپلود تصاویر گالری -->
+        <!-- ۳. تب مدیریت و انتشار مقالات وبلاگ (ساده، عکس در بالا، عنوان و متن در pre) -->
+        <div id="tabContent-blog" class="hidden space-y-6">
+          <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-xs space-y-5">
+            <div>
+              <h3 class="text-base sm:text-lg font-black text-[#14213D]">انتشار مقاله جدید در وبلاگ</h3>
+              <p class="text-xs text-slate-500 mt-1">ساختار ساده: یک تصویر در بالا، عنوان و متن در پایین. می‌توانید هر تعداد عنوان، سطر و پاراگراف بنویسید (در حالت pre نمایش داده می‌شود).</p>
+            </div>
+
+            <div id="blogAlert" class="hidden p-4 rounded-xl text-xs font-bold"></div>
+
+            <form id="blogPublishForm" onsubmit="publishBlogPost(event)" class="space-y-4">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1.5">تصویر مقاله (اختیاری - تبدیل به WebP)</label>
+                  <input id="blogImageInput" type="file" accept="image/*" class="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 file:mr-0 file:ml-2 file:py-1 file:px-2.5 file:rounded-lg file:border-0 file:text-[11px] file:font-bold file:bg-[#14213D] file:text-white cursor-pointer" />
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1.5">نویسنده مقاله</label>
+                  <input id="blogAuthorInput" type="text" value="آمووی ترول" required class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-800 focus:outline-none focus:border-[#FCA311] focus:bg-white" />
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1.5">عنوان مقاله</label>
+                <input id="blogTitleInput" type="text" required placeholder="مثلاً: راهنمای سفر به بامیان و بازدید از پارک ملی بند امیر" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-800 focus:outline-none focus:border-[#FCA311] focus:bg-white font-bold" />
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1.5">متن کامل مقاله (هر تعداد پاراگراف، سطر و عنوان که مایلید)</label>
+                <textarea id="blogContentInput" rows="8" required placeholder="متن کامل مقاله را اینجا بنویسید. تمامی فاصله‌ها، سطرها و پاراگراف‌ها دقیقاً به همان صورت که می‌نویسید ذخیره و نمایش داده خواهند شد..." class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-[#FCA311] focus:bg-white font-sans leading-relaxed"></textarea>
+              </div>
+
+              <div>
+                <button type="submit" id="blogPublishBtn" class="px-6 py-3 rounded-xl bg-[#FCA311] hover:bg-amber-500 text-[#14213D] font-extrabold text-xs transition shadow-md flex items-center justify-center gap-2 cursor-pointer">
+                  <span>انتشار مقاله در وبلاگ</span>
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-4">
+            <h4 class="text-sm font-bold text-[#14213D]">لیست مقالات منتشرشده در وبلاگ</h4>
+            <div id="blogListContainer" class="space-y-3">
+              <!-- پر شدن توسط جاوا اسکریپت -->
+            </div>
+          </div>
+        </div>
+
+        <!-- ۴. تب مدیریت و آپلود تصاویر گالری -->
         <div id="tabContent-gallery" class="hidden space-y-6">
           <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-xs space-y-5">
             <div>
@@ -834,6 +1003,7 @@ app.get('/amovilogin', (req, res) => {
     let currentModalMsg = null;
     let currentSettings = {};
     let galleryList = [];
+    let blogList = [];
 
     function checkAuth() {
       const token = sessionStorage.getItem('amovi_admin_token');
@@ -862,7 +1032,7 @@ app.get('/amovilogin', (req, res) => {
     }
 
     function switchTab(tab) {
-      ['messages', 'settings', 'gallery'].forEach(t => {
+      ['messages', 'settings', 'blog', 'gallery'].forEach(t => {
         document.getElementById('tabContent-' + t)?.classList.add('hidden');
         const btn = document.getElementById('navBtn-' + t);
         if (btn) {
@@ -879,6 +1049,7 @@ app.get('/amovilogin', (req, res) => {
       const titles = {
         messages: 'پیام‌های دریافتی فرم تماس با ما',
         settings: 'تنظیمات و اطلاعات تماس شرکت',
+        blog: 'مدیریت مقالات وبلاگ',
         gallery: 'مدیریت و آپلود تصاویر گالری (WebP)'
       };
       document.getElementById('headerTitle').innerText = titles[tab] || '';
@@ -925,6 +1096,7 @@ app.get('/amovilogin', (req, res) => {
     async function loadAllData() {
       fetchMessages();
       fetchSettings();
+      fetchBlog();
       fetchGallery();
     }
 
@@ -1106,6 +1278,104 @@ app.get('/amovilogin', (req, res) => {
       }
     }
 
+    // وبلاگ
+    async function fetchBlog() {
+      try {
+        const res = await fetch('/api/blog');
+        if (res.ok) {
+          blogList = await res.json();
+          document.getElementById('blogCountBadge').innerText = blogList.length;
+          renderBlog();
+        }
+      } catch (err) { console.error(err); }
+    }
+
+    function renderBlog() {
+      const container = document.getElementById('blogListContainer');
+      if (blogList.length === 0) {
+        container.innerHTML = '<div class="py-8 text-center text-slate-400 text-xs">هنوز مقاله‌ای در وبلاگ منتشر نشده است.</div>';
+        return;
+      }
+      container.innerHTML = blogList.map(item => \`
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div class="flex items-center gap-3.5 min-w-0">
+            <img src="\${item.image}" alt="\${escapeHtml(item.title)}" class="w-16 h-12 rounded-lg object-cover shrink-0 border border-slate-200">
+            <div class="min-w-0">
+              <h5 class="text-xs sm:text-sm font-bold text-slate-900 truncate">\${escapeHtml(item.title)}</h5>
+              <div class="flex items-center gap-2 text-[11px] text-slate-400 mt-0.5 font-mono">
+                <span>\${escapeHtml(item.author || 'Amovi Travel')}</span>
+                <span>•</span>
+                <span>\${new Date(item.createdAt).toLocaleDateString('fa-IR')}</span>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 shrink-0 self-end sm:self-center">
+            <a href="/blog/\${item.id}" target="_blank" class="px-3 py-1.5 rounded-lg bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs font-bold transition">
+              مشاهده مقاله
+            </a>
+            <button onclick="deleteBlogPostItem(\${item.id})" class="p-1.5 rounded-lg text-rose-600 hover:bg-rose-50 transition cursor-pointer" title="حذف">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+            </button>
+          </div>
+        </div>
+      \`).join('');
+    }
+
+    async function publishBlogPost(e) {
+      e.preventDefault();
+      const fileInput = document.getElementById('blogImageInput');
+      const titleInput = document.getElementById('blogTitleInput');
+      const authorInput = document.getElementById('blogAuthorInput');
+      const contentInput = document.getElementById('blogContentInput');
+      const btn = document.getElementById('blogPublishBtn');
+      const alertBox = document.getElementById('blogAlert');
+
+      btn.disabled = true;
+      btn.innerText = 'در حال انتشار مقاله...';
+      alertBox.className = 'hidden';
+
+      const formData = new FormData();
+      if (fileInput.files[0]) {
+        formData.append('image', fileInput.files[0]);
+      }
+      formData.append('title', titleInput.value.trim());
+      formData.append('author', authorInput.value.trim());
+      formData.append('content', contentInput.value.trim());
+
+      try {
+        const res = await fetch('/api/blog', {
+          method: 'POST',
+          body: formData
+        });
+        const data = await res.json();
+        if (res.ok && data.success) {
+          alertBox.className = 'p-4 rounded-xl text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200';
+          alertBox.innerText = 'مقاله با موفقیت در وبلاگ منتشر گردید.';
+          fileInput.value = '';
+          titleInput.value = '';
+          contentInput.value = '';
+          fetchBlog();
+        } else {
+          alertBox.className = 'p-4 rounded-xl text-xs font-bold bg-rose-50 text-rose-800 border border-rose-200';
+          alertBox.innerText = data.error || 'خطا در ثبت مقاله.';
+        }
+      } catch (err) {
+        alertBox.className = 'p-4 rounded-xl text-xs font-bold bg-rose-50 text-rose-800 border border-rose-200';
+        alertBox.innerText = 'خطا در برقراری ارتباط با سرور.';
+      } finally {
+        btn.disabled = false;
+        btn.innerText = 'انتشار مقاله در وبلاگ';
+      }
+    }
+
+    async function deleteBlogPostItem(id) {
+      if (!confirm('آیا از حذف این مقاله از وبلاگ اطمینان دارید؟')) return;
+      try {
+        await fetch('/api/blog/' + id, { method: 'DELETE' });
+        fetchBlog();
+      } catch (err) { console.error(err); }
+    }
+
     // گالری
     async function fetchGallery() {
       try {
@@ -1198,6 +1468,7 @@ app.get('/amovilogin', (req, res) => {
       const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify({ 
         messages: allMessages, 
         settings: currentSettings, 
+        blog: blogList,
         gallery: galleryList 
       }, null, 2));
       const dl = document.createElement('a');

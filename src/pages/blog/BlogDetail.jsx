@@ -128,7 +128,7 @@ export default function BlogDetail() {
       />
 
       {/* نوار بالا و دکمه بازگشت */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-36 pb-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-36 pb-4">
         <Link
           to="/blog"
           className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-slate-500 hover:text-[#14213D] transition group"
@@ -143,7 +143,7 @@ export default function BlogDetail() {
       </div>
 
       {/* کانتینر اصلی مقاله: ساختار ساده، عکس در بالا و متن در پایین */}
-      <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
+      <article className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
         
         {/* ۱. عکس در قسمت بالای مقاله (قابل کلیک برای نمایش اندازه کامل) */}
         <div 

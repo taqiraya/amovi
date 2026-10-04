@@ -96,7 +96,7 @@ export default function Blog() {
         />
         <div className="absolute inset-0 z-10 bg-gradient-to-b from-[#14213D]/95 via-[#14213D]/80 to-[#14213D] pointer-events-none" />
 
-        <div className={`relative z-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 ${isRtl ? 'text-right' : 'text-left'}`}>
+        <div className={`relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${isRtl ? 'text-right' : 'text-left'}`}>
           <span className="inline-block text-[#FCA311] text-xs font-bold uppercase tracking-[0.2em] mb-2 font-[Inter]">
             {isRtl ? 'مجله و مقالات گردشگری آمووی' : 'AMOVI TRAVEL JOURNAL & ARTICLES'}
           </span>
@@ -116,7 +116,7 @@ export default function Blog() {
       </section>
 
       {/* ۲. نوار جستجو و تب‌های دسته‌بندی */}
-      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-4 space-y-4">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-4 space-y-4">
         {/* نوار جستجو */}
         <div className="max-w-md mx-auto relative">
           <input
@@ -155,7 +155,7 @@ export default function Blog() {
       </section>
 
       {/* ۳. گرید مقالات وبلاگ با ساختار ساده: عکس در بالا، عنوان و متن در پایین */}
-      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
         {loading ? (
           <div className="text-center py-20 text-slate-400 text-sm">
             {isRtl ? 'در حال بارگذاری مقالات...' : 'Loading articles...'}

@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Shield, FileText, CalendarCheck, CheckCircle2 } from 'lucide-react';
 import { useLangStore } from '../../store/useLangStore';
+import { getLegalContent } from '../../services/api';
 import SEO from '../../components/SEO';
 import heroBg from '../../assets/images/hero-bg.webp';
 
@@ -11,19 +12,46 @@ export default function Policy({ defaultTab = 'privacy' }) {
   const isRtl = currentLang === 'fa';
   
   const legalData = translations?.legalPage || {};
-  
-  // خواندن تب از کوئری پارامز یا استیت محلی بدون نیاز به useEffect
+  const [dynamicData, setDynamicData] = useState(null);
+
+  // خواندن تب فعال مستقیماً از کوئری پارامز یا پراپ پیش‌فرض
   const queryTab = searchParams.get('tab');
-  const [localTab, setLocalTab] = useState(defaultTab);
-  const activeTab = queryTab || localTab;
+  const activeTab = queryTab || defaultTab || 'privacy';
+
+  useEffect(() => {
+    let isMounted = true;
+    getLegalContent().then((data) => {
+      if (isMounted && data) {
+        setDynamicData(data);
+      }
+    }).catch(() => {});
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   const handleTabChange = (tabKey) => {
-    setLocalTab(tabKey);
     setSearchParams({ tab: tabKey });
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const currentDoc = legalData[activeTab] || legalData.privacy || {};
+  const fallbackDoc = legalData[activeTab] || legalData.privacy || {};
+  const serverDoc = dynamicData?.[activeTab];
+  
+  let currentDoc = fallbackDoc;
+  if (serverDoc) {
+    const langDoc = isRtl ? serverDoc.fa : serverDoc.en;
+    if (langDoc && langDoc.title) {
+      currentDoc = {
+        title: langDoc.title || fallbackDoc.title,
+        lastUpdated: langDoc.lastUpdated || fallbackDoc.lastUpdated,
+        intro: langDoc.intro || fallbackDoc.intro,
+        sections: Array.isArray(langDoc.sections) && langDoc.sections.length > 0 
+          ? langDoc.sections 
+          : fallbackDoc.sections
+      };
+    }
+  }
 
   return (
     <div className={`w-full overflow-x-hidden bg-[#F8FAFC] min-h-screen text-[#14213D] ${isRtl ? 'font-[Sahel]' : 'font-[Inter]'}`}>

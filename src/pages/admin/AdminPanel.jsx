@@ -20,7 +20,10 @@ import {
   Link as LinkIcon,
   AlertCircle,
   BookOpen,
-  Compass
+  Compass,
+  FileText,
+  ShieldCheck,
+  Plus
 } from 'lucide-react';
 import { 
   getMasterRequests, 
@@ -39,7 +42,9 @@ import {
   updateTourPageSettings,
   getTours,
   createTourPackage,
-  deleteTourPackage
+  deleteTourPackage,
+  getLegalContent,
+  updateLegalDocument
 } from '../../services/api';
 import localDb from '../../../db.json';
 
@@ -160,6 +165,13 @@ export default function AdminPanel() {
   const [packageSuccess, setPackageSuccess] = useState('');
   const [packageError, setPackageError] = useState('');
 
+  // دیتای اسناد و مقررات حقوقی (حریم خصوصی، شرایط عمومی، شرایط رزرو)
+  const [legalDocs, setLegalDocs] = useState({});
+  const [legalActiveDoc, setLegalActiveDoc] = useState('privacy'); // 'privacy' | 'terms' | 'booking'
+  const [legalSaving, setLegalSaving] = useState(false);
+  const [legalSuccess, setLegalSuccess] = useState('');
+  const [legalError, setLegalError] = useState('');
+
   // وضعیت لاگین
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
     return Boolean(sessionStorage.getItem('amovi_admin_token'));
@@ -212,6 +224,9 @@ export default function AdminPanel() {
     });
     getTours().then((tours) => {
       if (Array.isArray(tours)) setToursList(tours);
+    });
+    getLegalContent().then((data) => {
+      if (data) setLegalDocs(data);
     });
   };
 
@@ -540,6 +555,92 @@ export default function AdminPanel() {
     }
   };
 
+  // ذخیره سند حقوقی انتخابی
+  const handleSaveLegalDoc = async (e) => {
+    e.preventDefault();
+    setLegalSaving(true);
+    setLegalSuccess('');
+    setLegalError('');
+    try {
+      const current = legalDocs[legalActiveDoc] || {};
+      const payload = {
+        title_fa: current.title_fa || current.fa?.title || '',
+        title_en: current.title_en || current.en?.title || '',
+        last_updated_fa: current.last_updated_fa || current.fa?.lastUpdated || '',
+        last_updated_en: current.last_updated_en || current.en?.lastUpdated || '',
+        intro_fa: current.intro_fa || current.fa?.intro || '',
+        intro_en: current.intro_en || current.en?.intro || '',
+        sections: current.sections || []
+      };
+      await updateLegalDocument(legalActiveDoc, payload);
+      setLegalSuccess('سند حقوقی با موفقیت به‌روزرسانی و ذخیره شد.');
+      setTimeout(() => setLegalSuccess(''), 5000);
+    } catch (err) {
+      console.error('Save legal doc error:', err);
+      setLegalError('خطا در ذخیره‌سازی سند حقوقی.');
+    } finally {
+      setLegalSaving(false);
+    }
+  };
+
+  const handleAddSection = () => {
+    const current = legalDocs[legalActiveDoc] || {};
+    const sections = current.sections || [];
+    const newNum = String(sections.length + 1).padStart(2, '0');
+    const newSection = {
+      num: newNum,
+      num_en: newNum,
+      title_fa: '',
+      title_en: '',
+      content_fa: '',
+      content_en: ''
+    };
+    setLegalDocs({
+      ...legalDocs,
+      [legalActiveDoc]: {
+        ...current,
+        sections: [...sections, newSection]
+      }
+    });
+  };
+
+  const handleRemoveSection = (idx) => {
+    if (!window.confirm('آیا از حذف این بند اطمینان دارید؟')) return;
+    const current = legalDocs[legalActiveDoc] || {};
+    const sections = (current.sections || []).filter((_, i) => i !== idx);
+    setLegalDocs({
+      ...legalDocs,
+      [legalActiveDoc]: {
+        ...current,
+        sections
+      }
+    });
+  };
+
+  const handleUpdateSection = (idx, field, value) => {
+    const current = legalDocs[legalActiveDoc] || {};
+    const sections = [...(current.sections || [])];
+    sections[idx] = { ...sections[idx], [field]: value };
+    setLegalDocs({
+      ...legalDocs,
+      [legalActiveDoc]: {
+        ...current,
+        sections
+      }
+    });
+  };
+
+  const handleUpdateDocField = (field, value) => {
+    const current = legalDocs[legalActiveDoc] || {};
+    setLegalDocs({
+      ...legalDocs,
+      [legalActiveDoc]: {
+        ...current,
+        [field]: value
+      }
+    });
+  };
+
   const exportData = () => {
     const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify({ 
       contactMessages, 
@@ -548,6 +649,7 @@ export default function AdminPanel() {
       blogPosts: blogList,
       tours: toursList,
       tourPageSettings: tourPageForm,
+      legalDocuments: legalDocs,
       masterRequests 
     }, null, 2));
     const downloadAnchor = document.createElement('a');
@@ -750,6 +852,25 @@ export default function AdminPanel() {
             </button>
 
             <button
+              onClick={() => { setActiveTab('legal'); setMobileSidebarOpen(false); }}
+              className={`w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-xs font-bold transition cursor-pointer ${
+                activeTab === 'legal'
+                  ? 'bg-[#14213D] text-white shadow-md'
+                  : 'text-slate-600 hover:bg-slate-100 hover:text-[#14213D]'
+              }`}
+            >
+              <div className="flex items-center gap-2.5">
+                <FileText size={16} className={activeTab === 'legal' ? 'text-[#FCA311]' : 'text-slate-400'} />
+                <span>اسناد و مقررات حقوقی</span>
+              </div>
+              <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
+                activeTab === 'legal' ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-600'
+              }`}>
+                ۳ سند
+              </span>
+            </button>
+
+            <button
               onClick={() => { setActiveTab('bookings'); setMobileSidebarOpen(false); }}
               className={`w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-xs font-bold transition cursor-pointer ${
                 activeTab === 'bookings'
@@ -808,6 +929,7 @@ export default function AdminPanel() {
                 {activeTab === 'gallery' && 'مدیریت و آپلود تصاویر گالری (WebP)'}
                 {activeTab === 'blog' && 'مدیریت و انتشار مقالات وبلاگ'}
                 {activeTab === 'tours' && 'مدیریت محتوا و پکیج‌های صفحه سفر'}
+                {activeTab === 'legal' && 'مدیریت اسناد، شرایط و مقررات حقوقی'}
                 {activeTab === 'bookings' && 'درخواست‌های رزرواسیون تورها'}
               </h2>
               <p className="text-[11px] text-slate-500 hidden sm:block">سیستم جامع کنترل و مدیریت عملیات آمووی ترول</p>
@@ -2191,7 +2313,330 @@ export default function AdminPanel() {
           )}
 
           {/* ========================================================
-              تب ۶: درخواست‌های رزرواسیون
+              تب ۶: مدیریت اسناد، شرایط و مقررات حقوقی (Legal Documents)
+          ======================================================== */}
+          {activeTab === 'legal' && (() => {
+            const currentDocData = legalDocs[legalActiveDoc] || {};
+            const titleFa = currentDocData.title_fa !== undefined ? currentDocData.title_fa : (currentDocData.fa?.title || '');
+            const titleEn = currentDocData.title_en !== undefined ? currentDocData.title_en : (currentDocData.en?.title || '');
+            const lastUpdatedFa = currentDocData.last_updated_fa !== undefined ? currentDocData.last_updated_fa : (currentDocData.fa?.lastUpdated || '');
+            const lastUpdatedEn = currentDocData.last_updated_en !== undefined ? currentDocData.last_updated_en : (currentDocData.en?.lastUpdated || '');
+            const introFa = currentDocData.intro_fa !== undefined ? currentDocData.intro_fa : (currentDocData.fa?.intro || '');
+            const introEn = currentDocData.intro_en !== undefined ? currentDocData.intro_en : (currentDocData.en?.intro || '');
+            
+            let sectionsList = currentDocData.sections;
+            if (!Array.isArray(sectionsList)) {
+              sectionsList = (currentDocData.fa?.sections || []).map((s, idx) => ({
+                num: s.num || String(idx + 1).padStart(2, '0'),
+                num_en: currentDocData.en?.sections?.[idx]?.num || String(idx + 1).padStart(2, '0'),
+                title_fa: s.title || '',
+                title_en: currentDocData.en?.sections?.[idx]?.title || '',
+                content_fa: s.content || '',
+                content_en: currentDocData.en?.sections?.[idx]?.content || ''
+              }));
+            }
+
+            return (
+              <div className="space-y-6">
+                {/* سوییچر بین سه سند حقوقی */}
+                <div className="flex flex-wrap items-center gap-2 border-b border-slate-200 pb-3">
+                  <button
+                    type="button"
+                    onClick={() => setLegalActiveDoc('privacy')}
+                    className={`px-4 py-2.5 rounded-xl text-xs font-bold transition cursor-pointer flex items-center gap-2 ${
+                      legalActiveDoc === 'privacy'
+                        ? 'bg-[#14213D] text-white shadow-sm'
+                        : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
+                    }`}
+                  >
+                    <ShieldCheck size={14} className={legalActiveDoc === 'privacy' ? 'text-[#FCA311]' : 'text-slate-400'} />
+                    <span>سیاست حفظ حریم خصوصی (Privacy)</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setLegalActiveDoc('terms')}
+                    className={`px-4 py-2.5 rounded-xl text-xs font-bold transition cursor-pointer flex items-center gap-2 ${
+                      legalActiveDoc === 'terms'
+                        ? 'bg-[#14213D] text-white shadow-sm'
+                        : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
+                    }`}
+                  >
+                    <FileText size={14} className={legalActiveDoc === 'terms' ? 'text-[#FCA311]' : 'text-slate-400'} />
+                    <span>شرایط و ضوابط عمومی (Terms)</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setLegalActiveDoc('booking')}
+                    className={`px-4 py-2.5 rounded-xl text-xs font-bold transition cursor-pointer flex items-center gap-2 ${
+                      legalActiveDoc === 'booking'
+                        ? 'bg-[#14213D] text-white shadow-sm'
+                        : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
+                    }`}
+                  >
+                    <FileText size={14} className={legalActiveDoc === 'booking' ? 'text-[#FCA311]' : 'text-slate-400'} />
+                    <span>مقررات و شرایط رزرو (Booking)</span>
+                  </button>
+                </div>
+
+                {/* فرم ویرایش سند حقوقی */}
+                <div className="bg-white rounded-2xl border border-slate-200 shadow-xs p-6 space-y-6">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+                    <div>
+                      <h3 className="text-base font-black text-[#14213D]">
+                        {legalActiveDoc === 'privacy' && 'ویرایش سیاست حفظ حریم خصوصی (Privacy Policy)'}
+                        {legalActiveDoc === 'terms' && 'ویرایش شرایط و ضوابط عمومی (Terms & Conditions)'}
+                        {legalActiveDoc === 'booking' && 'ویرایش مقررات و شرایط رزرو سفر (Booking Terms)'}
+                      </h3>
+                      <p className="text-xs text-slate-500 mt-1">
+                        ویرایش عناوین، تاریخ، مقدمه و بندهای این سند به زبان‌های دری و انگلیسی.
+                      </p>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs text-slate-400 font-mono font-bold">
+                        {sectionsList.length} بند ثبت‌شده
+                      </span>
+                    </div>
+                  </div>
+
+                  {legalSuccess && (
+                    <div className="p-3.5 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-bold">
+                      {legalSuccess}
+                    </div>
+                  )}
+                  {legalError && (
+                    <div className="p-3.5 rounded-xl bg-rose-50 text-rose-700 border border-rose-200 text-xs font-bold">
+                      {legalError}
+                    </div>
+                  )}
+
+                  <form onSubmit={handleSaveLegalDoc} className="space-y-6">
+                    {/* عناوین سند */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                          عنوان سند (دری / فارسی)
+                        </label>
+                        <input
+                          type="text"
+                          required
+                          value={titleFa}
+                          onChange={(e) => handleUpdateDocField('title_fa', e.target.value)}
+                          className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 font-['Sahel'] focus:outline-none focus:border-[#FCA311] focus:bg-white"
+                          dir="rtl"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                          Document Title (English)
+                        </label>
+                        <input
+                          type="text"
+                          required
+                          value={titleEn}
+                          onChange={(e) => handleUpdateDocField('title_en', e.target.value)}
+                          className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 font-[Inter] focus:outline-none focus:border-[#FCA311] focus:bg-white"
+                          dir="ltr"
+                        />
+                      </div>
+                    </div>
+
+                    {/* تاریخ آخرین به‌روزرسانی */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                          متن تاریخ آخرین به‌روزرسانی (دری)
+                        </label>
+                        <input
+                          type="text"
+                          value={lastUpdatedFa}
+                          onChange={(e) => handleUpdateDocField('last_updated_fa', e.target.value)}
+                          placeholder="آخرین به‌روزرسانی: سپتامبر ۲۰۲۶"
+                          className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 font-['Sahel'] focus:outline-none focus:border-[#FCA311] focus:bg-white"
+                          dir="rtl"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                          Last Updated Text (English)
+                        </label>
+                        <input
+                          type="text"
+                          value={lastUpdatedEn}
+                          onChange={(e) => handleUpdateDocField('last_updated_en', e.target.value)}
+                          placeholder="Last Updated: September 2026"
+                          className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 font-[Inter] focus:outline-none focus:border-[#FCA311] focus:bg-white"
+                          dir="ltr"
+                        />
+                      </div>
+                    </div>
+
+                    {/* متن مقدمه */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                          متن مقدمه سند (دری / فارسی)
+                        </label>
+                        <textarea
+                          rows={3}
+                          value={introFa}
+                          onChange={(e) => handleUpdateDocField('intro_fa', e.target.value)}
+                          className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 font-['Sahel'] leading-relaxed focus:outline-none focus:border-[#FCA311] focus:bg-white"
+                          dir="rtl"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                          Introduction Text (English)
+                        </label>
+                        <textarea
+                          rows={3}
+                          value={introEn}
+                          onChange={(e) => handleUpdateDocField('intro_en', e.target.value)}
+                          className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 font-[Inter] leading-relaxed focus:outline-none focus:border-[#FCA311] focus:bg-white"
+                          dir="ltr"
+                        />
+                      </div>
+                    </div>
+
+                    {/* بخش بندهای سند (Sections List) */}
+                    <div className="border border-slate-200 rounded-2xl p-5 bg-slate-50/50 space-y-4">
+                      <div className="flex items-center justify-between pb-2 border-b border-slate-200/80">
+                        <div>
+                          <h4 className="text-sm font-black text-[#14213D]">بندهای رسمی این سند قانونی</h4>
+                          <p className="text-[11px] text-slate-500 mt-0.5">
+                            می‌توانید هر بند را ویرایش کنید یا بندهای جدید اضافه نمایید.
+                          </p>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={handleAddSection}
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#14213D] text-white text-xs font-bold hover:bg-[#1E293B] transition cursor-pointer"
+                        >
+                          <Plus size={14} />
+                          <span>افزودن بند جدید</span>
+                        </button>
+                      </div>
+
+                      <div className="space-y-4">
+                        {sectionsList.map((sec, idx) => (
+                          <div key={idx} className="bg-white border border-slate-200 rounded-xl p-4 space-y-3 shadow-2xs">
+                            <div className="flex items-center justify-between border-b border-slate-100 pb-2">
+                              <div className="flex items-center gap-2">
+                                <span className="w-6 h-6 rounded-md bg-[#14213D] text-[#FCA311] text-[11px] font-black font-mono flex items-center justify-center">
+                                  {sec.num || idx + 1}
+                                </span>
+                                <span className="text-xs font-bold text-slate-700">بند شماره {idx + 1}</span>
+                              </div>
+
+                              <div className="flex items-center gap-2">
+                                <button
+                                  type="button"
+                                  onClick={() => handleRemoveSection(idx)}
+                                  className="p-1 rounded-md text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition cursor-pointer"
+                                  title="حذف این بند"
+                                >
+                                  <Trash2 size={14} />
+                                </button>
+                              </div>
+                            </div>
+
+                            {/* شماره‌های بند */}
+                            <div className="grid grid-cols-2 gap-3">
+                              <div>
+                                <label className="block text-[10px] font-bold text-slate-500 mb-1">شماره بند دری (مثال: ۰۱)</label>
+                                <input
+                                  type="text"
+                                  value={sec.num || ''}
+                                  onChange={(e) => handleUpdateSection(idx, 'num', e.target.value)}
+                                  className="w-full px-2.5 py-1.5 rounded-lg bg-slate-50 border border-slate-200 text-xs font-mono"
+                                  dir="rtl"
+                                />
+                              </div>
+                              <div>
+                                <label className="block text-[10px] font-bold text-slate-500 mb-1">Number (English, e.g. 01)</label>
+                                <input
+                                  type="text"
+                                  value={sec.num_en || sec.num || ''}
+                                  onChange={(e) => handleUpdateSection(idx, 'num_en', e.target.value)}
+                                  className="w-full px-2.5 py-1.5 rounded-lg bg-slate-50 border border-slate-200 text-xs font-mono"
+                                  dir="ltr"
+                                />
+                              </div>
+                            </div>
+
+                            {/* عناوین بند */}
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                              <div>
+                                <label className="block text-[10px] font-bold text-slate-500 mb-1">عنوان بند (دری)</label>
+                                <input
+                                  type="text"
+                                  value={sec.title_fa || sec.title || ''}
+                                  onChange={(e) => handleUpdateSection(idx, 'title_fa', e.target.value)}
+                                  className="w-full px-3 py-2 rounded-lg bg-slate-50 border border-slate-200 text-xs font-['Sahel']"
+                                  dir="rtl"
+                                />
+                              </div>
+                              <div>
+                                <label className="block text-[10px] font-bold text-slate-500 mb-1">Section Title (English)</label>
+                                <input
+                                  type="text"
+                                  value={sec.title_en || ''}
+                                  onChange={(e) => handleUpdateSection(idx, 'title_en', e.target.value)}
+                                  className="w-full px-3 py-2 rounded-lg bg-slate-50 border border-slate-200 text-xs font-[Inter]"
+                                  dir="ltr"
+                                />
+                              </div>
+                            </div>
+
+                            {/* متن بند */}
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                              <div>
+                                <label className="block text-[10px] font-bold text-slate-500 mb-1">متن کامل بند (دری)</label>
+                                <textarea
+                                  rows={3}
+                                  value={sec.content_fa || sec.content || ''}
+                                  onChange={(e) => handleUpdateSection(idx, 'content_fa', e.target.value)}
+                                  className="w-full px-3 py-2 rounded-lg bg-slate-50 border border-slate-200 text-xs font-['Sahel'] leading-relaxed"
+                                  dir="rtl"
+                                />
+                              </div>
+                              <div>
+                                <label className="block text-[10px] font-bold text-slate-500 mb-1">Section Content (English)</label>
+                                <textarea
+                                  rows={3}
+                                  value={sec.content_en || ''}
+                                  onChange={(e) => handleUpdateSection(idx, 'content_en', e.target.value)}
+                                  className="w-full px-3 py-2 rounded-lg bg-slate-50 border border-slate-200 text-xs font-[Inter] leading-relaxed"
+                                  dir="ltr"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* دکمه ذخیره‌سازی نهایی */}
+                    <div className="flex justify-end pt-2">
+                      <button
+                        type="submit"
+                        disabled={legalSaving}
+                        className="px-6 py-2.5 rounded-xl bg-[#FCA311] hover:bg-amber-500 text-[#14213D] font-black text-xs transition shadow-sm cursor-pointer disabled:opacity-50"
+                      >
+                        {legalSaving ? 'در حال ذخیره‌سازی...' : 'ذخیره تغییرات این سند حقوقی'}
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            );
+          })()}
+
+          {/* ========================================================
+              تب ۷: درخواست‌های رزرواسیون
           ======================================================== */}
           {activeTab === 'bookings' && (
             <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">

@@ -403,6 +403,67 @@ async function initDatabase() {
       }
     }
 
+    // ۸. جدول اسناد و شرایط حقوقی (Legal Documents: Privacy, Terms, Booking)
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS legal_documents (
+        id VARCHAR(50) PRIMARY KEY,
+        title_fa VARCHAR(255) NOT NULL,
+        title_en VARCHAR(255) NOT NULL,
+        last_updated_fa VARCHAR(100) DEFAULT 'آخرین به‌روزرسانی: سپتامبر ۲۰۲۶',
+        last_updated_en VARCHAR(100) DEFAULT 'Last Updated: September 2026',
+        intro_fa TEXT,
+        intro_en TEXT,
+        sections_json LONGTEXT NOT NULL,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+    `);
+
+    // بررسی و بارگذاری ۳ سند حقوقی پیش‌فرض از fa.json و en.json در صورت خالی بودن جدول
+    const [existLegal] = await pool.query('SELECT COUNT(*) as cnt FROM legal_documents');
+    if (existLegal[0].cnt === 0) {
+      try {
+        const faPath = path.join(__dirname, 'src', 'locales', 'fa.json');
+        const enPath = path.join(__dirname, 'src', 'locales', 'en.json');
+        if (fs.existsSync(faPath) && fs.existsSync(enPath)) {
+          const faData = JSON.parse(fs.readFileSync(faPath, 'utf8'));
+          const enData = JSON.parse(fs.readFileSync(enPath, 'utf8'));
+          const docs = ['privacy', 'terms', 'booking'];
+          for (const docId of docs) {
+            const docFa = faData.legalPage?.[docId] || {};
+            const docEn = enData.legalPage?.[docId] || {};
+            const sections = (docFa.sections || []).map((sec, idx) => {
+              const enSec = docEn.sections?.[idx] || {};
+              return {
+                num: sec.num || String(idx + 1).padStart(2, '0'),
+                num_en: enSec.num || String(idx + 1).padStart(2, '0'),
+                title_fa: sec.title || '',
+                title_en: enSec.title || '',
+                content_fa: sec.content || '',
+                content_en: enSec.content || ''
+              };
+            });
+            await pool.query(`
+              INSERT INTO legal_documents 
+              (id, title_fa, title_en, last_updated_fa, last_updated_en, intro_fa, intro_en, sections_json)
+              VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            `, [
+              docId,
+              docFa.title || '',
+              docEn.title || '',
+              docFa.lastUpdated || 'آخرین به‌روزرسانی: سپتامبر ۲۰۲۶',
+              docEn.lastUpdated || 'Last Updated: September 2026',
+              docFa.intro || '',
+              docEn.intro || '',
+              JSON.stringify(sections)
+            ]);
+          }
+          console.log('[Database] 3 official legal documents initialized into database.');
+        }
+      } catch (err) {
+        console.warn('Seeding legal documents warning:', err.message);
+      }
+    }
+
     console.log(`[Database] MySQL connected to "${DB_NAME}". All tables initialized.`);
   } catch (err) {
     console.error('[Database Error] Connection to MySQL failed:', err.message);
@@ -1141,6 +1202,121 @@ app.delete('/api/tours/:id', async (req, res) => {
   } catch (error) {
     console.error('Delete tour error:', error);
     res.status(500).json({ success: false, error: 'خطا در حذف پکیج سفر.' });
+  }
+});
+
+/* ========================================================
+   مسیرهای اسناد و شرایط حقوقی (Legal Content API)
+======================================================== */
+// ۱. دریافت تمامی اسناد حقوقی (حریم خصوصی، شرایط عمومی، شرایط رزرو)
+app.get(['/api/legal-content', '/api/legal'], async (req, res) => {
+  try {
+    const [rows] = await pool.query('SELECT * FROM legal_documents');
+    if (rows.length > 0) {
+      const result = {};
+      for (const r of rows) {
+        let sections = [];
+        try {
+          sections = typeof r.sections_json === 'string' ? JSON.parse(r.sections_json) : r.sections_json;
+        } catch {
+          sections = [];
+        }
+
+        result[r.id] = {
+          id: r.id,
+          title_fa: r.title_fa,
+          title_en: r.title_en,
+          last_updated_fa: r.last_updated_fa,
+          last_updated_en: r.last_updated_en,
+          intro_fa: r.intro_fa,
+          intro_en: r.intro_en,
+          sections,
+          fa: {
+            title: r.title_fa,
+            lastUpdated: r.last_updated_fa,
+            intro: r.intro_fa,
+            sections: sections.map(s => ({
+              num: s.num || '۰۱',
+              title: s.title_fa || s.title || '',
+              content: s.content_fa || s.content || ''
+            }))
+          },
+          en: {
+            title: r.title_en,
+            lastUpdated: r.last_updated_en,
+            intro: r.intro_en,
+            sections: sections.map(s => ({
+              num: s.num_en || s.num || '01',
+              title: s.title_en || s.title || '',
+              content: s.content_en || s.content || ''
+            }))
+          },
+          updated_at: r.updated_at
+        };
+      }
+      return res.json({ success: true, data: result });
+    }
+
+    // فال‌بک به فایل‌های لوکال در صورت خالی بودن دیتابیس
+    const faPath = path.join(__dirname, 'src', 'locales', 'fa.json');
+    const enPath = path.join(__dirname, 'src', 'locales', 'en.json');
+    if (fs.existsSync(faPath) && fs.existsSync(enPath)) {
+      const faData = JSON.parse(fs.readFileSync(faPath, 'utf8'));
+      const enData = JSON.parse(fs.readFileSync(enPath, 'utf8'));
+      const docs = ['privacy', 'terms', 'booking'];
+      const fallbackResult = {};
+      for (const d of docs) {
+        fallbackResult[d] = {
+          id: d,
+          fa: faData.legalPage?.[d] || {},
+          en: enData.legalPage?.[d] || {}
+        };
+      }
+      return res.json({ success: true, data: fallbackResult });
+    }
+
+    res.json({ success: true, data: {} });
+  } catch (error) {
+    console.error('Fetch legal content error:', error);
+    res.status(500).json({ success: false, error: 'خطا در دریافت اسناد حقوقی.' });
+  }
+});
+
+// ۲. به‌روزرسانی یک سند حقوقی مشخص (privacy, terms, booking)
+app.post(['/api/legal-content/:docId', '/api/legal/:docId'], async (req, res) => {
+  try {
+    const docId = req.params.docId;
+    const { title_fa, title_en, last_updated_fa, last_updated_en, intro_fa, intro_en, sections } = req.body;
+
+    const sectionsJson = typeof sections === 'string' ? sections : JSON.stringify(sections || []);
+
+    await pool.query(`
+      INSERT INTO legal_documents 
+      (id, title_fa, title_en, last_updated_fa, last_updated_en, intro_fa, intro_en, sections_json)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+      ON DUPLICATE KEY UPDATE
+        title_fa = VALUES(title_fa),
+        title_en = VALUES(title_en),
+        last_updated_fa = VALUES(last_updated_fa),
+        last_updated_en = VALUES(last_updated_en),
+        intro_fa = VALUES(intro_fa),
+        intro_en = VALUES(intro_en),
+        sections_json = VALUES(sections_json);
+    `, [
+      docId,
+      (title_fa || '').trim(),
+      (title_en || '').trim(),
+      (last_updated_fa || '').trim(),
+      (last_updated_en || '').trim(),
+      (intro_fa || '').trim(),
+      (intro_en || '').trim(),
+      sectionsJson
+    ]);
+
+    res.json({ success: true, message: 'سند حقوقی با موفقیت به‌روزرسانی گردید.' });
+  } catch (error) {
+    console.error('Update legal content error:', error);
+    res.status(500).json({ success: false, error: 'خطا در ذخیره سند حقوقی.' });
   }
 });
 

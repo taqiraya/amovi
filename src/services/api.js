@@ -303,4 +303,28 @@ export const deleteGalleryItem = async (id) => {
   }
 };
 
+// Legal Documents (Privacy Policy, Terms & Conditions, Booking Terms)
+export const getLegalContent = async () => {
+  try {
+    const res = await api.get('/api/legal-content');
+    if (res && res.data && res.data.success && res.data.data) {
+      return res.data.data;
+    }
+    return null;
+  } catch (error) {
+    console.warn('Could not fetch legal content from backend:', error);
+    return null;
+  }
+};
+
+export const updateLegalDocument = async (docId, data) => {
+  try {
+    const res = await api.post(`/api/legal-content/${docId}`, data);
+    return res.data;
+  } catch (error) {
+    console.error('Failed to update legal document:', error);
+    throw error;
+  }
+};
+
 export default api;

@@ -30,7 +30,7 @@ export default function AdminPanel() {
     });
 
     getContactMessages().then((data) => {
-      if (isMounted && Array.isArray(data) && data.length > 0) {
+      if (isMounted && Array.isArray(data)) {
         setContactMessages(data);
       }
     });

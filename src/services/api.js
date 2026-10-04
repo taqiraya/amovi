@@ -8,11 +8,11 @@ const configuredApiUrl = import.meta.env.VITE_API_URL;
 const shouldSkipRemoteApi = isHttps && (!configuredApiUrl || configuredApiUrl.startsWith('http://'));
 
 const api = axios.create({
-  baseURL: configuredApiUrl || 'http://localhost:3000',
+  baseURL: configuredApiUrl || 'http://localhost:5000',
   headers: {
     'Content-Type': 'application/json',
   },
-  timeout: 4000,
+  timeout: 6000,
 });
 
 // Helper for resilient fetching: attempts API first, falls back to local data if server is offline or inaccessible
@@ -95,22 +95,27 @@ export const createMasterRequest = async (data) => {
   }
 };
 
-// Contact Messages
+// Contact Messages (ذخیره پویا در دیتابیس MySQL از طریق بک‌ند Node.js)
 export const getContactMessages = async () => {
-  return fetchWithFallback('/contactMessages', localDb.contactMessages || []);
+  try {
+    const res = await api.get('/api/contact');
+    if (res && res.data && Array.isArray(res.data)) {
+      return res.data;
+    }
+    return localDb.contactMessages || [];
+  } catch (error) {
+    console.warn('Could not fetch contact messages from backend, using local fallback:', error);
+    return localDb.contactMessages || [];
+  }
 };
 
 export const createContactMessage = async (data) => {
-  if (shouldSkipRemoteApi) {
-    console.info('Contact message saved locally (HTTPS tunnel active):', data);
-    return { success: true, localOnly: true, data };
-  }
   try {
-    const res = await api.post('/contactMessages', data);
+    const res = await api.post('/api/contact', data);
     return res.data;
   } catch (error) {
-    console.warn('API offline or error, logging contact message locally:', data, error);
-    return { success: true, localOnly: true, data };
+    console.error('Failed to submit contact message to MySQL backend:', error);
+    throw error;
   }
 };
 

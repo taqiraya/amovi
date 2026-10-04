@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Mail, MapPin, ArrowRight, ArrowLeft, MessageCircle, CheckCircle2 } from 'lucide-react';
 import { useLangStore } from '../../store/useLangStore';
-import { createContactMessage } from '../../services/api';
+import { createContactMessage, getSettings } from '../../services/api';
 import SEO from '../../components/SEO';
 import heroBg from '../../assets/images/hero-bg.webp';
 
@@ -17,6 +17,23 @@ export default function Contact() {
     subject: '',
     message: ''
   });
+
+  const [settings, setSettings] = useState({
+    email: 'info@amovitravel.com',
+    phone: '+93 70 633 8223',
+    address: 'چهارراهی انصاری، شهرنو، کابل، افغانستان',
+    locationUrl: 'https://www.google.com/maps/search/?api=1&query=Char+Rahi+Ansari+Shahr-e+Naw+Kabul+Afghanistan'
+  });
+
+  useEffect(() => {
+    let isMounted = true;
+    getSettings().then((data) => {
+      if (isMounted && data) {
+        setSettings(data);
+      }
+    });
+    return () => { isMounted = false; };
+  }, []);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
@@ -120,7 +137,7 @@ export default function Contact() {
               
               {/* ۱. کارت واتس‌اپ */}
               <a
-                href="https://wa.me/93706338223"
+                href={`https://wa.me/${(settings.phone || '93706338223').replace(/[^0-9]/g, '')}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group flex items-center gap-3.5 sm:gap-4 p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/80 shadow-sm hover:shadow-md hover:border-[#FCA311]/50 transition-all duration-200 hover:-translate-y-0.5"
@@ -133,7 +150,7 @@ export default function Contact() {
                     {t.whatsappTitle || 'WhatsApp'}
                   </h3>
                   <p className="text-xs sm:text-sm font-semibold text-slate-700 font-[Inter] tracking-wide truncate" dir="ltr">
-                    {t.whatsappNumber || '+93 70 633 8223'}
+                    {settings.phone || t.whatsappNumber || '+93 70 633 8223'}
                   </p>
                   <span className="text-[11px] sm:text-xs text-slate-400 block mt-0.5 font-normal truncate">
                     {t.whatsappAction || (isRtl ? 'در واتس‌اپ با ما گفتگو کنید' : 'Chat with us on WhatsApp')}
@@ -143,7 +160,7 @@ export default function Contact() {
 
               {/* ۲. کارت ایمیل */}
               <a
-                href="mailto:info@amovitravel.com"
+                href={`mailto:${settings.email || 'info@amovitravel.com'}`}
                 className="group flex items-center gap-3.5 sm:gap-4 p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/80 shadow-sm hover:shadow-md hover:border-[#FCA311]/50 transition-all duration-200 hover:-translate-y-0.5"
               >
                 <div className="w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-[#FCA311] flex items-center justify-center text-white shrink-0 shadow-md shadow-[#FCA311]/20 group-hover:scale-105 transition-transform duration-200">
@@ -154,7 +171,7 @@ export default function Contact() {
                     {t.emailTitle || 'Email'}
                   </h3>
                   <p className="text-xs sm:text-sm font-semibold text-slate-700 font-[Inter] truncate">
-                    {t.emailAddress || 'info@amovitravel.com'}
+                    {settings.email || t.emailAddress || 'info@amovitravel.com'}
                   </p>
                   <span className="text-[11px] sm:text-xs text-slate-400 block mt-0.5 font-normal truncate">
                     {t.emailAction || (isRtl ? 'برای ما ایمیل ارسال کنید' : 'Send us an email')}
@@ -178,7 +195,7 @@ export default function Contact() {
                     {t.officeTitle || (isRtl ? 'دفتر کابل' : 'Kabul Office')}
                   </h3>
                   <p className="text-xs sm:text-sm font-semibold text-slate-700 truncate">
-                    {t.officeLocation || (isRtl ? 'کابل، افغانستان' : 'Kabul, Afghanistan')}
+                    {settings.address || t.officeLocation || (isRtl ? 'کابل، افغانستان' : 'Kabul, Afghanistan')}
                   </p>
                   <span className="text-[11px] sm:text-xs text-slate-400 block mt-0.5 font-normal truncate">
                     {t.officeAction || (isRtl ? 'از دفتر ما بازدید کنید' : 'Visit our office')}
@@ -351,11 +368,11 @@ export default function Contact() {
             </h3>
             <div className="flex items-start gap-2 text-xs sm:text-sm text-slate-600 mb-4 sm:mb-5 leading-relaxed">
               <MapPin size={15} className="text-[#FCA311] shrink-0 mt-0.5" />
-              <span>{t.officeAddress || (isRtl ? 'چهارراهی انصاری، شهرنو، کابل، افغانستان' : 'Ansari Square, Shahr-e Naw, Kabul, Afghanistan')}</span>
+              <span>{settings.address || t.officeAddress || (isRtl ? 'چهارراهی انصاری، شهرنو، کابل، افغانستان' : 'Ansari Square, Shahr-e Naw, Kabul, Afghanistan')}</span>
             </div>
             
             <a
-              href="https://www.google.com/maps/search/?api=1&query=Char+Rahi+Ansari+Shahr-e+Naw+Kabul+Afghanistan"
+              href={settings.locationUrl || "https://www.google.com/maps/search/?api=1&query=Char+Rahi+Ansari+Shahr-e+Naw+Kabul+Afghanistan"}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-[#FCA311] hover:bg-amber-500 text-[#14213D] text-xs sm:text-sm font-bold py-2 sm:py-2.5 px-4 sm:px-5 rounded-full shadow-md transition-all duration-200 group"

@@ -20,10 +20,12 @@
     "express": "^4.21.2",
     "json-server": "^1.0.0-beta.15",
     "lucide-react": "^1.48.0",
+    "multer": "^2.4.0",
     "mysql2": "^3.12.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "react-router-dom": "^7.18.4",
+    "sharp": "^0.35.5",
     "zustand": "^5.0.15"
   },
   "devDependencies": {

@@ -4,6 +4,7 @@ import { useLangStore } from '../../store/useLangStore';
 import SEO from '../../components/SEO';
 import heroBg from '../../assets/images/hero-bg.webp';
 import { getAssetUrl } from '../../config/assets';
+import { getGalleryItems } from '../../services/api';
 
 // لیست جامع تصاویر منتخب و واقعی گالری سراسری افغانستان با تصاویر بهینه‌شده WebP
 const galleryDatabase = [
@@ -275,10 +276,33 @@ export default function Gallery() {
     { id: 'culture', label: isRtl ? 'فرهنگ و سنت‌ها' : 'Culture & Heritage' },
   ], [isRtl]);
 
+  const [dynamicPhotos, setDynamicPhotos] = useState([]);
+
+  useEffect(() => {
+    let isMounted = true;
+    getGalleryItems().then((items) => {
+      if (isMounted && Array.isArray(items)) {
+        setDynamicPhotos(items);
+      }
+    });
+    return () => { isMounted = false; };
+  }, []);
+
+  const allPhotos = useMemo(() => {
+    const formattedDynamic = dynamicPhotos.map((item) => ({
+      id: `dyn_${item.id}`,
+      category: item.category || 'nature',
+      image: item.image,
+      en: { title: item.title, location: item.location || 'Afghanistan', desc: item.title },
+      fa: { title: item.title, location: item.location || 'افغانستان', desc: item.title }
+    }));
+    return [...formattedDynamic, ...galleryDatabase];
+  }, [dynamicPhotos]);
+
   const filteredPhotos = useMemo(() => {
-    if (activeCategory === 'all') return galleryDatabase;
-    return galleryDatabase.filter((item) => item.category === activeCategory);
-  }, [activeCategory]);
+    if (activeCategory === 'all') return allPhotos;
+    return allPhotos.filter((item) => item.category === activeCategory);
+  }, [activeCategory, allPhotos]);
 
   const handleNext = (e) => {
     if (e) e.stopPropagation();

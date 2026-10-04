@@ -119,4 +119,90 @@ export const createContactMessage = async (data) => {
   }
 };
 
+export const updateMessageStatus = async (id, status) => {
+  try {
+    const res = await api.patch(`/api/contact/${id}/status`, { status });
+    return res.data;
+  } catch (error) {
+    console.error('Failed to update message status:', error);
+    throw error;
+  }
+};
+
+export const deleteContactMessage = async (id) => {
+  try {
+    const res = await api.delete(`/api/contact/${id}`);
+    return res.data;
+  } catch (error) {
+    console.error('Failed to delete contact message:', error);
+    throw error;
+  }
+};
+
+// Company / Contact Info Settings
+export const getSettings = async () => {
+  const fallback = {
+    email: 'info@amovitravel.com',
+    phone: '+93 70 633 8223',
+    address: 'چهارراهی انصاری، شهرنو، کابل، افغانستان',
+    locationUrl: 'https://www.google.com/maps/search/?api=1&query=Char+Rahi+Ansari+Shahr-e+Naw+Kabul+Afghanistan'
+  };
+  try {
+    const res = await api.get('/api/settings');
+    if (res && res.data && res.data.success && res.data.data) {
+      return res.data.data;
+    }
+    return fallback;
+  } catch (error) {
+    console.warn('Could not fetch settings from backend, using fallback:', error);
+    return fallback;
+  }
+};
+
+export const updateSettings = async (settingsData) => {
+  try {
+    const res = await api.post('/api/settings', settingsData);
+    return res.data;
+  } catch (error) {
+    console.error('Failed to update settings:', error);
+    throw error;
+  }
+};
+
+// Gallery Items
+export const getGalleryItems = async () => {
+  try {
+    const res = await api.get('/api/gallery');
+    if (res && res.data && Array.isArray(res.data)) {
+      return res.data;
+    }
+    return [];
+  } catch (error) {
+    console.warn('Could not fetch dynamic gallery items, using local fallback:', error);
+    return [];
+  }
+};
+
+export const uploadGalleryItem = async (formData) => {
+  try {
+    const res = await api.post('/api/gallery', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    });
+    return res.data;
+  } catch (error) {
+    console.error('Failed to upload gallery item:', error);
+    throw error;
+  }
+};
+
+export const deleteGalleryItem = async (id) => {
+  try {
+    const res = await api.delete(`/api/gallery/${id}`);
+    return res.data;
+  } catch (error) {
+    console.error('Failed to delete gallery item:', error);
+    throw error;
+  }
+};
+
 export default api;

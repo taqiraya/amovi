@@ -4,28 +4,72 @@ import {
   Users, 
   Mail, 
   MapPin, 
-  Compass, 
   Search, 
   Home, 
   Download,
-  LogOut
+  LogOut,
+  Eye,
+  Trash2,
+  CheckCircle2,
+  Image as ImageIcon,
+  Upload,
+  Menu,
+  X,
+  Settings,
+  Phone,
+  Link as LinkIcon,
+  AlertCircle
 } from 'lucide-react';
-import { getMasterRequests, getContactMessages } from '../../services/api';
+import { 
+  getMasterRequests, 
+  getContactMessages, 
+  updateMessageStatus, 
+  deleteContactMessage,
+  getSettings,
+  updateSettings,
+  getGalleryItems,
+  uploadGalleryItem,
+  deleteGalleryItem
+} from '../../services/api';
 import localDb from '../../../db.json';
 
 export default function AdminPanel() {
-  const [activeTab, setActiveTab] = useState('bookings');
+  const [activeTab, setActiveTab] = useState('messages'); // 'messages', 'settings', 'gallery', 'bookings'
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+  
+  // دیتای پیام‌ها و درخواست‌ها
+  const [contactMessages, setContactMessages] = useState([]);
   const [masterRequests, setMasterRequests] = useState(localDb.masterRequests || []);
-  const [contactMessages, setContactMessages] = useState(localDb.contactMessages || []);
-  const [provinces] = useState(localDb.provinces || []);
-  const [tours] = useState(localDb.tours || []);
-  const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedMessage, setSelectedMessage] = useState(null);
 
+  // دیتای تنظیمات تماس
+  const [settingsForm, setSettingsForm] = useState({
+    email: 'info@amovitravel.com',
+    phone: '+93 70 633 8223',
+    address: 'چهارراهی انصاری، شهرنو، کابل، افغانستان',
+    locationUrl: 'https://www.google.com/maps/search/?api=1&query=Char+Rahi+Ansari+Shahr-e+Naw+Kabul+Afghanistan'
+  });
+  const [settingsSaved, setSettingsSaved] = useState(false);
+  const [settingsLoading, setSettingsLoading] = useState(false);
+
+  // دیتای گالری
+  const [galleryList, setGalleryList] = useState([]);
+  const [galleryUploading, setGalleryUploading] = useState(false);
+  const [uploadSuccess, setUploadSuccess] = useState('');
+  const [uploadError, setUploadError] = useState('');
+  const [newImageForm, setNewImageForm] = useState({
+    title: '',
+    category: 'kabul',
+    location: 'کابل',
+    file: null
+  });
+
+  // وضعیت لاگین
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
     return Boolean(sessionStorage.getItem('amovi_admin_token'));
   });
-  const [loginForm, setLoginForm] = useState({ username: '', password: '' });
+  const [loginForm, setLoginForm] = useState({ username: 'admin', password: 'admin' });
   const [loginError, setLoginError] = useState('');
 
   const handleLogin = (e) => {
@@ -44,49 +88,141 @@ export default function AdminPanel() {
     setIsAuthenticated(false);
   };
 
-  useEffect(() => {
-    let isMounted = true;
-    getMasterRequests().then((data) => {
-      if (isMounted && Array.isArray(data) && data.length > 0) {
-        setMasterRequests(data);
-      }
-    });
-
+  const refreshAllData = () => {
     getContactMessages().then((data) => {
-      if (isMounted && Array.isArray(data)) {
-        setContactMessages(data);
-      }
+      if (Array.isArray(data)) setContactMessages(data);
     });
+    getSettings().then((data) => {
+      if (data) setSettingsForm(data);
+    });
+    getGalleryItems().then((items) => {
+      if (Array.isArray(items)) setGalleryList(items);
+    });
+    getMasterRequests().then((data) => {
+      if (Array.isArray(data)) setMasterRequests(data);
+    });
+  };
 
-    return () => {
-      isMounted = false;
-    };
-  }, []);
+  useEffect(() => {
+    if (isAuthenticated) {
+      refreshAllData();
+    }
+  }, [isAuthenticated]);
 
-  const totalDestinations = provinces.reduce((acc, p) => acc + (p.sub_destinations?.length || 0), 0);
+  // تغییر وضعیت پیام (خوانده شد / جدید)
+  const handleToggleStatus = async (id, currentStatus) => {
+    const nextStatus = currentStatus === 'unread' ? 'read' : 'unread';
+    try {
+      await updateMessageStatus(id, nextStatus);
+      setContactMessages((prev) => 
+        prev.map((m) => m.id === id ? { ...m, status: nextStatus } : m)
+      );
+      if (selectedMessage && selectedMessage.id === id) {
+        setSelectedMessage({ ...selectedMessage, status: nextStatus });
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
-  const filteredRequests = masterRequests.filter((req) => {
-    const q = searchTerm.toLowerCase();
-    return (
-      (req.fullName || '').toLowerCase().includes(q) ||
-      (req.email || '').toLowerCase().includes(q) ||
-      (req.packageOrService || '').toLowerCase().includes(q) ||
-      (req.phoneWhatsApp || '').toLowerCase().includes(q)
-    );
-  });
+  // حذف پیام
+  const handleDeleteMessage = async (id) => {
+    if (!window.confirm('آیا از حذف این پیام اطمینان دارید؟')) return;
+    try {
+      await deleteContactMessage(id);
+      setContactMessages((prev) => prev.filter((m) => m.id !== id));
+      if (selectedMessage && selectedMessage.id === id) {
+        setSelectedMessage(null);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
+  // ذخیره اطلاعات تماس
+  const handleSaveSettings = async (e) => {
+    e.preventDefault();
+    setSettingsLoading(true);
+    try {
+      await updateSettings(settingsForm);
+      setSettingsSaved(true);
+      setTimeout(() => setSettingsSaved(false), 4000);
+    } catch (err) {
+      console.error('Error saving settings:', err);
+      alert('خطا در ذخیره تنظیمات');
+    } finally {
+      setSettingsLoading(false);
+    }
+  };
+
+  // آپلود عکس به گالری
+  const handleUploadImage = async (e) => {
+    e.preventDefault();
+    if (!newImageForm.file) {
+      setUploadError('لطفاً یک فایل تصویر انتخاب فرمایید.');
+      return;
+    }
+    setGalleryUploading(true);
+    setUploadError('');
+    setUploadSuccess('');
+
+    const formData = new FormData();
+    formData.append('image', newImageForm.file);
+    formData.append('title', newImageForm.title.trim() || 'تصویر گالری آمووی');
+    formData.append('category', newImageForm.category);
+    formData.append('location', newImageForm.location.trim() || 'افغانستان');
+
+    try {
+      const res = await uploadGalleryItem(formData);
+      if (res.success && res.data) {
+        setGalleryList((prev) => [res.data, ...prev]);
+        setUploadSuccess(`تصویر با موفقیت به WebP تبدیل و فشرده شد (${res.data.fileSizeKB || 0} کیلوبایت).`);
+        setNewImageForm({ title: '', category: 'kabul', location: 'کابل', file: null });
+        // پاک کردن ورودی فایل
+        const fileInput = document.getElementById('galleryFileInput');
+        if (fileInput) fileInput.value = '';
+        setTimeout(() => setUploadSuccess(''), 5000);
+      }
+    } catch (err) {
+      console.error('Upload error:', err);
+      setUploadError('خطا در تبدیل یا آپلود تصویر. لطفاً دوباره تلاش نمایید.');
+    } finally {
+      setGalleryUploading(false);
+    }
+  };
+
+  // حذف عکس از گالری
+  const handleDeleteGallery = async (id) => {
+    if (!window.confirm('آیا از حذف این تصویر از گالری اطمینان دارید؟')) return;
+    try {
+      await deleteGalleryItem(id);
+      setGalleryList((prev) => prev.filter((img) => img.id !== id));
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  // فیلتر جستجوی پیام‌ها
   const filteredMessages = contactMessages.filter((msg) => {
     const q = searchTerm.toLowerCase();
     return (
       (msg.fullName || '').toLowerCase().includes(q) ||
       (msg.email || '').toLowerCase().includes(q) ||
       (msg.subject || '').toLowerCase().includes(q) ||
-      (msg.message || '').toLowerCase().includes(q)
+      (msg.message || '').toLowerCase().includes(q) ||
+      (msg.phoneWhatsApp || '').toLowerCase().includes(q)
     );
   });
 
+  const unreadCount = contactMessages.filter((m) => m.status === 'unread').length;
+
   const exportData = () => {
-    const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify({ masterRequests, contactMessages }, null, 2));
+    const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify({ 
+      contactMessages, 
+      settings: settingsForm, 
+      gallery: galleryList,
+      masterRequests 
+    }, null, 2));
     const downloadAnchor = document.createElement('a');
     downloadAnchor.setAttribute('href', dataStr);
     downloadAnchor.setAttribute('download', `amovi_admin_export_${new Date().toISOString().slice(0, 10)}.json`);
@@ -95,417 +231,735 @@ export default function AdminPanel() {
     downloadAnchor.remove();
   };
 
+  // صفحه لاگین (در رنگ روشن و لوکس)
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-[#0d1527] via-[#14213D] to-[#0a101f] flex items-center justify-center p-4 text-white font-[Inter]" dir="rtl">
-        <div className="w-full max-w-md bg-[#14213D]/95 backdrop-blur-xl border border-white/10 rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
+      <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4 text-slate-800 font-[Inter]" dir="rtl">
+        <div className="w-full max-w-md bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-xl relative overflow-hidden">
           <div className="text-center mb-8">
-            <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-[#0d1527] border border-[#FCA311]/40 p-2.5 shadow-xl flex items-center justify-center">
+            <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-white border border-amber-300 p-2.5 shadow-md flex items-center justify-center">
               <img src="/logo.png" alt="Amovi Travel" className="w-full h-full object-contain" />
             </div>
-            <h1 className="text-2xl font-black text-white">Amovi Travel</h1>
+            <h1 className="text-2xl font-black text-[#14213D]">Amovi Travel</h1>
             <p className="text-xs uppercase tracking-[0.2em] text-[#FCA311] font-bold mt-1">Management Portal</p>
-            <p className="text-xs text-slate-300 mt-2 font-medium">ورود به پنل مدیریت پیام‌ها و رزرواسیون‌ها</p>
+            <p className="text-xs text-slate-500 mt-2 font-medium">ورود به پنل مدیریت پیام‌ها، اطلاعات و گالری</p>
           </div>
 
           <form onSubmit={handleLogin} className="space-y-4">
             {loginError && (
-              <div className="p-3 rounded-xl text-xs font-bold text-center bg-rose-500/20 text-rose-300 border border-rose-500/30">
+              <div className="p-3 rounded-xl text-xs font-bold text-center bg-rose-50 text-rose-700 border border-rose-200">
                 {loginError}
               </div>
             )}
 
             <div>
-              <label className="block text-xs font-bold text-slate-300 mb-1.5">نام کاربری</label>
+              <label className="block text-xs font-bold text-slate-700 mb-1.5">نام کاربری</label>
               <input
                 type="text"
                 required
                 value={loginForm.username}
                 onChange={(e) => setLoginForm({ ...loginForm, username: e.target.value })}
                 placeholder="admin"
-                className="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-[#FCA311]"
+                className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-[#FCA311] focus:bg-white"
                 dir="ltr"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-slate-300 mb-1.5">رمز عبور</label>
+              <label className="block text-xs font-bold text-slate-700 mb-1.5">رمز عبور</label>
               <input
                 type="password"
                 required
                 value={loginForm.password}
                 onChange={(e) => setLoginForm({ ...loginForm, password: e.target.value })}
                 placeholder="admin"
-                className="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-[#FCA311]"
+                className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-[#FCA311] focus:bg-white"
                 dir="ltr"
               />
             </div>
 
             <button
               type="submit"
-              className="w-full py-3.5 px-4 rounded-xl bg-[#FCA311] hover:bg-amber-500 text-[#14213D] font-extrabold text-sm tracking-wider uppercase transition-all shadow-lg hover:scale-[1.02] cursor-pointer mt-2"
+              className="w-full py-3.5 px-4 rounded-xl bg-[#FCA311] hover:bg-amber-500 text-[#14213D] font-extrabold text-sm tracking-wider uppercase transition-all shadow-md hover:scale-[1.01] cursor-pointer mt-2"
             >
-              ورود به سیستم
+              ورود به پنل مدیریت
             </button>
           </form>
 
-          <div className="mt-6 pt-4 border-t border-white/10 text-center text-[11px] text-slate-400">
-            نام کاربری: <span className="font-mono text-[#FCA311]">admin</span> | رمز عبور: <span className="font-mono text-[#FCA311]">admin</span>
+          <div className="mt-6 pt-4 border-t border-slate-100 text-center text-[11px] text-slate-500">
+            نام کاربری: <span className="font-mono font-bold text-[#14213D]">admin</span> | رمز عبور: <span className="font-mono font-bold text-[#14213D]">admin</span>
           </div>
         </div>
       </div>
     );
   }
 
+  // پنل مدیریت با تم روشن، سایدبار و طراحی کاملاً ریسپانسیو
   return (
-    <div className="min-h-screen bg-[#0F172A] text-slate-100 font-sans flex flex-col w-full overflow-x-hidden">
-      {/* Top Admin Navbar */}
-      <header className="bg-[#1E293B] border-b border-slate-700/80 px-4 sm:px-6 py-3.5 sm:py-4 flex flex-wrap items-center justify-between gap-4 sticky top-0 z-40">
-        <div className="flex items-center gap-3">
-          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#FCA311] flex items-center justify-center text-[#14213D] font-black text-lg sm:text-xl shadow-md shrink-0">
-            A
+    <div className="min-h-screen bg-[#F8FAFC] text-slate-800 font-[Inter] flex" dir="rtl">
+      
+      {/* اوورلی سایدبار در موبایل */}
+      {mobileSidebarOpen && (
+        <div 
+          onClick={() => setMobileSidebarOpen(false)}
+          className="fixed inset-0 z-40 bg-slate-900/40 backdrop-blur-xs lg:hidden"
+        />
+      )}
+
+      {/* سایدبار ناوبری مدرن */}
+      <aside className={`fixed lg:static top-0 right-0 bottom-0 z-50 w-72 bg-white border-l border-slate-200 flex flex-col justify-between transition-transform duration-300 ease-in-out ${
+        mobileSidebarOpen ? 'translate-x-0 shadow-2xl' : 'translate-x-full lg:translate-x-0'
+      }`}>
+        <div>
+          {/* هدر سایدبار با لوگو */}
+          <div className="p-5 border-b border-slate-100 flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-slate-50 border border-amber-300 p-1.5 shadow-xs flex items-center justify-center shrink-0">
+                <img src="/logo.png" alt="Amovi Travel" className="w-full h-full object-contain" />
+              </div>
+              <div>
+                <span className="block text-base font-black text-[#14213D]">Amovi Travel</span>
+                <span className="block text-[10px] text-[#FCA311] font-bold uppercase tracking-wider">Control Hub</span>
+              </div>
+            </div>
+            <button 
+              onClick={() => setMobileSidebarOpen(false)}
+              className="lg:hidden p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100"
+            >
+              <X size={18} />
+            </button>
           </div>
-          <div>
-            <h1 className="text-base sm:text-lg font-bold text-white tracking-wide flex items-center gap-2">
-              Amovi Travel Control Hub
-              <span className="text-[10px] uppercase px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-bold border border-emerald-500/30">
-                Live Admin
+
+          {/* آیتم‌های منو */}
+          <nav className="p-4 space-y-1.5">
+            <button
+              onClick={() => { setActiveTab('messages'); setMobileSidebarOpen(false); }}
+              className={`w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-xs font-bold transition cursor-pointer ${
+                activeTab === 'messages'
+                  ? 'bg-[#14213D] text-white shadow-md'
+                  : 'text-slate-600 hover:bg-slate-100 hover:text-[#14213D]'
+              }`}
+            >
+              <div className="flex items-center gap-2.5">
+                <Mail size={16} className={activeTab === 'messages' ? 'text-[#FCA311]' : 'text-slate-400'} />
+                <span>پیام‌های تماس با ما</span>
+              </div>
+              {unreadCount > 0 && (
+                <span className={`px-2 py-0.5 rounded-full text-[10px] font-black ${
+                  activeTab === 'messages' ? 'bg-[#FCA311] text-[#14213D]' : 'bg-amber-100 text-amber-800'
+                }`}>
+                  {unreadCount}
+                </span>
+              )}
+            </button>
+
+            <button
+              onClick={() => { setActiveTab('settings'); setMobileSidebarOpen(false); }}
+              className={`w-full flex items-center gap-2.5 px-3.5 py-3 rounded-xl text-xs font-bold transition cursor-pointer ${
+                activeTab === 'settings'
+                  ? 'bg-[#14213D] text-white shadow-md'
+                  : 'text-slate-600 hover:bg-slate-100 hover:text-[#14213D]'
+              }`}
+            >
+              <Settings size={16} className={activeTab === 'settings' ? 'text-[#FCA311]' : 'text-slate-400'} />
+              <span>اطلاعات و آدرس تماس</span>
+            </button>
+
+            <button
+              onClick={() => { setActiveTab('gallery'); setMobileSidebarOpen(false); }}
+              className={`w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-xs font-bold transition cursor-pointer ${
+                activeTab === 'gallery'
+                  ? 'bg-[#14213D] text-white shadow-md'
+                  : 'text-slate-600 hover:bg-slate-100 hover:text-[#14213D]'
+              }`}
+            >
+              <div className="flex items-center gap-2.5">
+                <ImageIcon size={16} className={activeTab === 'gallery' ? 'text-[#FCA311]' : 'text-slate-400'} />
+                <span>مدیریت گالری تصاویر</span>
+              </div>
+              <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
+                activeTab === 'gallery' ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-600'
+              }`}>
+                {galleryList.length}
               </span>
-            </h1>
-            <p className="text-[11px] sm:text-xs text-slate-400">Master Operations & Communications Management</p>
-          </div>
+            </button>
+
+            <button
+              onClick={() => { setActiveTab('bookings'); setMobileSidebarOpen(false); }}
+              className={`w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-xs font-bold transition cursor-pointer ${
+                activeTab === 'bookings'
+                  ? 'bg-[#14213D] text-white shadow-md'
+                  : 'text-slate-600 hover:bg-slate-100 hover:text-[#14213D]'
+              }`}
+            >
+              <div className="flex items-center gap-2.5">
+                <Users size={16} className={activeTab === 'bookings' ? 'text-[#FCA311]' : 'text-slate-400'} />
+                <span>درخواست‌های رزرواسیون</span>
+              </div>
+              <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
+                activeTab === 'bookings' ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-600'
+              }`}>
+                {masterRequests.length}
+              </span>
+            </button>
+          </nav>
         </div>
 
-        <div className="flex items-center gap-2.5 sm:gap-3">
-          <button
-            onClick={exportData}
-            className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-300 border border-slate-700 transition cursor-pointer"
-          >
-            <Download size={14} />
-            <span>Export JSON</span>
-          </button>
+        {/* پایین سایدبار */}
+        <div className="p-4 border-t border-slate-100 space-y-2">
           <Link
             to="/"
-            className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl bg-[#FCA311] hover:bg-amber-500 text-xs font-bold text-[#14213D] transition shadow-md"
+            className="w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-[#14213D] text-xs font-bold transition"
           >
             <Home size={14} />
-            <span>Return to Website</span>
+            <span>مشاهده وب‌سایت</span>
           </Link>
           <button
             onClick={handleLogout}
-            className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-xl bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 border border-rose-500/30 text-xs font-bold transition cursor-pointer"
+            className="w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 text-xs font-bold transition cursor-pointer"
           >
             <LogOut size={14} />
-            <span>خروج</span>
+            <span>خروج از حساب</span>
           </button>
         </div>
-      </header>
+      </aside>
 
-      {/* Main Admin Content */}
-      <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 space-y-5 sm:space-y-6">
-        {/* KPI Summary Cards */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-          <div className="bg-[#1E293B] border border-slate-700/60 rounded-2xl p-5 shadow-sm">
-            <div className="flex items-center justify-between text-slate-400 mb-2">
-              <span className="text-xs font-semibold uppercase tracking-wider">Bookings & Inquiries</span>
-              <Users size={18} className="text-[#FCA311]" />
-            </div>
-            <div className="text-2xl font-black text-white">{masterRequests.length}</div>
-            <div className="text-[11px] text-slate-400 mt-1">Direct travel requests</div>
-          </div>
-
-          <div className="bg-[#1E293B] border border-slate-700/60 rounded-2xl p-5 shadow-sm">
-            <div className="flex items-center justify-between text-slate-400 mb-2">
-              <span className="text-xs font-semibold uppercase tracking-wider">Contact Messages</span>
-              <Mail size={18} className="text-sky-400" />
-            </div>
-            <div className="text-2xl font-black text-white">{contactMessages.length}</div>
-            <div className="text-[11px] text-slate-400 mt-1">General inquiries</div>
-          </div>
-
-          <div className="bg-[#1E293B] border border-slate-700/60 rounded-2xl p-5 shadow-sm">
-            <div className="flex items-center justify-between text-slate-400 mb-2">
-              <span className="text-xs font-semibold uppercase tracking-wider">Active Provinces</span>
-              <MapPin size={18} className="text-emerald-400" />
-            </div>
-            <div className="text-2xl font-black text-white">{provinces.length}</div>
-            <div className="text-[11px] text-slate-400 mt-1">{totalDestinations} documented places</div>
-          </div>
-
-          <div className="bg-[#1E293B] border border-slate-700/60 rounded-2xl p-5 shadow-sm">
-            <div className="flex items-center justify-between text-slate-400 mb-2">
-              <span className="text-xs font-semibold uppercase tracking-wider">Tour Packages</span>
-              <Compass size={18} className="text-amber-400" />
-            </div>
-            <div className="text-2xl font-black text-white">{tours.length}</div>
-            <div className="text-[11px] text-slate-400 mt-1">Curated expeditions</div>
-          </div>
-        </div>
-
-        {/* Tab Controls & Search */}
-        <div className="flex flex-wrap items-center justify-between gap-4 bg-[#1E293B] p-3 rounded-2xl border border-slate-700/60">
-          <div className="flex items-center gap-2">
+      {/* بخش محتوای اصلی */}
+      <div className="flex-1 flex flex-col min-w-0">
+        
+        {/* نوار بالای صفحه (Header) */}
+        <header className="bg-white border-b border-slate-200 px-4 sm:px-8 py-3.5 flex items-center justify-between sticky top-0 z-30 shadow-xs">
+          <div className="flex items-center gap-3">
             <button
-              onClick={() => { setActiveTab('bookings'); setSelectedItem(null); }}
-              className={`px-4 py-2 rounded-xl text-xs font-bold transition cursor-pointer ${
-                activeTab === 'bookings'
-                  ? 'bg-[#FCA311] text-[#14213D] shadow-md'
-                  : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
-              }`}
+              onClick={() => setMobileSidebarOpen(true)}
+              className="lg:hidden p-2 rounded-xl text-slate-600 hover:bg-slate-100"
             >
-              Master Requests ({masterRequests.length})
+              <Menu size={20} />
             </button>
+            <div>
+              <h2 className="text-base sm:text-lg font-black text-[#14213D]">
+                {activeTab === 'messages' && 'پیام‌های دریافتی فرم تماس با ما'}
+                {activeTab === 'settings' && 'تنظیمات و اطلاعات تماس شرکت'}
+                {activeTab === 'gallery' && 'مدیریت و آپلود تصاویر گالری (WebP)'}
+                {activeTab === 'bookings' && 'درخواست‌های رزرواسیون تورها'}
+              </h2>
+              <p className="text-[11px] text-slate-500 hidden sm:block">سیستم جامع کنترل و مدیریت عملیات آمووی ترول</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2 sm:gap-3">
             <button
-              onClick={() => { setActiveTab('messages'); setSelectedItem(null); }}
-              className={`px-4 py-2 rounded-xl text-xs font-bold transition cursor-pointer ${
-                activeTab === 'messages'
-                  ? 'bg-[#FCA311] text-[#14213D] shadow-md'
-                  : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
-              }`}
+              onClick={exportData}
+              className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition cursor-pointer"
             >
-              Contact Messages ({contactMessages.length})
-            </button>
-            <button
-              onClick={() => { setActiveTab('provinces'); setSelectedItem(null); }}
-              className={`px-4 py-2 rounded-xl text-xs font-bold transition cursor-pointer ${
-                activeTab === 'provinces'
-                  ? 'bg-[#FCA311] text-[#14213D] shadow-md'
-                  : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
-              }`}
-            >
-              Provinces & Sights ({provinces.length})
+              <Download size={14} />
+              <span className="hidden sm:inline">خروجی JSON</span>
             </button>
           </div>
+        </header>
 
-          <div className="relative min-w-[240px]">
-            <Search size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
-            <input
-              type="text"
-              placeholder="Search records..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#FCA311]"
-            />
-          </div>
-        </div>
-
-        {/* Tab 1: Bookings / Master Requests */}
-        {activeTab === 'bookings' && (
-          <div className="bg-[#1E293B] border border-slate-700/60 rounded-2xl overflow-hidden shadow-sm">
-            <div className="p-4 border-b border-slate-700/60 flex items-center justify-between">
-              <h3 className="text-sm font-bold text-white">Client Booking & Itinerary Inquiries</h3>
-              <span className="text-xs text-slate-400">{filteredRequests.length} results</span>
-            </div>
-
-            {filteredRequests.length === 0 ? (
-              <div className="p-12 text-center text-slate-400 text-xs">
-                No booking requests match your search criteria.
+        {/* محتوای تب‌ها */}
+        <main className="p-4 sm:p-8 flex-1 space-y-6 max-w-7xl w-full mx-auto">
+          
+          {/* ========================================================
+              تب ۱: پیام‌های تماس با ما (جدول با دکمه مشاهده کامل پیام)
+          ======================================================== */}
+          {activeTab === 'messages' && (
+            <div className="space-y-6">
+              {/* کارت‌های خلاصه آمار */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
+                  <span className="text-xs text-slate-500 font-bold block mb-1">کل پیام‌های دریافتی</span>
+                  <span className="text-2xl sm:text-3xl font-black text-[#14213D] font-mono">{contactMessages.length}</span>
+                </div>
+                <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
+                  <span className="text-xs text-amber-600 font-bold block mb-1">پیام‌های جدید (نخوانده)</span>
+                  <span className="text-2xl sm:text-3xl font-black text-[#FCA311] font-mono">{unreadCount}</span>
+                </div>
+                <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
+                  <span className="text-xs text-emerald-600 font-bold block mb-1">پیام‌های بررسی‌شده</span>
+                  <span className="text-2xl sm:text-3xl font-black text-emerald-600 font-mono">{contactMessages.length - unreadCount}</span>
+                </div>
               </div>
-            ) : (
-              <div className="overflow-x-auto">
-                <table className="w-full text-left text-xs text-slate-300">
-                  <thead className="bg-slate-900/60 text-slate-400 uppercase font-semibold text-[10px] tracking-wider border-b border-slate-700/60">
-                    <tr>
-                      <th className="py-3 px-4">Client Name</th>
-                      <th className="py-3 px-4">Contact Info</th>
-                      <th className="py-3 px-4">Package / Service</th>
-                      <th className="py-3 px-4">Date / Travelers</th>
-                      <th className="py-3 px-4">Submitted At</th>
-                      <th className="py-3 px-4 text-right">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-slate-800">
-                    {filteredRequests.map((req, idx) => (
-                      <tr key={req.id || idx} className="hover:bg-slate-800/50 transition">
-                        <td className="py-3.5 px-4 font-bold text-white">
-                          {req.fullName || 'Anonymous Traveler'}
-                        </td>
-                        <td className="py-3.5 px-4">
-                          <div className="text-slate-300">{req.email || '-'}</div>
-                          <div className="text-slate-400 text-[11px] font-mono">{req.phoneWhatsApp || '-'}</div>
-                        </td>
-                        <td className="py-3.5 px-4 font-medium text-amber-400">
-                          {req.packageOrService || 'Custom Journey'}
-                        </td>
-                        <td className="py-3.5 px-4 text-slate-300">
-                          <div>{req.preferredDate || 'Flexible'}</div>
-                          {req.travelers && <div className="text-[11px] text-slate-400">{req.travelers} Guests</div>}
-                        </td>
-                        <td className="py-3.5 px-4 text-slate-400 text-[11px]">
-                          {req.submittedAt ? new Date(req.submittedAt).toLocaleDateString() : 'Recent'}
-                        </td>
-                        <td className="py-3.5 px-4 text-right">
-                          <button
-                            onClick={() => setSelectedItem(req)}
-                            className="px-3 py-1 rounded-lg bg-[#FCA311]/15 text-[#FCA311] hover:bg-[#FCA311] hover:text-[#14213D] font-bold text-[11px] transition cursor-pointer"
-                          >
-                            View Details
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
-          </div>
-        )}
 
-        {/* Tab 2: Contact Messages */}
-        {activeTab === 'messages' && (
-          <div className="bg-[#1E293B] border border-slate-700/60 rounded-2xl overflow-hidden shadow-sm">
-            <div className="p-4 border-b border-slate-700/60 flex items-center justify-between">
-              <h3 className="text-sm font-bold text-white">Website Contact Messages</h3>
-              <span className="text-xs text-slate-400">{filteredMessages.length} results</span>
-            </div>
-
-            {filteredMessages.length === 0 ? (
-              <div className="p-12 text-center text-slate-400 text-xs">
-                No contact messages found.
-              </div>
-            ) : (
-              <div className="overflow-x-auto">
-                <table className="w-full text-left text-xs text-slate-300">
-                  <thead className="bg-slate-900/60 text-slate-400 uppercase font-semibold text-[10px] tracking-wider border-b border-slate-700/60">
-                    <tr>
-                      <th className="py-3 px-4">Sender Name</th>
-                      <th className="py-3 px-4">Email & Phone</th>
-                      <th className="py-3 px-4">Subject</th>
-                      <th className="py-3 px-4">Message Snippet</th>
-                      <th className="py-3 px-4 text-right">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-slate-800">
-                    {filteredMessages.map((msg, idx) => (
-                      <tr key={msg.id || idx} className="hover:bg-slate-800/50 transition">
-                        <td className="py-3.5 px-4 font-bold text-white">
-                          {msg.fullName || 'Visitor'}
-                        </td>
-                        <td className="py-3.5 px-4">
-                          <div>{msg.email || '-'}</div>
-                          <div className="text-slate-400 text-[11px] font-mono">{msg.phoneWhatsApp || '-'}</div>
-                        </td>
-                        <td className="py-3.5 px-4 font-medium text-sky-400">
-                          {msg.subject || 'General Inquiry'}
-                        </td>
-                        <td className="py-3.5 px-4 text-slate-400 line-clamp-1 max-w-xs">
-                          {msg.message || '-'}
-                        </td>
-                        <td className="py-3.5 px-4 text-right">
-                          <button
-                            onClick={() => setSelectedItem(msg)}
-                            className="px-3 py-1 rounded-lg bg-sky-500/15 text-sky-400 hover:bg-sky-400 hover:text-[#14213D] font-bold text-[11px] transition cursor-pointer"
-                          >
-                            Read Full
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* Tab 3: Provinces & Sights Summary */}
-        {activeTab === 'provinces' && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {provinces.map((prov) => (
-              <div key={prov.slug} className="bg-[#1E293B] border border-slate-700/60 rounded-2xl p-5 flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-xs uppercase font-mono text-amber-400">{prov.slug}</span>
-                    <span className="px-2 py-0.5 rounded-full bg-slate-800 text-[11px] text-slate-300 font-bold">
-                      {prov.sub_destinations?.length || 0} places
-                    </span>
+              {/* کادر جدول و جستجو */}
+              <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
+                <div className="p-4 sm:p-5 border-b border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-3">
+                  <div className="relative w-full sm:w-80">
+                    <Search size={14} className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                    <input
+                      type="text"
+                      placeholder="جستجو در نام، ایمیل، شماره، پیام..."
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      className="w-full pr-9 pl-4 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#FCA311] focus:bg-white"
+                    />
                   </div>
-                  <h4 className="text-base font-bold text-white">{prov.en?.name} / {prov.fa?.name}</h4>
-                  <p className="text-xs text-slate-400 mt-1 line-clamp-2">{prov.en?.intro || prov.fa?.intro}</p>
+                  <span className="text-xs text-slate-500 font-medium">{filteredMessages.length} پیام یافت شد</span>
                 </div>
 
-                <div className="mt-4 pt-3 border-t border-slate-800 flex items-center justify-between text-xs">
-                  <span className="text-slate-500">{prov.gallery?.length || 0} gallery photos</span>
-                  <Link
-                    to={`/destinations/${prov.slug}`}
-                    target="_blank"
-                    className="text-[#FCA311] hover:underline font-bold"
-                  >
-                    View Live Page &rarr;
-                  </Link>
+                {filteredMessages.length === 0 ? (
+                  <div className="p-12 text-center text-slate-400 text-xs font-medium">
+                    هیچ پیامی مطابق با جستجوی شما یافت نشد.
+                  </div>
+                ) : (
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-right text-xs text-slate-700">
+                      <thead className="bg-slate-50 text-slate-600 font-bold text-[11px] border-b border-slate-200">
+                        <tr>
+                          <th className="py-3.5 px-4">شناسه</th>
+                          <th className="py-3.5 px-4">نام فرستنده</th>
+                          <th className="py-3.5 px-4">اطلاعات تماس</th>
+                          <th className="py-3.5 px-4">موضوع</th>
+                          <th className="py-3.5 px-4">خلاصه پیام</th>
+                          <th className="py-3.5 px-4">وضعیت</th>
+                          <th className="py-3.5 px-4">تاریخ ارسال</th>
+                          <th className="py-3.5 px-4 text-center">عملیات</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-slate-100">
+                        {filteredMessages.map((msg) => {
+                          const isUnread = msg.status === 'unread';
+                          const dateStr = msg.created_at || msg.submittedAt 
+                            ? new Date(msg.created_at || msg.submittedAt).toLocaleDateString('fa-IR') 
+                            : '-';
+                          return (
+                            <tr key={msg.id} className={isUnread ? 'bg-amber-50/40 hover:bg-amber-50/70 transition' : 'hover:bg-slate-50 transition'}>
+                              <td className="py-3 px-4 font-mono font-bold text-slate-400">#{msg.id}</td>
+                              <td className="py-3 px-4 font-bold text-slate-900">{msg.fullName || '-'}</td>
+                              <td className="py-3 px-4 font-mono text-[11px]">
+                                <div>{msg.email || '-'}</div>
+                                {msg.phoneWhatsApp && (
+                                  <div className="text-amber-600 font-bold mt-0.5">{msg.phoneWhatsApp}</div>
+                                )}
+                              </td>
+                              <td className="py-3 px-4 font-medium text-slate-800">{msg.subject || '-'}</td>
+                              <td className="py-3 px-4 max-w-xs truncate text-slate-600" title={msg.message}>
+                                {msg.message || '-'}
+                              </td>
+                              <td className="py-3 px-4">
+                                <span className={`inline-flex px-2 py-0.5 rounded text-[10px] font-bold ${
+                                  isUnread 
+                                    ? 'bg-amber-100 text-amber-800 border border-amber-200' 
+                                    : 'bg-emerald-100 text-emerald-800 border border-emerald-200'
+                                }`}>
+                                  {isUnread ? 'جدید' : 'بررسی‌شده'}
+                                </span>
+                              </td>
+                              <td className="py-3 px-4 font-mono text-slate-500 text-[11px]">{dateStr}</td>
+                              <td className="py-3 px-4 text-center">
+                                <div className="flex items-center justify-center gap-1.5">
+                                  {/* دکمه اختصاصی مشاهده کامل پیام */}
+                                  <button
+                                    onClick={() => setSelectedMessage(msg)}
+                                    className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-[#14213D] hover:bg-[#1E293B] text-white text-[11px] font-bold transition shadow-xs cursor-pointer"
+                                  >
+                                    <Eye size={12} />
+                                    <span>مشاهده کامل پیام</span>
+                                  </button>
+                                  {/* دکمه حذف */}
+                                  <button
+                                    onClick={() => handleDeleteMessage(msg.id)}
+                                    className="p-1.5 rounded-lg text-rose-600 hover:bg-rose-50 transition cursor-pointer"
+                                    title="حذف پیام"
+                                  >
+                                    <Trash2 size={14} />
+                                  </button>
+                                </div>
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* ========================================================
+              تب ۲: ویرایش اطلاعات و آدرس تماس شرکت (ایمیل، آدرس، نمبر، لوکیشن)
+          ======================================================== */}
+          {activeTab === 'settings' && (
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+              <div className="lg:col-span-8 bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-xs space-y-6">
+                <div>
+                  <h3 className="text-base sm:text-lg font-black text-[#14213D]">تنظیمات اطلاعات تماس دفتر آمووی ترول</h3>
+                  <p className="text-xs text-slate-500 mt-1">
+                    این اطلاعات به طور خودکار در سراسر وب‌سایت (صفحه تماس با ما، فوتر و نقشه) نمایش داده می‌شوند.
+                  </p>
+                </div>
+
+                {settingsSaved && (
+                  <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 flex items-center gap-2 text-xs font-bold">
+                    <CheckCircle2 size={16} className="text-emerald-600 shrink-0" />
+                    <span>اطلاعات تماس با موفقیت در دیتابیس MySQL ذخیره گردید و در وب‌سایت اعمال شد.</span>
+                  </div>
+                )}
+
+                <form onSubmit={handleSaveSettings} className="space-y-4">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1.5 flex items-center gap-1.5">
+                      <Mail size={14} className="text-[#FCA311]" />
+                      <span>آدرس ایمیل شرکت (Email)</span>
+                    </label>
+                    <input
+                      type="email"
+                      required
+                      value={settingsForm.email}
+                      onChange={(e) => setSettingsForm({ ...settingsForm, email: e.target.value })}
+                      placeholder="info@amovitravel.com"
+                      className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 focus:outline-none focus:border-[#FCA311] focus:bg-white font-mono"
+                      dir="ltr"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1.5 flex items-center gap-1.5">
+                      <Phone size={14} className="text-[#FCA311]" />
+                      <span>شماره تماس و واتس‌اپ (Phone / WhatsApp)</span>
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={settingsForm.phone}
+                      onChange={(e) => setSettingsForm({ ...settingsForm, phone: e.target.value })}
+                      placeholder="+93 70 633 8223"
+                      className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 focus:outline-none focus:border-[#FCA311] focus:bg-white font-mono"
+                      dir="ltr"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1.5 flex items-center gap-1.5">
+                      <MapPin size={14} className="text-[#FCA311]" />
+                      <span>آدرس فیزیکی دفتر (Office Address)</span>
+                    </label>
+                    <textarea
+                      rows={3}
+                      required
+                      value={settingsForm.address}
+                      onChange={(e) => setSettingsForm({ ...settingsForm, address: e.target.value })}
+                      placeholder="چهارراهی انصاری، شهرنو، کابل، افغانستان"
+                      className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 focus:outline-none focus:border-[#FCA311] focus:bg-white resize-none"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1.5 flex items-center gap-1.5">
+                      <LinkIcon size={14} className="text-[#FCA311]" />
+                      <span>لینک لوکیشن نقشه گوگل (Google Maps URL)</span>
+                    </label>
+                    <input
+                      type="url"
+                      value={settingsForm.locationUrl}
+                      onChange={(e) => setSettingsForm({ ...settingsForm, locationUrl: e.target.value })}
+                      placeholder="https://www.google.com/maps/search/?api=1&query=..."
+                      className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 focus:outline-none focus:border-[#FCA311] focus:bg-white font-mono"
+                      dir="ltr"
+                    />
+                  </div>
+
+                  <div className="pt-2">
+                    <button
+                      type="submit"
+                      disabled={settingsLoading}
+                      className="px-6 py-3 rounded-xl bg-[#FCA311] hover:bg-amber-500 text-[#14213D] font-extrabold text-xs transition shadow-md cursor-pointer disabled:opacity-50"
+                    >
+                      {settingsLoading ? 'در حال ذخیره‌سازی...' : 'ذخیره تغییرات در دیتابیس'}
+                    </button>
+                  </div>
+                </form>
+              </div>
+
+              {/* پیش‌نمایش در کارت کناری */}
+              <div className="lg:col-span-4 bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-4">
+                <span className="text-[11px] font-bold text-[#FCA311] uppercase tracking-wider block">پیش‌نمایش زنده در وب‌سایت</span>
+                <div className="space-y-3 pt-1">
+                  <div className="p-3 rounded-xl bg-slate-50 border border-slate-100">
+                    <span className="text-[10px] text-slate-400 block font-bold mb-0.5">ایمیل</span>
+                    <span className="text-xs font-mono font-bold text-slate-800">{settingsForm.email}</span>
+                  </div>
+                  <div className="p-3 rounded-xl bg-slate-50 border border-slate-100">
+                    <span className="text-[10px] text-slate-400 block font-bold mb-0.5">شماره تماس / واتس‌اپ</span>
+                    <span className="text-xs font-mono font-bold text-slate-800">{settingsForm.phone}</span>
+                  </div>
+                  <div className="p-3 rounded-xl bg-slate-50 border border-slate-100">
+                    <span className="text-[10px] text-slate-400 block font-bold mb-0.5">آدرس دفتر</span>
+                    <span className="text-xs font-bold text-slate-800">{settingsForm.address}</span>
+                  </div>
                 </div>
               </div>
-            ))}
-          </div>
-        )}
+            </div>
+          )}
 
-        {/* Detail Modal */}
-        {selectedItem && (
+          {/* ========================================================
+              تب ۳: مدیریت گالری تصاویر (تبدیل به WebP و فشرده‌سازی زیر ۱۵۰KB)
+          ======================================================== */}
+          {activeTab === 'gallery' && (
+            <div className="space-y-6">
+              {/* فرم آپلود عکس */}
+              <div className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-xs space-y-5">
+                <div>
+                  <h3 className="text-base sm:text-lg font-black text-[#14213D]">آپلود و انتشار تصویر جدید در گالری</h3>
+                  <p className="text-xs text-slate-500 mt-1">
+                    تصویر آپلود شده به صورت خودکار به فرمت بهینه <span className="font-bold text-[#FCA311]">WebP</span> تبدیل شده و در صورت داشتن حجم بالای ۱۵۰ کیلوبایت فشرده‌سازی می‌شود.
+                  </p>
+                </div>
+
+                {uploadSuccess && (
+                  <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 flex items-center gap-2 text-xs font-bold">
+                    <CheckCircle2 size={16} className="text-emerald-600 shrink-0" />
+                    <span>{uploadSuccess}</span>
+                  </div>
+                )}
+
+                {uploadError && (
+                  <div className="p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 flex items-center gap-2 text-xs font-bold">
+                    <AlertCircle size={16} className="text-rose-600 shrink-0" />
+                    <span>{uploadError}</span>
+                  </div>
+                )}
+
+                <form onSubmit={handleUploadImage} className="grid grid-cols-1 md:grid-cols-12 gap-4 items-end">
+                  <div className="md:col-span-4">
+                    <label className="block text-xs font-bold text-slate-700 mb-1.5">فایل تصویر</label>
+                    <input
+                      id="galleryFileInput"
+                      type="file"
+                      accept="image/*"
+                      required
+                      onChange={(e) => setNewImageForm({ ...newImageForm, file: e.target.files[0] })}
+                      className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 file:mr-0 file:ml-2 file:py-1 file:px-2.5 file:rounded-lg file:border-0 file:text-[11px] file:font-bold file:bg-[#14213D] file:text-white cursor-pointer"
+                    />
+                  </div>
+
+                  <div className="md:col-span-3">
+                    <label className="block text-xs font-bold text-slate-700 mb-1.5">عنوان تصویر</label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="مثلاً: نمای پانورامای بامیان"
+                      value={newImageForm.title}
+                      onChange={(e) => setNewImageForm({ ...newImageForm, title: e.target.value })}
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-800 focus:outline-none focus:border-[#FCA311] focus:bg-white"
+                    />
+                  </div>
+
+                  <div className="md:col-span-2">
+                    <label className="block text-xs font-bold text-slate-700 mb-1.5">دسته‌بندی</label>
+                    <select
+                      value={newImageForm.category}
+                      onChange={(e) => setNewImageForm({ ...newImageForm, category: e.target.value })}
+                      className="w-full px-3 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-800 focus:outline-none focus:border-[#FCA311] focus:bg-white cursor-pointer"
+                    >
+                      <option value="kabul">کابل</option>
+                      <option value="bamyan">بامیان</option>
+                      <option value="herat">هرات</option>
+                      <option value="balkh">بلخ و مزار</option>
+                      <option value="nature">طبیعت و مناظر</option>
+                      <option value="culture">فرهنگ و سنت‌ها</option>
+                    </select>
+                  </div>
+
+                  <div className="md:col-span-3">
+                    <button
+                      type="submit"
+                      disabled={galleryUploading}
+                      className="w-full py-2.5 px-4 rounded-xl bg-[#FCA311] hover:bg-amber-500 text-[#14213D] font-extrabold text-xs transition shadow-md flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                    >
+                      <Upload size={14} />
+                      <span>{galleryUploading ? 'در حال تبدیل و بهینه‌سازی...' : 'آپلود بهینه (WebP)'}</span>
+                    </button>
+                  </div>
+                </form>
+              </div>
+
+              {/* لیست و گرید تصاویر آپلود شده */}
+              <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-4">
+                <div className="flex items-center justify-between">
+                  <h4 className="text-sm font-bold text-[#14213D]">تصاویر داینامیک ثبت‌شده در دیتابیس ({galleryList.length})</h4>
+                  <span className="text-[11px] text-slate-400">تمام تصاویر به صورت WebP ذخیره شده‌اند</span>
+                </div>
+
+                {galleryList.length === 0 ? (
+                  <div className="p-10 text-center text-slate-400 text-xs font-medium">
+                    هنوز تصویر داینامیک جدیدی آپلود نشده است. با استفاده از فرم بالا می‌توانید تصویر دلخواه خود را اضافه کنید.
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                    {galleryList.map((item) => (
+                      <div key={item.id} className="group relative rounded-xl overflow-hidden border border-slate-200 bg-slate-50 flex flex-col justify-between shadow-xs">
+                        <div className="aspect-[4/3] w-full overflow-hidden relative">
+                          <img 
+                            src={item.image} 
+                            alt={item.title} 
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" 
+                          />
+                          {item.fileSizeKB && (
+                            <span className="absolute bottom-1.5 left-1.5 px-1.5 py-0.5 rounded bg-black/70 text-white font-mono text-[9px]">
+                              {item.fileSizeKB} KB WebP
+                            </span>
+                          )}
+                        </div>
+                        <div className="p-2.5 flex items-center justify-between gap-1">
+                          <div className="min-w-0">
+                            <span className="block text-xs font-bold text-slate-800 truncate">{item.title}</span>
+                            <span className="text-[10px] text-slate-400 block">{item.category}</span>
+                          </div>
+                          <button
+                            onClick={() => handleDeleteGallery(item.id)}
+                            className="p-1 rounded-lg text-rose-500 hover:bg-rose-50 cursor-pointer shrink-0"
+                            title="حذف از گالری"
+                          >
+                            <Trash2 size={13} />
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* ========================================================
+              تب ۴: درخواست‌های رزرواسیون
+          ======================================================== */}
+          {activeTab === 'bookings' && (
+            <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
+              <div className="p-4 sm:p-5 border-b border-slate-100 flex items-center justify-between">
+                <h3 className="text-sm font-bold text-[#14213D]">لیست درخواست‌های اختصاصی رزرو تور</h3>
+                <span className="text-xs text-slate-400 font-mono">{masterRequests.length} مورد</span>
+              </div>
+              <div className="overflow-x-auto">
+                <table className="w-full text-right text-xs text-slate-700">
+                  <thead className="bg-slate-50 text-slate-600 font-bold text-[11px] border-b border-slate-200">
+                    <tr>
+                      <th className="py-3 px-4">مشتری</th>
+                      <th className="py-3 px-4">ارتباط</th>
+                      <th className="py-3 px-4">پکیج درخواستی</th>
+                      <th className="py-3 px-4">تعداد همسفران</th>
+                      <th className="py-3 px-4">تاریخ ارسال</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-100">
+                    {masterRequests.map((req, idx) => (
+                      <tr key={req.id || idx} className="hover:bg-slate-50 transition">
+                        <td className="py-3 px-4 font-bold text-slate-900">{req.fullName || '-'}</td>
+                        <td className="py-3 px-4 font-mono text-[11px]">
+                          <div>{req.email || '-'}</div>
+                          <div className="text-slate-500">{req.phoneWhatsApp || '-'}</div>
+                        </td>
+                        <td className="py-3 px-4 font-semibold text-amber-600">{req.packageOrService || 'تور سفارشی'}</td>
+                        <td className="py-3 px-4 text-slate-600">{req.travelers ? `${req.travelers} نفر` : 'نامشخص'}</td>
+                        <td className="py-3 px-4 font-mono text-slate-400 text-[11px]">
+                          {req.submittedAt ? new Date(req.submittedAt).toLocaleDateString('fa-IR') : 'اخیر'}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+
+        </main>
+      </div>
+
+      {/* ========================================================
+          مودال اختصاصی نمایش کامل متن پیام (Full Message Modal)
+      ======================================================== */}
+      {selectedMessage && (
+        <div 
+          className="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-xs flex items-center justify-center p-4 animate-fade-in"
+          onClick={() => setSelectedMessage(null)}
+        >
           <div 
-            className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
-            onClick={() => setSelectedItem(null)}
+            className="bg-white border border-slate-200 max-w-xl w-full rounded-3xl p-6 sm:p-8 shadow-2xl text-slate-800 space-y-5"
+            onClick={(e) => e.stopPropagation()}
+            dir="rtl"
           >
-            <div 
-              className="bg-[#1E293B] border border-slate-700 max-w-lg w-full rounded-2xl p-6 shadow-2xl text-slate-200"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="flex items-center justify-between border-b border-slate-700 pb-3 mb-4">
-                <h3 className="font-bold text-white text-base">Inquiry Details</h3>
-                <button 
-                  onClick={() => setSelectedItem(null)}
-                  className="text-slate-400 hover:text-white font-bold text-sm cursor-pointer"
+            {/* سربرگ مودال */}
+            <div className="flex items-start justify-between border-b border-slate-100 pb-4">
+              <div>
+                <span className="text-[11px] font-bold text-[#FCA311] uppercase tracking-wider block">جزئیات پیام دریافتی</span>
+                <h3 className="text-lg font-black text-[#14213D] mt-0.5">{selectedMessage.fullName || 'بدون نام'}</h3>
+                <span className="text-[11px] text-slate-400 font-mono">
+                  زمان ارسال: {selectedMessage.created_at || selectedMessage.submittedAt 
+                    ? new Date(selectedMessage.created_at || selectedMessage.submittedAt).toLocaleString('fa-IR') 
+                    : '-'}
+                </span>
+              </div>
+              <button 
+                onClick={() => setSelectedMessage(null)}
+                className="p-1.5 rounded-xl text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition cursor-pointer"
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            {/* کارت مشخصات فرستنده */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-100 text-xs">
+              <div>
+                <span className="text-slate-400 block mb-0.5 font-bold text-[10px]">آدرس ایمیل:</span>
+                <a href={`mailto:${selectedMessage.email}`} className="text-sky-600 font-mono font-bold hover:underline">
+                  {selectedMessage.email || '-'}
+                </a>
+              </div>
+              <div>
+                <span className="text-slate-400 block mb-0.5 font-bold text-[10px]">شماره تماس / واتس‌اپ:</span>
+                <span className="text-amber-600 font-mono font-bold">
+                  {selectedMessage.phoneWhatsApp || '-'}
+                </span>
+              </div>
+              <div className="sm:col-span-2 pt-1 border-t border-slate-200/60">
+                <span className="text-slate-400 block mb-0.5 font-bold text-[10px]">موضوع پیام:</span>
+                <span className="text-slate-800 font-bold">{selectedMessage.subject || '-'}</span>
+              </div>
+            </div>
+
+            {/* کادر متن کامل پیام با قابلیت نمایش کامل متون طولانی */}
+            <div>
+              <span className="text-xs font-bold text-slate-700 block mb-2">متن کامل پیام:</span>
+              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-slate-800 text-xs sm:text-sm leading-relaxed whitespace-pre-wrap max-h-72 overflow-y-auto">
+                {selectedMessage.message || '-'}
+              </div>
+            </div>
+
+            {/* اکشن‌های پایینی مودال */}
+            <div className="pt-2 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
+              <button
+                onClick={() => handleToggleStatus(selectedMessage.id, selectedMessage.status)}
+                className={`px-4 py-2 rounded-xl text-xs font-bold transition cursor-pointer ${
+                  selectedMessage.status === 'unread'
+                    ? 'bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100'
+                    : 'bg-amber-50 text-amber-700 border border-amber-200 hover:bg-amber-100'
+                }`}
+              >
+                {selectedMessage.status === 'unread' ? 'علامت به عنوان خوانده‌شده' : 'علامت به عنوان پیام جدید'}
+              </button>
+
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => handleDeleteMessage(selectedMessage.id)}
+                  className="px-3.5 py-2 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 text-xs font-bold transition cursor-pointer"
                 >
-                  &times; Close
+                  حذف این پیام
+                </button>
+                <button
+                  onClick={() => setSelectedMessage(null)}
+                  className="px-4 py-2 rounded-xl bg-[#14213D] hover:bg-[#1E293B] text-white text-xs font-bold transition cursor-pointer"
+                >
+                  بستن
                 </button>
               </div>
-
-              <div className="space-y-3 text-xs">
-                <div>
-                  <span className="text-slate-400 block font-semibold">Full Name:</span>
-                  <span className="text-white font-bold text-sm">{selectedItem.fullName || '-'}</span>
-                </div>
-                <div className="grid grid-cols-2 gap-2">
-                  <div>
-                    <span className="text-slate-400 block font-semibold">Email:</span>
-                    <a href={`mailto:${selectedItem.email}`} className="text-sky-400 hover:underline">{selectedItem.email || '-'}</a>
-                  </div>
-                  <div>
-                    <span className="text-slate-400 block font-semibold">Phone / WhatsApp:</span>
-                    <a href={`tel:${selectedItem.phoneWhatsApp}`} className="text-emerald-400 font-mono">{selectedItem.phoneWhatsApp || '-'}</a>
-                  </div>
-                </div>
-
-                {selectedItem.packageOrService && (
-                  <div>
-                    <span className="text-slate-400 block font-semibold">Package / Service:</span>
-                    <span className="text-amber-400 font-bold">{selectedItem.packageOrService}</span>
-                  </div>
-                )}
-
-                {selectedItem.subject && (
-                  <div>
-                    <span className="text-slate-400 block font-semibold">Subject:</span>
-                    <span className="text-sky-400 font-bold">{selectedItem.subject}</span>
-                  </div>
-                )}
-
-                <div>
-                  <span className="text-slate-400 block font-semibold">Message / Additional Requirements:</span>
-                  <div className="mt-1 p-3 rounded-xl bg-slate-900/80 border border-slate-700/60 leading-relaxed whitespace-pre-wrap text-slate-300">
-                    {selectedItem.additionalRequirements || selectedItem.message || 'No additional details provided.'}
-                  </div>
-                </div>
-
-                {selectedItem.submittedAt && (
-                  <div className="text-[11px] text-slate-500 pt-2 border-t border-slate-700">
-                    Submitted: {new Date(selectedItem.submittedAt).toLocaleString()}
-                  </div>
-                )}
-              </div>
             </div>
           </div>
-        )}
-      </main>
+        </div>
+      )}
+
     </div>
   );
 }

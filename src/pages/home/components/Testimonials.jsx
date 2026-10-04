@@ -1,4 +1,5 @@
 import { Star } from 'lucide-react';
+import { getAssetUrl } from '../../../config/assets';
 
 export default function Testimonials({ currentLang }) {
   const isRtl = currentLang === 'fa';
@@ -91,7 +92,7 @@ export default function Testimonials({ currentLang }) {
                 <div className="flex items-center gap-4">
                   <div className="w-14 h-14 rounded-full border-2 border-white/10 shadow-md shrink-0 overflow-hidden bg-slate-700">
                     <img 
-                      src={item.avatar} 
+                      src={getAssetUrl(item.avatar)} 
                       alt={item.name} 
                       className="w-full h-full object-cover" 
                       onError={(e) => {

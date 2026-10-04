@@ -4,6 +4,7 @@ import { ArrowRight, ArrowLeft, Clock, ChevronLeft, ChevronRight, Compass } from
 import { useLangStore } from '../../store/useLangStore';
 import SEO from '../../components/SEO';
 import heroBg from '../../assets/images/hero-bg.webp';
+import { getAssetUrl } from '../../config/assets';
 
 const ITEMS_PER_PAGE = 6;
 
@@ -160,14 +161,14 @@ export default function Blog() {
               {/* تصویر مقاله با بج تاریخ و افکت زوم */}
               <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
                 <img
-                  src={article.image || '/images/provinces/kabul/kabul-hero.webp'}
+                  src={getAssetUrl(article.image || '/images/provinces/kabul/kabul-hero.webp')}
                   alt={article.title}
                   className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 select-none"
                   loading="lazy"
                   onError={(e) => {
                     if (!e.target.dataset.tried) {
                       e.target.dataset.tried = 'true';
-                      e.target.src = '/images/provinces/kabul/kabul-hero.webp';
+                      e.target.src = getAssetUrl('/images/provinces/kabul/kabul-hero.webp');
                     }
                   }}
                 />

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Bed, Car, User, ArrowRight, ArrowLeft } from "lucide-react";
 import { useLangStore } from "../../../../store/useLangStore";
+import { getAssetUrl } from "../../../../config/assets";
 
 const ExploreCTA = ({ image, title, price, durationDay, durationNight }) => {
   const { currentLang, translations } = useLangStore();
@@ -20,13 +21,13 @@ const ExploreCTA = ({ image, title, price, durationDay, durationNight }) => {
       <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-100 select-none">
         <img 
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-          src={image || "/tours/images/kabulPictures.webp"} 
+          src={getAssetUrl(image || "/tours/images/kabulPictures.webp")} 
           alt={title || "Tour package"} 
           loading="lazy"
           onError={(e) => {
             if (!e.target.dataset.tried) {
               e.target.dataset.tried = 'true';
-              e.target.src = '/tours/images/kabulPictures.webp';
+              e.target.src = getAssetUrl('/tours/images/kabulPictures.webp');
             }
           }}
         />

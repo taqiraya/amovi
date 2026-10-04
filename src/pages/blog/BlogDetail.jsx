@@ -17,6 +17,7 @@ import {
 import { useLangStore } from '../../store/useLangStore';
 import SEO from '../../components/SEO';
 import heroBg from '../../assets/images/hero-bg.webp';
+import { getAssetUrl } from '../../config/assets';
 
 export default function BlogDetail() {
   const { id } = useParams();
@@ -196,13 +197,13 @@ export default function BlogDetail() {
             {/* عکس شاخص مقاله (Featured Image - Full Width 16:9) */}
             <div className="relative aspect-[16/9] w-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl border-2 sm:border-4 border-white bg-slate-100 group">
               <img
-                src={currentArticle.image || '/images/provinces/kabul/kabul-hero.webp'}
+                src={getAssetUrl(currentArticle.image || '/images/provinces/kabul/kabul-hero.webp')}
                 alt={currentArticle.title}
                 className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-102 select-none"
                 onError={(e) => {
                   if (!e.target.dataset.tried) {
                     e.target.dataset.tried = 'true';
-                    e.target.src = '/images/provinces/kabul/kabul-hero.webp';
+                    e.target.src = getAssetUrl('/images/provinces/kabul/kabul-hero.webp');
                   }
                 }}
               />
@@ -393,13 +394,13 @@ export default function BlogDetail() {
                     {/* تصویر کوچک بندانگشتی */}
                     <div className="w-16 h-16 sm:w-18 sm:h-18 rounded-xl sm:rounded-2xl overflow-hidden bg-slate-200 shrink-0 border border-slate-100">
                       <img
-                        src={relItem.image}
+                        src={getAssetUrl(relItem.image)}
                         alt={relItem.title}
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                         onError={(e) => {
                           if (!e.target.dataset.tried) {
                             e.target.dataset.tried = 'true';
-                            e.target.src = '/tours/images/bamyanPictures.webp';
+                            e.target.src = getAssetUrl('/tours/images/bamyanPictures.webp');
                           }
                         }}
                       />

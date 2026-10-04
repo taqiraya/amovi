@@ -9,6 +9,7 @@ import {
   Home, 
   Download
 } from 'lucide-react';
+import { getMasterRequests, getContactMessages } from '../../services/api';
 import localDb from '../../../db.json';
 
 export default function AdminPanel() {
@@ -21,20 +22,22 @@ export default function AdminPanel() {
   const [selectedItem, setSelectedItem] = useState(null);
 
   useEffect(() => {
-    // Attempt to fetch latest from local json-server if active
-    fetch('http://localhost:3000/masterRequests')
-      .then((res) => res.json())
-      .then((data) => {
-        if (Array.isArray(data) && data.length > 0) setMasterRequests(data);
-      })
-      .catch(() => {});
+    let isMounted = true;
+    getMasterRequests().then((data) => {
+      if (isMounted && Array.isArray(data) && data.length > 0) {
+        setMasterRequests(data);
+      }
+    });
 
-    fetch('http://localhost:3000/contactMessages')
-      .then((res) => res.json())
-      .then((data) => {
-        if (Array.isArray(data) && data.length > 0) setContactMessages(data);
-      })
-      .catch(() => {});
+    getContactMessages().then((data) => {
+      if (isMounted && Array.isArray(data) && data.length > 0) {
+        setContactMessages(data);
+      }
+    });
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const totalDestinations = provinces.reduce((acc, p) => acc + (p.sub_destinations?.length || 0), 0);

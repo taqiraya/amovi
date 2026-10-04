@@ -1,25 +1,37 @@
 import imageTwo from "./images/imageTwo.webp";
 import { useLangStore } from "../../../store/useLangStore";
-const DiscoverSection = () => {
-  const { translations } = useLangStore();
-  const discover = translations?.tourPage?.discoverSection || {};
+
+const DiscoverSection = ({ content }) => {
+  const { currentLang, translations } = useLangStore();
+  const isRtl = currentLang === "fa";
+  const discover = translations?.tourPage?.discoverSection || {
+    title: isRtl ? "افغانستان را به شیوه خود کشف کنید" : "Discover Afghanistan on Your Own Terms",
+    description: isRtl 
+      ? "افغانستان را از طریق سفرهای دقیقاً برنامه‌ریزی‌شده، همراه با مقصد، اقامت، حمل‌ونقل، راهنما و پشتیبانی سفر کشف کنید."
+      : "Discover Afghanistan through carefully planned journeys, complete with destinations, accommodation, transport, guides, and comprehensive travel support."
+  };
+
+  const title = (isRtl ? content?.discover_title_fa : content?.discover_title_en) || discover.title;
+  const description = (isRtl ? content?.discover_desc_fa : content?.discover_desc_en) || discover.description;
+  const imageSrc = content?.discover_image || imageTwo;
+
   return (
     <section
       className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center"
     >
       <div className="lg:order-2 space-y-3">
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#14213D] leading-tight">
-          {discover.title}
+          {title}
         </h2>
         <p className="text-xs sm:text-sm md:text-base text-slate-600 leading-relaxed font-normal">
-          {discover.description}
+          {description}
         </p>
       </div>
       <div className="lg:order-1 max-w-xl mx-auto lg:max-w-none w-full">
         <img
           className="rounded-2xl sm:rounded-3xl aspect-[16/10] w-full object-cover shadow-xl border-2 sm:border-4 border-white bg-slate-100"
-          src={imageTwo}
-          alt={discover.title}
+          src={imageSrc}
+          alt={title}
           loading="lazy"
           onError={(e) => {
             if (!e.target.dataset.tried) {

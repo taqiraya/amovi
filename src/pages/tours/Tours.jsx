@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import DiscoverSection from "./components/DiscoverSection.jsx";
 import ExploreHandle from "./components/exploreCTA/ExploreHandle.jsx";
 import ExploreSection from "./components/ExploreSection.jsx";
@@ -6,11 +7,27 @@ import TourHero from "./components/TourHero.jsx";
 import HandelTravelCTA from "./components/travelCTA/HandelTravelCTA.jsx";
 import HandleWorkCTA from "./components/workCTA/HandleWorkCTA.jsx";
 import { useLangStore } from "../../store/useLangStore";
+import { getTourPageSettings } from "../../services/api";
 import SEO from "../../components/SEO";
 
 export default function Tours() {
   const { currentLang } = useLangStore();
   const isRtl = currentLang === "fa";
+  const [pageSettings, setPageSettings] = useState(null);
+
+  useEffect(() => {
+    let isMounted = true;
+    getTourPageSettings().then((data) => {
+      if (isMounted && data) {
+        setPageSettings(data);
+      }
+    }).catch(() => {
+      // fallback to static translations
+    });
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   return (
     <div
@@ -28,12 +45,12 @@ export default function Tours() {
         canonicalUrl="https://amovi.travel/tours"
       />
       <TourHero />
-      <DiscoverSection />
+      <DiscoverSection content={pageSettings} />
       <ExploreSection />
       <ExploreHandle />
-      <HandelTravelCTA />
-      <HandleMoreCTA />
-      <HandleWorkCTA />
+      <HandelTravelCTA content={pageSettings} />
+      <HandleMoreCTA content={pageSettings} />
+      <HandleWorkCTA content={pageSettings} />
     </div>
   );
 }

@@ -281,6 +281,128 @@ async function initDatabase() {
       console.log('[Database] Default admin user created (admin / admin).');
     }
 
+    // ۶. جدول تنظیمات و متون صفحه سفرها (Tour Page Dynamic Content)
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS tour_page_settings (
+        id INT PRIMARY KEY DEFAULT 1,
+        discover_title_fa VARCHAR(255) NOT NULL DEFAULT 'افغانستان را به شیوه خود کشف کنید',
+        discover_title_en VARCHAR(255) NOT NULL DEFAULT 'Discover Afghanistan Your Way',
+        discover_desc_fa TEXT NOT NULL,
+        discover_desc_en TEXT NOT NULL,
+        discover_image VARCHAR(500) DEFAULT '/tours/images/bamyanPictures.webp',
+        travel_eyebrow_fa VARCHAR(255) DEFAULT 'موضوعات سفر',
+        travel_eyebrow_en VARCHAR(255) DEFAULT 'Travel Themes',
+        travel_title_fa VARCHAR(255) DEFAULT 'تجربه سفر خود را انتخاب کنید',
+        travel_title_en VARCHAR(255) DEFAULT 'Choose Your Travel Experience',
+        travel_items LONGTEXT DEFAULT NULL,
+        more_eyebrow_fa VARCHAR(255) DEFAULT 'فراتر از یک سفر ساده',
+        more_eyebrow_en VARCHAR(255) DEFAULT 'More Than a Tour',
+        more_title_fa VARCHAR(255) DEFAULT 'خدماتی فراتر از یک سفر ساده',
+        more_title_en VARCHAR(255) DEFAULT 'More Than a Tour',
+        more_items LONGTEXT DEFAULT NULL,
+        work_eyebrow_fa VARCHAR(255) DEFAULT 'نحوه رزرو سفر',
+        work_eyebrow_en VARCHAR(255) DEFAULT 'How Booking Works',
+        work_title_fa VARCHAR(255) DEFAULT 'چگونه کار می‌کند',
+        work_title_en VARCHAR(255) DEFAULT 'How It Works',
+        work_items LONGTEXT DEFAULT NULL,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+    `);
+
+    // بررسی و ثبت رکورد پیش‌فرض محتوای صفحه تورها
+    const [existTourSettings] = await pool.query('SELECT id FROM tour_page_settings WHERE id = 1');
+    if (existTourSettings.length === 0) {
+      const defaultTravelItems = JSON.stringify([
+        { id: 'plane', title_fa: 'تجربه‌های مقصد', title_en: 'Destination Experiences', desc_fa: 'مقصدهای مختلف را با سفرهایی که با دقت طراحی شده‌اند، کشف کنید.', desc_en: 'Discover individual destinations through carefully designed journeys.' },
+        { id: 'map', title_fa: 'سفرهای چندمقصدی', title_en: 'Multi-Destination Journeys', desc_fa: 'چندین مقصد را در قالب یک سفر یکپارچه در سراسر افغانستان تجربه کنید.', desc_en: 'Connect multiple destinations in one seamless journey across Afghanistan.' },
+        { id: 'landmark', title_fa: 'فرهنگ و میراث', title_en: 'Cultural & Heritage', desc_fa: 'تاریخ، فرهنگ، سنت‌ها و میراث افغانستان را کشف کنید.', desc_en: 'Explore Afghanistan\'s history, culture, traditions, and heritage.' },
+        { id: 'mountain', title_fa: 'طبیعت و ماجراجویی', title_en: 'Nature & Adventure', desc_fa: 'کوه‌ها، دره‌ها، دریاچه‌ها، مناظر طبیعی و فعالیت‌های فضای باز را تجربه کنید.', desc_en: 'Experience mountains, valleys, lakes, landscapes, and outdoor activities.' },
+        { id: 'crown', title_fa: 'سفرهای ویژه و VIP', title_en: 'Premium & VIP', desc_fa: 'با آسایش بیشتر، برنامه‌ریزی شخصی‌سازی‌شده و پشتیبانی اختصاصی سفر کنید.', desc_en: 'Travel with enhanced comfort, personalized arrangements, and dedicated support.' },
+        { id: 'setting', title_fa: 'سفرهای سفارشی', title_en: 'Customized Journeys', desc_fa: 'سفری متناسب با علایق، زمان‌بندی و ترجیحات سفر خود ایجاد کنید.', desc_en: 'Create a journey tailored to your interests, schedule, and travel preferences.' }
+      ]);
+
+      const defaultMoreItems = JSON.stringify([
+        { id: 'accommodation', title_fa: 'اقامت', title_en: 'Accommodation', desc_fa: 'اقامتگاه‌های منتخب برای سفر شما.', desc_en: 'Selected stays for your journey.' },
+        { id: 'transportation', title_fa: 'حمل‌ونقل', title_en: 'Transportation', desc_fa: 'هماهنگی رفت‌وآمد میان مقصدهای مختلف.', desc_en: 'Coordinated travel between destinations.' },
+        { id: 'professional', title_fa: 'راهنمایان حرفه‌ای', title_en: 'Professional Guides', desc_fa: 'راهنمایی محلی و آشنایی با فرهنگ و جاذبه‌های منطقه.', desc_en: 'Local guidance and cultural insight.' },
+        { id: 'travel', title_fa: 'پشتیبانی سفر', title_en: 'Travel Support', desc_fa: 'کمک و پشتیبانی عملی در طول سفر شما.', desc_en: 'Practical assistance throughout your journey.' },
+        { id: 'visa', title_fa: 'کمک در امور ویزا', title_en: 'Visa Assistance', desc_fa: 'راهنمایی برای آماده‌سازی مدارک و مراحل ویزا.', desc_en: 'Guidance with your visa preparation.' }
+      ]);
+
+      const defaultWorkItems = JSON.stringify([
+        { id: 'package', title_fa: 'انتخاب پکیج', title_en: 'Choose Package', desc_fa: 'پکیج مورد نظر خود را متناسب با برنامه و مقصد انتخاب کنید.', desc_en: 'Choose your desired package matching your plans.' },
+        { id: 'request', title_fa: 'ثبت درخواست', title_en: 'Send Inquiry', desc_fa: 'مشخصات و زمان سفر خود را برای هماهنگی ارسال نمایید.', desc_en: 'Submit your journey dates and details.' },
+        { id: 'confirmJourney', title_fa: 'تأیید برنامه', title_en: 'Confirm Journey', desc_fa: 'برنامه نهایی سفر و اقامتگاه‌ها توسط کارشناسان تأیید می‌شود.', desc_en: 'Finalize travel schedule and accommodations with our team.' },
+        { id: 'beginJourney', title_fa: 'آغاز سفر', title_en: 'Begin Adventure', desc_fa: 'با آسودگی خاطر سفر خاطره‌انگیز خود را در افغانستان آغاز کنید.', desc_en: 'Embark on an unforgettable voyage across Afghanistan.' }
+      ]);
+
+      await pool.query(`
+        INSERT INTO tour_page_settings 
+        (id, discover_title_fa, discover_title_en, discover_desc_fa, discover_desc_en, discover_image, travel_items, more_items, work_items)
+        VALUES (1, ?, ?, ?, ?, ?, ?, ?, ?)
+      `, [
+        'افغانستان را به شیوه خود کشف کنید',
+        'Discover Afghanistan Your Way',
+        'افغانستان را از طریق سفرهای دقیقاً برنامه‌ریزی‌شده، همراه با مقصد، اقامت، حمل‌ونقل، راهنما و پشتیبانی سفر کشف کنید',
+        'Explore Afghanistan through carefully planned journeys combining destinations, accommodation, transportation, guides, and travel support',
+        '/tours/images/bamyanPictures.webp',
+        defaultTravelItems,
+        defaultMoreItems,
+        defaultWorkItems
+      ]);
+      console.log('[Database] Default tour page content initialized.');
+    }
+
+    // ۷. جدول پکیج‌های اختصاصی تورها (Tour Packages)
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS tour_packages (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        slug VARCHAR(150) UNIQUE,
+        title_fa VARCHAR(255) NOT NULL,
+        title_en VARCHAR(255) NOT NULL,
+        description_fa TEXT,
+        description_en TEXT,
+        price INT NOT NULL DEFAULT 150,
+        days INT DEFAULT 3,
+        nights INT DEFAULT 2,
+        image_url VARCHAR(500) DEFAULT '/tours/images/kabulPictures.webp',
+        is_active TINYINT(1) DEFAULT 1,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+    `);
+
+    // بررسی و بارگذاری ۱۰ پکیج تور اولیه از db.json در صورت خالی بودن جدول
+    const [existPackages] = await pool.query('SELECT COUNT(*) as cnt FROM tour_packages');
+    if (existPackages[0].cnt === 0) {
+      try {
+        const dbJsonPath = path.join(__dirname, 'db.json');
+        if (fs.existsSync(dbJsonPath)) {
+          const parsedDb = JSON.parse(fs.readFileSync(dbJsonPath, 'utf8'));
+          const tours = parsedDb.tours || [];
+          for (const t of tours) {
+            await pool.query(`
+              INSERT INTO tour_packages 
+              (slug, title_fa, title_en, description_fa, description_en, price, days, nights, image_url)
+              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            `, [
+              t.slug || t.id,
+              t.fa?.title || t.en?.title || 'پکیج سفر',
+              t.en?.title || t.fa?.title || 'Tour Package',
+              t.fa?.description || '',
+              t.en?.description || '',
+              t.price || 150,
+              parseInt(t.fa?.days || t.days || 3) || 3,
+              parseInt(t.fa?.nights || t.nights || 2) || 2,
+              t.image || '/tours/images/kabulPictures.webp'
+            ]);
+          }
+          console.log('[Database] 10 initial tour packages seeded into database.');
+        }
+      } catch (err) {
+        console.warn('Seeding tour packages warning:', err.message);
+      }
+    }
+
     console.log(`[Database] MySQL connected to "${DB_NAME}". All tables initialized.`);
   } catch (err) {
     console.error('[Database Error] Connection to MySQL failed:', err.message);
@@ -750,11 +872,276 @@ function getLocalDbData() {
 }
 
 /* ========================================================
-   مسیرهای پکیج‌های سفر، خدمات، مقاصد و نظرات
+   مسیرهای صفحه و پکیج‌های سفر (Tour Page & Packages API)
 ======================================================== */
-app.get(['/api/tours', '/toursList'], (req, res) => {
+// ۱. دریافت محتوا و تنظیمات بخش‌های صفحه سفر
+app.get('/api/tours/page-content', async (req, res) => {
+  try {
+    const [rows] = await pool.query('SELECT * FROM tour_page_settings WHERE id = 1');
+    if (rows.length > 0) {
+      const r = rows[0];
+      return res.json({
+        success: true,
+        data: {
+          id: r.id,
+          discover_title_fa: r.discover_title_fa,
+          discover_title_en: r.discover_title_en,
+          discover_desc_fa: r.discover_desc_fa,
+          discover_desc_en: r.discover_desc_en,
+          discover_image: r.discover_image,
+          travel_eyebrow_fa: r.travel_eyebrow_fa,
+          travel_eyebrow_en: r.travel_eyebrow_en,
+          travel_title_fa: r.travel_title_fa,
+          travel_title_en: r.travel_title_en,
+          travel_items: typeof r.travel_items === 'string' ? JSON.parse(r.travel_items) : r.travel_items,
+          more_eyebrow_fa: r.more_eyebrow_fa,
+          more_eyebrow_en: r.more_eyebrow_en,
+          more_title_fa: r.more_title_fa,
+          more_title_en: r.more_title_en,
+          more_items: typeof r.more_items === 'string' ? JSON.parse(r.more_items) : r.more_items,
+          work_eyebrow_fa: r.work_eyebrow_fa,
+          work_eyebrow_en: r.work_eyebrow_en,
+          work_title_fa: r.work_title_fa,
+          work_title_en: r.work_title_en,
+          work_items: typeof r.work_items === 'string' ? JSON.parse(r.work_items) : r.work_items,
+          updated_at: r.updated_at
+        }
+      });
+    }
+    res.json({ success: true, data: null });
+  } catch (error) {
+    console.error('Fetch tour page content error:', error);
+    res.status(500).json({ success: false, error: 'خطا در دریافت اطلاعات صفحه سفر.' });
+  }
+});
+
+// ۲. به‌روزرسانی محتوا و تصویر بخش‌های صفحه سفر
+app.post('/api/tours/page-content', upload.single('discover_image'), async (req, res) => {
+  try {
+    const {
+      discover_title_fa,
+      discover_title_en,
+      discover_desc_fa,
+      discover_desc_en,
+      travel_eyebrow_fa,
+      travel_eyebrow_en,
+      travel_title_fa,
+      travel_title_en,
+      travel_items,
+      more_eyebrow_fa,
+      more_eyebrow_en,
+      more_title_fa,
+      more_title_en,
+      more_items,
+      work_eyebrow_fa,
+      work_eyebrow_en,
+      work_title_fa,
+      work_title_en,
+      work_items
+    } = req.body;
+
+    let imageUrl = undefined;
+    if (req.file) {
+      const processed = await processAndSaveWebp(req.file.buffer, req.file.originalname, 'tours');
+      imageUrl = processed.imageUrl;
+    }
+
+    const [current] = await pool.query('SELECT * FROM tour_page_settings WHERE id = 1');
+    const existing = current[0] || {};
+
+    const finalDiscoverTitleFa = discover_title_fa !== undefined ? discover_title_fa.trim() : existing.discover_title_fa;
+    const finalDiscoverTitleEn = discover_title_en !== undefined ? discover_title_en.trim() : existing.discover_title_en;
+    const finalDiscoverDescFa = discover_desc_fa !== undefined ? discover_desc_fa.trim() : existing.discover_desc_fa;
+    const finalDiscoverDescEn = discover_desc_en !== undefined ? discover_desc_en.trim() : existing.discover_desc_en;
+    const finalImage = imageUrl || existing.discover_image || '/tours/images/bamyanPictures.webp';
+
+    const finalTravelEyebrowFa = travel_eyebrow_fa !== undefined ? travel_eyebrow_fa.trim() : existing.travel_eyebrow_fa;
+    const finalTravelEyebrowEn = travel_eyebrow_en !== undefined ? travel_eyebrow_en.trim() : existing.travel_eyebrow_en;
+    const finalTravelTitleFa = travel_title_fa !== undefined ? travel_title_fa.trim() : existing.travel_title_fa;
+    const finalTravelTitleEn = travel_title_en !== undefined ? travel_title_en.trim() : existing.travel_title_en;
+    const finalTravelItems = travel_items !== undefined 
+      ? (typeof travel_items === 'string' ? travel_items : JSON.stringify(travel_items))
+      : existing.travel_items;
+
+    const finalMoreEyebrowFa = more_eyebrow_fa !== undefined ? more_eyebrow_fa.trim() : existing.more_eyebrow_fa;
+    const finalMoreEyebrowEn = more_eyebrow_en !== undefined ? more_eyebrow_en.trim() : existing.more_eyebrow_en;
+    const finalMoreTitleFa = more_title_fa !== undefined ? more_title_fa.trim() : existing.more_title_fa;
+    const finalMoreTitleEn = more_title_en !== undefined ? more_title_en.trim() : existing.more_title_en;
+    const finalMoreItems = more_items !== undefined
+      ? (typeof more_items === 'string' ? more_items : JSON.stringify(more_items))
+      : existing.more_items;
+
+    const finalWorkEyebrowFa = work_eyebrow_fa !== undefined ? work_eyebrow_fa.trim() : existing.work_eyebrow_fa;
+    const finalWorkEyebrowEn = work_eyebrow_en !== undefined ? work_eyebrow_en.trim() : existing.work_eyebrow_en;
+    const finalWorkTitleFa = work_title_fa !== undefined ? work_title_fa.trim() : existing.work_title_fa;
+    const finalWorkTitleEn = work_title_en !== undefined ? work_title_en.trim() : existing.work_title_en;
+    const finalWorkItems = work_items !== undefined
+      ? (typeof work_items === 'string' ? work_items : JSON.stringify(work_items))
+      : existing.work_items;
+
+    await pool.query(`
+      INSERT INTO tour_page_settings 
+      (id, discover_title_fa, discover_title_en, discover_desc_fa, discover_desc_en, discover_image,
+       travel_eyebrow_fa, travel_eyebrow_en, travel_title_fa, travel_title_en, travel_items,
+       more_eyebrow_fa, more_eyebrow_en, more_title_fa, more_title_en, more_items,
+       work_eyebrow_fa, work_eyebrow_en, work_title_fa, work_title_en, work_items)
+      VALUES (1, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      ON DUPLICATE KEY UPDATE
+        discover_title_fa = VALUES(discover_title_fa),
+        discover_title_en = VALUES(discover_title_en),
+        discover_desc_fa = VALUES(discover_desc_fa),
+        discover_desc_en = VALUES(discover_desc_en),
+        discover_image = VALUES(discover_image),
+        travel_eyebrow_fa = VALUES(travel_eyebrow_fa),
+        travel_eyebrow_en = VALUES(travel_eyebrow_en),
+        travel_title_fa = VALUES(travel_title_fa),
+        travel_title_en = VALUES(travel_title_en),
+        travel_items = VALUES(travel_items),
+        more_eyebrow_fa = VALUES(more_eyebrow_fa),
+        more_eyebrow_en = VALUES(more_eyebrow_en),
+        more_title_fa = VALUES(more_title_fa),
+        more_title_en = VALUES(more_title_en),
+        more_items = VALUES(more_items),
+        work_eyebrow_fa = VALUES(work_eyebrow_fa),
+        work_eyebrow_en = VALUES(work_eyebrow_en),
+        work_title_fa = VALUES(work_title_fa),
+        work_title_en = VALUES(work_title_en),
+        work_items = VALUES(work_items);
+    `, [
+      finalDiscoverTitleFa, finalDiscoverTitleEn, finalDiscoverDescFa, finalDiscoverDescEn, finalImage,
+      finalTravelEyebrowFa, finalTravelEyebrowEn, finalTravelTitleFa, finalTravelTitleEn, finalTravelItems,
+      finalMoreEyebrowFa, finalMoreEyebrowEn, finalMoreTitleFa, finalMoreTitleEn, finalMoreItems,
+      finalWorkEyebrowFa, finalWorkEyebrowEn, finalWorkTitleFa, finalWorkTitleEn, finalWorkItems
+    ]);
+
+    res.json({
+      success: true,
+      message: 'محتوا و تنظیمات صفحه سفر با موفقیت به‌روزرسانی شد.',
+      data: {
+        discover_title_fa: finalDiscoverTitleFa,
+        discover_title_en: finalDiscoverTitleEn,
+        discover_desc_fa: finalDiscoverDescFa,
+        discover_desc_en: finalDiscoverDescEn,
+        discover_image: finalImage
+      }
+    });
+  } catch (error) {
+    console.error('Update tour page content error:', error);
+    res.status(500).json({ success: false, error: 'خطا در ذخیره تغییرات صفحه سفر.' });
+  }
+});
+
+// ۳. دریافت لیست پکیج‌های سفر (دیتابیس MySQL با فال‌بک به db.json)
+app.get(['/api/tours', '/toursList'], async (req, res) => {
+  try {
+    const [rows] = await pool.query('SELECT * FROM tour_packages WHERE is_active = 1 ORDER BY id ASC');
+    if (rows.length > 0) {
+      return res.json(rows.map((r) => ({
+        id: r.slug || `tour-${r.id}`,
+        dbId: r.id,
+        slug: r.slug || `tour-${r.id}`,
+        title: r.title_fa,
+        title_fa: r.title_fa,
+        title_en: r.title_en,
+        description: r.description_fa,
+        description_fa: r.description_fa,
+        description_en: r.description_en,
+        price: r.price,
+        days: r.days,
+        nights: r.nights,
+        image: r.image_url,
+        image_url: r.image_url,
+        fa: {
+          title: r.title_fa,
+          description: r.description_fa,
+          days: r.days,
+          nights: r.nights
+        },
+        en: {
+          title: r.title_en,
+          description: r.description_en,
+          days: r.days,
+          nights: r.nights
+        },
+        createdAt: r.created_at
+      })));
+    }
+  } catch (err) {
+    console.warn('MySQL fetch tours warning:', err.message);
+  }
   const db = getLocalDbData();
   res.json(db.tours || []);
+});
+
+// ۴. ایجاد پکیج سفر جدید با تبدیل خودکار عکس به WebP
+app.post('/api/tours', upload.single('image'), async (req, res) => {
+  try {
+    const { title_fa, title_en, title, price, days, nights, description_fa, description_en } = req.body;
+    const finalTitleFa = (title_fa || title || '').trim();
+    const finalTitleEn = (title_en || title || finalTitleFa).trim();
+
+    if (!finalTitleFa && !finalTitleEn) {
+      return res.status(400).json({ success: false, error: 'عنوان پکیج سفر الزامی است.' });
+    }
+
+    let imageUrl = '/tours/images/kabulPictures.webp';
+    if (req.file) {
+      const processed = await processAndSaveWebp(req.file.buffer, req.file.originalname, 'tours');
+      imageUrl = processed.imageUrl;
+    }
+
+    const slug = 'tour-' + Date.now();
+    const numPrice = Number(price) || 150;
+    const numDays = Number(days) || 3;
+    const numNights = Number(nights) || 2;
+
+    const [result] = await pool.query(`
+      INSERT INTO tour_packages 
+      (slug, title_fa, title_en, description_fa, description_en, price, days, nights, image_url)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `, [
+      slug,
+      finalTitleFa || finalTitleEn,
+      finalTitleEn || finalTitleFa,
+      (description_fa || '').trim(),
+      (description_en || '').trim(),
+      numPrice,
+      numDays,
+      numNights,
+      imageUrl
+    ]);
+
+    res.status(201).json({
+      success: true,
+      message: 'پکیج سفر با موفقیت افزوده شد.',
+      data: {
+        id: slug,
+        dbId: result.insertId,
+        slug,
+        title_fa: finalTitleFa,
+        title_en: finalTitleEn,
+        price: numPrice,
+        days: numDays,
+        nights: numNights,
+        image: imageUrl
+      }
+    });
+  } catch (error) {
+    console.error('Create tour package error:', error);
+    res.status(500).json({ success: false, error: 'خطا در ثبت پکیج سفر.' });
+  }
+});
+
+// ۵. حذف پکیج سفر
+app.delete('/api/tours/:id', async (req, res) => {
+  try {
+    const paramId = req.params.id;
+    await pool.query('DELETE FROM tour_packages WHERE id = ? OR slug = ?', [paramId, paramId]);
+    res.json({ success: true, message: 'پکیج سفر با موفقیت حذف گردید.' });
+  } catch (error) {
+    console.error('Delete tour error:', error);
+    res.status(500).json({ success: false, error: 'خطا در حذف پکیج سفر.' });
+  }
 });
 
 app.get(['/api/services', '/servicesList'], (req, res) => {

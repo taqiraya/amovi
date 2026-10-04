@@ -19,7 +19,8 @@ import {
   Phone,
   Link as LinkIcon,
   AlertCircle,
-  BookOpen
+  BookOpen,
+  Compass
 } from 'lucide-react';
 import { 
   getMasterRequests, 
@@ -33,7 +34,12 @@ import {
   deleteGalleryItem,
   getBlogPosts,
   createBlogPost,
-  deleteBlogPost
+  deleteBlogPost,
+  getTourPageSettings,
+  updateTourPageSettings,
+  getTours,
+  createTourPackage,
+  deleteTourPackage
 } from '../../services/api';
 import localDb from '../../../db.json';
 
@@ -87,6 +93,73 @@ export default function AdminPanel() {
     file: null
   });
 
+  // دیتای صفحه سفر و پکیج‌ها
+  const [toursList, setToursList] = useState([]);
+  const [tourSubTab, setTourSubTab] = useState('discover'); // 'discover', 'packages', 'sections'
+  const [tourPageForm, setTourPageForm] = useState({
+    discover_title_fa: 'افغانستان را به شیوه خود کشف کنید',
+    discover_title_en: 'Discover Afghanistan on Your Own Terms',
+    discover_desc_fa: 'افغانستان را از طریق سفرهای دقیقاً برنامه‌ریزی‌شده، همراه با مقصد، اقامت، حمل‌ونقل، راهنما و پشتیبانی سفر کشف کنید.',
+    discover_desc_en: 'Discover Afghanistan through carefully planned journeys, complete with destinations, accommodation, transport, guides, and comprehensive travel support.',
+    discover_image: '/tours/images/bamyanPictures.webp',
+    travel_eyebrow_fa: 'موضوعات سفر',
+    travel_eyebrow_en: 'Travel Themes',
+    travel_title_fa: 'تجربه سفر خود را انتخاب کنید',
+    travel_title_en: 'Choose Your Travel Experience',
+    travel_items: [
+      { title_fa: 'تجربه‌های مقصد', title_en: 'Destination Experiences', description_fa: 'مقصدهای مختلف را با سفرهایی که با دقت طراحی شده‌اند، کشف کنید.', description_en: 'Discover individual destinations through carefully designed journeys.' },
+      { title_fa: 'سفرهای چندمقصدی', title_en: 'Multi-Destination Journeys', description_fa: 'چندین مقصد را در قالب یک سفر یکپارچه در سراسر افغانستان تجربه کنید.', description_en: 'Connect multiple destinations in one seamless journey across Afghanistan.' },
+      { title_fa: 'فرهنگ و میراث', title_en: 'Cultural & Heritage', description_fa: 'تاریخ، فرهنگ، سنت‌ها و میراث افغانستان را کشف کنید.', description_en: "Explore Afghanistan's history, culture, traditions, and heritage." },
+      { title_fa: 'طبیعت و ماجراجویی', title_en: 'Nature & Adventure', description_fa: 'کوه‌ها، دره‌ها، دریاچه‌ها، مناظر طبیعی و فعالیت‌های فضای باز را تجربه کنید.', description_en: 'Experience mountains, valleys, lakes, landscapes, and outdoor activities.' },
+      { title_fa: 'سفرهای ویژه و VIP', title_en: 'Premium & VIP', description_fa: 'با آسایش بیشتر، برنامه‌ریزی شخصی‌سازی‌شده و پشتیبانی اختصاصی سفر کنید.', description_en: 'Travel with enhanced comfort, personalized arrangements, and dedicated support.' },
+      { title_fa: 'سفرهای سفارشی', title_en: 'Customized Journeys', description_fa: 'سفری متناسب با علایق، زمان‌بندی و ترجیحات سفر خود ایجاد کنید.', description_en: 'Create a journey tailored to your interests, schedule, and travel preferences.' }
+    ],
+    more_eyebrow_fa: 'فراتر از یک سفر ساده',
+    more_eyebrow_en: 'More Than a Tour',
+    more_title_fa: 'خدماتی فراتر از یک سفر ساده',
+    more_title_en: 'More Than a Tour',
+    more_items: [
+      { title_fa: 'اقامت', title_en: 'Accommodation', description_fa: 'اقامتگاه‌های منتخب برای سفر شما.', description_en: 'Selected stays for your journey.' },
+      { title_fa: 'حمل‌ونقل', title_en: 'Transportation', description_fa: 'هماهنگی رفت‌وآمد میان مقصدهای مختلف.', description_en: 'Coordinated travel between destinations.' },
+      { title_fa: 'راهنمایان حرفه‌ای', title_en: 'Professional Guides', description_fa: 'راهنمایی محلی و آشنایی با فرهنگ و جاذبه‌های منطقه.', description_en: 'Local guidance and cultural insight.' },
+      { title_fa: 'پشتیبانی سفر', title_en: 'Travel Support', description_fa: 'کمک و پشتیبانی عملی در طول سفر شما.', description_en: 'Practical assistance throughout your journey.' },
+      { title_fa: 'کمک در امور ویزا', title_en: 'Visa Assistance', description_fa: 'راهنمایی برای آماده‌سازی مدارک و مراحل ویزا.', description_en: 'Guidance with your visa preparation.' }
+    ],
+    work_eyebrow_fa: 'نحوه رزرو سفر',
+    work_eyebrow_en: 'How Booking Works',
+    work_title_fa: 'چگونه کار می‌کند',
+    work_title_en: 'How It Works',
+    work_items: [
+      { title_fa: 'انتخاب پکیج', title_en: 'Choose Package', description_fa: 'پکیج مورد نظر خود را متناسب با برنامه و مقصد انتخاب کنید.', description_en: 'Choose your desired package matching your plans.' },
+      { title_fa: 'ثبت درخواست', title_en: 'Send Inquiry', description_fa: 'مشخصات و زمان سفر خود را برای هماهنگی ارسال نمایید.', description_en: 'Submit your journey dates and details.' },
+      { title_fa: 'تأیید برنامه', title_en: 'Confirm Journey', description_fa: 'برنامه نهایی سفر و اقامتگاه‌ها توسط کارشناسان تأیید می‌شود.', description_en: 'Finalize travel schedule and accommodations with our team.' },
+      { title_fa: 'آغاز سفر', title_en: 'Begin Adventure', description_fa: 'با آسودگی خاطر سفر خاطره‌انگیز خود را در افغانستان آغاز کنید.', description_en: 'Embark on an unforgettable voyage across Afghanistan.' }
+    ]
+  });
+
+  const [discoverSaving, setDiscoverSaving] = useState(false);
+  const [discoverSuccess, setDiscoverSuccess] = useState('');
+  const [discoverError, setDiscoverError] = useState('');
+  const [discoverFile, setDiscoverFile] = useState(null);
+
+  const [sectionsSaving, setSectionsSaving] = useState(false);
+  const [sectionsSuccess, setSectionsSuccess] = useState('');
+  const [sectionsError, setSectionsError] = useState('');
+
+  const [newPackageForm, setNewPackageForm] = useState({
+    title_fa: '',
+    title_en: '',
+    price: 150,
+    days: 3,
+    nights: 2,
+    description_fa: '',
+    description_en: '',
+    file: null
+  });
+  const [packageUploading, setPackageUploading] = useState(false);
+  const [packageSuccess, setPackageSuccess] = useState('');
+  const [packageError, setPackageError] = useState('');
+
   // وضعیت لاگین
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
     return Boolean(sessionStorage.getItem('amovi_admin_token'));
@@ -125,6 +198,20 @@ export default function AdminPanel() {
     });
     getBlogPosts().then((posts) => {
       if (Array.isArray(posts)) setBlogList(posts);
+    });
+    getTourPageSettings().then((data) => {
+      if (data) {
+        setTourPageForm((prev) => ({
+          ...prev,
+          ...data,
+          travel_items: Array.isArray(data.travel_items) ? data.travel_items : prev.travel_items,
+          more_items: Array.isArray(data.more_items) ? data.more_items : prev.more_items,
+          work_items: Array.isArray(data.work_items) ? data.work_items : prev.work_items,
+        }));
+      }
+    });
+    getTours().then((tours) => {
+      if (Array.isArray(tours)) setToursList(tours);
     });
   };
 
@@ -319,12 +406,148 @@ export default function AdminPanel() {
 
   const unreadCount = contactMessages.filter((m) => m.status === 'unread').length;
 
+  // ذخیره بخش کشف افغانستان
+  const handleSaveDiscover = async (e) => {
+    e.preventDefault();
+    setDiscoverSaving(true);
+    setDiscoverSuccess('');
+    setDiscoverError('');
+    try {
+      const formData = new FormData();
+      formData.append('discover_title_fa', tourPageForm.discover_title_fa);
+      formData.append('discover_title_en', tourPageForm.discover_title_en);
+      formData.append('discover_desc_fa', tourPageForm.discover_desc_fa);
+      formData.append('discover_desc_en', tourPageForm.discover_desc_en);
+      if (discoverFile) {
+        formData.append('discover_image', discoverFile);
+      }
+      const res = await updateTourPageSettings(formData);
+      if (res && res.success) {
+        setDiscoverSuccess('بخش کشف افغانستان با موفقیت ذخیره شد.');
+        if (res.data?.discover_image) {
+          setTourPageForm((prev) => ({ ...prev, discover_image: res.data.discover_image }));
+        }
+        setDiscoverFile(null);
+        const fileInput = document.getElementById('discoverFileInput');
+        if (fileInput) fileInput.value = '';
+        setTimeout(() => setDiscoverSuccess(''), 5000);
+      }
+    } catch (err) {
+      console.error('Discover save error:', err);
+      setDiscoverError('خطا در ذخیره بخش کشف افغانستان.');
+    } finally {
+      setDiscoverSaving(false);
+    }
+  };
+
+  // ذخیره متون و عناوین بخش‌های دیگر صفحه سفر
+  const handleSaveSections = async (e) => {
+    e.preventDefault();
+    setSectionsSaving(true);
+    setSectionsSuccess('');
+    setSectionsError('');
+    try {
+      const formData = new FormData();
+      formData.append('travel_eyebrow_fa', tourPageForm.travel_eyebrow_fa);
+      formData.append('travel_eyebrow_en', tourPageForm.travel_eyebrow_en);
+      formData.append('travel_title_fa', tourPageForm.travel_title_fa);
+      formData.append('travel_title_en', tourPageForm.travel_title_en);
+      formData.append('travel_items', JSON.stringify(tourPageForm.travel_items));
+
+      formData.append('more_eyebrow_fa', tourPageForm.more_eyebrow_fa);
+      formData.append('more_eyebrow_en', tourPageForm.more_eyebrow_en);
+      formData.append('more_title_fa', tourPageForm.more_title_fa);
+      formData.append('more_title_en', tourPageForm.more_title_en);
+      formData.append('more_items', JSON.stringify(tourPageForm.more_items));
+
+      formData.append('work_eyebrow_fa', tourPageForm.work_eyebrow_fa);
+      formData.append('work_eyebrow_en', tourPageForm.work_eyebrow_en);
+      formData.append('work_title_fa', tourPageForm.work_title_fa);
+      formData.append('work_title_en', tourPageForm.work_title_en);
+      formData.append('work_items', JSON.stringify(tourPageForm.work_items));
+
+      const res = await updateTourPageSettings(formData);
+      if (res && res.success) {
+        setSectionsSuccess('عناوین و متون بخش‌های صفحه سفر با موفقیت به‌روزرسانی شد.');
+        setTimeout(() => setSectionsSuccess(''), 5000);
+      }
+    } catch (err) {
+      console.error('Sections save error:', err);
+      setSectionsError('خطا در ذخیره متون بخش‌ها.');
+    } finally {
+      setSectionsSaving(false);
+    }
+  };
+
+  // افزودن پکیج تور جدید
+  const handleCreatePackage = async (e) => {
+    e.preventDefault();
+    if (!newPackageForm.title_fa.trim() && !newPackageForm.title_en.trim()) {
+      setPackageError('عنوان پکیج تور الزامی است.');
+      return;
+    }
+    setPackageUploading(true);
+    setPackageSuccess('');
+    setPackageError('');
+    try {
+      const formData = new FormData();
+      formData.append('title_fa', newPackageForm.title_fa.trim());
+      formData.append('title_en', (newPackageForm.title_en || newPackageForm.title_fa).trim());
+      formData.append('price', Number(newPackageForm.price) || 150);
+      formData.append('days', Number(newPackageForm.days) || 3);
+      formData.append('nights', Number(newPackageForm.nights) || 2);
+      formData.append('description_fa', newPackageForm.description_fa.trim());
+      formData.append('description_en', newPackageForm.description_en.trim());
+      if (newPackageForm.file) {
+        formData.append('image', newPackageForm.file);
+      }
+      const res = await createTourPackage(formData);
+      if (res && res.success) {
+        setPackageSuccess('پکیج جدید با موفقیت ایجاد و ذخیره شد.');
+        const updated = await getTours();
+        setToursList(updated);
+        setNewPackageForm({
+          title_fa: '',
+          title_en: '',
+          price: 150,
+          days: 3,
+          nights: 2,
+          description_fa: '',
+          description_en: '',
+          file: null
+        });
+        const fileInput = document.getElementById('tourPkgFileInput');
+        if (fileInput) fileInput.value = '';
+        setTimeout(() => setPackageSuccess(''), 5000);
+      }
+    } catch (err) {
+      console.error('Create tour package error:', err);
+      setPackageError('خطا در افزودن پکیج تور.');
+    } finally {
+      setPackageUploading(false);
+    }
+  };
+
+  // حذف پکیج تور
+  const handleDeletePackage = async (id) => {
+    if (!window.confirm('آیا از حذف این پکیج تور اطمینان دارید؟')) return;
+    try {
+      await deleteTourPackage(id);
+      setToursList((prev) => prev.filter((p) => p.id !== id && p.slug !== id && p.dbId !== id));
+    } catch (err) {
+      console.error('Delete tour package error:', err);
+      alert('خطا در حذف پکیج تور.');
+    }
+  };
+
   const exportData = () => {
     const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify({ 
       contactMessages, 
       settings: settingsForm, 
       gallery: galleryList,
       blogPosts: blogList,
+      tours: toursList,
+      tourPageSettings: tourPageForm,
       masterRequests 
     }, null, 2));
     const downloadAnchor = document.createElement('a');
@@ -508,6 +731,25 @@ export default function AdminPanel() {
             </button>
 
             <button
+              onClick={() => { setActiveTab('tours'); setMobileSidebarOpen(false); }}
+              className={`w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-xs font-bold transition cursor-pointer ${
+                activeTab === 'tours'
+                  ? 'bg-[#14213D] text-white shadow-md'
+                  : 'text-slate-600 hover:bg-slate-100 hover:text-[#14213D]'
+              }`}
+            >
+              <div className="flex items-center gap-2.5">
+                <Compass size={16} className={activeTab === 'tours' ? 'text-[#FCA311]' : 'text-slate-400'} />
+                <span>مدیریت صفحه سفر و پکیج‌ها</span>
+              </div>
+              <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
+                activeTab === 'tours' ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-600'
+              }`}>
+                {toursList.length}
+              </span>
+            </button>
+
+            <button
               onClick={() => { setActiveTab('bookings'); setMobileSidebarOpen(false); }}
               className={`w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-xs font-bold transition cursor-pointer ${
                 activeTab === 'bookings'
@@ -565,6 +807,7 @@ export default function AdminPanel() {
                 {activeTab === 'settings' && 'تنظیمات و اطلاعات تماس شرکت'}
                 {activeTab === 'gallery' && 'مدیریت و آپلود تصاویر گالری (WebP)'}
                 {activeTab === 'blog' && 'مدیریت و انتشار مقالات وبلاگ'}
+                {activeTab === 'tours' && 'مدیریت محتوا و پکیج‌های صفحه سفر'}
                 {activeTab === 'bookings' && 'درخواست‌های رزرواسیون تورها'}
               </h2>
               <p className="text-[11px] text-slate-500 hidden sm:block">سیستم جامع کنترل و مدیریت عملیات آمووی ترول</p>
@@ -1204,7 +1447,751 @@ export default function AdminPanel() {
           )}
 
           {/* ========================================================
-              تب ۵: درخواست‌های رزرواسیون
+              تب ۵: مدیریت صفحه سفر و پکیج‌ها (Tours Management)
+          ======================================================== */}
+          {activeTab === 'tours' && (
+            <div className="space-y-6">
+              {/* تب‌های داخلی بخش سفر */}
+              <div className="flex flex-wrap items-center gap-2 border-b border-slate-200 pb-3">
+                <button
+                  type="button"
+                  onClick={() => setTourSubTab('discover')}
+                  className={`px-4 py-2 rounded-xl text-xs font-bold transition cursor-pointer ${
+                    tourSubTab === 'discover'
+                      ? 'bg-[#14213D] text-white shadow-sm'
+                      : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
+                  }`}
+                >
+                  بخش کشف افغانستان
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setTourSubTab('packages')}
+                  className={`px-4 py-2 rounded-xl text-xs font-bold transition cursor-pointer flex items-center gap-1.5 ${
+                    tourSubTab === 'packages'
+                      ? 'bg-[#14213D] text-white shadow-sm'
+                      : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
+                  }`}
+                >
+                  <span>پکیج‌های تور</span>
+                  <span className={`px-2 py-0.5 rounded-full text-[10px] ${
+                    tourSubTab === 'packages' ? 'bg-[#FCA311] text-[#14213D]' : 'bg-slate-100 text-slate-600'
+                  }`}>
+                    {toursList.length}
+                  </span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setTourSubTab('sections')}
+                  className={`px-4 py-2 rounded-xl text-xs font-bold transition cursor-pointer ${
+                    tourSubTab === 'sections'
+                      ? 'bg-[#14213D] text-white shadow-sm'
+                      : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
+                  }`}
+                >
+                  عناوین و متون بخش‌های صفحه سفر
+                </button>
+              </div>
+
+              {/* زیرتب ۱: بخش کشف افغانستان */}
+              {tourSubTab === 'discover' && (
+                <div className="bg-white rounded-2xl border border-slate-200 shadow-xs p-6 space-y-6">
+                  <div>
+                    <h3 className="text-base font-black text-[#14213D]">تنظیمات بخش کشف افغانستان (Discover Section)</h3>
+                    <p className="text-xs text-slate-500 mt-1">
+                      ویرایش عنوان، متن توضیحات به زبان‌های دری و انگلیسی همراه با تغییر تصویر کنار متن.
+                    </p>
+                  </div>
+
+                  {discoverSuccess && (
+                    <div className="p-3.5 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-bold">
+                      {discoverSuccess}
+                    </div>
+                  )}
+                  {discoverError && (
+                    <div className="p-3.5 rounded-xl bg-rose-50 text-rose-700 border border-rose-200 text-xs font-bold">
+                      {discoverError}
+                    </div>
+                  )}
+
+                  <form onSubmit={handleSaveDiscover} className="space-y-5">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                          عنوان بخش (دری / فارسی)
+                        </label>
+                        <input
+                          type="text"
+                          required
+                          value={tourPageForm.discover_title_fa || ''}
+                          onChange={(e) => setTourPageForm({ ...tourPageForm, discover_title_fa: e.target.value })}
+                          className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 font-['Sahel'] focus:outline-none focus:border-[#FCA311] focus:bg-white"
+                          dir="rtl"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                          Section Title (English)
+                        </label>
+                        <input
+                          type="text"
+                          required
+                          value={tourPageForm.discover_title_en || ''}
+                          onChange={(e) => setTourPageForm({ ...tourPageForm, discover_title_en: e.target.value })}
+                          className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 font-[Inter] focus:outline-none focus:border-[#FCA311] focus:bg-white"
+                          dir="ltr"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                          توضیحات بخش (دری / فارسی)
+                        </label>
+                        <textarea
+                          rows={4}
+                          required
+                          value={tourPageForm.discover_desc_fa || ''}
+                          onChange={(e) => setTourPageForm({ ...tourPageForm, discover_desc_fa: e.target.value })}
+                          className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 font-['Sahel'] leading-relaxed focus:outline-none focus:border-[#FCA311] focus:bg-white"
+                          dir="rtl"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                          Section Description (English)
+                        </label>
+                        <textarea
+                          rows={4}
+                          required
+                          value={tourPageForm.discover_desc_en || ''}
+                          onChange={(e) => setTourPageForm({ ...tourPageForm, discover_desc_en: e.target.value })}
+                          className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 font-[Inter] leading-relaxed focus:outline-none focus:border-[#FCA311] focus:bg-white"
+                          dir="ltr"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="border border-slate-200 rounded-2xl p-4 bg-slate-50/50 space-y-3">
+                      <label className="block text-xs font-bold text-slate-700">
+                        تصویر بخش کشف (فرمت تبدیل خودکار به WebP)
+                      </label>
+                      <div className="flex flex-col sm:flex-row items-center gap-4">
+                        <div className="w-32 h-20 rounded-xl overflow-hidden border border-slate-200 bg-white shadow-xs shrink-0">
+                          <img
+                            src={discoverFile ? URL.createObjectURL(discoverFile) : (tourPageForm.discover_image || '/tours/images/bamyanPictures.webp')}
+                            alt="Discover Preview"
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                        <div className="flex-1 w-full">
+                          <input
+                            id="discoverFileInput"
+                            type="file"
+                            accept="image/*"
+                            onChange={(e) => setDiscoverFile(e.target.files[0] || null)}
+                            className="block w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-[#14213D] file:text-white hover:file:bg-slate-800 cursor-pointer"
+                          />
+                          <p className="text-[11px] text-slate-400 mt-1.5">
+                            تصویر جدید در صورت آپلود به‌طور خودکار به WebP تبدیل و فشرده‌سازی می‌شود.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex justify-end pt-2">
+                      <button
+                        type="submit"
+                        disabled={discoverSaving}
+                        className="px-6 py-2.5 rounded-xl bg-[#FCA311] hover:bg-amber-500 text-[#14213D] font-black text-xs transition shadow-sm cursor-pointer disabled:opacity-50"
+                      >
+                        {discoverSaving ? 'در حال ذخیره‌سازی...' : 'ذخیره تغییرات بخش کشف'}
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              )}
+
+              {/* زیرتب ۲: پکیج‌های تور */}
+              {tourSubTab === 'packages' && (
+                <div className="space-y-6">
+                  {/* فرم افزودن پکیج جدید */}
+                  <div className="bg-white rounded-2xl border border-slate-200 shadow-xs p-6 space-y-4">
+                    <h3 className="text-base font-black text-[#14213D]">افزودن پکیج سفر جدید</h3>
+
+                    {packageSuccess && (
+                      <div className="p-3.5 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-bold">
+                        {packageSuccess}
+                      </div>
+                    )}
+                    {packageError && (
+                      <div className="p-3.5 rounded-xl bg-rose-50 text-rose-700 border border-rose-200 text-xs font-bold">
+                        {packageError}
+                      </div>
+                    )}
+
+                    <form onSubmit={handleCreatePackage} className="space-y-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                            عنوان پکیج (دری / فارسی)
+                          </label>
+                          <input
+                            type="text"
+                            required
+                            placeholder="مثال: تور کشف بامیان و بند امیر"
+                            value={newPackageForm.title_fa}
+                            onChange={(e) => setNewPackageForm({ ...newPackageForm, title_fa: e.target.value })}
+                            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 font-['Sahel'] focus:outline-none focus:border-[#FCA311] focus:bg-white"
+                            dir="rtl"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                            Package Title (English)
+                          </label>
+                          <input
+                            type="text"
+                            required
+                            placeholder="e.g. Bamyan & Band-e Amir Discovery"
+                            value={newPackageForm.title_en}
+                            onChange={(e) => setNewPackageForm({ ...newPackageForm, title_en: e.target.value })}
+                            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 font-[Inter] focus:outline-none focus:border-[#FCA311] focus:bg-white"
+                            dir="ltr"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div>
+                          <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                            قیمت به دالر (USD)
+                          </label>
+                          <input
+                            type="number"
+                            min="0"
+                            required
+                            value={newPackageForm.price}
+                            onChange={(e) => setNewPackageForm({ ...newPackageForm, price: e.target.value })}
+                            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 font-mono focus:outline-none focus:border-[#FCA311] focus:bg-white"
+                            dir="ltr"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                            تعداد روزها (Days)
+                          </label>
+                          <input
+                            type="number"
+                            min="1"
+                            required
+                            value={newPackageForm.days}
+                            onChange={(e) => setNewPackageForm({ ...newPackageForm, days: e.target.value })}
+                            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 font-mono focus:outline-none focus:border-[#FCA311] focus:bg-white"
+                            dir="ltr"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                            تعداد شب‌ها (Nights)
+                          </label>
+                          <input
+                            type="number"
+                            min="0"
+                            required
+                            value={newPackageForm.nights}
+                            onChange={(e) => setNewPackageForm({ ...newPackageForm, nights: e.target.value })}
+                            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 font-mono focus:outline-none focus:border-[#FCA311] focus:bg-white"
+                            dir="ltr"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                            توضیحات مختصر (دری / فارسی)
+                          </label>
+                          <textarea
+                            rows={3}
+                            placeholder="توضیح کوتاه درباره مقاصد و خدمات این پکیج..."
+                            value={newPackageForm.description_fa}
+                            onChange={(e) => setNewPackageForm({ ...newPackageForm, description_fa: e.target.value })}
+                            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 font-['Sahel'] focus:outline-none focus:border-[#FCA311] focus:bg-white"
+                            dir="rtl"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                            Short Description (English)
+                          </label>
+                          <textarea
+                            rows={3}
+                            placeholder="Short overview of destinations and services..."
+                            value={newPackageForm.description_en}
+                            onChange={(e) => setNewPackageForm({ ...newPackageForm, description_en: e.target.value })}
+                            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 font-[Inter] focus:outline-none focus:border-[#FCA311] focus:bg-white"
+                            dir="ltr"
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                          تصویر پکیج تور (تبدیل خودکار به WebP)
+                        </label>
+                        <input
+                          id="tourPkgFileInput"
+                          type="file"
+                          accept="image/*"
+                          onChange={(e) => setNewPackageForm({ ...newPackageForm, file: e.target.files[0] || null })}
+                          className="block w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-[#14213D] file:text-white hover:file:bg-slate-800 cursor-pointer"
+                        />
+                      </div>
+
+                      <div className="flex justify-end pt-2">
+                        <button
+                          type="submit"
+                          disabled={packageUploading}
+                          className="px-6 py-2.5 rounded-xl bg-[#FCA311] hover:bg-amber-500 text-[#14213D] font-black text-xs transition shadow-sm cursor-pointer disabled:opacity-50"
+                        >
+                          {packageUploading ? 'در حال ثبت...' : 'افزودن و ذخیره پکیج تور'}
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+
+                  {/* لیست پکیج‌های ثبت‌شده */}
+                  <div className="bg-white rounded-2xl border border-slate-200 shadow-xs p-6 space-y-4">
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-base font-black text-[#14213D]">لیست پکیج‌های موجود در سایت</h3>
+                      <span className="text-xs text-slate-500 font-mono">{toursList.length} پکیج</span>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {toursList.map((pkg, idx) => {
+                        const titleFa = pkg.fa?.title || pkg.title_fa || pkg.title || 'پکیج تور';
+                        const titleEn = pkg.en?.title || pkg.title_en || pkg.title || 'Tour Package';
+                        const price = pkg.price || 150;
+                        const days = pkg.fa?.days || pkg.days || 3;
+                        const nights = pkg.fa?.nights || pkg.nights || 2;
+                        const image = pkg.image || pkg.image_url || '/tours/images/kabulPictures.webp';
+                        const id = pkg.id || pkg.slug || pkg.dbId || idx;
+
+                        return (
+                          <div key={id} className="border border-slate-200 rounded-2xl overflow-hidden bg-white shadow-xs flex flex-col justify-between">
+                            <div>
+                              <div className="h-36 w-full bg-slate-100 overflow-hidden relative">
+                                <img src={image} alt={titleFa} className="w-full h-full object-cover" />
+                                <span className="absolute top-2.5 right-2.5 bg-[#14213D]/90 text-[#FCA311] text-[11px] font-bold px-2 py-0.5 rounded-md font-mono">
+                                  ${price}
+                                </span>
+                              </div>
+                              <div className="p-4 space-y-1.5">
+                                <h4 className="font-bold text-xs text-[#14213D] line-clamp-1">{titleFa}</h4>
+                                <p className="text-[11px] text-slate-500 line-clamp-1 font-[Inter]" dir="ltr">{titleEn}</p>
+                                <div className="text-[11px] text-slate-400 font-mono pt-1">
+                                  {days} روز / {nights} شب
+                                </div>
+                              </div>
+                            </div>
+                            <div className="p-4 pt-0 border-t border-slate-100 mt-2 flex justify-end">
+                              <button
+                                type="button"
+                                onClick={() => handleDeletePackage(id)}
+                                className="px-3 py-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 text-xs font-bold transition flex items-center gap-1 cursor-pointer"
+                              >
+                                <Trash2 size={13} />
+                                <span>حذف پکیج</span>
+                              </button>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* زیرتب ۳: عناوین و متون بخش‌ها */}
+              {tourSubTab === 'sections' && (
+                <div className="bg-white rounded-2xl border border-slate-200 shadow-xs p-6 space-y-6">
+                  <div>
+                    <h3 className="text-base font-black text-[#14213D]">ویرایش عناوین و متون بخش‌های صفحه سفر</h3>
+                    <p className="text-xs text-slate-500 mt-1">
+                      مطابق درخواست، آیکون‌ها ثابت و استاندارد هستند و متن‌ها و عنوان‌ها به زبان‌های دری و انگلیسی قابل شخصی‌سازی می‌باشند.
+                    </p>
+                  </div>
+
+                  {sectionsSuccess && (
+                    <div className="p-3.5 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-bold">
+                      {sectionsSuccess}
+                    </div>
+                  )}
+                  {sectionsError && (
+                    <div className="p-3.5 rounded-xl bg-rose-50 text-rose-700 border border-rose-200 text-xs font-bold">
+                      {sectionsError}
+                    </div>
+                  )}
+
+                  <form onSubmit={handleSaveSections} className="space-y-8">
+                    {/* بخش ۱: تجربه سفر خود را انتخاب کنید */}
+                    <div className="border border-slate-200 rounded-2xl p-5 bg-slate-50/50 space-y-5">
+                      <div className="border-b border-slate-200 pb-3">
+                        <span className="text-[11px] font-bold text-[#FCA311] uppercase tracking-wider block">بخش اول</span>
+                        <h4 className="text-sm font-black text-[#14213D]">تجربه سفر خود را انتخاب کنید (Travel Themes)</h4>
+                      </div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-[11px] font-bold text-slate-600 mb-1">سربرگ کوچک (دری)</label>
+                          <input
+                            type="text"
+                            value={tourPageForm.travel_eyebrow_fa || ''}
+                            onChange={(e) => setTourPageForm({ ...tourPageForm, travel_eyebrow_fa: e.target.value })}
+                            className="w-full px-3 py-2 rounded-xl bg-white border border-slate-200 text-xs text-slate-800"
+                            dir="rtl"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-[11px] font-bold text-slate-600 mb-1">Eyebrow (English)</label>
+                          <input
+                            type="text"
+                            value={tourPageForm.travel_eyebrow_en || ''}
+                            onChange={(e) => setTourPageForm({ ...tourPageForm, travel_eyebrow_en: e.target.value })}
+                            className="w-full px-3 py-2 rounded-xl bg-white border border-slate-200 text-xs text-slate-800"
+                            dir="ltr"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-[11px] font-bold text-slate-600 mb-1">عنوان اصلی (دری)</label>
+                          <input
+                            type="text"
+                            value={tourPageForm.travel_title_fa || ''}
+                            onChange={(e) => setTourPageForm({ ...tourPageForm, travel_title_fa: e.target.value })}
+                            className="w-full px-3 py-2 rounded-xl bg-white border border-slate-200 text-xs text-slate-800"
+                            dir="rtl"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-[11px] font-bold text-slate-600 mb-1">Main Title (English)</label>
+                          <input
+                            type="text"
+                            value={tourPageForm.travel_title_en || ''}
+                            onChange={(e) => setTourPageForm({ ...tourPageForm, travel_title_en: e.target.value })}
+                            className="w-full px-3 py-2 rounded-xl bg-white border border-slate-200 text-xs text-slate-800"
+                            dir="ltr"
+                          />
+                        </div>
+                      </div>
+
+                      {/* ۶ آیتم این بخش */}
+                      <div className="space-y-4 pt-2">
+                        <span className="text-xs font-bold text-slate-700 block">۶ گزینه تجربه سفر:</span>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          {(tourPageForm.travel_items || []).map((item, idx) => (
+                            <div key={idx} className="p-3.5 bg-white border border-slate-200 rounded-xl space-y-2">
+                              <span className="text-[11px] font-mono font-bold text-amber-600">گزینه {idx + 1}</span>
+                              <div className="grid grid-cols-2 gap-2">
+                                <input
+                                  type="text"
+                                  placeholder="عنوان دری"
+                                  value={item.title_fa || ''}
+                                  onChange={(e) => {
+                                    const updated = [...tourPageForm.travel_items];
+                                    updated[idx] = { ...updated[idx], title_fa: e.target.value };
+                                    setTourPageForm({ ...tourPageForm, travel_items: updated });
+                                  }}
+                                  className="px-2.5 py-1.5 rounded-lg bg-slate-50 border border-slate-200 text-xs"
+                                  dir="rtl"
+                                />
+                                <input
+                                  type="text"
+                                  placeholder="English Title"
+                                  value={item.title_en || ''}
+                                  onChange={(e) => {
+                                    const updated = [...tourPageForm.travel_items];
+                                    updated[idx] = { ...updated[idx], title_en: e.target.value };
+                                    setTourPageForm({ ...tourPageForm, travel_items: updated });
+                                  }}
+                                  className="px-2.5 py-1.5 rounded-lg bg-slate-50 border border-slate-200 text-xs"
+                                  dir="ltr"
+                                />
+                              </div>
+                              <textarea
+                                rows={2}
+                                placeholder="متن توضیحات دری"
+                                value={item.description_fa || ''}
+                                onChange={(e) => {
+                                  const updated = [...tourPageForm.travel_items];
+                                  updated[idx] = { ...updated[idx], description_fa: e.target.value };
+                                  setTourPageForm({ ...tourPageForm, travel_items: updated });
+                                }}
+                                className="w-full px-2.5 py-1.5 rounded-lg bg-slate-50 border border-slate-200 text-xs"
+                                dir="rtl"
+                              />
+                              <textarea
+                                rows={2}
+                                placeholder="English Description"
+                                value={item.description_en || ''}
+                                onChange={(e) => {
+                                  const updated = [...tourPageForm.travel_items];
+                                  updated[idx] = { ...updated[idx], description_en: e.target.value };
+                                  setTourPageForm({ ...tourPageForm, travel_items: updated });
+                                }}
+                                className="w-full px-2.5 py-1.5 rounded-lg bg-slate-50 border border-slate-200 text-xs"
+                                dir="ltr"
+                              />
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* بخش ۲: خدماتی فراتر از یک سفر ساده */}
+                    <div className="border border-slate-200 rounded-2xl p-5 bg-slate-50/50 space-y-5">
+                      <div className="border-b border-slate-200 pb-3">
+                        <span className="text-[11px] font-bold text-[#FCA311] uppercase tracking-wider block">بخش دوم</span>
+                        <h4 className="text-sm font-black text-[#14213D]">خدماتی فراتر از یک سفر ساده (More Than a Tour)</h4>
+                      </div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-[11px] font-bold text-slate-600 mb-1">سربرگ کوچک (دری)</label>
+                          <input
+                            type="text"
+                            value={tourPageForm.more_eyebrow_fa || ''}
+                            onChange={(e) => setTourPageForm({ ...tourPageForm, more_eyebrow_fa: e.target.value })}
+                            className="w-full px-3 py-2 rounded-xl bg-white border border-slate-200 text-xs text-slate-800"
+                            dir="rtl"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-[11px] font-bold text-slate-600 mb-1">Eyebrow (English)</label>
+                          <input
+                            type="text"
+                            value={tourPageForm.more_eyebrow_en || ''}
+                            onChange={(e) => setTourPageForm({ ...tourPageForm, more_eyebrow_en: e.target.value })}
+                            className="w-full px-3 py-2 rounded-xl bg-white border border-slate-200 text-xs text-slate-800"
+                            dir="ltr"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-[11px] font-bold text-slate-600 mb-1">عنوان اصلی (دری)</label>
+                          <input
+                            type="text"
+                            value={tourPageForm.more_title_fa || ''}
+                            onChange={(e) => setTourPageForm({ ...tourPageForm, more_title_fa: e.target.value })}
+                            className="w-full px-3 py-2 rounded-xl bg-white border border-slate-200 text-xs text-slate-800"
+                            dir="rtl"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-[11px] font-bold text-slate-600 mb-1">Main Title (English)</label>
+                          <input
+                            type="text"
+                            value={tourPageForm.more_title_en || ''}
+                            onChange={(e) => setTourPageForm({ ...tourPageForm, more_title_en: e.target.value })}
+                            className="w-full px-3 py-2 rounded-xl bg-white border border-slate-200 text-xs text-slate-800"
+                            dir="ltr"
+                          />
+                        </div>
+                      </div>
+
+                      {/* ۵ آیتم این بخش */}
+                      <div className="space-y-4 pt-2">
+                        <span className="text-xs font-bold text-slate-700 block">۵ خدمت ویژه سفر:</span>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          {(tourPageForm.more_items || []).map((item, idx) => (
+                            <div key={idx} className="p-3.5 bg-white border border-slate-200 rounded-xl space-y-2">
+                              <span className="text-[11px] font-mono font-bold text-amber-600">خدمت {idx + 1}</span>
+                              <div className="grid grid-cols-2 gap-2">
+                                <input
+                                  type="text"
+                                  placeholder="عنوان دری"
+                                  value={item.title_fa || ''}
+                                  onChange={(e) => {
+                                    const updated = [...tourPageForm.more_items];
+                                    updated[idx] = { ...updated[idx], title_fa: e.target.value };
+                                    setTourPageForm({ ...tourPageForm, more_items: updated });
+                                  }}
+                                  className="px-2.5 py-1.5 rounded-lg bg-slate-50 border border-slate-200 text-xs"
+                                  dir="rtl"
+                                />
+                                <input
+                                  type="text"
+                                  placeholder="English Title"
+                                  value={item.title_en || ''}
+                                  onChange={(e) => {
+                                    const updated = [...tourPageForm.more_items];
+                                    updated[idx] = { ...updated[idx], title_en: e.target.value };
+                                    setTourPageForm({ ...tourPageForm, more_items: updated });
+                                  }}
+                                  className="px-2.5 py-1.5 rounded-lg bg-slate-50 border border-slate-200 text-xs"
+                                  dir="ltr"
+                                />
+                              </div>
+                              <textarea
+                                rows={2}
+                                placeholder="متن توضیحات دری"
+                                value={item.description_fa || ''}
+                                onChange={(e) => {
+                                  const updated = [...tourPageForm.more_items];
+                                  updated[idx] = { ...updated[idx], description_fa: e.target.value };
+                                  setTourPageForm({ ...tourPageForm, more_items: updated });
+                                }}
+                                className="w-full px-2.5 py-1.5 rounded-lg bg-slate-50 border border-slate-200 text-xs"
+                                dir="rtl"
+                              />
+                              <textarea
+                                rows={2}
+                                placeholder="English Description"
+                                value={item.description_en || ''}
+                                onChange={(e) => {
+                                  const updated = [...tourPageForm.more_items];
+                                  updated[idx] = { ...updated[idx], description_en: e.target.value };
+                                  setTourPageForm({ ...tourPageForm, more_items: updated });
+                                }}
+                                className="w-full px-2.5 py-1.5 rounded-lg bg-slate-50 border border-slate-200 text-xs"
+                                dir="ltr"
+                              />
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* بخش ۳: چگونه کار می‌کند */}
+                    <div className="border border-slate-200 rounded-2xl p-5 bg-slate-50/50 space-y-5">
+                      <div className="border-b border-slate-200 pb-3">
+                        <span className="text-[11px] font-bold text-[#FCA311] uppercase tracking-wider block">بخش سوم</span>
+                        <h4 className="text-sm font-black text-[#14213D]">چگونه کار می‌کند (How Booking Works)</h4>
+                      </div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-[11px] font-bold text-slate-600 mb-1">سربرگ کوچک (دری)</label>
+                          <input
+                            type="text"
+                            value={tourPageForm.work_eyebrow_fa || ''}
+                            onChange={(e) => setTourPageForm({ ...tourPageForm, work_eyebrow_fa: e.target.value })}
+                            className="w-full px-3 py-2 rounded-xl bg-white border border-slate-200 text-xs text-slate-800"
+                            dir="rtl"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-[11px] font-bold text-slate-600 mb-1">Eyebrow (English)</label>
+                          <input
+                            type="text"
+                            value={tourPageForm.work_eyebrow_en || ''}
+                            onChange={(e) => setTourPageForm({ ...tourPageForm, work_eyebrow_en: e.target.value })}
+                            className="w-full px-3 py-2 rounded-xl bg-white border border-slate-200 text-xs text-slate-800"
+                            dir="ltr"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-[11px] font-bold text-slate-600 mb-1">عنوان اصلی (دری)</label>
+                          <input
+                            type="text"
+                            value={tourPageForm.work_title_fa || ''}
+                            onChange={(e) => setTourPageForm({ ...tourPageForm, work_title_fa: e.target.value })}
+                            className="w-full px-3 py-2 rounded-xl bg-white border border-slate-200 text-xs text-slate-800"
+                            dir="rtl"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-[11px] font-bold text-slate-600 mb-1">Main Title (English)</label>
+                          <input
+                            type="text"
+                            value={tourPageForm.work_title_en || ''}
+                            onChange={(e) => setTourPageForm({ ...tourPageForm, work_title_en: e.target.value })}
+                            className="w-full px-3 py-2 rounded-xl bg-white border border-slate-200 text-xs text-slate-800"
+                            dir="ltr"
+                          />
+                        </div>
+                      </div>
+
+                      {/* ۴ مرحله رزرو */}
+                      <div className="space-y-4 pt-2">
+                        <span className="text-xs font-bold text-slate-700 block">۴ مرحله رزرو و آغاز سفر:</span>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          {(tourPageForm.work_items || []).map((item, idx) => (
+                            <div key={idx} className="p-3.5 bg-white border border-slate-200 rounded-xl space-y-2">
+                              <span className="text-[11px] font-mono font-bold text-amber-600">مرحله {idx + 1}</span>
+                              <div className="grid grid-cols-2 gap-2">
+                                <input
+                                  type="text"
+                                  placeholder="عنوان دری"
+                                  value={item.title_fa || ''}
+                                  onChange={(e) => {
+                                    const updated = [...tourPageForm.work_items];
+                                    updated[idx] = { ...updated[idx], title_fa: e.target.value };
+                                    setTourPageForm({ ...tourPageForm, work_items: updated });
+                                  }}
+                                  className="px-2.5 py-1.5 rounded-lg bg-slate-50 border border-slate-200 text-xs"
+                                  dir="rtl"
+                                />
+                                <input
+                                  type="text"
+                                  placeholder="English Title"
+                                  value={item.title_en || ''}
+                                  onChange={(e) => {
+                                    const updated = [...tourPageForm.work_items];
+                                    updated[idx] = { ...updated[idx], title_en: e.target.value };
+                                    setTourPageForm({ ...tourPageForm, work_items: updated });
+                                  }}
+                                  className="px-2.5 py-1.5 rounded-lg bg-slate-50 border border-slate-200 text-xs"
+                                  dir="ltr"
+                                />
+                              </div>
+                              <textarea
+                                rows={2}
+                                placeholder="متن توضیحات دری"
+                                value={item.description_fa || ''}
+                                onChange={(e) => {
+                                  const updated = [...tourPageForm.work_items];
+                                  updated[idx] = { ...updated[idx], description_fa: e.target.value };
+                                  setTourPageForm({ ...tourPageForm, work_items: updated });
+                                }}
+                                className="w-full px-2.5 py-1.5 rounded-lg bg-slate-50 border border-slate-200 text-xs"
+                                dir="rtl"
+                              />
+                              <textarea
+                                rows={2}
+                                placeholder="English Description"
+                                value={item.description_en || ''}
+                                onChange={(e) => {
+                                  const updated = [...tourPageForm.work_items];
+                                  updated[idx] = { ...updated[idx], description_en: e.target.value };
+                                  setTourPageForm({ ...tourPageForm, work_items: updated });
+                                }}
+                                className="w-full px-2.5 py-1.5 rounded-lg bg-slate-50 border border-slate-200 text-xs"
+                                dir="ltr"
+                              />
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex justify-end pt-2">
+                      <button
+                        type="submit"
+                        disabled={sectionsSaving}
+                        className="px-6 py-2.5 rounded-xl bg-[#FCA311] hover:bg-amber-500 text-[#14213D] font-black text-xs transition shadow-sm cursor-pointer disabled:opacity-50"
+                      >
+                        {sectionsSaving ? 'در حال ذخیره‌سازی...' : 'ذخیره تغییرات عناوین و متون بخش‌ها'}
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* ========================================================
+              تب ۶: درخواست‌های رزرواسیون
           ======================================================== */}
           {activeTab === 'bookings' && (
             <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">

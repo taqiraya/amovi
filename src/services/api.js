@@ -69,6 +69,53 @@ export const getTours = async () => {
   return fetchWithFallback('/api/tours', localDb.tours || []);
 };
 
+export const getTourPageSettings = async () => {
+  try {
+    const res = await api.get('/api/tours/page-content');
+    if (res && res.data && res.data.success && res.data.data) {
+      return res.data.data;
+    }
+    return null;
+  } catch (error) {
+    console.warn('Could not fetch tour page settings from backend:', error);
+    return null;
+  }
+};
+
+export const updateTourPageSettings = async (formData) => {
+  try {
+    const res = await api.post('/api/tours/page-content', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    });
+    return res.data;
+  } catch (error) {
+    console.error('Failed to update tour page settings:', error);
+    throw error;
+  }
+};
+
+export const createTourPackage = async (formData) => {
+  try {
+    const res = await api.post('/api/tours', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    });
+    return res.data;
+  } catch (error) {
+    console.error('Failed to create tour package:', error);
+    throw error;
+  }
+};
+
+export const deleteTourPackage = async (id) => {
+  try {
+    const res = await api.delete(`/api/tours/${id}`);
+    return res.data;
+  } catch (error) {
+    console.error('Failed to delete tour package:', error);
+    throw error;
+  }
+};
+
 // Services
 export const getServices = async () => {
   return fetchWithFallback('/api/services', localDb.services || []);

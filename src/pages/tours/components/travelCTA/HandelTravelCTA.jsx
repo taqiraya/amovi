@@ -2,12 +2,12 @@ import TravelCTA from "./TravelCTA";
 import { useLangStore } from "../../../../store/useLangStore";
 import { Plane, Map, Mountain, Settings2, Crown, Landmark } from "lucide-react";
 
-const HandelTravelCTA = () => {
+const HandelTravelCTA = ({ content }) => {
   const { currentLang, translations } = useLangStore();
   const isRTL = currentLang === "fa";
   const cta = translations?.tourPage?.travelCTA || {};
 
-  const data = [
+  const defaultItems = [
     {
       id: 1,
       icon: <Plane size={22} />,
@@ -46,20 +46,42 @@ const HandelTravelCTA = () => {
     },
   ];
 
+  const icons = [
+    <Plane size={22} key="1" />,
+    <Map size={22} key="2" />,
+    <Landmark size={22} key="3" />,
+    <Mountain size={22} key="4" />,
+    <Crown size={22} key="5" />,
+    <Settings2 size={22} key="6" />
+  ];
+
+  let displayItems = defaultItems;
+  if (content && Array.isArray(content.travel_items) && content.travel_items.length > 0) {
+    displayItems = content.travel_items.map((item, idx) => ({
+      id: idx + 1,
+      icon: icons[idx % icons.length],
+      title: isRTL ? (item.title_fa || item.title) : (item.title_en || item.title),
+      description: isRTL ? (item.description_fa || item.description) : (item.description_en || item.description)
+    }));
+  }
+
+  const eyebrow = (isRTL ? content?.travel_eyebrow_fa : content?.travel_eyebrow_en) || cta.eyebrow || (isRTL ? "موضوعات سفر" : "Travel Themes");
+  const title = (isRTL ? content?.travel_title_fa : content?.travel_title_en) || cta.title || (isRTL ? "تجربه سفر خود را انتخاب کنید" : "Choose Your Travel Experience");
+
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
       <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12">
         <p className="text-[var(--color-amovi-gold)] text-xs sm:text-sm font-bold tracking-wider uppercase mb-2">
-          {cta.eyebrow || (isRTL ? "موضوعات سفر" : "Travel Themes")}
+          {eyebrow}
         </p>
 
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[var(--color-amovi-navy)] leading-tight">
-          {cta.title || (isRTL ? "تجربه سفر خود را انتخاب کنید" : "Choose Your Travel Experience")}
+          {title}
         </h2>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 text-[var(--color-amovi-navy)]">
-        {data.map((item) => (
+        {displayItems.map((item) => (
           <TravelCTA
             key={item.id}
             icon={item.icon}

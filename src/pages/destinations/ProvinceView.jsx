@@ -151,7 +151,7 @@ export default function ProvinceView() {
   if (loading) {
     return (
       <div className="pt-24 min-h-[70vh] flex items-center justify-center">
-        <BrandLoader message={isRtl ? 'در حال بارگذاری اطلاعات ولایت...' : 'Loading Province Details...'} />
+        <BrandLoader />
       </div>
     );
   }

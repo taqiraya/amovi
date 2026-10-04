@@ -1,30 +1,25 @@
-import { useLangStore } from '../store/useLangStore';
 import amoviLogo from '../assets/images/logo.png';
 
+/**
+ * کامپوننت لودینگ رسمی آمووی ترول
+ * تنها نمایش‌دهنده لوگوی شرکت همراه با هاله نور و حلقه ظریف طلایی (بدون هیچ خط یا نوشته اضافی)
+ */
 export default function BrandLoader({ 
-  message, 
   fullScreen = false, 
   minHeight = 'min-h-[60vh]' 
 }) {
-  const { currentLang } = useLangStore();
-  const isRtl = currentLang === 'fa';
-
-  const defaultMessage = isRtl 
-    ? 'در حال آماده‌سازی اطلاعات سفر...' 
-    : 'Preparing your travel experience...';
-
   const content = (
-    <div className="flex flex-col items-center justify-center p-6 text-center select-none animate-fadeIn">
-      {/* نگهدارنده لوگو همراه با حلقه انیمیشنی طلایی */}
-      <div className="relative flex items-center justify-center mb-5">
-        {/* هاله نور ملایم پس‌زمینه */}
-        <div className="absolute w-28 h-28 rounded-full bg-[#FCA311]/20 blur-xl animate-pulse" />
+    <div className="flex items-center justify-center select-none animate-fadeIn">
+      {/* کانتینر مرکزی لوگو */}
+      <div className="relative flex items-center justify-center">
+        {/* هاله نور طلایی ملایم */}
+        <div className="absolute w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-[#FCA311]/25 blur-xl animate-pulse" />
         
-        {/* حلقه چرخشی طلایی دور لوگو */}
-        <div className="absolute w-20 h-20 rounded-full border-2 border-transparent border-t-[#FCA311] border-r-[#FCA311]/60 animate-spin" />
+        {/* حلقه چرخشی ظریف طلایی دور لوگو */}
+        <div className="absolute w-20 h-20 sm:w-24 sm:h-24 rounded-full border-2 border-transparent border-t-[#FCA311] border-r-[#FCA311]/60 animate-spin" />
 
-        {/* لوگوی رسمی آمووی ترول */}
-        <div className="relative z-10 w-16 h-16 rounded-2xl bg-[#14213D] border border-[#FCA311]/40 p-2.5 shadow-xl shadow-[#14213D]/25 flex items-center justify-center">
+        {/* باکس لوگوی رسمی شرکت آمووی ترول */}
+        <div className="relative z-10 w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-[#14213D] border border-[#FCA311]/40 p-2.5 shadow-2xl shadow-[#14213D]/30 flex items-center justify-center">
           <img
             src={amoviLogo}
             alt="Amovi Travel"
@@ -38,32 +33,12 @@ export default function BrandLoader({
           />
         </div>
       </div>
-
-      {/* تایپوگرافی نام برند آمووی */}
-      <div className="space-y-0.5 mb-2">
-        <h3 className="text-base sm:text-lg font-black text-[#14213D] tracking-wide font-[Inter]">
-          Amovi Travel
-        </h3>
-        <p className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-[#FCA311] font-bold font-[Inter]">
-          Travel & Experiences
-        </p>
-      </div>
-
-      {/* متن وضعیت لودینگ */}
-      <p className="text-xs sm:text-sm text-slate-500 font-medium animate-pulse mt-1">
-        {message || defaultMessage}
-      </p>
-
-      {/* خط متحرک لودینگ طلایی و سورمه‌ای */}
-      <div className="w-28 sm:w-36 h-1 bg-slate-200/80 rounded-full overflow-hidden mt-3">
-        <div className="h-full bg-gradient-to-r from-[#14213D] via-[#FCA311] to-[#14213D] rounded-full animate-pulse" />
-      </div>
     </div>
   );
 
   if (fullScreen) {
     return (
-      <div className="fixed inset-0 z-[9999] bg-white/95 backdrop-blur-md flex items-center justify-center transition-all duration-300">
+      <div className="fixed inset-0 z-[9999] bg-white/95 backdrop-blur-md flex items-center justify-center transition-opacity duration-300">
         {content}
       </div>
     );

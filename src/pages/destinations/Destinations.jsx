@@ -53,7 +53,7 @@ export default function Destinations() {
       </div>
 
       {loading ? (
-        <BrandLoader message={isRtl ? 'در حال آماده‌سازی مقاصد گردشگری افغانستان...' : 'Loading Afghanistan Destinations...'} />
+        <BrandLoader />
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6" dir={isRtl ? 'rtl' : 'ltr'}>
           {provinces.map((prov) => {

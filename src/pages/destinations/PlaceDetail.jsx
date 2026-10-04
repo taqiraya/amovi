@@ -56,7 +56,7 @@ export default function PlaceDetail() {
   if (loading) {
     return (
       <div className="pt-24 min-h-[70vh] flex items-center justify-center">
-        <BrandLoader message={isRtl ? 'در حال بارگذاری جزئیات جاذبه...' : 'Loading Attraction Details...'} />
+        <BrandLoader />
       </div>
     );
   }

@@ -4,7 +4,6 @@ import { useLangStore } from '../../store/useLangStore';
 import SEO from '../../components/SEO';
 import heroBg from '../../assets/images/hero-bg.webp';
 import { getAssetUrl } from '../../config/assets';
-import BrandLoader from '../../components/BrandLoader';
 
 // لیست جامع تصاویر منتخب و واقعی گالری سراسری افغانستان با تصاویر بهینه‌شده WebP
 const galleryDatabase = [
@@ -265,14 +264,6 @@ export default function Gallery() {
 
   const [activeCategory, setActiveCategory] = useState('all');
   const [lightboxIndex, setLightboxIndex] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 300);
-    return () => clearTimeout(timer);
-  }, []);
 
   const categories = useMemo(() => [
     { id: 'all', label: isRtl ? 'همه تصاویر' : 'All Photos' },
@@ -380,12 +371,7 @@ export default function Gallery() {
 
       {/* ۳. گرید ریسپانسیو تصاویر */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {loading ? (
-          <div className="py-12">
-            <BrandLoader message={isRtl ? 'در حال بارگذاری تصاویر منتخب افغانستان...' : 'Loading selected Afghanistan photography...'} />
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6" dir={isRtl ? 'rtl' : 'ltr'}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6" dir={isRtl ? 'rtl' : 'ltr'}>
           {filteredPhotos.map((item, idx) => {
             const text = item[currentLang] || item.en;
             return (
@@ -446,7 +432,6 @@ export default function Gallery() {
             );
           })}
         </div>
-        )}
       </section>
 
       {/* ۴. مودال لایت‌باکس تمام‌صفحه (Fullscreen Lightbox) */}

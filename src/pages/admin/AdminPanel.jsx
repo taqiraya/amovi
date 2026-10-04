@@ -75,9 +75,15 @@ export default function AdminPanel() {
   const [blogSuccess, setBlogSuccess] = useState('');
   const [blogError, setBlogError] = useState('');
   const [newBlogForm, setNewBlogForm] = useState({
-    title: '',
-    author: 'تیم گردشگری آمووی',
-    content: '',
+    title_fa: '',
+    title_en: '',
+    author_fa: 'تیم گردشگری آمووی',
+    author_en: 'Amovi Travel Team',
+    content_fa: '',
+    content_en: '',
+    category_fa: 'کشف سرزمین',
+    category_en: 'DISCOVER',
+    pillar: 'discover',
     file: null
   });
 
@@ -224,8 +230,17 @@ export default function AdminPanel() {
   // انتشار مقاله جدید وبلاگ
   const handleCreateBlog = async (e) => {
     e.preventDefault();
-    if (!newBlogForm.title.trim() || !newBlogForm.content.trim()) {
-      setBlogError('لطفاً عنوان و متن مقاله را وارد فرمایید.');
+    const titleFa = newBlogForm.title_fa.trim();
+    const titleEn = newBlogForm.title_en.trim();
+    const contentFa = newBlogForm.content_fa.trim();
+    const contentEn = newBlogForm.content_en.trim();
+
+    if (!titleFa && !titleEn) {
+      setBlogError('لطفاً عنوان مقاله (دری یا انگلیسی) را وارد فرمایید.');
+      return;
+    }
+    if (!contentFa && !contentEn) {
+      setBlogError('لطفاً متن مقاله (دری یا انگلیسی) را وارد فرمایید.');
       return;
     }
     setBlogUploading(true);
@@ -236,9 +251,18 @@ export default function AdminPanel() {
     if (newBlogForm.file) {
       formData.append('image', newBlogForm.file);
     }
-    formData.append('title', newBlogForm.title.trim());
-    formData.append('author', newBlogForm.author.trim() || 'تیم گردشگری آمووی');
-    formData.append('content', newBlogForm.content);
+    formData.append('title_fa', titleFa || titleEn);
+    formData.append('title_en', titleEn || titleFa);
+    formData.append('title', titleFa || titleEn);
+    formData.append('author_fa', newBlogForm.author_fa.trim() || 'تیم گردشگری آمووی');
+    formData.append('author_en', newBlogForm.author_en.trim() || 'Amovi Travel Team');
+    formData.append('author', newBlogForm.author_fa.trim() || 'تیم گردشگری آمووی');
+    formData.append('content_fa', newBlogForm.content_fa || newBlogForm.content_en);
+    formData.append('content_en', newBlogForm.content_en || newBlogForm.content_fa);
+    formData.append('content', newBlogForm.content_fa || newBlogForm.content_en);
+    formData.append('category_fa', newBlogForm.category_fa || 'کشف سرزمین');
+    formData.append('category_en', newBlogForm.category_en || 'DISCOVER');
+    formData.append('pillar', newBlogForm.pillar || 'discover');
 
     try {
       const res = await createBlogPost(formData);
@@ -246,9 +270,15 @@ export default function AdminPanel() {
         setBlogList((prev) => [res.data, ...prev]);
         setBlogSuccess('مقاله جدید با موفقیت ذخیره و منتشر شد.');
         setNewBlogForm({
-          title: '',
-          author: 'تیم گردشگری آمووی',
-          content: '',
+          title_fa: '',
+          title_en: '',
+          author_fa: 'تیم گردشگری آمووی',
+          author_en: 'Amovi Travel Team',
+          content_fa: '',
+          content_en: '',
+          category_fa: 'کشف سرزمین',
+          category_en: 'DISCOVER',
+          pillar: 'discover',
           file: null
         });
         const fileInput = document.getElementById('blogFileInput');
@@ -946,69 +976,164 @@ export default function AdminPanel() {
                   </div>
                 )}
 
-                <form onSubmit={handleCreateBlog} className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
-                    <div className="md:col-span-5">
-                      <label className="block text-xs font-bold text-slate-700 mb-1.5">عنوان مقاله *</label>
-                      <input
-                        type="text"
-                        required
-                        placeholder="مثلاً: راهنمای جامع سفر به دره بامیان و بند امیر"
-                        value={newBlogForm.title}
-                        onChange={(e) => setNewBlogForm({ ...newBlogForm, title: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-800 focus:outline-none focus:border-[#FCA311] focus:bg-white"
-                      />
-                    </div>
-
-                    <div className="md:col-span-3">
-                      <label className="block text-xs font-bold text-slate-700 mb-1.5">نویسنده / منبع</label>
-                      <input
-                        type="text"
-                        placeholder="تیم گردشگری آمووی"
-                        value={newBlogForm.author}
-                        onChange={(e) => setNewBlogForm({ ...newBlogForm, author: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-800 focus:outline-none focus:border-[#FCA311] focus:bg-white"
-                      />
-                    </div>
-
-                    <div className="md:col-span-4">
+                <form onSubmit={handleCreateBlog} className="space-y-6">
+                  {/* ردیف اول: تصویر شاخص و دسته‌بندی موضوعی */}
+                  <div className="grid grid-cols-1 md:grid-cols-12 gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                    <div className="md:col-span-7">
                       <label className="block text-xs font-bold text-slate-700 mb-1.5">تصویر شاخص بالای مقاله</label>
                       <input
                         id="blogFileInput"
                         type="file"
                         accept="image/*"
                         onChange={(e) => setNewBlogForm({ ...newBlogForm, file: e.target.files[0] })}
-                        className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 file:mr-0 file:ml-2 file:py-1 file:px-2.5 file:rounded-lg file:border-0 file:text-[11px] file:font-bold file:bg-[#14213D] file:text-white cursor-pointer"
+                        className="w-full px-3 py-2 rounded-xl bg-white border border-slate-200 text-xs text-slate-700 file:mr-0 file:ml-2 file:py-1 file:px-2.5 file:rounded-lg file:border-0 file:text-[11px] file:font-bold file:bg-[#14213D] file:text-white cursor-pointer"
                       />
-                      <span className="block text-[10px] text-slate-400 mt-1">خودکار به فرمت بهینه WebP تبدیل و فشرده می‌شود.</span>
+                      <span className="block text-[10px] text-slate-400 mt-1">خودکار به فرمت بهینه WebP تبدیل و فشرده می‌شود (حداکثر ۱۵۰ کیلوبایت).</span>
+                    </div>
+
+                    <div className="md:col-span-5">
+                      <label className="block text-xs font-bold text-slate-700 mb-1.5">محور موضوعی (Pillar)</label>
+                      <select
+                        value={newBlogForm.pillar}
+                        onChange={(e) => {
+                          const p = e.target.value;
+                          let catFa = 'کشف سرزمین';
+                          let catEn = 'DISCOVER';
+                          if (p === 'understand') {
+                            catFa = 'شناخت فرهنگ و مردم';
+                            catEn = 'UNDERSTAND';
+                          } else if (p === 'experience') {
+                            catFa = 'تجربه‌ها و سوغات';
+                            catEn = 'EXPERIENCE';
+                          }
+                          setNewBlogForm({ ...newBlogForm, pillar: p, category_fa: catFa, category_en: catEn });
+                        }}
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-xs text-slate-800 font-bold focus:outline-none focus:border-[#FCA311]"
+                      >
+                        <option value="discover">کشف سرزمین (Discover Afghanistan)</option>
+                        <option value="understand">شناخت فرهنگ و مردم (Understand Culture & People)</option>
+                        <option value="experience">تجربه‌ها و سوغات (Experiences & Treasures)</option>
+                      </select>
                     </div>
                   </div>
 
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1.5">
-                      متن کامل مقاله (هر تعداد عنوان و پاراگراف دلخواه) *
-                    </label>
-                    <textarea
-                      required
-                      rows={10}
-                      placeholder="متن مقاله را اینجا تایپ کنید یا قرار دهید...&#10;&#10;عنوان بخش اول:&#10;توضیحات و پاراگراف‌ها با هر مقدار طول و شکستگی خطوط..."
-                      value={newBlogForm.content}
-                      onChange={(e) => setNewBlogForm({ ...newBlogForm, content: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 leading-relaxed focus:outline-none focus:border-[#FCA311] focus:bg-white resize-y font-mono sm:font-sans"
-                    />
-                    <p className="text-[11px] text-slate-400 mt-1">
-                      نکته: تمامی فاصله‌ها، اینترها (Enter) و شکستگی‌های خطوط به صورت دقیق در ساختار &lt;pre&gt; صفحه نمایش داده می‌شوند.
-                    </p>
+                  {/* ردیف دوم: بخش فارسی / دری */}
+                  <div className="p-5 rounded-2xl bg-amber-50/40 border border-amber-200/70 space-y-4" dir="rtl">
+                    <div className="flex items-center justify-between pb-2 border-b border-amber-200/50">
+                      <h4 className="text-xs sm:text-sm font-black text-[#14213D] flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-[#FCA311]"></span>
+                        <span>محتوای زبان دری (راست‌چین RTL)</span>
+                      </h4>
+                      <span className="text-[10px] font-bold text-amber-700 bg-amber-100/80 px-2 py-0.5 rounded-md font-mono">DARI / FA</span>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
+                      <div className="md:col-span-8">
+                        <label className="block text-xs font-bold text-slate-700 mb-1.5">عنوان دری مقاله *</label>
+                        <input
+                          type="text"
+                          required
+                          placeholder="مثلاً: راهنمای جامع سفر به دره بامیان و بند امیر"
+                          value={newBlogForm.title_fa}
+                          onChange={(e) => setNewBlogForm({ ...newBlogForm, title_fa: e.target.value })}
+                          className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-xs text-slate-800 focus:outline-none focus:border-[#FCA311] font-[Sahel]"
+                          dir="rtl"
+                        />
+                      </div>
+
+                      <div className="md:col-span-4">
+                        <label className="block text-xs font-bold text-slate-700 mb-1.5">نویسنده به دری</label>
+                        <input
+                          type="text"
+                          placeholder="تیم گردشگری آمووی"
+                          value={newBlogForm.author_fa}
+                          onChange={(e) => setNewBlogForm({ ...newBlogForm, author_fa: e.target.value })}
+                          className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-xs text-slate-800 focus:outline-none focus:border-[#FCA311] font-[Sahel]"
+                          dir="rtl"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                        متن کامل مقاله به دری (هر تعداد عنوان و پاراگراف دلخواه در حالت pre) *
+                      </label>
+                      <textarea
+                        required
+                        rows={7}
+                        placeholder="متن دری مقاله را اینجا تایپ فرمایید یا پیست کنید...&#10;&#10;عنوان بخش اول:&#10;توضیحات و پاراگراف‌ها با هر میزان طول، خطوط و فاصله‌گذاری..."
+                        value={newBlogForm.content_fa}
+                        onChange={(e) => setNewBlogForm({ ...newBlogForm, content_fa: e.target.value })}
+                        className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 text-xs sm:text-sm text-slate-800 leading-relaxed focus:outline-none focus:border-[#FCA311] resize-y font-[Sahel]"
+                        dir="rtl"
+                      />
+                    </div>
                   </div>
 
-                  <div className="pt-2 flex justify-end">
+                  {/* ردیف سوم: بخش انگلیسی (English Section) */}
+                  <div className="p-5 rounded-2xl bg-blue-50/40 border border-blue-200/70 space-y-4" dir="ltr">
+                    <div className="flex items-center justify-between pb-2 border-b border-blue-200/50">
+                      <h4 className="text-xs sm:text-sm font-black text-[#14213D] flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-blue-600"></span>
+                        <span className="font-[Inter]">English Content (Left-to-Right LTR)</span>
+                      </h4>
+                      <span className="text-[10px] font-bold text-blue-700 bg-blue-100/80 px-2 py-0.5 rounded-md font-mono">ENGLISH / EN</span>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
+                      <div className="md:col-span-8">
+                        <label className="block text-xs font-bold text-slate-700 mb-1.5 font-[Inter]">English Title *</label>
+                        <input
+                          type="text"
+                          required
+                          placeholder="e.g. Comprehensive Travel Guide to Bamyan Valley & Band-e Amir"
+                          value={newBlogForm.title_en}
+                          onChange={(e) => setNewBlogForm({ ...newBlogForm, title_en: e.target.value })}
+                          className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-xs text-slate-800 focus:outline-none focus:border-[#FCA311] font-[Inter]"
+                          dir="ltr"
+                        />
+                      </div>
+
+                      <div className="md:col-span-4">
+                        <label className="block text-xs font-bold text-slate-700 mb-1.5 font-[Inter]">English Author</label>
+                        <input
+                          type="text"
+                          placeholder="Amovi Travel Team"
+                          value={newBlogForm.author_en}
+                          onChange={(e) => setNewBlogForm({ ...newBlogForm, author_en: e.target.value })}
+                          className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-xs text-slate-800 focus:outline-none focus:border-[#FCA311] font-[Inter]"
+                          dir="ltr"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1.5 font-[Inter]">
+                        Full Article Content in English (Any headings, line breaks & paragraphs in &lt;pre&gt;) *
+                      </label>
+                      <textarea
+                        required
+                        rows={7}
+                        placeholder="Type or paste the English article content here...&#10;&#10;Section Title:&#10;Paragraphs with preserved line breaks and spacing..."
+                        value={newBlogForm.content_en}
+                        onChange={(e) => setNewBlogForm({ ...newBlogForm, content_en: e.target.value })}
+                        className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 text-xs sm:text-sm text-slate-800 leading-relaxed focus:outline-none focus:border-[#FCA311] resize-y font-[Inter]"
+                        dir="ltr"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="pt-2 flex items-center justify-between">
+                    <p className="text-[11px] text-slate-400">
+                      تمامی مقالات منتشر شده با ترتیب «جدیدترین در ابتدا» در سایت و دیتابیس نمایش داده می‌شوند.
+                    </p>
                     <button
                       type="submit"
                       disabled={blogUploading}
                       className="py-3 px-6 rounded-xl bg-[#FCA311] hover:bg-amber-500 text-[#14213D] font-extrabold text-xs transition shadow-md flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
                     >
                       <Upload size={14} />
-                      <span>{blogUploading ? 'در حال بهینه‌سازی و انتشار مقاله...' : 'انتشار مقاله در وبلاگ'}</span>
+                      <span>{blogUploading ? 'در حال بهینه‌سازی و انتشار مقاله...' : 'انتشار مقاله دوزبانه در وبلاگ'}</span>
                     </button>
                   </div>
                 </form>

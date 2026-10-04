@@ -22,8 +22,16 @@ async function fetchWithFallback(url, fallbackData) {
   }
   try {
     const res = await api.get(url);
-    if (res && res.data && (!Array.isArray(res.data) || res.data.length > 0)) {
-      return res.data;
+    if (res && res.data) {
+      if (Array.isArray(fallbackData)) {
+        if (Array.isArray(res.data)) {
+          return res.data.length > 0 ? res.data : fallbackData;
+        }
+        return fallbackData;
+      }
+      if (typeof res.data === 'object' && res.data !== null) {
+        return res.data;
+      }
     }
     return fallbackData;
   } catch {
@@ -33,7 +41,7 @@ async function fetchWithFallback(url, fallbackData) {
 
 // Provinces / Destinations
 export const getProvinces = async () => {
-  return fetchWithFallback('/provinces', localDb.provinces || []);
+  return fetchWithFallback('/api/provinces', localDb.provinces || []);
 };
 
 export const getDestinations = getProvinces;
@@ -41,8 +49,8 @@ export const getDestinations = getProvinces;
 export const getProvinceBySlug = async (slug) => {
   if (!shouldSkipRemoteApi) {
     try {
-      const res = await api.get(`/provinces?slug=${slug}`);
-      if (res.data && res.data.length > 0) return res.data[0];
+      const res = await api.get(`/api/provinces?slug=${slug}`);
+      if (res.data && Array.isArray(res.data) && res.data.length > 0) return res.data[0];
     } catch {
       // fallback to local data
     }
@@ -58,12 +66,12 @@ export const getPlaceBySlug = async (provinceSlug, placeId) => {
 
 // Tours
 export const getTours = async () => {
-  return fetchWithFallback('/tours', localDb.tours || []);
+  return fetchWithFallback('/api/tours', localDb.tours || []);
 };
 
 // Services
 export const getServices = async () => {
-  return fetchWithFallback('/services', localDb.services || []);
+  return fetchWithFallback('/api/services', localDb.services || []);
 };
 
 // Blog

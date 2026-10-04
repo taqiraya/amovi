@@ -4,7 +4,7 @@ import { useLangStore } from "../../../store/useLangStore";
 
 const TourHero = () => {
   const { currentLang, translations } = useLangStore();
-  const hero = translations.tourPage.heroSection;
+  const hero = translations?.tourPage?.heroSection || {};
   const isRTL = currentLang === "fa";
 
   const handleExplore = () => {

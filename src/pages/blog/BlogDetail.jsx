@@ -7,7 +7,10 @@ import {
   ArrowRight,
   Copy,
   Check,
-  Tag
+  Tag,
+  Maximize2,
+  X,
+  ZoomIn
 } from 'lucide-react';
 import { useLangStore } from '../../store/useLangStore';
 import SEO from '../../components/SEO';
@@ -22,6 +25,7 @@ export default function BlogDetail() {
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
   const [copied, setCopied] = useState(false);
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
 
   useEffect(() => {
     let isMounted = true;
@@ -37,6 +41,22 @@ export default function BlogDetail() {
     });
     return () => { isMounted = false; };
   }, [id]);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setIsLightboxOpen(false);
+      }
+    };
+    if (isLightboxOpen) {
+      window.addEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'hidden';
+    }
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = '';
+    };
+  }, [isLightboxOpen]);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(window.location.href);
@@ -125,12 +145,19 @@ export default function BlogDetail() {
       {/* کانتینر اصلی مقاله: ساختار ساده، عکس در بالا و متن در پایین */}
       <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
         
-        {/* ۱. عکس در قسمت بالای مقاله */}
-        <div className="w-full aspect-[16/9] sm:aspect-[21/9] rounded-2xl sm:rounded-3xl overflow-hidden shadow-lg border border-slate-200/80 bg-slate-100">
+        {/* ۱. عکس در قسمت بالای مقاله (قابل کلیک برای نمایش اندازه کامل) */}
+        <div 
+          onClick={() => setIsLightboxOpen(true)}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setIsLightboxOpen(true); }}
+          className="group relative w-full aspect-[16/9] sm:aspect-[21/9] rounded-2xl sm:rounded-3xl overflow-hidden shadow-lg border border-slate-200/80 bg-slate-100 cursor-zoom-in transition-all duration-300 hover:shadow-2xl"
+          title={isRtl ? "کلیک کنید تا تصویر با اندازه کامل باز شود" : "Click to view full size image"}
+        >
           <img
             src={getAssetUrl(postImage)}
             alt={postTitle}
-            className="w-full h-full object-cover select-none"
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 select-none"
             onError={(e) => {
               if (!e.target.dataset.tried) {
                 e.target.dataset.tried = 'true';
@@ -138,6 +165,16 @@ export default function BlogDetail() {
               }
             }}
           />
+          {/* نشانگر قابلیت کلیک و بزرگنمایی تصویر */}
+          <div className="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+            <div className="bg-white/90 backdrop-blur-md text-[#14213D] px-4 py-2 rounded-full font-bold text-xs flex items-center gap-2 shadow-xl transform scale-95 group-hover:scale-100 transition-transform">
+              <ZoomIn size={16} className="text-[#FCA311]" />
+              <span>{isRtl ? 'مشاهده تصویر در اندازه کامل' : 'Click to View Full Size'}</span>
+            </div>
+          </div>
+          <div className="absolute top-3 left-3 bg-[#14213D]/80 backdrop-blur-sm text-white p-2 rounded-xl opacity-80 group-hover:opacity-100 transition-opacity">
+            <Maximize2 size={16} />
+          </div>
         </div>
 
         {/* ۲. بخش عنوان و مشخصات نویسنده و تاریخ */}
@@ -196,6 +233,48 @@ export default function BlogDetail() {
         </footer>
 
       </article>
+
+      {/* مودال تمام‌صفحه لایت‌باکس تصویر وبلاگ */}
+      {isLightboxOpen && (
+        <div 
+          className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex flex-col items-center justify-center p-4 sm:p-6"
+          onClick={() => setIsLightboxOpen(false)}
+        >
+          {/* دکمه بستن در بالا */}
+          <div className="w-full max-w-5xl flex items-center justify-between pb-3 sm:pb-4 text-white">
+            <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-300 truncate max-w-xl">
+              <span>{postTitle}</span>
+            </div>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsLightboxOpen(false);
+              }}
+              className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition cursor-pointer flex items-center gap-1.5 text-xs font-bold"
+              aria-label="بستن"
+            >
+              <span>{isRtl ? 'بستن' : 'Close'}</span>
+              <X size={18} />
+            </button>
+          </div>
+
+          {/* محفظه تصویر بزرگنمایی‌شده */}
+          <div 
+            className="relative max-w-5xl max-h-[85vh] flex items-center justify-center overflow-hidden rounded-2xl bg-black/40 border border-white/10 shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src={getAssetUrl(postImage)}
+              alt={postTitle}
+              className="max-w-full max-h-[85vh] object-contain select-none transition-transform duration-200"
+            />
+          </div>
+
+          <p className="text-slate-400 text-[11px] sm:text-xs mt-3 select-none">
+            {isRtl ? 'برای بستن روی پس‌زمینه کلیک کنید یا کلید ESC را بفشارید' : 'Click anywhere outside or press ESC to close'}
+          </p>
+        </div>
+      )}
 
     </div>
   );

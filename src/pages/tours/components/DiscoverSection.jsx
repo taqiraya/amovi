@@ -2,7 +2,7 @@ import imageTwo from "./images/imageTwo.webp";
 import { useLangStore } from "../../../store/useLangStore";
 const DiscoverSection = () => {
   const { translations } = useLangStore();
-  const discover = translations.tourPage.discoverSection;
+  const discover = translations?.tourPage?.discoverSection || {};
   return (
     <section
       className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center"

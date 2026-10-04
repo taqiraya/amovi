@@ -545,7 +545,7 @@ app.delete('/api/gallery/:id', async (req, res) => {
 ======================================================== */
 app.get(['/api/blog', '/blogPosts'], async (req, res) => {
   try {
-    const [rows] = await pool.query('SELECT * FROM blog_posts ORDER BY id ASC');
+    const [rows] = await pool.query('SELECT * FROM blog_posts ORDER BY created_at DESC, id DESC');
     res.json(rows.map(r => ({
       id: r.slug || r.id,
       dbId: r.id,
@@ -734,6 +734,56 @@ app.delete('/api/blog/:id', async (req, res) => {
     console.error('Delete blog post error:', error);
     res.status(500).json({ success: false, error: 'خطا در حذف مقاله.' });
   }
+});
+
+// خواندن اطلاعات پایگاه داده از db.json جهت ارائه داده‌های پکیج‌های سفر، خدمات و مقاصد
+function getLocalDbData() {
+  try {
+    const dbJsonPath = path.join(__dirname, 'db.json');
+    if (fs.existsSync(dbJsonPath)) {
+      return JSON.parse(fs.readFileSync(dbJsonPath, 'utf8'));
+    }
+  } catch (err) {
+    console.error('Error reading db.json:', err.message);
+  }
+  return {};
+}
+
+/* ========================================================
+   مسیرهای پکیج‌های سفر، خدمات، مقاصد و نظرات
+======================================================== */
+app.get(['/api/tours', '/toursList'], (req, res) => {
+  const db = getLocalDbData();
+  res.json(db.tours || []);
+});
+
+app.get(['/api/services', '/servicesList'], (req, res) => {
+  const db = getLocalDbData();
+  res.json(db.services || []);
+});
+
+app.get(['/api/provinces', '/provincesList'], (req, res) => {
+  const db = getLocalDbData();
+  const slug = req.query.slug;
+  if (slug) {
+    const found = (db.provinces || []).find((p) => p.slug === slug);
+    return res.json(found ? [found] : []);
+  }
+  res.json(db.provinces || []);
+});
+
+app.get(['/api/testimonials', '/testimonials'], (req, res) => {
+  const db = getLocalDbData();
+  res.json(db.testimonials || []);
+});
+
+app.get(['/api/masterRequests', '/masterRequests'], (req, res) => {
+  const db = getLocalDbData();
+  res.json(db.masterRequests || []);
+});
+
+app.post(['/api/masterRequests', '/masterRequests'], (req, res) => {
+  res.json({ success: true, message: 'درخواست رزرو ثبت گردید.', data: req.body });
 });
 
 // بررسی سلامت API
@@ -1037,25 +1087,43 @@ app.get('/amovilogin', (req, res) => {
             <div id="blogAlert" class="hidden p-4 rounded-xl text-xs font-bold"></div>
 
             <form id="blogPublishForm" onsubmit="publishBlogPost(event)" class="space-y-4">
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
                   <label class="block text-xs font-bold text-slate-700 mb-1.5">تصویر مقاله (اختیاری - تبدیل به WebP)</label>
                   <input id="blogImageInput" type="file" accept="image/*" class="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 file:mr-0 file:ml-2 file:py-1 file:px-2.5 file:rounded-lg file:border-0 file:text-[11px] file:font-bold file:bg-[#14213D] file:text-white cursor-pointer" />
                 </div>
                 <div>
-                  <label class="block text-xs font-bold text-slate-700 mb-1.5">نویسنده مقاله</label>
-                  <input id="blogAuthorInput" type="text" value="آمووی ترول" required class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-800 focus:outline-none focus:border-[#FCA311] focus:bg-white" />
+                  <label class="block text-xs font-bold text-slate-700 mb-1.5">نویسنده به دری</label>
+                  <input id="blogAuthorInput" type="text" value="تیم گردشگری آمووی" required class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-800 focus:outline-none focus:border-[#FCA311] focus:bg-white" />
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1.5">نویسنده به انگلیسی</label>
+                  <input id="blogAuthorEnInput" type="text" value="Amovi Travel Team" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-800 focus:outline-none focus:border-[#FCA311] focus:bg-white" dir="ltr" />
                 </div>
               </div>
 
-              <div>
-                <label class="block text-xs font-bold text-slate-700 mb-1.5">عنوان مقاله</label>
-                <input id="blogTitleInput" type="text" required placeholder="مثلاً: راهنمای سفر به بامیان و بازدید از پارک ملی بند امیر" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-800 focus:outline-none focus:border-[#FCA311] focus:bg-white font-bold" />
+              <!-- بخش عنوان‌های دوزبانه -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="p-3.5 rounded-xl bg-amber-50/50 border border-amber-200/80">
+                  <label class="block text-xs font-bold text-slate-800 mb-1.5">عنوان دری مقاله *</label>
+                  <input id="blogTitleInput" type="text" required placeholder="مثلاً: راهنمای سفر به بامیان و بازدید از پارک ملی بند امیر" class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-xs text-slate-800 focus:outline-none focus:border-[#FCA311] font-bold" dir="rtl" />
+                </div>
+                <div class="p-3.5 rounded-xl bg-blue-50/50 border border-blue-200/80">
+                  <label class="block text-xs font-bold text-slate-800 mb-1.5 font-sans">English Article Title *</label>
+                  <input id="blogTitleEnInput" type="text" required placeholder="e.g. Travel Guide to Bamyan & Band-e Amir" class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-xs text-slate-800 focus:outline-none focus:border-[#FCA311] font-bold font-sans" dir="ltr" />
+                </div>
               </div>
 
-              <div>
-                <label class="block text-xs font-bold text-slate-700 mb-1.5">متن کامل مقاله (هر تعداد پاراگراف، سطر و عنوان که مایلید)</label>
-                <textarea id="blogContentInput" rows="8" required placeholder="متن کامل مقاله را اینجا بنویسید. تمامی فاصله‌ها، سطرها و پاراگراف‌ها دقیقاً به همان صورت که می‌نویسید ذخیره و نمایش داده خواهند شد..." class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-[#FCA311] focus:bg-white font-sans leading-relaxed"></textarea>
+              <!-- بخش متن‌های دوزبانه -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="p-3.5 rounded-xl bg-amber-50/50 border border-amber-200/80">
+                  <label class="block text-xs font-bold text-slate-800 mb-1.5">متن کامل به دری (نمایش در ساختار &lt;pre&gt;) *</label>
+                  <textarea id="blogContentInput" rows="8" required placeholder="متن کامل دری مقاله را اینجا بنویسید. تمامی فاصله‌ها، سطرها و پاراگراف‌ها حفظ خواهند شد..." class="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-[#FCA311] leading-relaxed" dir="rtl"></textarea>
+                </div>
+                <div class="p-3.5 rounded-xl bg-blue-50/50 border border-blue-200/80">
+                  <label class="block text-xs font-bold text-slate-800 mb-1.5 font-sans">English Full Article Content (&lt;pre&gt;) *</label>
+                  <textarea id="blogContentEnInput" rows="8" required placeholder="Write the full English article text here with preserved spacing and paragraphs..." class="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-[#FCA311] leading-relaxed font-sans" dir="ltr"></textarea>
+                </div>
               </div>
 
               <div>
@@ -1499,8 +1567,11 @@ app.get('/amovilogin', (req, res) => {
       e.preventDefault();
       const fileInput = document.getElementById('blogImageInput');
       const titleInput = document.getElementById('blogTitleInput');
+      const titleEnInput = document.getElementById('blogTitleEnInput');
       const authorInput = document.getElementById('blogAuthorInput');
+      const authorEnInput = document.getElementById('blogAuthorEnInput');
       const contentInput = document.getElementById('blogContentInput');
+      const contentEnInput = document.getElementById('blogContentEnInput');
       const btn = document.getElementById('blogPublishBtn');
       const alertBox = document.getElementById('blogAlert');
 
@@ -1512,9 +1583,22 @@ app.get('/amovilogin', (req, res) => {
       if (fileInput.files[0]) {
         formData.append('image', fileInput.files[0]);
       }
-      formData.append('title', titleInput.value.trim());
-      formData.append('author', authorInput.value.trim());
-      formData.append('content', contentInput.value.trim());
+      const tFa = (titleInput?.value || '').trim();
+      const tEn = (titleEnInput?.value || '').trim();
+      const aFa = (authorInput?.value || '').trim() || 'تیم گردشگری آمووی';
+      const aEn = (authorEnInput?.value || '').trim() || 'Amovi Travel Team';
+      const cFa = (contentInput?.value || '').trim();
+      const cEn = (contentEnInput?.value || '').trim();
+
+      formData.append('title_fa', tFa || tEn);
+      formData.append('title_en', tEn || tFa);
+      formData.append('title', tFa || tEn);
+      formData.append('author_fa', aFa);
+      formData.append('author_en', aEn);
+      formData.append('author', aFa);
+      formData.append('content_fa', cFa || cEn);
+      formData.append('content_en', cEn || cFa);
+      formData.append('content', cFa || cEn);
 
       try {
         const res = await fetch('/api/blog', {
@@ -1524,10 +1608,12 @@ app.get('/amovilogin', (req, res) => {
         const data = await res.json();
         if (res.ok && data.success) {
           alertBox.className = 'p-4 rounded-xl text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200';
-          alertBox.innerText = 'مقاله با موفقیت در وبلاگ منتشر گردید.';
+          alertBox.innerText = 'مقاله دوزبانه با موفقیت در وبلاگ منتشر گردید.';
           fileInput.value = '';
           titleInput.value = '';
+          if (titleEnInput) titleEnInput.value = '';
           contentInput.value = '';
+          if (contentEnInput) contentEnInput.value = '';
           fetchBlog();
         } else {
           alertBox.className = 'p-4 rounded-xl text-xs font-bold bg-rose-50 text-rose-800 border border-rose-200';

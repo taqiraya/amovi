@@ -7,7 +7,14 @@ const ExploreCTA = ({ image, title, price, durationDay, durationNight }) => {
   const { currentLang, translations } = useLangStore();
 
   const isRTL = currentLang === "fa";
-  const cta = translations.tourPage.exploreCTA;
+  const cta = translations?.tourPage?.exploreCTA || {
+    days: isRTL ? "روز" : "Days",
+    nights: isRTL ? "شب" : "Nights",
+    bedroom: isRTL ? "اقامت" : "Stay",
+    transport: isRTL ? "حمل‌ونقل" : "Transport",
+    people: isRTL ? "مسافران" : "Travelers",
+    meetNow: isRTL ? "رزرو سفر" : "Book Journey",
+  };
 
   return (
     <div className="group relative bg-white rounded-2xl border border-slate-200/80 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden w-full">

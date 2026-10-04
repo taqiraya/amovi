@@ -2,9 +2,13 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useLangStore } from "../../../store/useLangStore";
 const ExploreSection = () => {
   const { currentLang, translations } = useLangStore();
-  const explore = translations.tourPage.exploreSection;
-
   const isRTL = currentLang === "fa";
+  const explore = translations?.tourPage?.exploreSection || {
+    label: isRTL ? "پکیج‌های سفر ما را کشف کنید" : "EXPLORE OUR PACKAGES",
+    title: isRTL ? "پکیج‌های سفر ما را ببینید" : "Explore Our Packages",
+    description: isRTL ? "سفرهایی را کشف کنید که بر اساس فرهنگ، تاریخ و مکان‌های دیدنی افغانستان طراحی شده‌اند." : "Discover journeys designed around Afghanistan's culture, history, and interesting places.",
+    button: isRTL ? "مشاهده پکیج‌ها" : "Explore Package"
+  };
 
   return (
     <section

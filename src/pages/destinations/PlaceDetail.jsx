@@ -21,6 +21,7 @@ import { useLangStore } from '../../store/useLangStore';
 import { getPlaceBySlug, getProvinceBySlug } from '../../services/api';
 import SEO from '../../components/SEO';
 import { getAssetUrl } from '../../config/assets';
+import BrandLoader from '../../components/BrandLoader';
 
 export default function PlaceDetail() {
   const { slug, placeId } = useParams();
@@ -54,13 +55,8 @@ export default function PlaceDetail() {
 
   if (loading) {
     return (
-      <div className="min-h-[70vh] flex items-center justify-center pt-32">
-        <div className="flex flex-col items-center gap-3">
-          <div className="w-10 h-10 border-4 border-[#FCA311] border-t-transparent rounded-full animate-spin" />
-          <div className="text-base font-bold text-slate-500 font-[Inter]">
-            {isRtl ? 'در حال بارگذاری جزئیات جاذبه...' : 'Loading Attraction Details...'}
-          </div>
-        </div>
+      <div className="pt-24 min-h-[70vh] flex items-center justify-center">
+        <BrandLoader message={isRtl ? 'در حال بارگذاری جزئیات جاذبه...' : 'Loading Attraction Details...'} />
       </div>
     );
   }

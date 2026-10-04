@@ -254,7 +254,7 @@ export default function Services() {
                   
                   {/* بج شماره خدمت روی عکس */}
                   <div className={`absolute top-3.5 sm:top-4 ${isRtl ? 'right-3.5 sm:right-4' : 'left-3.5 sm:left-4'} bg-[#14213D]/80 backdrop-blur-md px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full border border-white/20 text-[#FCA311] font-bold text-xs font-[Inter] tracking-wider`}>
-                    {service.tag || service.number}
+                    {service.number} — {service.tag}
                   </div>
 
                   {/* تگ لاین کوتاه روی گوشه تصویر */}
@@ -594,7 +594,7 @@ export default function Services() {
                     required
                     value={formData.phoneWhatsApp}
                     onChange={handleChange}
-                    placeholder={t.phonePlaceholder || '+93 700 000 000'}
+                    placeholder={t.phonePlaceholder || '+93 70 633 8223'}
                     className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-[#FCA311] text-xs sm:text-sm text-slate-800 bg-slate-50/50"
                   />
                 </div>
@@ -662,9 +662,6 @@ export default function Services() {
                           {srv.title}
                         </option>
                       ))}
-                      <option value="Customized & VIP Travel">
-                        {isRtl ? 'سفرهای سفارشی و تشریفاتی (VIP)' : 'Customized & VIP Travel'}
-                      </option>
                       <option value="All Services / Comprehensive Package">
                         {isRtl ? 'بسته جامع سفر (تمامی خدمات)' : 'All Services / Comprehensive Package'}
                       </option>
@@ -755,7 +752,7 @@ export default function Services() {
             <div>
               <div className="flex items-center gap-2 mb-2">
                 <span className="px-3 py-1 rounded-full bg-[#14213D] text-[#FCA311] text-xs font-bold font-[Inter]">
-                  {activeModalService.tag || activeModalService.number}
+                  {activeModalService.number ? `${activeModalService.number} — ${activeModalService.tag}` : activeModalService.tag}
                 </span>
               </div>
               <h3 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-[#14213D]">

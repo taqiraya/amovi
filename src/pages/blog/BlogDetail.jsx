@@ -6,13 +6,11 @@ import {
   Clock, 
   Eye, 
   Search, 
-  Mail, 
   CheckCircle2, 
   Check, 
   Copy, 
   ArrowLeft, 
-  ArrowRight,
-  Send
+  ArrowRight
 } from 'lucide-react';
 import { useLangStore } from '../../store/useLangStore';
 import SEO from '../../components/SEO';
@@ -62,25 +60,14 @@ export default function BlogDetail() {
       .slice(0, 3);
   }, [blogData.articles, currentArticle.id]);
 
-  // استیت‌های جستجو و اشتراک خبرنامه
+  // استیت‌های جستجو و کپی لینک
   const [searchQuery, setSearchQuery] = useState('');
-  const [newsletterEmail, setNewsletterEmail] = useState('');
-  const [subscribed, setSubscribed] = useState(false);
   const [copiedLink, setCopiedLink] = useState(false);
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     if (searchQuery.trim()) {
       navigate('/blog');
-    }
-  };
-
-  const handleNewsletterSubmit = (e) => {
-    e.preventDefault();
-    if (newsletterEmail.trim()) {
-      setSubscribed(true);
-      setNewsletterEmail('');
-      setTimeout(() => setSubscribed(false), 5000);
     }
   };
 
@@ -296,28 +283,32 @@ export default function BlogDetail() {
               </span>
 
               <div className="flex items-center gap-2 sm:gap-2.5">
+                {/* فیسبوک */}
+                <a
+                  href={`https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#1877F2] hover:bg-[#166fe5] text-white flex items-center justify-center shadow-sm hover:scale-110 transition-all cursor-pointer"
+                  title="Share on Facebook"
+                  aria-label="Share on Facebook"
+                >
+                  <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                  </svg>
+                </a>
+
                 {/* واتس‌اپ */}
                 <a
                   href={`https://api.whatsapp.com/send?text=${shareTitle}%20${shareUrl}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#FCA311] hover:bg-amber-500 text-[#14213D] flex items-center justify-center shadow-sm hover:scale-110 transition-all cursor-pointer"
+                  className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-white flex items-center justify-center shadow-sm hover:scale-110 transition-all cursor-pointer"
                   title="Share on WhatsApp"
                   aria-label="Share on WhatsApp"
                 >
-                  <Send size={15} />
-                </a>
-
-                {/* تلگرام */}
-                <a
-                  href={`https://t.me/share/url?url=${shareUrl}&text=${shareTitle}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#FCA311] hover:bg-amber-500 text-[#14213D] flex items-center justify-center shadow-sm hover:scale-110 transition-all cursor-pointer"
-                  title="Share on Telegram"
-                  aria-label="Share on Telegram"
-                >
-                  <Send size={15} className="-rotate-45" />
+                  <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+                  </svg>
                 </a>
 
                 {/* کپی لینک */}
@@ -328,7 +319,7 @@ export default function BlogDetail() {
                   title="Copy Link"
                   aria-label="Copy Link"
                 >
-                  {copiedLink ? <Check size={15} className="text-emerald-400" /> : <Copy size={15} />}
+                  {copiedLink ? <Check size={16} className="text-emerald-400" /> : <Copy size={16} />}
                 </button>
               </div>
             </div>
@@ -417,56 +408,6 @@ export default function BlogDetail() {
                     </div>
                   </Link>
                 ))}
-              </div>
-            </div>
-
-            {/* ۳. کارت اشتراک در ژورنال (Subscribe to Our Journal) */}
-            <div className="bg-[#14213D] text-white p-5 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl text-center space-y-4 shadow-xl relative overflow-hidden">
-              <div 
-                className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-20 pointer-events-none scale-105"
-                style={{ backgroundImage: `url(${heroBg})` }}
-              />
-
-              <div className="relative z-10 space-y-3 sm:space-y-4">
-                {/* آیکون نامه طلایی در دایره */}
-                <div className="w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-amber-500/20 text-[#FCA311] border border-[#FCA311]/40 flex items-center justify-center mx-auto shadow-md">
-                  <Mail size={20} />
-                </div>
-
-                <div className="space-y-1.5 sm:space-y-2">
-                  <h3 className="text-base sm:text-lg md:text-xl font-extrabold text-white">
-                    {t.subscribeTitle || (isRtl ? 'عضویت در خبرنامه آمووی' : 'Subscribe to Our Journal')}
-                  </h3>
-                  <p className="text-slate-300 text-xs sm:text-sm leading-relaxed font-light">
-                    {t.subscribeSubtitle || (isRtl 
-                      ? 'جدیدترین داستان‌های سفر، مقاصد و بینش‌های اختصاصی از افغانستان را دریافت کنید.' 
-                      : 'Get the latest travel stories, destinations and exclusive insights from Afghanistan.')}
-                  </p>
-                </div>
-
-                {subscribed ? (
-                  <div className="p-3 rounded-xl bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-xs font-bold flex items-center justify-center gap-2">
-                    <CheckCircle2 size={16} />
-                    <span>{t.subscribedSuccess || (isRtl ? 'با تشکر! عضویت شما ثبت شد.' : 'Thank you for subscribing!')}</span>
-                  </div>
-                ) : (
-                  <form onSubmit={handleNewsletterSubmit} className="space-y-2.5 sm:space-y-3 pt-2">
-                    <input
-                      type="email"
-                      required
-                      value={newsletterEmail}
-                      onChange={(e) => setNewsletterEmail(e.target.value)}
-                      placeholder={isRtl ? 'ایمیل خود را وارد کنید...' : 'Enter your email...'}
-                      className="w-full px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl border border-white/20 bg-white/10 text-white placeholder-slate-400 text-xs sm:text-sm focus:outline-none focus:border-[#FCA311]"
-                    />
-                    <button
-                      type="submit"
-                      className="w-full bg-[#FCA311] hover:bg-amber-500 text-[#14213D] font-bold py-2.5 px-4 rounded-xl text-xs sm:text-sm uppercase tracking-wider font-[Inter] transition-all shadow-md cursor-pointer"
-                    >
-                      {t.subscribeButton || (isRtl ? 'عضویت در خبرنامه' : 'Subscribe →')}
-                    </button>
-                  </form>
-                )}
               </div>
             </div>
 

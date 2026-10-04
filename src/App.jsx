@@ -23,13 +23,7 @@ const PaymentMethods = lazy(() => import('./pages/payment/PaymentMethods'));
 const AdminPanel = lazy(() => import('./pages/admin/AdminPanel'));
 const NotFound = lazy(() => import('./pages/notFound/NotFound'));
 
-function PageLoader() {
-  return (
-    <div className="min-h-[70vh] flex items-center justify-center">
-      <div className="w-10 h-10 border-4 border-[#FCA311] border-t-transparent rounded-full animate-spin" />
-    </div>
-  );
-}
+import BrandLoader from './components/BrandLoader';
 
 function App() {
   const { currentLang } = useLangStore();
@@ -43,7 +37,7 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900 font-sans">
       <ScrollToTop />
-      <Suspense fallback={<PageLoader />}>
+      <Suspense fallback={<BrandLoader fullScreen />}>
         <Routes>
           {/* گروه اول روت‌ها: تمام صفحات داخل لایوت اصلی (همراه هدر و فوتر) */}
           <Route element={<MainLayout />}>

@@ -104,12 +104,12 @@ function Footer() {
               </a>
 
               <a 
-                href="tel:+93700000000" 
+                href="tel:+93706338223" 
                 className={`inline-flex items-center gap-2 text-[13px] text-slate-300 transition-colors duration-200 hover:text-[#FCA311] font-medium group cursor-pointer w-fit ${isRtl ? 'flex-row-reverse' : ''}`}
                 dir="ltr"
               >
                 <Phone size={14} className="text-slate-400 group-hover:text-[#FCA311] shrink-0" />
-                <span className="font-[Inter] text-xs sm:text-sm">+93 700 000 000</span>
+                <span className="font-[Inter] text-xs sm:text-sm">+93 70 633 8223</span>
               </a>
 
               <div className={`inline-flex items-center gap-2 text-[13px] text-slate-300 transition-colors duration-200 hover:text-[#FCA311] font-medium group w-fit ${isRtl ? 'flex-row-reverse' : ''}`}>

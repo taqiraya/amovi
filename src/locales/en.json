@@ -137,7 +137,7 @@
     "letsTalkTitle": "Let's Talk",
     "letsTalkSubtitle": "Reach out to us through any of the following channels. We're always happy to help.",
     "whatsappTitle": "WhatsApp",
-    "whatsappNumber": "+93 700 000 000",
+    "whatsappNumber": "+93 70 633 8223",
     "whatsappAction": "Chat with us on WhatsApp",
     "emailTitle": "Email",
     "emailAddress": "info@amovitravel.com",
@@ -152,7 +152,7 @@
     "email": "Email Address",
     "emailPlaceholder": "Enter your email address",
     "phone": "Phone / WhatsApp",
-    "phonePlaceholder": "+93 700 000 000",
+    "phonePlaceholder": "+93 70 633 8223",
     "subject": "Subject",
     "selectSubject": "Select a subject",
     "subjectOptions": {
@@ -264,7 +264,7 @@
       {
         "id": "visa",
         "number": "01",
-        "tag": "01 — VISA ASSISTANCE",
+        "tag": "VISA ASSISTANCE",
         "title": "Visa Assistance",
         "heroTagline": "Guidance and support for a smoother journey to Afghanistan.",
         "description": "Guidance and support with visa applications, required documents, and visa extension procedures where applicable.",
@@ -321,7 +321,7 @@
       {
         "id": "accommodations",
         "number": "02",
-        "tag": "02 — ACCOMMODATION",
+        "tag": "ACCOMMODATION",
         "title": "Accommodation",
         "heroTagline": "Comfortable stays, carefully selected for your journey.",
         "description": "Selected accommodation options, from comfortable local hotels to premium stays, based on your destination and travel preferences.",
@@ -396,7 +396,7 @@
       {
         "id": "transportation",
         "number": "03",
-        "tag": "03 — TRANSPORTATION",
+        "tag": "TRANSPORTATION",
         "title": "Transportation",
         "heroTagline": "Reliable transportation, coordinated around your journey.",
         "description": "Safe and reliable transportation for airport transfers, city travel, intercity journeys, and private tours.",
@@ -471,7 +471,7 @@
       {
         "id": "guides",
         "number": "04",
-        "tag": "04 — PROFESSIONAL GUIDES",
+        "tag": "PROFESSIONAL GUIDES",
         "title": "Professional Guides",
         "heroTagline": "Discover Afghanistan with knowledgeable local guidance.",
         "description": "Experienced local and multilingual guides to help you discover Afghanistan’s history, culture, nature, and local life.",
@@ -546,7 +546,7 @@
       {
         "id": "security",
         "number": "05",
-        "tag": "05 — SECURITY & TRAVEL SUPPORT",
+        "tag": "SECURITY & TRAVEL SUPPORT",
         "title": "Security & Travel Support",
         "heroTagline": "Thoughtful planning and practical support throughout your journey.",
         "description": "Travel coordination, secure transportation arrangements, route planning, and ongoing support throughout your journey.",
@@ -621,7 +621,7 @@
       {
         "id": "health",
         "number": "06",
-        "tag": "06 — TRAVEL & HEALTH ASSISTANCE",
+        "tag": "TRAVEL & HEALTH ASSISTANCE",
         "title": "Travel & Health Assistance",
         "heroTagline": "Practical support to help you travel with greater peace of mind.",
         "description": "Practical assistance with travel insurance guidance, medical coordination, and emergency support when required.",
@@ -696,7 +696,7 @@
       {
         "id": "vip",
         "number": "07",
-        "tag": "07 — CUSTOMIZED & VIP TRAVEL",
+        "tag": "CUSTOMIZED & VIP TRAVEL",
         "title": "Customized & VIP Travel",
         "heroTagline": "A journey designed around you.",
         "description": "Personalized travel arrangements with premium accommodation, private transportation, dedicated guides, and tailored experiences.",
@@ -858,7 +858,7 @@
     "email": "Email Address",
     "emailPlaceholder": "Enter your email address",
     "phone": "Phone / WhatsApp",
-    "phonePlaceholder": "+93 700 000 000",
+    "phonePlaceholder": "+93 70 633 8223",
     "preferredDate": "Estimated Travel Date",
     "travelers": "Number of Travelers",
     "purposeOfTravel": "Purpose of Travel",

@@ -120,7 +120,7 @@ export default function Contact() {
               
               {/* ۱. کارت واتس‌اپ */}
               <a
-                href="https://wa.me/93700000000"
+                href="https://wa.me/93706338223"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group flex items-center gap-3.5 sm:gap-4 p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/80 shadow-sm hover:shadow-md hover:border-[#FCA311]/50 transition-all duration-200 hover:-translate-y-0.5"
@@ -133,7 +133,7 @@ export default function Contact() {
                     {t.whatsappTitle || 'WhatsApp'}
                   </h3>
                   <p className="text-xs sm:text-sm font-semibold text-slate-700 font-[Inter] tracking-wide truncate" dir="ltr">
-                    {t.whatsappNumber || '+93 700 000 000'}
+                    {t.whatsappNumber || '+93 70 633 8223'}
                   </p>
                   <span className="text-[11px] sm:text-xs text-slate-400 block mt-0.5 font-normal truncate">
                     {t.whatsappAction || (isRtl ? 'در واتس‌اپ با ما گفتگو کنید' : 'Chat with us on WhatsApp')}

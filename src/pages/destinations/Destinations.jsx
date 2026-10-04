@@ -5,6 +5,7 @@ import { getProvinces } from '../../services/api';
 import SEO from '../../components/SEO';
 import { MapPin, ArrowRight, ArrowLeft } from 'lucide-react';
 import { getAssetUrl } from '../../config/assets';
+import BrandLoader from '../../components/BrandLoader';
 
 export default function Destinations() {
   const { currentLang } = useLangStore();
@@ -52,9 +53,7 @@ export default function Destinations() {
       </div>
 
       {loading ? (
-        <div className="min-h-[40vh] flex items-center justify-center">
-          <div className="w-10 h-10 border-4 border-[#FCA311] border-t-transparent rounded-full animate-spin" />
-        </div>
+        <BrandLoader message={isRtl ? 'در حال آماده‌سازی مقاصد گردشگری افغانستان...' : 'Loading Afghanistan Destinations...'} />
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6" dir={isRtl ? 'rtl' : 'ltr'}>
           {provinces.map((prov) => {

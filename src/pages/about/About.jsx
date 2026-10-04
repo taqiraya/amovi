@@ -488,7 +488,7 @@ export default function About() {
                     required
                     value={formData.phoneWhatsApp}
                     onChange={handleChange}
-                    placeholder="+93 700 000 000"
+                    placeholder="+93 70 633 8223"
                     className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-[#FCA311] text-xs sm:text-sm text-slate-800 bg-slate-50/50"
                   />
                 </div>

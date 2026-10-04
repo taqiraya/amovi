@@ -7,7 +7,8 @@ import {
   Compass, 
   Search, 
   Home, 
-  Download
+  Download,
+  LogOut
 } from 'lucide-react';
 import { getMasterRequests, getContactMessages } from '../../services/api';
 import localDb from '../../../db.json';
@@ -20,6 +21,28 @@ export default function AdminPanel() {
   const [provinces] = useState(localDb.provinces || []);
   const [tours] = useState(localDb.tours || []);
   const [selectedItem, setSelectedItem] = useState(null);
+
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    return Boolean(sessionStorage.getItem('amovi_admin_token'));
+  });
+  const [loginForm, setLoginForm] = useState({ username: '', password: '' });
+  const [loginError, setLoginError] = useState('');
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if (loginForm.username.trim() === 'admin' && loginForm.password.trim() === 'admin') {
+      sessionStorage.setItem('amovi_admin_token', 'amovi_admin_authenticated');
+      setIsAuthenticated(true);
+      setLoginError('');
+    } else {
+      setLoginError('نام کاربری یا رمز عبور اشتباه است.');
+    }
+  };
+
+  const handleLogout = () => {
+    sessionStorage.removeItem('amovi_admin_token');
+    setIsAuthenticated(false);
+  };
 
   useEffect(() => {
     let isMounted = true;
@@ -72,6 +95,68 @@ export default function AdminPanel() {
     downloadAnchor.remove();
   };
 
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-[#0d1527] via-[#14213D] to-[#0a101f] flex items-center justify-center p-4 text-white font-[Inter]" dir="rtl">
+        <div className="w-full max-w-md bg-[#14213D]/95 backdrop-blur-xl border border-white/10 rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
+          <div className="text-center mb-8">
+            <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-[#0d1527] border border-[#FCA311]/40 p-2.5 shadow-xl flex items-center justify-center">
+              <img src="/logo.png" alt="Amovi Travel" className="w-full h-full object-contain" />
+            </div>
+            <h1 className="text-2xl font-black text-white">Amovi Travel</h1>
+            <p className="text-xs uppercase tracking-[0.2em] text-[#FCA311] font-bold mt-1">Management Portal</p>
+            <p className="text-xs text-slate-300 mt-2 font-medium">ورود به پنل مدیریت پیام‌ها و رزرواسیون‌ها</p>
+          </div>
+
+          <form onSubmit={handleLogin} className="space-y-4">
+            {loginError && (
+              <div className="p-3 rounded-xl text-xs font-bold text-center bg-rose-500/20 text-rose-300 border border-rose-500/30">
+                {loginError}
+              </div>
+            )}
+
+            <div>
+              <label className="block text-xs font-bold text-slate-300 mb-1.5">نام کاربری</label>
+              <input
+                type="text"
+                required
+                value={loginForm.username}
+                onChange={(e) => setLoginForm({ ...loginForm, username: e.target.value })}
+                placeholder="admin"
+                className="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-[#FCA311]"
+                dir="ltr"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-bold text-slate-300 mb-1.5">رمز عبور</label>
+              <input
+                type="password"
+                required
+                value={loginForm.password}
+                onChange={(e) => setLoginForm({ ...loginForm, password: e.target.value })}
+                placeholder="admin"
+                className="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-[#FCA311]"
+                dir="ltr"
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="w-full py-3.5 px-4 rounded-xl bg-[#FCA311] hover:bg-amber-500 text-[#14213D] font-extrabold text-sm tracking-wider uppercase transition-all shadow-lg hover:scale-[1.02] cursor-pointer mt-2"
+            >
+              ورود به سیستم
+            </button>
+          </form>
+
+          <div className="mt-6 pt-4 border-t border-white/10 text-center text-[11px] text-slate-400">
+            نام کاربری: <span className="font-mono text-[#FCA311]">admin</span> | رمز عبور: <span className="font-mono text-[#FCA311]">admin</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-[#0F172A] text-slate-100 font-sans flex flex-col w-full overflow-x-hidden">
       {/* Top Admin Navbar */}
@@ -106,6 +191,13 @@ export default function AdminPanel() {
             <Home size={14} />
             <span>Return to Website</span>
           </Link>
+          <button
+            onClick={handleLogout}
+            className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-xl bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 border border-rose-500/30 text-xs font-bold transition cursor-pointer"
+          >
+            <LogOut size={14} />
+            <span>خروج</span>
+          </button>
         </div>
       </header>
 
